@@ -1,0 +1,51 @@
+.questionWrap {
+    width: 960px;
+    margin: auto;
+    padding: 40px 0;
+}
+.questionTitle {
+    font-size: 32px;
+    text-align: center;
+    padding-bottom: 25px;
+}
+.questionTab {
+    width: 876px;
+    margin: auto;
+    padding-bottom: 100px;
+}
+.questionGB,
+.questionDelivery,
+.questionDeposit {
+    float: left;
+}
+.questionTabTitle {
+    font-size: 20px;
+    text-align: center;
+    width: 292px;
+    border-top: 7px solid #ebebeb;
+    cursor: pointer;
+    padding-top: 15px;
+    color: #777;
+}
+.questionTabTitleSelected {
+    border-color: #ddd;
+}
+.questionContentBlock {
+    width: 266px;
+    float: left;
+    margin-right: 58px;
+}
+.questionContentBlock:last-child {
+    margin-right: 0;
+}
+.questionSubTitle {
+    font-size: 16px;
+    padding-bottom: 25px;
+}
+.questionSubInfo {
+    color: #8a8a8a;
+}
+.questionBlock {
+    width: 914px;
+    margin: auto;
+}

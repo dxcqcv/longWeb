@@ -1,0 +1,138 @@
+.vsTitle {
+    font-size: 24px;
+    color: #957cca;
+    margin: 50px 0;
+}
+.vsts {
+    margin-bottom: 30px;
+}
+.vstt {
+    margin: 50px 0 30px;
+}
+.vsWrap {
+    margin-top: 100px;
+    background-color: #f5f3f9;
+    padding: 70px 50px 30px;
+}
+.vsList {
+    margin-bottom: 5px;
+}
+.vsBigImg {
+    width: 342px;
+    height: 253px;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+}
+.vsSignup {
+    background: url('../images/vendor/vsSignup01.jpg') no-repeat;
+}
+.vsSignup02 {
+    background: url('../images/vendor/vsSignup02.jpg') no-repeat;
+}
+.vsOr {
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    vertical-align: top;
+    background: url('../images/vendor/vsOr.png') no-repeat;
+    margin: 115px 55px 0;
+}
+
+.vsLogin {
+    background: url('../images/vendor/vsLogin01.jpg') no-repeat;
+}
+.vsLogin02 {
+    background: url('../images/vendor/vsLogin02.jpg') no-repeat;
+}
+.vsArrowDown {
+    background: url('../images/vendor/vsArrowDown.png') no-repeat;
+    width: 48px;
+    height: 24px;
+    display: block;
+    margin: 20px 0 50px 150px;
+}
+.vsLabel {
+    width: 128px;
+    height: 47px;
+    line-height: 47px;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: top;
+}
+.vslSecond {
+    line-height: 16px;
+}
+.vsNormalInput {
+    width: 298px;
+    height: 45px;
+    border: 1px solid #cfb6ff;
+}
+.vsP {
+    margin-bottom: 39px;
+}
+.vsLongInput {
+   width: 728px; 
+}
+.vsArea {
+    resize: none;
+    height: 139px;
+    width: 728px;
+    border: 1px solid #cfb6ff;
+}
+.vsStatement {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+.vsRight {
+    width: 18px;
+    height: 15px;
+    display: inline-block;
+    background: url('../images/vendor/vsRight.jpg') no-repeat;
+    margin-left: 10px;
+}
+.vsButton {
+    width: 128px;
+    height: 43px;
+    background: #cfb6ff;
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 4px solid #b39be7;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.vsButtonWrap {
+    text-align: center;
+    margin-top: 30px;
+}
+.vsbTitle {
+    color: #957cca;
+    margin-bottom: 10px;
+}
+.vsLast {
+    margin-bottom: 30px;
+}
+.vsb {
+    margin: 50px 0 40px;
+}
+.vsaLogin {
+    margin-left: 660px;
+}
+.vsForgot {
+    color: #acacac;
+    margin-left: 20px;
+}
+.vsRemember {
+    color: #acacac;
+    margin-left: 290px;
+}
+.vsLoginForm {
+    position: relative;
+}
+.vslButton {
+    position: absolute;
+    top: 120px;
+    right: 110px;
+}

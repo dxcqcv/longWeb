@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link media="all" rel="stylesheet" href="css/global.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="css/find.css" type="text/css" />
+</head>
+<body>
+<div class="fwbWrap">
+    <div class="findWelcomeBox">
+        <p class="fwbTitle">Welcome, Start your groupbuy and make real money!</p>
+        <div class="findStepBox clearfix">
+            <div class="findStep fs01">
+                <p class="fwbSubTitle">1.Find</p>
+                <p>Find the product you like</p>
+            </div>
+            <div class="findStep fs02">
+                <p class="fwbSubTitle">2.Create</p>
+                <p>Create a groupbuy on this product</p>
+            </div>
+            <div class="findStep fs03">
+                <p class="fwbSubTitle">3.Promote</p>
+                <p>Promote your groupbuy and get more buyers</p>
+            </div>
+            <div class="findStep fs04">
+                <p class="fwbSubTitle">4.Bid</p>
+                <p>Find sellers to bid on your groupbuy</p>
+            </div>
+            <div class="findStep fs05">
+                <p class="fwbSubTitle">5.Win</p>
+                <p>Win 1% cashback from each group member</p>
+            </div>
+        </div>
+        <p class="fwbBottomTitle">If your groupbuy is not successful, you will recieve a full refund of your deposit.</p>
+        <div class="fwbButton">
+            <button class="fwbStartButton">Get started</button>
+            <button>Learn more</button>
+        </div>
+    </div>
+</div>
+<div class="findProductBox">
+    <div class="wantSearchBox{% if not search_product_keywords %} hide{% endif %}">
+        <form action="/product/search/" method="GET" id="wantSearchForm">
+            <input placeholder="Search For A Product" id="input-product-search" class="wantSearch" name="q" value="{{ search_product_keywords|default:'' }}"/>
+            <span class="wantSearchButton"></span>
+        </form>
+    </div>
+    <div class="promptBox">
+        <p class="prompt">Featured Products</p>
+    </div>
+            <div class="productList clearfix">
+                <ul>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <a href="#">
+                                    <img src="{% static 'img/index/bigImg.jpg' %}" alt="" />
+                                </a>
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand dkfjdsljfl dkfjklajfklas dfjasjf</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy. I feel very good because I like it, I did it for me, and I liked it, I was alive.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <a href="#">
+                                    <img src="{% static 'img/index/bigImg.jpg' %}" alt="" />
+                                </a>
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand dkfjdsljfl dkfjklajfklas dfjasjf</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy. I feel very good because I like it, I did it for me, and I liked it, I was alive.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <a href="#">
+                                    <img src="{% static 'img/index/bigImg.jpg' %}" alt="" />
+                                </a>
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand dkfjdsljfl dkfjklajfklas dfjasjf</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy. I feel very good because I like it, I did it for me, and I liked it, I was alive.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <a href="#">
+                                    <img src="{% static 'img/index/bigImg.jpg' %}" alt="" />
+                                </a>
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand dkfjdsljfl dkfjklajfklas dfjasjf</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy. I feel very good because I like it, I did it for me, and I liked it, I was alive.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+</div>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/find.js"></script>
+</body>
+</html>

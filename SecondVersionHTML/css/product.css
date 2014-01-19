@@ -1,0 +1,178 @@
+.productBlock {
+    margin: 40px 0;
+}
+.pImgWrap { float: left;}
+.productInfo {
+    float: left;
+    width: 427px;
+    margin-left: 80px;
+}
+.productName {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.productDescription {
+    color: #929292;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+.productDetails {
+    color: #67c8b5;
+    font-size: 16px;
+    text-align: right;
+    margin: 20px 0 20px 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+.productPrice {
+    position: relative;
+    margin: 25px 0 40px;
+}
+.ppInput {
+    width: 280px;
+    height: 70px;
+    background-color: #fff;
+    border: none;
+    padding-right: 40px
+}
+.arrowWrap{
+    position: absolute;
+    width: 40px;
+    height: 70px;
+    right: 108px;
+    top: 1px;
+}
+.arrowUp, .arrowDown{
+    cursor: pointer;
+    display: block;
+    width: 40px;
+    height: 34px;
+    float: left;
+    background: url(../images/product/c_arrow_up.png) no-repeat center center #FFF;
+}
+.arrowUp:active, .up_active{
+    background: url(../images/product/arrow_up.png) no-repeat center center #67c8b5;
+}
+.arrowDown{
+    background: url(../images/product/c_arrow_down.png) no-repeat center center #FFF!important;
+}
+.arrowDown:active, .down_active{
+    background: url(../images/product/arrow_down.png) no-repeat center center #67c8b5!important;
+}
+.productBuy {
+    width: 426px;
+    height: 56px;
+    background-color: #9f80c6;
+    color: #fff;
+    font-size: 24px;
+    border: none;
+}
+.buyNum {
+    color: #7f7e7e;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+}
+.groupWrap {
+}
+.groupBox {
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 40px;
+    padding: 20px;
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.gLine {
+    font-size: 16px;
+}
+.gLogo {
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 30px;
+    border: 5px solid #F7F7F7;
+}
+.gRules {
+    font-size: 14px;
+    color: #7fd1c0;
+    margin-left: 30px;
+}
+.groupInfo {
+    border: 1px #ebebeb;
+    border-style: solid none;
+    margin: 20px 0;
+    padding: 10px 0;
+}
+.desiredPrice, 
+.Delivery {
+    float: left;
+}
+.giTitle {
+    color: #929292;
+    margin: 0 60px 20px 0;
+}
+.giColor {
+    font-size: 20px;
+    color: #7fd1c0;
+}
+.gBar {
+    background-color: #e8e8e8;
+    width: 380px;
+    height: 19px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #f4f4f4;
+    float: right;
+    border-radius: 10px;
+}
+.userName {
+    color: #929292;
+    font-size: 14px;
+}
+.userBox {
+    width: 80px;
+    text-align: center;
+}
+.gUsers > ul > li {
+    float: left;
+}
+.gUsers > ul > li > img {
+}
+.seeAll {
+    float: left;
+    border-right: 1px solid #61c6b2;
+    padding-right: 20px;
+    margin-left: 20px;
+}
+.buyerNum {
+    color: #717171;
+    margin-bottom: 20px;
+}
+.seeAllWords {
+    color: #61c6b2;
+}
+.joinButtonBox {
+    margin-top: 10px;
+    float: left;
+}
+.joinButton {
+    color: #fff;
+    background-color: #ffa42d;
+    width: 126px;
+    height: 37px;
+    border: none;
+    margin-left: 20px;
+}
+.gID {
+    font-size: 14px;
+    color: #888888;
+}

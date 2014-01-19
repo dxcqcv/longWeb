@@ -1,0 +1,82 @@
+.amBlock {
+    background-color: #fff;
+}
+.ambInner {
+    padding: 30px;
+    border-left: 2px solid #7fd1c0;
+}
+.amTitle { 
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+.amNum { 
+    color: #888888; 
+    padding-left: 20px;
+}
+.amProductImg { float: left; }
+.amDetail {
+    float: left;
+    margin-left: 100px;
+}
+.abProductName {
+    width: 186px;
+}
+.amAbout {
+    border-bottom: 1px solid #ccc;
+    width: 600px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.amDate {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+.adMiddle {
+    width: 230px;
+    text-align: center;
+    border: 1px #ccc;
+    border-style: none solid;
+}
+.amLast {
+    text-align: center;
+}
+.adFirst {
+    color: #929292;
+    margin-bottom: 10px;
+}
+.adSecond { color: #7fd1c0; }
+.buyers {
+    margin-top: 20px;
+}
+.bAvatar { float: left; }
+.bAvatar > li {
+    text-align: center;
+    float: left;
+    color: #929292;
+    margin-left: 25px;
+    width: 63px;
+    font-size: 12px;
+}
+.bAvatar > li:first-child { margin-left: 0; }
+.bAvatar > li:last-child { 
+    border-right: 1px solid #ccc; 
+    padding-right: 30px;
+}
+.amSeeAll {
+    float: right;
+    width: 85px;
+    text-align: center;
+    margin-right: 50px;
+}
+.amsaBuyersNum {
+    font-size: 18px;
+    text-align: left;
+    color: #717171;
+    margin-bottom: 15px;
+}
+.amsaWords {
+    font-size: 12px;
+    color: #61c6b2;
+}

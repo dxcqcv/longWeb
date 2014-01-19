@@ -1,0 +1,129 @@
+.registerBox {
+    background-color: #232323;
+}
+.rbInner {
+    width: 960px;
+    margin: auto;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 40px;
+    text-align: center;
+}
+.lbPw {
+    position: relative;
+}
+.snsBox {
+    margin-top: 85px;
+}
+.snsBox > a{
+    display: inline-block;
+    width: 150px;
+    height: 32px;
+}
+.rTwitter {
+    background: url('../images/register/twitterIcon.jpg') no-repeat;
+}
+.rFacebook {
+    background: url('../images/register/facebookIcon.jpg') no-repeat;
+    margin-left: 20px;
+}
+.loginBox {
+    float: left;
+}
+.signupLine {
+    position: relative;
+}
+.rYoN {
+    width: 21px;
+    height: 16px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: -40px;
+}
+.rYes {
+    background: url('../images/register/yon.png') no-repeat 0;
+}
+.rNo {
+    background: url('../images/register/yon.png') no-repeat -21px 0;
+}
+.rOr {
+    width: 26px;
+    height: 26px;
+    border-radius: 26px;
+    background-color: #686868;
+    color: #fff;
+    line-height: 26px;
+    position: absolute;
+    font-size: 12px;
+    left: -15px;
+    top: 150px;
+}
+.signupBox {
+    float: left;
+    border-left: 1px solid #686868;
+    padding-left: 90px;
+    margin-left: 90px;
+    position: relative;
+}
+.rButton {
+    background-color: #61c6b2;
+    width: 100px;
+    height: 32px;
+    border: none;
+    color: #fff;
+    border-radius: 2px;
+    border-bottom: 4px solid #348172;
+    cursor: pointer;
+}
+.rTitle {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.rInput {
+    border-radius: 2px;
+    width: 275px;
+    height: 53px;
+    background-color: #424242;
+    border: none;
+    color: #909090;
+    font-size: 16px;
+    padding-left: 18px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+.forgotLink {
+    color: #393939;
+    position: absolute;
+    top: 20px;
+    right: -45px;
+}
+.remember {
+    color: #393939;
+    text-align: right;
+    margin: 0 20px 40px 0;
+}
+.saInside {
+    color: #909090;
+}
+.saImg {
+    position: absolute;
+    right: -35px;
+}
+.signupAccept {
+    font-size: 12px;
+    color: #393939;
+    position: relative;
+    margin-bottom: 40px;
+}
+.rImg {
+    background: url('../images/register/rightIcon01.png') no-repeat;
+    width: 19px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+}

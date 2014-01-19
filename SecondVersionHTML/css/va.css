@@ -1,0 +1,123 @@
+.vendorName {
+    margin-bottom: 10px;
+}
+.vendorAddress { color: #929292; }
+.vendorPhone { color: #acacac; }
+.vendorReplace {
+    margin-top: 20px;
+}
+.vaProductBlock {
+    margin-top: 20px;
+}
+.vrSearch {
+    width: 700px;
+    height: 47px;
+    border: 1px solid #99bef7;
+    vertical-align: top;
+}
+.vrsButton {
+    background: url('../images/vendor/vasButton.jpg') no-repeat;
+    width: 58px;
+    height: 51px;
+    display: inline-block;
+    vertical-align: top;
+}
+.vrsAdd {
+    width: 190px;
+    height: 51px;
+    background-color: #99bef7;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+}
+.vendorList {
+    background-color: #fff;
+    padding: 40px 60px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 40px;
+}
+.vapImg {
+    float: left;
+}
+.vaInfo {
+    float: left;
+    margin-left: 40px;
+}
+.vaProductName {
+    font-size: 22px;
+}
+.vaProductDetail {
+    font-size: 14px;
+    color: #61c6b2;
+}
+.vaBidSetting {
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.vaiNum {
+    display: inline-block;
+    vertical-align: top;
+    width: 153px;
+    text-align: center;
+}
+.vabFirst {
+    font-size: 20px;
+    color: #99bef7;
+    margin-bottom: 10px;
+}
+.vaSecond {
+    font-size: 14px;
+}
+.vainMiddle {
+    width: 290px;
+}
+.vaOrdersLine {
+    margin: 20px 0;
+    font-weight: 700;
+}
+.vaoNum {
+    background-color: #f8f8f8;
+    padding: 10px 0 10px 20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.vaGroupbuyNum {
+    color: #61c6b2;
+}
+.vagnRight {
+    float: right;
+    margin-right: 20px;
+}
+.vaPrice {
+    margin-left: 20px;
+}
+.vaNumColor {
+    color: #99bef7;
+}
+.vaoNum { 
+    border-bottom: 1px solid #e1e1e1;
+}
+.vaWordsColor {
+    color: #797979;
+}
+.vaGroupTable {
+    width: 100%;
+    text-align: center;
+}
+.vaGroupTable > thead > tr > th {
+    background-color: #f8f8f8;
+    font-size: 14px;
+    color: #d5d5d5;
+    padding: 10px 0; 
+    border-top: 1px solid #fff;
+}
+.vaGroupTable > tbody > tr > td {
+    color: #acacac;
+    border-bottom: 1px solid #f8f8f8;
+    padding: 15px 0 ;
+}

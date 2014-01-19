@@ -1,0 +1,58 @@
+.upTitle {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+.upuImg,
+.upuInfo {
+    float: left;
+}
+.upuInfo {
+    padding: 40px 0 0 40px;
+}
+.upuUserName {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.upuAddress {
+    color: #929292;
+    font-size: 18px;
+}
+.upuSep {
+    color: #7f7e7e;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.upuTable {
+    width: 100%;
+}
+.upuTable > thead > tr > th {
+    height: 50px;
+    vertical-align: middle;
+
+}
+.upuTable > tbody > tr > td {
+    vertical-align: middle;
+    background: #fff;
+    border-bottom: 10px solid #f7f7f7;
+    text-align: center;
+}
+.upuTable > tbody > tr > td > img {
+    vertical-align: middle;
+}
+.upuProductImg {
+    width: 118px;
+}
+.upuProductDescribe {
+    width: 200px;
+    padding-left: 100px;
+}
+.upupn {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+.upupd {
+    font-size: 12px;
+    color: #929292;
+    text-align: left;
+}
