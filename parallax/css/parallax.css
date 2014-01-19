@@ -1,0 +1,11 @@
+body {
+    width: 2000px;
+}
+h1 {
+    width: 500px;
+    height: 500px;
+    background: #39c;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
