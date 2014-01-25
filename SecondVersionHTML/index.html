@@ -7,14 +7,118 @@
 <head>
     <meta charset="UTF-8">
     <title>buckete second version</title>
-    <link media="all" rel="stylesheet" href="css/global.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="../css/global.css" type="text/css" />
     <link media="all" rel="stylesheet" href="css/index.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="css/main.css" type="text/css" />
 </head>
 <body>
    <!--head start-->
    <header class="mainHeader"></header>
    <!--head end-->
    
+
+	<div class="header-box clearfix">
+        <a href="javascript:;" class="scrollToTop" id="scrollToTop"></a>
+        <div class="registerBox ">
+            <div class="rbInner clearfix">
+                <div class="rClose hide">x</div>
+               <div class="loginBox hide">
+                <div class="lbInner">
+                    <p class="rTitle">WELCOME BACK</p>
+                    <form id="loginForm" onsubmit="return false;" action="" method="POST" name="registerForm">
+                        <input type="hidden" name="next" value=""/>
+                        <p class="loginLine"><input  pattern="[A-Za-z0-9_]{3,}" class="rInput" placeholder="Email/Username"  name="login" required autofocus/></p>
+                        <p class="lbPw"><input  class="rInput" type="password" placeholder="Password" name="password" required/><span class="wrongPWIcon hide">X</span></p>
+                        <p class="forgotLinkBox"><a class="forgotLink" href="#">I forgot</a></p>
+                        <p class="regWarning loginWarning hide">tips</p>
+                        <p class="rememberBox"><span class="rememberIcon "></span>Keep me logged in</p>
+                        <p class="remember"><button class="rButton loginButton">Log in</button></p>
+                        
+                    </form>
+                    <div class="snsBox">
+                       <a class="rTwitter" href="#"></a>
+                       <a class="rFacebook" href="#"></a>
+                    </div>
+                </div>
+               </div>
+               <div class="signupBox hide">
+                   <div class="lbInner">
+                        <p class="rTitle">Create a new account</p>
+                        <form id="signupForm" onsubmit="return false;" action="" method="POST">
+                            <div class="signupLine ">
+                                    <input  pattern="[A-Za-z0-9_]{3,}"  title="username must have a minimum 3 characters" id="signName" class="rInput" type="text" placeholder="Username" name="username" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning usernameWarning hide">Another use with this username already exists.</p>
+                            </div>
+                            <div class="signupLine">
+                                    <input id="signPsw" class="rInput" type="password" class="rYoN" placeholder="Password" name="password1" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning pwd2Warning hide">Choose a password that's at least six characters, including a number or special character.</p>
+                            </div>
+                            <div class="signupLine">
+                                    <input id="signPsw2" class="rInput signupRight" type="password" placeholder="Confirm Password" name="password2"/>
+                                    <span class="rYoN"></span>
+                            </div>
+                            <div class="signupLine ">
+
+                                    <input id="signEmail" class="rInput signupRight" type="text" placeholder="Email" name="email" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning emailWarning hide"></p>
+                            </div>
+                            <div class="signupLine signupWords">
+                                <span class="rImg rImg01 signupStatementRight"></span>I agree to the <a  href="" class="saInside">Terms of Use</a> and <a href="" class="saInside">Privacy Statement</a>
+                            </div>
+                            <div class="signupAccept">
+                                <button class="rButton signupButton">SIGN UP</button>
+                            </div>
+                        </form>
+                   </div>
+               </div>
+               <div class="sendEmail hide">
+                    <p class="seTitle">Hi, <span>Guimauve</span>. Thanks for signing up!</p>
+                    <p class="seWords">plz check your email and click <a href="#" class="reLinks">Activate Your Account</a> in the email we just sent you.</p>
+               </div>
+            </div>
+        </div>
+
+		<div class="container header ">
+			<h1 class="logo left"><a href=""><img src="images/icon/index/logo.png" alt=""></a></h1>
+
+            <div class="seekBarBox">
+                <span class="sbbDepartment ">shop by department
+                    <ul class="sbbdList hide">
+                        <li>Electronics & Computers</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Full Store Directory</li>
+                    </ul>
+                </span>
+                <input placeholder="search for a product" class="seekBar" />
+                <span class="sbbButton"></span>
+            </div>
+
+<ul class="searchBar ">
+        <li class="left login-username hide">
+        <div class="hMenu">
+            <p class="greettingWords"><img class="userAccountAvatar" src="" alt="" /><span class="usersName"></span><span class="userAccountTopArrow"></span></p>
+                <a  class="userAccountInstruct hide usersAccountIcon" href="">My Account</a>
+                <a class="userAccountInstruct hide usersLogout" href="">Sign Out</a>
+        </div>
+        </li>
+        <li class="unlogina login left"><a>Login</a></li>
+        <li class="unlogina sign left"><a>Sign Up</a></li>
+</ul>
+    </div>
+</div>
+
    <!--content start-->
     <div class="subHeader"></div>
     <div class="content">
@@ -280,12 +384,20 @@
                 </div>
             </li>
         </ul>
+        <nav class="focusTicker">
+            <ul class="ftList clearfix">
+                <li class="ftlBall"></li>
+                <li class="ftlBall"></li>
+                <li class="ftlBall"></li>
+            </ul>
+        </nav>
    </section>
    
    <!--footer start-->
    <footer class="footer"></footer>
    <!--footer end-->
-    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

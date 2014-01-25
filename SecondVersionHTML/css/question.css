@@ -17,18 +17,52 @@
 .questionDelivery,
 .questionDeposit {
     float: left;
+    cursor: pointer;
 }
 .questionTabTitle {
     font-size: 20px;
     text-align: center;
     width: 292px;
-    border-top: 7px solid #ebebeb;
-    cursor: pointer;
     padding-top: 15px;
-    color: #777;
+    padding-top: 10px;
+    color: #acacac;
+}
+.qgbIcon {
+    background: url('../images/product/question07.gif') no-repeat 0 -46px;
+    width: 41px;
+    height: 46px;
+    display: block;
+    margin: auto;
+}
+.qDeliveryIcon {
+    background: url('../images/product/question07.gif') no-repeat 0 -129px;
+    width: 50px;
+    height: 37px;
+    display: block;
+    margin: 9px auto 0;
+}
+.qDepositIcon {
+    background: url('../images/product/question07.gif') no-repeat 0 -195px;
+    width: 50px;
+    height: 29px;
+    display: block;
+    margin: 17px auto 0;
+}
+.qgbIcon01 {
+    background: url('../images/product/question07.gif') no-repeat;
+} 
+.qDeliveryIcon01 {
+    background: url('../images/product/question07.gif') no-repeat 0 -92px;
+} 
+.qDepositIcon01 {
+    background: url('../images/product/question07.gif') no-repeat 0 -166px;
+} 
+.gray{
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    -webkit-filter: saturate(5);
 }
 .questionTabTitleSelected {
-    border-color: #ddd;
+    color: #777;
 }
 .questionContentBlock {
     width: 266px;

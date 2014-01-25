@@ -111,7 +111,7 @@ slider.nav.find('button').on('click', function(){
 });
 
 // for focus
-function Focus (container) {
+function Focus (container,ticker) {
     this.container = container;
     this.lis = this.container.children('li');
     this.lisLen = this.lis.length;
@@ -121,11 +121,15 @@ function Focus (container) {
     this.timeoutID;
     this.dir = false;
     this.start = true;
+    this.ticker = ticker;
+    this.tlis= this.ticker.children('li');
 };
 Focus.prototype.init = function() {
     this.place();
     this.loop();
-    this.stop();
+    this.stop(this.container);
+    this.stop(this.tlis);
+    this.clicked(this.dir);
 }
 
 Focus.prototype.next = function(index) {
@@ -141,14 +145,54 @@ Focus.prototype.slide = function(dir) {
       this.lis.animate({
         'left': (dir ? '+' : '-') + '=960px' 
       }, this.animateTime);
+      
+
       this.current = dir ? this.prev(1) : this.next(1);
 
+      this.selected(this.lis, 'fibBlockSelected');
+      this.selected(this.tlis, 'ftlbSelected');
+      console.log(this.current);
 
+}
+Focus.prototype.selected = function(selection, className) {
+   selection.eq(this.current).addClass(className).siblings().removeClass(className); 
+}
+Focus.prototype.clicked = function(){
+   var self = this;
+
+   self.tlis.eq(0).on('click', function(dir) {
+        self.current = 0;
+        self.lis.eq(0).animate({'left':0}).addClass('fibBlockSelected');
+        self.lis.eq(1).animate({'left':'960px'}).removeClass('fibBlockSelected');
+        self.lis.eq(2).animate({'left':'-960px'}).removeClass('fibBlockSelected');
+        self.tlis.eq(0).addClass('ftlbSelected');
+        self.tlis.eq(1).removeClass('ftlbSelected');
+        self.tlis.eq(2).removeClass('ftlbSelected');
+   });
+   self.tlis.eq(1).on('click', function(dir) {
+        self.current = 1;
+        self.lis.eq(1).animate({'left':0}).addClass('fibBlockSelected');
+        self.lis.eq(2).animate({'left':'960px'}).removeClass('fibBlockSelected');
+        self.lis.eq(0).animate({'left':'-960px'}).removeClass('fibBlockSelected');
+        self.tlis.eq(1).addClass('ftlbSelected');
+        self.tlis.eq(0).removeClass('ftlbSelected');
+        self.tlis.eq(2).removeClass('ftlbSelected');
+   });
+   self.tlis.eq(2).on('click', function(dir) {
+        self.current = 2;
+        self.lis.eq(2).animate({'left':0}).addClass('fibBlockSelected');
+        self.lis.eq(0).animate({'left':'960px'}).removeClass('fibBlockSelected');
+        self.lis.eq(1).animate({'left':'-960px'}).removeClass('fibBlockSelected');
+        self.tlis.eq(2).addClass('ftlbSelected');
+        self.tlis.eq(1).removeClass('ftlbSelected');
+        self.tlis.eq(0).removeClass('ftlbSelected');
+   });
 }
 Focus.prototype.loop = function() {
   var self = this;
 
   if (self.start) {
+
       self.slide(self.dir);
   }
       this.timeoutID = setTimeout(function() {
@@ -156,9 +200,9 @@ Focus.prototype.loop = function() {
       }, this.speed);
 }
 
-Focus.prototype.stop = function() {
+Focus.prototype.stop = function(obj) {
     var self = this;
-    this.container.hover(
+    obj.hover(
     function() {
         self.start = false;
     },
@@ -171,7 +215,7 @@ Focus.prototype.place = function() {
     this.lis.eq(this.current).css('left', '0px').end().eq(this.current + 1).css('left', '960px').end().eq(this.current - 1).css('left', '-960px');
 }
 
-var focus = new Focus($('.focusImgBox'));
+var focus = new Focus($('.focusImgBox'), $('.ftList'));
 focus.init();
 /*
         var focusWrap = $('.focusWrap'),
