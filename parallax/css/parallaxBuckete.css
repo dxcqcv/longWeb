@@ -1,0 +1,49 @@
+html,body,div#howWarpper, div#howWarpper > section {
+    height: 100%;
+}
+p{ color: #fff;}
+section {
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+.hHeader {
+    background-image: url('../img/hHeader.jpg');
+}
+.hFound {
+   background-color: #39c;
+}
+ div#howWarpper > section.hOffer {
+    background-image: url('../img/ho01.jpg');
+    height: 991px;
+    background-size: contain;
+    background-color: #fff;
+}
+div#howWarpper > section.hOffer02 {
+    background-image: url('../img/ho02.jpg');
+    border-top: 4px solid #000;
+
+}
+.hGroup {
+    background-image: url('../img/hg01.jpg');
+}
+.hFixed {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 742px;
+
+}
+.hgIcon {
+    background-image: url('../img/hg02.png');
+    position: fixed;
+    top: 550px;
+    left: 50%;
+    width: 26px;
+    height: 64px;
+    opacity: 0;
+}
