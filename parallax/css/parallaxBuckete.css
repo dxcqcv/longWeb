@@ -1,49 +1,246 @@
-html,body,div#howWarpper, div#howWarpper > section {
+html,body,section,figure, span {
     height: 100%;
+    display: block;
 }
-p{ color: #fff;}
-section {
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    
-}
-.hHeader {
-    background-image: url('../img/hHeader.jpg');
-}
-.hFound {
-   background-color: #39c;
-}
- div#howWarpper > section.hOffer {
-    background-image: url('../img/ho01.jpg');
-    height: 991px;
-    background-size: contain;
-    background-color: #fff;
-}
-div#howWarpper > section.hOffer02 {
-    background-image: url('../img/ho02.jpg');
-    border-top: 4px solid #000;
-
-}
-.hGroup {
-    background-image: url('../img/hg01.jpg');
-}
-.hFixed {
+body {
     position: relative;
+}
+article {
+    height: 100%;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 742px;
+    bottom: 0;
+    right: 0;
+}
+figcaption {
+    color: #fff;
+    position: absolute;
+    text-align: center;
+}
+#hHeader {
+    z-index: 10;
+}
+.htTitle {
+    top: 70%;
+    left: 25%;
+}
+.htTitle > h1 {
+    font-size: 72px;
+    padding-bottom: 1%;
+}
+.htTitle > p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+.hhbg {
+    background: url('../img/hHeader.jpg') no-repeat;
+    background-size: cover;
 
 }
-.hgIcon {
-    background-image: url('../img/hg02.png');
+#hFound {
+   background-color: #fff;
+   z-index: 9;
+}
+.hfTitle {
+    top: 5%;
+    left:30%;
+}
+.hfTitle > h1 {
+    color: #000;
+    font-size: 60px;
+}
+.hfFigure {
+    position: absolute;
+    top: 15%;
+    left: 45%;
+}
+.hfIcon01 {
+    background: url('../img/hf01.jpg') no-repeat;
+    width: 146px;
+    height: 161px;
+    display: block;
+}
+.hfHits {
+    top: 39%;
+    left: 38%;
+    color: #acacac;
+}
+.hfPics {
+    position: absolute;
+    top: 45%;
+    left: 20%;
+}
+.hfPics > ul {
+    width: 90%;
+   padding-bottom: 5%;
+}
+.hfPics > ul > li {
+    background: url('../img/hf03.jpg') no-repeat; 
+    width: 151px;
+    height: 151px;
+    display: block;
+    float: left;
+    margin-right: 10%;
+    margin-bottom: 5%;
+}
+#hOffer {
+    z-index: 8;
+}
+figure.hoFigure {
     position: fixed;
-    top: 550px;
-    left: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+.hof01 {
+    z-index: 2;
+}
+.hof02 {
+    z-index: 1;
+}
+.hobg01 {
+    background: url('../img/ho01.jpg') no-repeat 0 -300px;
+    background-size: cover;
+}
+.hobg02 {
+    background: url('../img/ho02.jpg') no-repeat 0 -300px;
+    background-size: cover;
+}
+#hGroup {
+    z-index: 7;
+}
+.hgbg {
+    background: url('../img/hg01.jpg') no-repeat;
+    background-size: cover;
+}
+.hgTitle {
+    position: absolute;
+    top: 10%;
+    left: 22%;
+    text-align: center;
+}
+.hgTitle > h1 {
+    font-size: 72px;
+}
+.hgIcon {
+    position: absolute;
+}
+.hgIcon02 {
+    background: url('../img/hg02.png') no-repeat;
     width: 26px;
     height: 64px;
-    opacity: 0;
+}
+.hgIcon04 {
+    background: url('../img/hg04.png') no-repeat;
+    width: 61px;
+    height: 41px;
+}
+.hgIcon05 {
+    background: url('../img/hg05.png') no-repeat;
+    width: 51px;
+    height: 66px;
+}
+.hgIcon06 {
+    background: url('../img/hg06.png') no-repeat;
+    width: 60px;
+    height: 60px;
+}
+.hgIcon07 {
+    background: url('../img/hg07.png') no-repeat;
+    width: 62px;
+    height: 46px;
+}
+.hgIcon08 {
+    background: url('../img/hg08.png') no-repeat;
+    width: 62px;
+    height: 48px;
+}
+#hInvite {
+    z-index: 6;
+    background: #fff;
+}
+.hiTitle {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    color: #999;
+}
+.hiTitle > h1 {
+    color: #5bbccd;
+    font-size: 72px;
+}
+.hiTitle > p {
+    font-size: 18px;
+    padding-bottom: 2%;
+}
+.hiIcon {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+}
+.hiIcon01 {
+    background: url('../img/hi01.jpg') no-repeat;
+    width: 313px;
+    height: 104px;
+    left: 45%;
+}
+.hiIcon02 {
+    background: #fff url('../img/hi02.jpg') no-repeat right top;
+    width: 418px;
+    height: 106px;
+    left: 20%;
+}
+.hiIcon03 {
+    background: url('../img/hi03.png') no-repeat;
+    width: 28px;
+    height: 16px;
+    left: 67%;
+    top: 65%;
+}
+#hSave {
+    z-index: 5;
+}
+.hsIcon {
+    background: url('../img/hs01.jpg') no-repeat;
+    width: 128px;
+    height: 108px;
+    display: block;
+    position: absolute;
+    top:35%;
+    left: 46%;
+}
+.hsTitle {
+    position: absolute;
+    top: 10%;
+    left: 34%;
+}
+.hsTitle > h1 {
+    font-size: 72px;
+    color: #61c6b2;
+}
+.hsTitle > p {
+    font-size: 18px;
+    color: #999;
+}
+.hsInfo {
+    position: absolute;
+    bottom: 40%;
+    left: 43%;
+}
+.hsInfo > p {
+    font-size: 32px;
+    color: #61c6b2;
+}
+p.hsBottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 32px;
+    color: #fff;
+    width: 100%;
+    background-color: #61c6b2;
 }
