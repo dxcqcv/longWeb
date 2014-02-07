@@ -1,246 +1,217 @@
-html,body,section,figure, span {
+html,body,article {
     height: 100%;
-    display: block;
-}
-body {
-    position: relative;
-}
-article {
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-figcaption {
-    color: #fff;
-    position: absolute;
-    text-align: center;
+    width: 100%;
 }
 #hHeader {
-    z-index: 10;
-}
-.htTitle {
-    top: 70%;
-    left: 25%;
-}
-.htTitle > h1 {
-    font-size: 72px;
-    padding-bottom: 1%;
-}
-.htTitle > p {
-    font-size: 20px;
-    line-height: 1.5;
-}
-.hhbg {
-    background: url('../img/hHeader.jpg') no-repeat;
+    height: 100%;
+    background: url('../img/hHeader.jpg') no-repeat fixed;
+    display: block;
     background-size: cover;
-
+    overflow: hidden;
 }
-#hFound {
-   background-color: #fff;
-   z-index: 9;
+.howTitle {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    font-size: 72px;
+}
+.hhWords {
+    padding-top: 30%;
+    color: #fff;
+}
+.howSubTitle {
+    font-size: 20px;
 }
 .hfTitle {
-    top: 5%;
-    left:30%;
-}
-.hfTitle > h1 {
-    color: #000;
-    font-size: 60px;
-}
-.hfFigure {
-    position: absolute;
-    top: 15%;
-    left: 45%;
+    width: 60%;
+    padding: 40px 0 30px;
 }
 .hfIcon01 {
     background: url('../img/hf01.jpg') no-repeat;
     width: 146px;
     height: 161px;
+    margin: 0 auto 30px;
+}
+.hfList {
+    width: 960px;
+    margin: 0 auto 30px;
+}
+.hfList > li > a {
+    float: left;
     display: block;
-}
-.hfHits {
-    top: 39%;
-    left: 38%;
-    color: #acacac;
-}
-.hfPics {
-    position: absolute;
-    top: 45%;
-    left: 20%;
-}
-.hfPics > ul {
-    width: 90%;
-   padding-bottom: 5%;
-}
-.hfPics > ul > li {
-    background: url('../img/hf03.jpg') no-repeat; 
+    background: url('../img/hf03.jpg') no-repeat;
     width: 151px;
     height: 151px;
+    margin-right: 110px;
+    margin-top: 60px;
+}
+.hfList > li:nth-child(4n) > a {
+    margin-right: 0;
+}
+#hFind {
+    border-bottom: 4px solid #39c;
+    overflow: hidden;
+}
+.hoTitle {
+    padding-top: 30px;
+}
+.hoImg {
+    height: 991px;
+    margin: auto;
     display: block;
-    float: left;
-    margin-right: 10%;
-    margin-bottom: 5%;
+    width: 960px;
 }
-#hOffer {
-    z-index: 8;
+.hoi01 {
+    background: url('../img/ho01.jpg') 50% no-repeat fixed;
 }
-figure.hoFigure {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+.hoSep {
+    border-bottom: 4px solid #000;
 }
-.hof01 {
-    z-index: 2;
-}
-.hof02 {
-    z-index: 1;
-}
-.hobg01 {
-    background: url('../img/ho01.jpg') no-repeat 0 -300px;
-    background-size: cover;
-}
-.hobg02 {
-    background: url('../img/ho02.jpg') no-repeat 0 -300px;
-    background-size: cover;
+.hoi02 {
+    background: url('../img/ho02.jpg') 50% no-repeat fixed;
 }
 #hGroup {
-    z-index: 7;
-}
-.hgbg {
-    background: url('../img/hg01.jpg') no-repeat;
-    background-size: cover;
+    background: #f2982e;
+    background-attachment: fixed;
+    color: #fff;
+    height: 800px;
+    border-bottom: 4px solid #ae4c34;
 }
 .hgTitle {
-    position: absolute;
-    top: 10%;
-    left: 22%;
-    text-align: center;
+    width: 60%;
+    padding: 40px 0 30px;
 }
-.hgTitle > h1 {
-    font-size: 72px;
+.hgSubTitle {
+    line-height: 22px;
+    width: 55%;
 }
-.hgIcon {
+.howIcon {
+    background-attachment: fixed;
     position: absolute;
+    z-index: 2;
+}
+.hgIcon01 {
+    background: url('../img/hg04.png') no-repeat;
+    left: 5%;
+    width: 60px;
+    height: 141px;
 }
 .hgIcon02 {
-    background: url('../img/hg02.png') no-repeat;
-    width: 26px;
-    height: 64px;
+    background: url('../img/hg05.png') no-repeat;
+    left: 25%;
+    width: 51px;
+    height: 166px;
+    margin-top: 10px;
+}
+.hgIcon03 {
+    background: url('../img/hg06.png') no-repeat;
+    left: 48%;
+    width: 60px;
+    height: 160px;
+    margin-top: -8px;
 }
 .hgIcon04 {
-    background: url('../img/hg04.png') no-repeat;
-    width: 61px;
-    height: 41px;
+    background: url('../img/hg07.png') no-repeat;
+    right: 25%;
+    width: 62px;
+    height: 146px;
+    margin-top: 10px;
 }
 .hgIcon05 {
-    background: url('../img/hg05.png') no-repeat;
-    width: 51px;
-    height: 66px;
+    background: url('../img/hg08.png') no-repeat;
+    right: 5%;
+    width: 62px;
+    height: 148px;
 }
 .hgIcon06 {
-    background: url('../img/hg06.png') no-repeat;
-    width: 60px;
-    height: 60px;
+    background: url('../img/hg02.png') no-repeat;
+    left: 46%;
+    width: 26px;
+    height: 164px;
+    margin-top: 70px;
 }
-.hgIcon07 {
-    background: url('../img/hg07.png') no-repeat;
-    width: 62px;
-    height: 46px;
+.hgi601 {
+    margin-left: -30px;
+    margin-top: 85px;
 }
-.hgIcon08 {
-    background: url('../img/hg08.png') no-repeat;
-    width: 62px;
-    height: 48px;
+.hgi602 {
+    margin-left: -60px;
+    margin-top: 120px;
+}
+.hgi603 {
+    margin-left: -30px;
+    margin-top: 160px;
+}
+.hgi604 {
+    margin-left: 0px;
+    margin-top: 200px;
+}
+.hgi605 {
+    margin-left: 30px;
+    margin-top: 160px;
+}
+.hgi606 {
+    margin-left: 60px;
+    margin-top: 120px;
+}
+.hgi607 {
+    margin-left: 30px;
+    margin-top: 85px;
+}
+.hgi608 {
+    margin-left: 0px;
+    margin-top: 135px;
 }
 #hInvite {
-    z-index: 6;
-    background: #fff;
+    height: 700px;
+    border-bottom: 4px solid #5bbccd;
 }
 .hiTitle {
-    position: absolute;
-    top: 10%;
-    left: 15%;
-    color: #999;
+    width: 75%;
+    padding: 40px 0 30px;
 }
-.hiTitle > h1 {
-    color: #5bbccd;
-    font-size: 72px;
-}
-.hiTitle > p {
-    font-size: 18px;
-    padding-bottom: 2%;
-}
-.hiIcon {
-    position: absolute;
-    top: 60%;
-    left: 50%;
+.hiSubTitle {
+    width: 60%;
+    line-height: 25px;
 }
 .hiIcon01 {
+    background: url('../img/hi02.jpg') no-repeat;
+    width: 518px;
+    height: 106px;
+    left: 35%;
+    z-index: 3;
+    margin-top: 10%;
+}
+.hiIcon02 {
     background: url('../img/hi01.jpg') no-repeat;
     width: 313px;
     height: 104px;
-    left: 45%;
-}
-.hiIcon02 {
-    background: #fff url('../img/hi02.jpg') no-repeat right top;
-    width: 418px;
-    height: 106px;
-    left: 20%;
-}
-.hiIcon03 {
-    background: url('../img/hi03.png') no-repeat;
-    width: 28px;
-    height: 16px;
-    left: 67%;
-    top: 65%;
+    left: 35%;
+    margin-top: 10%;
 }
 #hSave {
-    z-index: 5;
 }
-.hsIcon {
+.hsTitle {
+    padding: 40px 0 30px;
+}
+.hsIcon01 {
     background: url('../img/hs01.jpg') no-repeat;
     width: 128px;
     height: 108px;
-    display: block;
-    position: absolute;
-    top:35%;
-    left: 46%;
+    left: 45%;
+    margin-top: 5%;
 }
-.hsTitle {
-    position: absolute;
-    top: 10%;
-    left: 34%;
+.hsSubTitle {
+    margin-top: 15%;
+    font-size: 28px;
+    color: #6ac6b2;
 }
-.hsTitle > h1 {
-    font-size: 72px;
-    color: #61c6b2;
-}
-.hsTitle > p {
-    font-size: 18px;
-    color: #999;
-}
-.hsInfo {
-    position: absolute;
-    bottom: 40%;
-    left: 43%;
-}
-.hsInfo > p {
-    font-size: 32px;
-    color: #61c6b2;
-}
-p.hsBottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 32px;
-    color: #fff;
+.hsHits {
+    background: #61c6b2;
     width: 100%;
-    background-color: #61c6b2;
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 240px;
 }
