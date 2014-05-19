@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link media="all" rel="stylesheet" href="../css/global.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="css/forum.css" type="text/css" />
+</head>
+<body>
+<div class="forumSelectWrapper">
+    <div class="forumSelectBlock forumGeneral">General</div>
+    <div class="forumSelectBlock forumCS">Customer Service</div>
+</div>
+<div class="createLine">
+    <span class="newTopicButton">Create A New Topic</span>
+</div>
+<div class="forumGbody clearfix">
+    <table class="forumList hide">
+        <thead>
+           <tr>
+               <th class="forumTopic">Topic</th>
+               <th>By</th>
+               <th>Replies/Views</th>
+               <th>Last Replied</th>
+           </tr>
+        </thead>
+       <tbody>
+       <!--listLineStart-->
+           <tr >
+               <td rowspan="2" class="forumTitle" >Should I buy Yamaha or apple?</td>
+               <td>Alex</td>
+               <td>138</td>
+               <td>Guimave</td>
+           </tr>
+           <tr>
+               <td class="forumGray">15 hrs ago</td>
+               <td class="forumGray">1234</td>
+               <td class="forumGray">3 hrs ago</td>
+           </tr>
+       <!--listLineEnd-->
+       <!--listLineStart-->
+           <tr >
+               <td rowspan="2" class="forumTitle" >Should I buy Yamaha or apple?</td>
+               <td>Alex</td>
+               <td>138</td>
+               <td>Guimave</td>
+           </tr>
+           <tr>
+               <td class="forumGray">15 hrs ago</td>
+               <td class="forumGray">1234</td>
+               <td class="forumGray">3 hrs ago</td>
+           </tr>
+       <!--listLineEnd-->
+       <!--listLineStart-->
+           <tr >
+               <td rowspan="2" class="forumTitle" >Should I buy Yamaha or apple?</td>
+               <td>Alex</td>
+               <td>138</td>
+               <td>Guimave</td>
+           </tr>
+           <tr>
+               <td class="forumGray">15 hrs ago</td>
+               <td class="forumGray">1234</td>
+               <td class="forumGray">3 hrs ago</td>
+           </tr>
+       <!--listLineEnd-->
+       <!--listLineStart-->
+           <tr >
+               <td rowspan="2" class="forumTitle" >Should I buy Yamaha or apple?</td>
+               <td>Alex</td>
+               <td>138</td>
+               <td>Guimave</td>
+           </tr>
+           <tr>
+               <td class="forumGray">15 hrs ago</td>
+               <td class="forumGray">1234</td>
+               <td class="forumGray">3 hrs ago</td>
+           </tr>
+       <!--listLineEnd-->
+       </tbody> 
+    </table>
+    <div class="forumContentWrapper clearfix">
+        <div class="fcTop">
+            <p class="fctTitle">Is $5000 a good price for brand new yamaha U1?<span class="fcReturn">Return to list</span></p>
+            <p class="fcUser"><img src="" alt="" />Guimauve New York · 2014-03-24</p>
+            <p>The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. The love world is big, which can hold hundreds of disappointments; the love world is small which is crowded even with three people inside. </p>
+            <p class="fcReply">152 reply</p>
+        </div>
+        <div class="fcReplyBox">
+            <p class="fcUser"><img class="fcAvatar" src="" alt="" />Guimauve New York · 2014-03-24 <span class="replyColour">Reply</span></p>
+            <p>Go back to china soon, cannot wait, just booked from other site, please removed my name. thanks.Go back to china soon, cannot wait, just booked from other site, please removed my name. thanks.</p>
+        </div>
+        <div class="fcReplyBox">
+            <p class="fcUser"><img class="fcAvatar" src="" alt="" />Guimauve New York · 2014-03-24 </p>
+            <p>Go back to china soon, cannot wait, just booked from other site, please removed my name. thanks.Go back to china soon, cannot wait, just booked from other site, please removed my name. thanks.</p>
+        </div>
+        <div class="fcPostWrapper clearfix">
+            <textarea class="editBlock" placeholder="PLZ input" ></textarea>
+            <button class="fcPostButton">Post</button>
+        </div>
+    </div>
+    <div class="forumSidebar">
+        <div class="fsImgBox"><a href="#"><img src="images/forum/ico_wb.gif" alt="" /></a></div>
+        <p class="fsGray">Modirator</p>
+        <p class="fsName">Vincent</p>
+        <p><span class="fsGray">Online</span> 2</p>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    (function(){
+        var rl  = $('.fcReturn'),
+            ft  = $('.forumTitle'),
+            fcw = $('.forumContentWrapper'),
+            fl  = $('.forumList');
+        
+        ft.on('click', function(){
+            fl.hide();
+            fcw.show();
+        });
+        rl.on('click', function(){
+            fcw.hide();
+            fl.show();
+        });
+
+    })();
+</script>
+</body>
+</html>
