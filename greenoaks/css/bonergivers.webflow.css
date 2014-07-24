@@ -1,0 +1,423 @@
+
+    /**
+    * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/)
+    * Richard Clark (http://richclarkdesign.com)
+    * http://cssreset.com
+    */
+    html, body, div, span, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    abbr, address, cite, code,
+    del, dfn, em, img, ins, kbd, q, samp,
+    small, strong, sub, sup, var,
+    b, i,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section, summary,
+    time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    }
+    body {
+    line-height:1;
+    }
+    article,aside,details,figcaption,figure,
+    footer,header,hgroup,menu,nav,section {
+    display:block;
+    }
+    nav, ul {
+    list-style:none;
+    }
+    blockquote, q {
+    quotes:none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+    content:'';
+    content:none;
+    }
+    a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    }
+    /* change colours to suit your needs */
+    ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+    }
+    /* change colours to suit your needs */
+    mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+    }
+    del {
+    text-decoration: line-through;
+    }
+    abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+    }
+    table {
+    border-collapse:collapse;
+    border-spacing:0;
+    }
+    /* change border colour to suit your needs */
+    hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+    }
+    input, select {
+    vertical-align:middle;
+    }
+    /*reset end*/
+.clearfix:after {
+    content: '.';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+@font-face {
+   font-family: vd;
+   src: url('../fonts/VerlagBold.otf');
+}
+@font-face {
+    font-family: vcb;
+    src: url('../fonts/VerlagCompressedBold.otf');
+}
+@font-face {
+    font-family: vb;
+    src: url('../fonts/VerlagBook.otf');
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-size: 12px;
+  line-height: 20px;
+}
+h1 {
+  margin: 1px -18px 1px 1px;
+  padding: 23px 0px 5px 38px;
+  font-size: 38px;
+  line-height: 44px;
+  font-weight: 700;
+}
+h2 {
+  margin: 10px 0px;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+}
+h3 {
+  margin: 10px 0px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+h4 {
+  margin: 10px 0px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+h5 {
+  margin: 10px 0px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+h6 {
+  margin: 10px 0px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+}
+p {
+  margin-bottom: 5px;
+}
+.button {
+  display: inline-block;
+  padding: 4px 15px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+html,body { height: 100%; 
+  min-width: 1350px;
+  position: relative;
+  background-color: #000;
+  }
+.backgroundImgs {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 0px;
+  float: none;
+  background-color: #964444;
+  background-image: url(../images/bkgrnd.jpg);
+  background-position: 50% 50%;
+  background-size: cover;
+  min-width: 1350px;
+  position: absolute;
+}
+.bg01 {
+  background-image: url(../images/bkgrnd.jpg);
+}
+.bg02 {
+  background-image: url(../images/Greenoaks_London.jpg);
+}
+.bg03 {
+  background-image: url(../images/Greenoaks_London_V2.jpg);
+}
+.bg04 {
+  background-image: url(../images/Greenoaks_SanFrancisco.jpg);
+}
+.bg05 {
+  background-image: url(../images/Greenoaks_Seoul.jpg);
+}
+.bg06 {
+  background-image: url(../images/Greenoaks_Zurich.jpg);
+}
+.header {
+  height: 145px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 135px;
+  background-color: rgba(105, 102, 102, 0.31);
+  background-image: none;
+}
+
+.gLogo {
+    position: absolute;
+    top: 150px;
+    left: 350px;
+}
+.gLogo > img{
+    width: 300px;
+    height: 139px;
+}
+.nav {
+    position: absolute;
+    top: 150px;
+    left: 665px;
+    overflow: hidden;
+}
+.navBar {
+    background-color: #346632;
+    color: #fff;
+}
+.navBar li {
+    float: left;
+    padding: 10px;
+    cursor: pointer;
+    min-width: 139px;
+    min-height: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-family: vcb;
+    letter-spacing: 2px;
+}
+.navBar li:hover {
+    background-color: #649861;
+}
+.navBarClicked {
+    background-color: #094b04;
+}
+.navBlock {
+    width: 556px;
+    background: rgba(0,0,0,0.8);
+    padding: 40px 20px;
+    color: #fff;
+    position: absolute;
+    top: 190px;
+    left: 665px;
+    font-size: 1.3em;
+    font-family: vb;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.hide { display:none; }
+.gBottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    width: 100%;
+    clear: both;
+    font-weight: 700;
+    font-size: 12px;
+    min-width: 1350px;
+    font-family: vd;
+}
+.gbUl {
+    float: left;
+    padding-left: 350px;
+}
+.gbUl li {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-right: 40px;
+}
+.gCopyright {
+    float: right;
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    padding-right: 40px;
+}
+.lbUl02Wrap {
+    width: 360px;
+    height: 200px;
+    float: left;
+}
+.lbUl02 {
+    width: 850px;
+}
+.lbUl02 > li {
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.lbUl02 > li:last-child {
+    margin-right: 0;
+}
+.leadershipBlockLeft {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.lbUl01 { float: left; }
+.lbUl01 > li {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px;
+}
+.lbUl01 > li > img,
+.lbUl02 > li > img {
+    width: 75px;
+    height: 95px;
+}
+.lbUl01 > li > p {
+    font-size: 14px;
+}
+.leadershipBlockRight{
+}
+.sectionTitle {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.sectionContent > p {
+    line-height: 1.5em; 
+}
+.stWords {
+    border: 1px #fff;
+    border-style: solid none;
+    padding: 5px 0;
+    font-size: 19px;
+}
+.gName {
+    font-size: 14px;
+}
+.gDescribe {
+    font-size: 10px;
+    margin-top: 5px;
+}
+.gTitle {
+    font-size: 19px;
+    text-align: left;
+    margin: 30px 20px 0 0;
+    padding: 5px 0;
+    border: 1px #fff;
+    border-style: solid none;
+    float: left;
+}
+.gtLine {
+    padding-bottom: 10px;
+    line-height: 1.1em;
+    letter-spacing: 2px;
+}
+.gtl01 {
+    text-align: center;
+}
+.lbUl02 {
+    padding: 0;
+}
+.lbUl02 li {
+    cursor: pointer;
+    margin-right: 50px;
+}
+.gt02 {
+    margin-right: 40px;
+}
+.left { float: left; }
+.ldcWords {
+    width: 350px;
+    margin-left: 20px;
+    line-height: 18px;
+}
+.ldcWords > p {
+    font-size: 11px;
+}
+.ldcWords > p.ldName {
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+.ldcWords > p.ldInfo {
+    font-size: 11px;
+    letter-spacing: 3px;
+    border-bottom: 1px solid #fff;
+    padding: 0 0 5px; 
+}
+.photoBlock {
+    margin-top: 60px;
+}
+.photoBlock > img {
+    width: 115px;
+    height: 175px;
+}
+.leadershipDetailBlock {
+    padding-left: 20px;
+}
+.navBlock02Inner {
+    position: relative;
+    min-height: 300px;
+}
+.close {
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 18px;
+    color: #000;
+    background: #8b8c8b;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 24px;
+}
+
