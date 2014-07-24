@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折叠导航</title>
+    <link media="all" rel="stylesheet" href="css/sidebar.css" type="text/css" />
+</head>
+<body>
+<ul class="list">
+    <li class="levelOne"><span class="loWords clearfix">PC端<span class="arrow arrowOne">&gt;</span></span>
+        <ul>
+            <li class="levelTwo"><span class="ltwoWords">流量分析</span>
+                <ul class="levelThree hide">
+                    <li>流量概况</li>
+                    <li>按小时流量分析</li>
+                    <li>按天流量分析</li>
+                    <li>商品访问分析</li>
+                    <li>单页访问分析</li>
+                    <li>网站访问分析</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li class="levelOne"><span class="loWordsT">移动端（预）</span></li>
+</ul>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    (function(){
+        var l3 = $('.levelThree'),
+            l2 = $('.levelTwo'),
+            ltwoWords = $('.ltwoWords'),
+            l3List = l3.find('li'),
+            arrowOne = $('.arrowOne'),
+            l1 = $('.levelOne');
+
+        $('.loWords').on('click', function(){
+            if(!l3.is(':visible')) {
+                ltwoWords.slideToggle();
+                arrowOne.toggleClass('arrowDown');
+            } else {
+                ltwoWords.slideToggle();
+                arrowOne.toggleClass('arrowDown');
+                l3.hide();
+            }
+        });
+        ltwoWords.on('click', function(){
+            l3.slideToggle();
+        });
+        l3List.on('click', function(){
+            $(this).addClass('levelThreeSel').siblings('li').removeClass('levelThreeSel');
+        })
+    })();
+</script>
+</body>
+</html>
