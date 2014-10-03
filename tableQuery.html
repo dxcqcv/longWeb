@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table and Query</title>
+    <link rel="stylesheet" href="css/global.css" media="all">
+    <style>
+        table {
+            width: 100%;
+        }
+        tr {
+            border: 1px solid #000;
+        }
+        td {
+            border: 2px #000;
+            border-style: none solid;
+        }
+        .cont,
+        .top {
+        }
+        .one {
+            width: 20%;
+        }
+        @media all and (max-width: 699px) and (min-width: 520px) , (min-width: 1151px) {
+            body {
+                background: #39c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>test table and query</h1>
+    <div class="top">
+       <table>
+            <thead>
+                <tr>
+                    <td class="one">one</td>
+                    <td class="one">two</td>
+                    <td class="one">three</td>
+                    <td class="one">four</td>
+                    <td>five</td>
+                </tr>
+            </thead>
+       </table>
+    </div>
+    <div class="cont">
+       <table>
+            <tbody>
+                <tr>
+                    <td class="one">1</td>
+                    <td class="one">Elpxentary Reading</td>
+                    <td class="one">rudimentary</td>
+                    <td class="one">basic</td>
+                    <td>initial</td>
+                </tr>
+            </tbody>
+       </table>
+    </div>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            console.log('hi'); 
+        });
+    </script>
+</body>
+</html>

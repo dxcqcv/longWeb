@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Slave Settings</title>
+	<link href="../css/theme.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div class="boxform">
+	<h1><span>ModBus从站设置</span></h1>
+	<h2>本页设置ModBus从站。</h2>
+<form method="post" action="#">
+	<table id="slaveSettingsTable" class="formTable">
+	  <tr>
+	    <th>通道号：</th>
+	    <td><select class="formsel">
+		  <option value="1">CHANNEL1</option>
+		  <option value="2">CHANNEL2</option>
+		  <option value="3">CHANNEL3</option>
+		  <option value="4">CHANNEL4</option>
+		  <option value="5">CHANNEL5</option>
+		  <option value="6">CHANNEL6</option>
+		  <option value="7">CHANNEL7</option>
+		  <option value="8">CHANNEL8</option>
+		</select></td>
+	  </tr>
+	  <tr>
+	    <th>从站号：</th>
+	    <td><input name="" type="text" class="formtext" /></td>
+	  </tr>
+	  <tr>
+	    <th>功能码：</th>
+	    <td><select class="formsel" id="gnmSel">
+		  <option value="1">0x01</option>
+		  <option value="2">0x02</option>
+		  <option value="3">0x03</option>
+		  <option value="4">0x04</option>
+		  <option value="5">0x05</option>
+		  <option value="16">0x10</option>
+		</select></td>
+	  </tr>
+	</table>
+	<ul>
+	  <li><a href="#" class="bnt"><span>Submit</span></a></li>
+	  <li><a href="mainbox.html" target="_self" class="bnt"><span>Cancel</span></a></li>
+	</ul>
+</form>
+    <fieldset  style="position:absolute;left:450px;top:100px; padding:10px 5px 5px 20px; border:#000 solid 3px;">
+    <legend style="width:130;font-size:20px;">寄存器配置</legend>
+    <table bordar="1" align="">
+        <tr>
+        <th>寄存器地址</th>
+        <th>寄存器数目</th>
+        <th>寄存器名字</th>
+        <th>寄存器描述</th>
+      </tr>
+      <tr class="jcqpzInputLine">
+        <td><input name="" type="text"  class="formtext2" id="jcqdzVal" /></td>
+        <td><input name="" type="text"  class="formtext2" id="jcqsmVal"/></td>
+        <td><input name="" type="text"  class="formtext3" id="jcqmzVal"/></td>
+        <td><input name="" type="text"  class="formtext3" id="jcqmsVal"/></td>
+      </tr>
+    </table>
+    <p class="bntLine">
+            <input id="jcqpzAdd" class="bnt smallButton" type="submit" name="add" value="添加"> 
+            <input id="jcqpzDel" class="bnt smallButton" type="submit" name="clear" value="清空">
+    </p>
+    </fieldset>
+</div>
+
+
+
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/slaveSettings.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+(function(){
+    $(document).on('click','#jcqpzAdd',addjcqpz);
+    $(document).on('click','#gnmSel option',selgnm);
+    $(document).on('click','.delButton',delThisLine);
+    $(document).on('click','#jcqpzDel',{name:'.jcqpzInputLine'},clearAll);
+})();
+
+function addjcqpz() {
+    var v1 = $("#jcqdzVal").val(),
+        v2 = $("#jcqsmVal").val(),
+        v3 = $("#jcqmzVal").val(),
+        v4 = $("#jcqmsVal").val();
+
+    if(numberCheck(v1) && numberCheck(v2)) {
+    $('<tr>'+
+            '<th>寄存器地址：</th><td><input class="formtext" type="text" name="" value="'+v1+'"></td>'+    
+            '<th>寄存器数目：</th><td><input class="formtext" type="text" name="" value="'+v2+'"></td>'+
+            '<th>寄存器名字：</th><td><input class="formtext" type="text" name="" value="'+v3+'"></td>'+
+            '<th>寄存器描述：</th><td><input class="formtext" type="text" name="" value="'+v4+'"></td>'+
+            '<td><a class="bnt delButton" href="#"><span>Delete</span></a></td>'+
+      '</tr>' 
+    ).appendTo('#slaveSettingsTable > tbody');
+    } else {
+        alert('only int number in 寄存器地址 and 寄存器数目');
+    }
+}
+function selgnm(){
+    if($('#gnm03').length) return;
+    if($(this).attr('value') == 3) {        
+        $('<tr id="gnm03">'+
+                '<th>功能码：</th><td>'+
+                '<select class="formsel">'+
+                '<option value="1">0x01</option>'+
+                '<option value="2">0x02</option>'+ 
+                '<option value="3">0x03</option>'+
+                '<option value="4">0x04</option>'+
+                '<option value="5">0x05</option>'+
+                '<option value="16">0x10</option>'+
+                '</select></td>'+    
+          '</tr>' 
+        ).appendTo('#slaveSettingsTable > tbody');
+    }
+}
+function numberCheck(text) {
+    var regex = /^[+|-]?\d*$/;
+    if(!regex.test(text)) {
+        return false; 
+    }
+    return true;
+}
+function delThisLine() {
+    var $this = $(this);
+    $this.parents('tr').remove();
+}
+
+function clearAll(event) {
+    var ele = $(event.data.name);
+    ele.find('input').val('');
+}

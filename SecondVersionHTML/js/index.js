@@ -110,26 +110,32 @@ slider.nav.find('button').on('click', function(){
     slider.transition();
 });
 
-// for focus
-function Focus (container,ticker) {
+
+// for focus 
+function Focus (opts,container,ticker,width, sliderClickName, tickerClickName,showContent, showClass, infoContent) {
     this.container = container;
     this.lis = this.container.children('li');
     this.lisLen = this.lis.length;
     this.current = -1;
     this.animateTime = 500;
-    this.speed = 1500;
+    this.speed = 8500;
     this.timeoutID;
     this.dir = false;
     this.start = true;
     this.ticker = ticker;
-    this.tlis= this.ticker.children('li');
+    this.tlis = this.ticker.children('li');
+    this.width = width;
+    this.sliderClickName = sliderClickName;
+    this.tickerClickName = tickerClickName;
+    this.showContent = showContent;
+    this.showClass = showClass;
+    this.infoContent = infoContent;
 };
 Focus.prototype.init = function() {
     this.place();
     this.loop();
     this.stop(this.container);
     this.stop(this.tlis);
-    this.clicked(this.dir);
 }
 
 Focus.prototype.next = function(index) {
@@ -138,55 +144,50 @@ Focus.prototype.next = function(index) {
 Focus.prototype.prev = function(index) {
     return this.current - index < 0 ? this.lisLen + this.current - index : this.current - index;
 }
-
 Focus.prototype.slide = function(dir) {
-      this.lis.eq((dir ? this.prev(2) : this.next(2))).css('left',dir ? '-1920px' : '1920px');
+      this.lis.eq((dir ? this.prev(2) : this.next(2))).css('left',dir ? '-'+this.width*2+'px' : this.width*2+'px');
 
       this.lis.animate({
-        'left': (dir ? '+' : '-') + '=960px' 
+        'left': (dir ? '+' : '-') + '='+this.width+'px' 
       }, this.animateTime);
       
-
       this.current = dir ? this.prev(1) : this.next(1);
 
-      this.selected(this.lis, 'fibBlockSelected');
-      this.selected(this.tlis, 'ftlbSelected');
-      console.log(this.current);
-
+      this.selected(this.lis,this.sliderClickName);
+      this.selected(this.tlis,this.tickerClickName);
+      if(this.showContent) {
+          this.selected(this.showContent,this.showClass);
+          this.selected(this.infoContent,this.showClass);
+      }
 }
 Focus.prototype.selected = function(selection, className) {
    selection.eq(this.current).addClass(className).siblings().removeClass(className); 
 }
-Focus.prototype.clicked = function(){
+Focus.prototype.clicked = function(num){
    var self = this;
+   
+   if(num == 0) {
+        self.current = num;
+        self.lis.eq(num).animate({'left':0}).addClass(self.sliderClickName);
+        self.lis.eq(num).next().animate({'left': self.width+'px'}).removeClass(self.sliderClickName);
+        self.lis.eq(self.lis.length-1).animate({'left':'-'+self.width+'px'}).removeClass(self.sliderClickName);
+   } else if(num == self.tlis.length-1) {
+        self.current = num;
+        self.lis.eq(num).animate({'left':0}).addClass(self.sliderClickName);
+        self.lis.eq(0).animate({'left':self.width+'px'}).removeClass(self.sliderClickName);
+        self.lis.eq(num).prev().animate({'left':'-'+self.width+'px'}).removeClass(self.sliderClickName);
+   } else {
+        self.current = num;
+        self.lis.eq(num).animate({'left':0}).addClass(self.sliderClickName);
+        self.lis.eq(num).next().animate({'left': self.width+'px'}).removeClass(self.sliderClickName);
+        self.lis.eq(num).prev().animate({'left':'-'+self.width+'px'}).removeClass(self.sliderClickName);
+   }
 
-   self.tlis.eq(0).on('click', function(dir) {
-        self.current = 0;
-        self.lis.eq(0).animate({'left':0}).addClass('fibBlockSelected');
-        self.lis.eq(1).animate({'left':'960px'}).removeClass('fibBlockSelected');
-        self.lis.eq(2).animate({'left':'-960px'}).removeClass('fibBlockSelected');
-        self.tlis.eq(0).addClass('ftlbSelected');
-        self.tlis.eq(1).removeClass('ftlbSelected');
-        self.tlis.eq(2).removeClass('ftlbSelected');
-   });
-   self.tlis.eq(1).on('click', function(dir) {
-        self.current = 1;
-        self.lis.eq(1).animate({'left':0}).addClass('fibBlockSelected');
-        self.lis.eq(2).animate({'left':'960px'}).removeClass('fibBlockSelected');
-        self.lis.eq(0).animate({'left':'-960px'}).removeClass('fibBlockSelected');
-        self.tlis.eq(1).addClass('ftlbSelected');
-        self.tlis.eq(0).removeClass('ftlbSelected');
-        self.tlis.eq(2).removeClass('ftlbSelected');
-   });
-   self.tlis.eq(2).on('click', function(dir) {
-        self.current = 2;
-        self.lis.eq(2).animate({'left':0}).addClass('fibBlockSelected');
-        self.lis.eq(0).animate({'left':'960px'}).removeClass('fibBlockSelected');
-        self.lis.eq(1).animate({'left':'-960px'}).removeClass('fibBlockSelected');
-        self.tlis.eq(2).addClass('ftlbSelected');
-        self.tlis.eq(1).removeClass('ftlbSelected');
-        self.tlis.eq(0).removeClass('ftlbSelected');
-   });
+        self.tlis.eq(num).addClass(self.tickerClickName).siblings().removeClass(self.tickerClickName);
+        if(self.showContent) {
+            self.showContent.eq(num).addClass(self.showClass).siblings().removeClass(self.showClass);
+            self.infoContent.eq(num).addClass(self.showClass).siblings().removeClass(self.showClass);
+        }
 }
 Focus.prototype.loop = function() {
   var self = this;
@@ -212,122 +213,18 @@ Focus.prototype.stop = function(obj) {
 }
 
 Focus.prototype.place = function() {
-    this.lis.eq(this.current).css('left', '0px').end().eq(this.current + 1).css('left', '960px').end().eq(this.current - 1).css('left', '-960px');
+    this.lis.eq(this.current).css('left', '0').end().eq(this.current + 1).css('left', this.width+'px').end().eq(this.current - 1).css('left', '-'+this.width+'px');
 }
 
-var focus = new Focus($('.focusImgBox'), $('.ftList'));
+var focus = new Focus($('.focusImgBox'), $('.ftList'),960, 'fibBlockSelected', 'ftlbSelected');
 focus.init();
-/*
-        var focusWrap = $('.focusWrap'),
-        sliderUL = $('.focusImgs').children('ul'),
-        imgs = sliderUL.find('img'),
-        imgWidth = imgs[0].width, // 713
-        imgsLen = imgs.length, // 5
-        current = 1,
-        totalImgWidth = imgsLen * imgWidth,
-        fLeft = $('.fLeft'),
-        fRight = $('.fRight'),   
-        fTicker = $('#fTicker').find('button'),
-        autoPlay = true,
-        delay; 
+focus.tlis.on('click', function(){
+    var self = this;
+    focus.clicked($(self).index());
+}); 
+focus.lis.on('click', function(){
+    var self = this;
+    focus.clicked($(self).index());
+}); 
 
-        focusWrap.on('mousemove', function(e){
-            if(e.pageX <= 700) {
-            fLeft.show();
-            fRight.hide();
-            } else if(e.pageX > 700) {
-            fRight.show();
-            fLeft.hide();
-            }
-            clearInterval(delay);
-        });
-        focusWrap.on('mouseout', function() {
-            autoPlay = true;
-            auto();
-            fLeft.hide();
-            fRight.hide();
-        })
-        fTicker.on('click', function(){
-           var $this = $(this),
-               num = $this.index();
-                    $this.addClass('fSelected').siblings().removeClass('fSelected');
-            switch(num) {
-                case 0: 
-                    sliderUL.animate({'margin-left': 0});
-                    current = 1;
-                    break;
-                case 1: 
-                    sliderUL.animate({'margin-left': -713});
-                    current = 2;
-                    break;
-                case 2: 
-                    sliderUL.animate({'margin-left': -1426});
-                    current = 3;
-                    break;
-                case 3: 
-                    sliderUL.animate({'margin-left': -2139});
-                    current = 4;
-                    break;
-                case 4: 
-                    sliderUL.animate({'margin-left': -2852});
-                    current = 5;
-                    break;
-            }
-
-        });        
-        $('#slider-nav').find('button').on('click', function(){
-                var direction = $(this).data('dir'),
-                loc = imgWidth;
-
-                (direction === 'next') ? ++current : --current;
-
-                if(current === 0) {
-                current = imgsLen;
-                direction = 'next';
-                loc = totalImgWidth - imgWidth;
-                } else if (current-1 === imgsLen) {
-                current = 1;
-                loc = 0;
-                }
-
-                fTicker.eq(current-1).addClass('fSelected').siblings().removeClass('fSelected');
-
-                transition(sliderUL, loc, direction);
-                });
-
-        function transition(container, loc, direction) {
-            var unit;
-            if(direction && loc !== 0) {
-                unit = (direction === 'next') ? '-=' : '+=';
-            }
-
-            container.animate({
-                    'margin-left': unit ? (unit + loc) : loc
-                    });
-        }
-       function loop() {
-                current++;
-                var direction = 'next',
-                loc = imgWidth;
-
-                if(current === 0) {
-                current = imgsLen;
-                direction = 'next';
-                loc = totalImgWidth - imgWidth;
-                } else if (current > imgsLen) {
-                current = 1;
-                loc = 0;
-                } 
-                fTicker.eq(current-1).addClass('fSelected').siblings().removeClass('fSelected');
-            transition(sliderUL, loc, direction);
-       }
-       function auto() {
-            if(autoPlay) {
-                delay = setInterval(loop, 1500);
-            }
-            aotoPlay = false; // to avoid play over and over
-       }
-       auto();
-
-*/
 });

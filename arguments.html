@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arguments</title>
+    <link rel="stylesheet" href="css/global.css" media="all">
+    <style>
+    </style>
+</head>
+<body>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script>
+    function dosomething(arg1){
+        return function(){
+            alert(arg1)
+        }
+    }
+    var fn = dosomething('hello closure');
+    fn();
+    fn = null;
+        var utility = (function(){
+            var i = 0;
+            return {
+                nameGen: function(arg2) {
+                    var name = 'customName' + i;
+                    i = i +1;
+                    return arg2;
+                }
+            }
+        }());
+            var name = utility.nameGen('gogo');
+            var name2 = utility.nameGen('nice');
+            alert(name + " " + name2);
+            alert(typeof(utility));
+    </script>
+</body>
+</html>
