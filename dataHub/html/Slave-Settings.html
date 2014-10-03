@@ -11,11 +11,10 @@
 <div class="boxform">
 	<h1><span>ModBus从站设置</span></h1>
 	<h2>本页设置ModBus从站。</h2>
-<form method="post" action="#">
 	<table id="slaveSettingsTable" class="formTable">
 	  <tr>
 	    <th>通道号：</th>
-	    <td><select class="formsel">
+	    <td><select class="formsel" id="tdhSel">
 		  <option value="1">CHANNEL1</option>
 		  <option value="2">CHANNEL2</option>
 		  <option value="3">CHANNEL3</option>
@@ -28,7 +27,7 @@
 	  </tr>
 	  <tr>
 	    <th>从站号：</th>
-	    <td><input name="" type="text" class="formtext" /></td>
+	    <td><input name="" type="text" class="formtext" id="czhNum" /></td>
 	  </tr>
 	  <tr>
 	    <th>功能码：</th>
@@ -42,11 +41,16 @@
 		</select></td>
 	  </tr>
 	</table>
+    <div id="slaveSettingsTable2Wrapper" class="totalTable">
+    </div>
 	<ul>
-	  <li><a href="#" class="bnt"><span>Submit</span></a></li>
+	  <li><a href="#" class="bnt" id="jcqpzSubmit"><span>Submit</span></a></li>
 	  <li><a href="mainbox.html" target="_self" class="bnt"><span>Cancel</span></a></li>
 	</ul>
-</form>
+<div class="pageButton clearfix">
+    <a class="bnt" href="#"><span>Save</span></a>
+    <a class="bnt" href="#"><span>Cancel</span></a>
+</div>
     <fieldset  style="position:absolute;left:450px;top:100px; padding:10px 5px 5px 20px; border:#000 solid 3px;">
     <legend style="width:130;font-size:20px;">寄存器配置</legend>
     <table bordar="1" align="">

@@ -6,7 +6,7 @@
     * **/
 
 (function(){
-    var n = 0;
+    var n = 0; // array init is 0
     $(document).on('click','#jcqpzAdd',{num: n},addjcqpz);
     $(document).on('change','#gnmSel',selgnm);
     $(document).on('click','.delButton',delThisLine);

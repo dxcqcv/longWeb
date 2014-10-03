@@ -1,12 +1,6 @@
 /* CSS Document */
 
-*{
-	font-family: Arial;
-	margin:0px;
-	padding:0px;
-	list-style:none;
-	font-size:10px;
-}
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td { margin: 0; padding: 0; }
 a{
 	text-decoration: none;
 }
@@ -19,8 +13,8 @@ html,body{
 }
 body{
 	background:#3C444F;
+    font: 12px/1.5 "Microsoft YaHei","songti", Arial, Helvetica, sans-serif;
 }
-
 .topbar{
 	display:block;
 	width:100%;
@@ -443,6 +437,7 @@ body{
 .icon31{ background-position: 0 -60px;} 
 .icon32{ background-position: -30px -60px;}
 .icon33{ background-position: -60px -60px;} 
+
 /* 调整样式2014-09-19 */
 .smallButton {
     height: auto;
@@ -456,3 +451,32 @@ body{
     padding-top: 40px;
     min-height: 200px;
 }
+.pageButton {
+    text-align: center;
+}
+.clearfix:after {
+   clear: both; 
+   content: '';
+   display: block;
+   height: 0;
+   width: 0;
+}
+.pageButton > a {
+    float: left;
+}
+.labelStyle {
+    color: #8c9dae;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 5px 2px;
+    text-align: left;
+}
+.totalTable > table {
+    width: 100%;
+    display: table;
+}
+.totalTable > table th,
+.totalTable > table td {
+    border: 1px solid #000;
+}
+.mb20 {margin-bottom: 20px;}
