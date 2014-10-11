@@ -112,7 +112,7 @@ slider.nav.find('button').on('click', function(){
 
 
 // for focus 
-function Focus (opts,container,ticker,width, sliderClickName, tickerClickName,showContent, showClass, infoContent) {
+function Focus (container,ticker,width, sliderClickName, tickerClickName,showContent, showClass, infoContent) {
     this.container = container;
     this.lis = this.container.children('li');
     this.lisLen = this.lis.length;
