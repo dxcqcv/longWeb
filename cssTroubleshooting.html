@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS trouble shooting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            
+        }
+        .clearfix:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+        .wrapper {
+            float: left;
+        }
+        .one {
+            margin-top: 50px;
+        }
+        p {
+            border: 1px solid #39c;
+        }
+        div {
+            border: 2px solid #ddd;
+        }
+        .showBox {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            display: none;
+        }
+    </style>
+    <script>
+            function init() {
+                var ele = document.getElementById('oo');
+                ele.addEventListener('click',function(e){
+                   e.cancelBubble = false;
+                   e.preventDefault(); 
+                   var showBox = document.getElementById('box');
+                   showBox.style.display = "block";
+                   return false;
+                }, false);
+            }
+    </script>
+</head>
+<body onload="init();">
+<div id="box" class="showBox">hi</div>
+<div class="clearfix">
+   <div class="wrapper ">
+        <p id="oo" class="one">111</p>
+        <input type="">
+        <input type="">
+        <input type="">
+        <p class="two">222</p>
+        <p class="three">333</p>
+   </div>
+   </div>
+   <div class="other">dddddd</div>
+</body>
+</html>

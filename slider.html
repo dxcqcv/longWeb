@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slider</title>
+    <link rel="stylesheet" href="css/global.css" media="all">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 300px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wrapper > ul {
+            height: 1600px;
+            position: absolute;
+            width: 300px;
+        }
+        .wrapper > ul > li {
+            height: 400px;
+        }
+        .wrapper > ul > li:nth-child(1) {
+            background: #39c;
+        }
+        .wrapper > ul > li:nth-child(2) {
+            background: pink;
+        }
+        .wrapper > ul > li:nth-child(3) {
+            background: black;
+        }
+        .wrapper > ul > li:nth-child(4) {
+            background: blue;
+        }
+        .arrow {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+<div class="up arrow">^</div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+<div class="down arrow">*</div>
+</div>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            console.log('hi'); 
+            $(document).on('click', '.up', function(){
+                var ul = $('.wrapper > ul'); 
+                ul.css({'top': '-400px'});
+            });
+        });
+    </script>
+</body>
+</html>

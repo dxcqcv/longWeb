@@ -1,0 +1,578 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>优化配置</title>
+    <link rel="stylesheet" href="Content/css/common.css" />
+    <link rel="stylesheet" href="Content/css/context.css" />
+    <link rel="stylesheet" href="Content/css/ico.css" />
+    <script src="Scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/common.js"></script>
+    <script src="Scripts/my.js"></script>
+    <script src="Scripts/base.js"></script>
+    <script src="Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="Scripts/jquery/jquery.cookies.2.2.0.min.js"></script>
+    <script src="Scripts/zTree_v3/js/jquery.ztree.core-3.5.min.js"></script>
+
+    <script src="Scripts/Regex.js"></script>
+    <script src="Scripts/jquery/jquery.pagination.js"></script>
+    <script src="Scripts/jquery/jquery.fancybox.js"></script>
+<!--
+    <script src="Scripts/bootstrap/bootstrap-scrollspy.js"></script>
+-->
+    <script src="Scripts/web/OptConfig.js"></script>
+</head>
+<body>
+    <div class="clearfix" data-spy="scroll" data-target=".yhpzLeft"></div>
+    <div class="content contentTop">
+        <div class="yhpzWrapper clearfix">
+            <div class="yhpzLeft">
+                <ul class="nav">
+                    <li class="ytpz yhpzSelected active"><span class="ytpzIcon"></span><a href="#ytpz">业态配置</a></li>
+                    <li class="rzlpz"><span class="ytpzIcon"></span><a href="#rzlpz">入住率配置</a></li>
+                    <li class="nyjgpz"><span class="ytpzIcon"></span><a href="#nyjgpz">能源价格配置</a></li>
+                    <li class="yhfwgl"><span class="ytpzIcon"></span><a href="#yhfwgl">优化服务管理</a></li>
+                    <li class="jhsjgl"><span class="ytpzIcon"></span><a href="#jhsjgl">计划事件管理</a></li>
+                    <li class="sxbsjpz"><span class="ytpzIcon"></span><a href="#sxbsjpz">上下班时间配置</a></li>
+                    <li class="ynyxjpz"><span class="ytpzIcon"></span><a href="#ynyxjpz">用能优先级配置</a></li>
+                    <li class="sbsyyxj"><span class="ytpzIcon"></span><a href="#sbsyyxj">设备使用优先级</a></li>
+                    <li class="xtyhmbpz"><span class="ytpzIcon"></span><a href="#xtyhmbpz">系统优化目标配置</a></li>
+                    <li class="mxzxxpz"><span class="ytpzIcon"></span><a href="#mxzxxpz">模型自学习配置</a></li>
+                    <li class="fhycxzpz"><span class="ytpzIcon"></span><a href="#fhycxzpz">负荷预测/修正配置</a></li>
+                </ul>
+            </div>
+            <div class="yhpzRight">
+                <div id="ytpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">业态配置</span>
+                    <label for="txtActivities" class="lw80">业态:</label>
+                    <input id="txtActivities" class="inputStyle" type="text" name="txtActivities" value='@ViewData["act"].ToString()' />
+                    <div class="buttonBox clearfix ml10">
+                        <div class="bbLeft"></div>
+                        <div class="bbCont">保&nbsp;存</div>
+                        <div class="bbRight"></div>
+                    </div>
+                </div>
+                <div id="rzlpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">入住率配置</span>
+                    <label class="lw80" for="txtOptProject">入住率:</label>
+                    <input id="txtOptProject" type="text" name="" class="mr5 inputStyle" value='@ViewData["opt"].ToString()' />%
+                    <div class="buttonBox clearfix">
+                        <div class="bbLeft"></div>
+                        <div class="bbCont">保&nbsp;存</div>
+                        <div class="bbRight"></div>
+                    </div>
+                </div>
+                <div id="nyjgpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">能源价格配置</span>
+                    <div>
+                        <label for="txtPriceWater" class="lw80">耗水单价/吨:</label>
+                        <input id="txtPriceWater" type="text" name="" class="mr5 inputStyle" value='@ViewData["waterPri"].ToString()' />元
+                        <label for="txtPriceElec1" class="lw80">耗电单价/KW:</label>
+                        <input id="txtPriceElec" type="text" name="" class="mr5 inputStyle" value='@ViewData["electPri"].ToString()' />元
+                        <label for="txtPriceGas" class="lw80">耗气单价/m3:</label>
+                        <input id="txtPriceGas" type="text" name="" class="mr5 inputStyle" value='@ViewData["gasPri"].ToString()' />元
+                    </div>
+                    <div class="mt10">
+                        <label for="txtPriceElec2" class="lw80">电转煤:</label>
+                        <input id="txtPriceElec2" type="text" name="" class="mr5 inputStyle" value='@ViewData["eToCoPri"].ToString()' />元
+                        <label for="txtPriceGas2" class="lw80">燃气转煤:</label>
+                        <input id="txtPriceGas2" type="text" name="" class="mr5 inputStyle" value='@ViewData["gToCoPri"].ToString()' />
+                        <div class="buttonBox clearfix">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont">保&nbsp;存</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="yhfwgl" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">优化服务管理</span>
+                    <span class="mr15" onclick="ConfigManage(1)">重启<span title="重启" class="yhfwglIcon chongqi"></span></span>
+                    <span class="mr15" onclick="ConfigManage(1)">启动<span title="启动" class="yhfwglIcon qidong"></span></span>
+                    <span class="mr15" onclick="ConfigManage(1)">关闭<span title="关闭" class="yhfwglIcon guanbi"></span></span>
+                    <span class="ml15">优化状态：可操作/不可操作</span>
+                </div>
+                <div id="jhsjgl" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">计划事件管理</span>
+                    <div class="datalist-div clearfix">
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx ">
+                                <thead>
+                                    <tr>
+                                        <td>计划名称</td>
+                                        <td class="tdW150">开始时间</td>
+                                        <td class="tdW150">结束时间</td>
+                                        <td class="tdW150">计划区域</td>
+                                        <td class="tdW150">计划类型</td>
+                                        <td>计划内容</td>
+                                        <td class="tdW100">操作</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx">
+                                <tbody id="tblEventPlan">
+                                    <tr class="odd">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 100px;">2014-8-12 10:00</td>
+                                        <td style="width: 100px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 100px;"></td>
+                                        <td style="width: 230px;"></td>
+                                        <td><a class="ico-sbgl ico-Update2 fancybox" href="#sb-pop-onupdate2"> </a>  <a class="ico-sbgl ico-Delete2"> </a></td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 100px;">2014-8-12 10:00</td>
+                                        <td style="width: 100px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 100px;"></td>
+                                        <td style="width: 230px;"></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="page mt10" id="PageEventPlan"></div>
+                        </div>
+                    </div>
+                    <div class="yhpzrBlockRight ">
+                        <div class="buttonBox clearfix fancybox" href="#sb-pop-onupdate3">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont"><span class="addIcon"></span>新&nbsp;增</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="sxbsjpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">上下班时间配置</span>
+                    <div class="datalist-div clearfix" style="border:none; ">
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx ">
+                                <thead>
+                                    <tr>
+                                        <td class="tdW150">上班时间</td>
+                                        <td class="tdW150">下班时间</td>
+                                        <td>开始日期</td>
+                                        <td>结束日期</td>
+                                        <td class="tdW150">操作</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx">
+                                <tbody id="tblWorktime">
+
+                                    <tr class="odd">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td><a class="ico-sbgl ico-Update2 fancybox" href="#sb-pop-onupdate2"> </a>  <a class="ico-sbgl ico-Delete2"> </a></td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td><a class="ico-sbgl ico-Update2 fancybox" href="#sb-pop-onupdate2"> </a>  <a class="ico-sbgl ico-Delete2"> </a></td>
+                                    </tr>
+
+                                </tbody>
+
+
+                            </table>
+                            <div class="page mt10" id="PageWorktime"></div>
+                        </div>
+                    </div>
+                    <div class="yhpzrBlockRight ">
+                        <div class="buttonBox clearfix fancybox" href="#sb-pop-onupdate4">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont">新&nbsp;增</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="ynyxjpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">用能优先级</span>
+                    <div class="ynyxjBlock">
+                        <div>
+                                <input id="rdoPriority1" class="yhpzPriority bn" type="radio" name="yxj" checked="checked" onclick="priorityChange();">
+                            <label for="rdoPriority1">有优先级</label>
+                        </div>
+                        <div class="yhpzNonpriority mt15">
+                                <input id="rdoPriority2" type="radio" class="bn" name="yxj" checked="checked" onclick="priorityChange();">
+                            <label for="rdoPriority2">无优先级</label>
+                        </div>
+                    </div>
+                    <div class="ynyxjBlock xmmc">
+                        <ul id="EngPriorityList">
+                                <li val="@v.Value">@v.Text</li>
+                        </ul>
+                    </div>
+                    <div class="ynyxjBlock arrowBlock">
+                        <div class="abUp"><span class="yhpzArrow yaUp"></span>上移</div>
+                        <div class="abDown"><span class="yhpzArrow yaDown"></span>下移</div>
+                    </div>
+                    <div class="ynyxjBlock arrowBlock">
+                        <div class="buttonBox clearfix ynyxjButton">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont">保&nbsp;存</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sbsyyxj" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">设备使用优先级</span>
+                    <div id="selEquType" class="mod-select sbsyyxjSelect">
+                        <p class="text" val="">选择设备类型</p>
+                        <span class="arr-group hand">
+                            <i class="icon-mod icon-arr"></i>
+                        </span>
+                        <div class="list">
+                            <ul>
+                                <li val="aa"><a href="">类型1</a></li>
+                                <li val="aa"><a href="">类型2</a></li>
+                                <li val="aa"><a href="">类型3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="datalist-div clearfix" style="border:none; ">
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx ">
+                                <thead>
+                                    <tr>
+                                        <td class="tdW100">优先级</td>
+                                        <td>设备名称</td>
+                                        <td class="tdW150">开始日期</td>
+                                        <td class="tdW150">结束日期</td>
+                                        <td class="tdW150">操作</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="">
+                            <table class="newdatalist nxfx_sbnx">
+                                <tbody id="tblDevPriority">
+
+                                    <tr class="odd">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 300px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td><a class="ico-sbgl ico-Update2 fancybox" href="#sb-pop-onupdate2"> </a>  <a class="ico-sbgl ico-Delete2"> </a></td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 300px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td style="width: 200px;"></td>
+                                        <td><a class="ico-sbgl ico-Update2 fancybox" href="#sb-pop-onupdate2"> </a>  <a class="ico-sbgl ico-Delete2"> </a></td>
+                                    </tr>
+
+                                </tbody>
+
+
+                            </table>
+                            <div class="page mt10" id="PageDevPriority"></div>
+                        </div>
+                    </div>
+                    <div class="yhpzrBlockRight ">
+                        <div class="buttonBox clearfix fancybox" href="#sb-pop-onupdate5">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont">新&nbsp;增</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="yhpzrBlock" id="xtyhmbpz">
+                    <span class="yhpzrTitle">系统优化目标配置</span>
+                         <span class="mr20"><input id='@("target"+v.uid)' class="bn" type="radio" name="xtyhmbpz" checked="checked" /><label for='@("target"+v.uid)'>@v.type</label></span> }
+                    <div class="buttonBox clearfix">
+                        <div class="bbLeft"></div>
+                        <div class="bbCont">保&nbsp;存</div>
+                        <div class="bbRight"></div>
+                    </div>
+                </div>
+                <div id="mxzxxpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">模型自学习执行配置</span>
+                    <span class="mr20">
+                         <input id="mxzdzx" class="bn" type="radio" name="mxzxxzxpz" checked="checked" /><label for="mxzdzx">自动执行</label> }
+                    </span>
+                    <span class="mr20">
+                        <label for="mxqdsj" class="mr5">启动时间</label>
+                        <input id="mxqdsj" type="text" class="Wdate" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'HH:mm:ss' })" autocomplete="off" value="@modStudy.stime">
+                    </span>
+                    <span class="mr20">
+                        <label for="mxjgsj" class="mr5">间隔时间</label>
+                        <input id="mxjgsj" type="text" class="inputStyle" value="@modStudy.timeinterval">小时
+                    </span>
+                    <span class="mr20">
+                         <input id="mxsdzx" class="bn" type="radio" name="mxzxxzxpz" checked="checked" /><label for="mxsdzx">手动执行</label>	
+                    </span>
+                    <div class="buttonBox clearfix">
+                        <div class="wbbLeft"></div>
+                        <div class="wbbCont" onclick="ParamFit();">执&nbsp;行</div>
+                        <div class="wbbRight"></div>
+                    </div>
+                    <div class="buttonBox clearfix">
+                        <div class="bbLeft"></div>
+                        <div class="bbCont">保&nbsp;存</div>
+                        <div class="bbRight"></div>
+                    </div>
+                </div>
+                <div id="fhycxzpz" class="yhpzrBlock ">
+                    <span class="yhpzrTitle">负荷预测执行配置</span>
+                    <div>
+                        <span>负荷预测：</span>
+                        <span class="mr20">
+                             <input id="fhzdzx" class="bn" type="radio" name="fhyczdzx" checked="checked" /><label for="fhzdzx">自动执行</label> }
+                        </span>
+                        <span class="mr20">
+                            <label for="ycqdsj" class="mr5">启动时间</label>
+                            <input id="ycqdsj" type="text" class="Wdate" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'HH:mm:ss' })" autocomplete="off" value="@modPredict.stime">
+                        </span>
+                        <span class="mr20">
+                            <label for="ycjgsj" class="mr5">间隔时间</label>
+                            <input id="ycjgsj" type="text" class="mr5 inputStyle" value="@modPredict.timeinterval">小时
+                        </span>
+                    </div>
+                    <div class="mtb10">
+                        <span class="mr20 ml65">
+                             <input id="fhsdzx" class="bn" type="radio" name="fhyczdzx" checked="checked" /><label for="fhsdzx">手动执行</label>	
+                        </span>
+                        <div class="buttonBox clearfix">
+                            <div class="wbbLeft"></div>
+                            <div class="wbbCont" onclick="Load_Predict();">执行</div>
+                            <div class="wbbRight"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span>负荷修正：</span>
+                        <span class="mr20">
+                            <label for="xzqdsj">启动时间</label>
+                            <input id="xzqdsj" type="text" class="Wdate" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'HH:mm:ss' })" autocomplete="off" value="@modDict.stime">
+                        </span>
+                        <span class="mr20">
+                            <label for="xzjgsj">间隔时间</label>
+                            <input id="xzjgsj" class="inputStyle" type="text" value="@modDict.timeinterval">小时
+                        </span>
+                        <div class="buttonBox clearfix">
+                            <div class="bbLeft"></div>
+                            <div class="bbCont">保&nbsp;存</div>
+                            <div class="bbRight"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="sb-pop-onupdate3" class="mod-pop w420">
+        <input id="EventPlanId" type="hidden" value="-1" />
+        <input id="PlanId" type="hidden" value="1" />
+        <div class="hd">
+            <h2>计划事件管理</h2>
+        </div>
+        <div class="dialogContBlock">
+            <div class="dcbTop">
+                <ul>
+                    <li>
+                        <span class="labelStyle">计划事件名称:</span>
+                        <input id="jxsjName" class="inputStyle w243" type="text" />
+                    </li>
+                    <li>
+                        <span class="labelStyle">计划开始时间:</span>
+                        <input id="jxsjSTime" type="text" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd HH:mm' })" autocomplete="off" />
+                    </li>
+                    <li>
+                        <span class="labelStyle">计划结束时间:</span>
+                        <input id="jxsjETime" type="text" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd HH:mm' })" autocomplete="off" />
+                    </li>
+                    <li>
+                        <span class="labelStyle">计划区域:</span>
+                        <div id="jxsjRegion" class="mod-select newSel w200">
+                            <p class="text">请选择</p>
+                            <span class="arr-group hand">
+                                <i class="icon-mod icon-arr"></i>
+                            </span>
+                            <div class="list">
+                                <ul>
+                                    <li val="所属项目11"><a href="">所属项目11</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目44"><a href="">所属项目44</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="labelStyle">计划类型:</span>
+                        <div id="jxsjType" class="mod-select newSel w200">
+                            <p class="text">请选择</p>
+                            <span class="arr-group hand">
+                                <i class="icon-mod icon-arr"></i>
+                            </span>
+                            <div class="list">
+                                <ul>
+                                    <li val="所属项目11"><a href="">所属项目11</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目44"><a href="">所属项目44</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="labelStyle">内容描述:</span>
+                        <textarea id="jxsjContent" name="" class="textareaStyle w240"></textarea>
+                    </li>
+                    <li>
+                        <span class="labelStyle">时间区域业态类型:</span>
+                        <div id="jxsjTimeRegion" class="mod-select newSel w200">
+                            <p class="text">请选择</p>
+                            <span class="arr-group hand">
+                                <i class="icon-mod icon-arr"></i>
+                            </span>
+                            <div class="list">
+                                <ul>
+                                    <li val="所属项目11"><a href="">所属项目11</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                    <li val="所属项目33"><a href="">所属项目33</a></li>
+                                    <li val="所属项目44"><a href="">所属项目44</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="labelStyle">人数:</span>
+                        <input id="jxsjPeople" class="inputStyle w243" type="text" />
+                    </li>
+                    <li>
+                        <span class="labelStyle">面积:</span>
+                        <input id="jxsjArea" class="inputStyle w243" type="text" />
+                    </li>
+                </ul>
+            </div>
+            <div class="dcbButtonBlock">
+                <div class="buttonBox clearfix ml10 tck-save " onclick="EditEventPlan()">
+                    <div class="bbLeft"></div>
+                    <div class="bbCont">保&nbsp;存</div>
+                    <div class="bbRight"></div>
+                </div>
+                <div class="buttonBox clearfix closeFancybox tck-cancel" title="Close ">
+                    <div class="wbbLeft"></div>
+                    <div class="wbbCont">取&nbsp;消</div>
+                    <div class="wbbRight"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sb-pop-onupdate4" class="mod-pop w420">
+        <input id="worktimeId" type="hidden" value="-1" />
+        <div class="hd">
+            <h2>上下班时间管理</h2>
+        </div>
+        <div class="dialogContBlock">
+            <div class="dcbTop">
+                <ul>
+                    <li>
+                        <span class="labelStyle">上班时间:</span>
+                        <input id="sxbSTime" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'HH:mm:ss' })" autocomplete="off" />
+                    </li>
+                    <li>
+                        <span class="">
+                            <span class="fs12 labelStyle">下班时间:</span>
+                            <input id="sxbETime" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'HH:mm:ss' })" autocomplete="off" />
+                        </span>
+                    </li>
+                    <li>
+                        <span class="">
+                            <span class="fs12 labelStyle">开始日期:</span>
+                            <input id="sxbSDate" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd' })" autocomplete="off" />
+                        </span>
+                    </li>
+                    <li>
+                        <span class="">
+                            <span class="fs12 labelStyle">结束日期:</span>
+                            <input id="sxbEDate" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd' })" autocomplete="off" />
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="dcbButtonBlock">
+                <div class="buttonBox clearfix ml10 tck-save " onclick="EditWorktime()">
+                    <div class="bbLeft"></div>
+                    <div class="bbCont">保&nbsp;存</div>
+                    <div class="bbRight"></div>
+                </div>
+                <div class="buttonBox clearfix closeFancybox tck-cancel" title="Close ">
+                    <div class="wbbLeft"></div>
+                    <div class="wbbCont">取&nbsp;消</div>
+                    <div class="wbbRight"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sb-pop-onupdate5" class="mod-pop w420">
+        <input id="sbyxjId" type="hidden" value="-1" />
+        <div class="hd">
+            <h2>设备使用优先级管理</h2>
+        </div>
+        <div class="dialogContBlock">
+            <div class="dcbTop">
+                <ul>
+                    <li>
+                        <span class="labelStyle">设备名称:</span>
+                        <div id="sbyxjEquList" class="mod-select newSel w200">
+                            <p class="text">请选择</p>
+                            <span class="arr-group hand">
+                                <i class="icon-mod icon-arr"></i>
+                            </span>
+                            <div class="list">
+                                <ul>
+                                    <li val="所属项目11"><a href="">所属项目11</a></li>
+                                    <li val="所属项目22"><a href="">所属项目22</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="labelStyle">开始日期:</span>
+                        <input id="sbyxjSTime" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd' })" autocomplete="off" />
+                    </li>
+                    <li>
+                        <span class="fs12 labelStyle">结束日期:</span>
+                        <input id="sbyxjETime" class="Wdate newDate w250" onfocus="WdatePicker({ onpicked: function () { $(this).blur(); }, dateFmt: 'yyyy-MM-dd' })" autocomplete="off" />
+                    </li>
+                    <li>
+                        <span class="fs12 labelStyle">优先级:</span>
+                        <input id="sbyxjYxj" class="inputStyle w243" type="text" />
+                    </li>
+                </ul>
+            </div>
+            <div class="dcbButtonBlock">
+                <div class="buttonBox clearfix ml10 tck-save " onclick="EditDevPriorityDev()">
+                    <div class="bbLeft"></div>
+                    <div class="bbCont">保&nbsp;存</div>
+                    <div class="bbRight"></div>
+                </div>
+                <div class="buttonBox clearfix closeFancybox tck-cancel" title="Close ">
+                    <div class="wbbLeft"></div>
+                    <div class="wbbCont">取&nbsp;消</div>
+                    <div class="wbbRight"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

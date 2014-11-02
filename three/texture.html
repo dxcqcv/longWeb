@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>phong</title>
+    <script src="js/three.js"></script>
+    <script>
+        function init() {
+            // renderer
+            var renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('mainCanvas')
+            });
+            renderer.setClearColor(0xffffff); //black
+
+            // scene
+            var scene = new THREE.Scene();
+
+            // camera
+            var camera = new THREE.OrthographicCamera(-10, 10, 7.5, -7.5, 0.1, 100);
+            camera.position.set(0, 0, 25);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+
+            // light
+            var light = new THREE.PointLight(0xffffff, 1, 100);
+            light.position.set(10, 15, 5);
+            scene.add(light);
+
+            // material
+            /*
+            var texture = THREE.ImageUtils.loadTexture('img/8.jpg', {}, function() {
+                renderer.render(scene, camera);
+            });
+            
+            var material = new THREE.MeshLambertMaterial({
+                map: texture
+            });
+            var box = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), material);
+            scene.add(box);
+            */
+            /*
+            var materials = [];
+            for (var i = 0; i < 6; ++i) {
+                materials.push(new THREE.MeshBasicMaterial({
+                    map: THREE.ImageUtils.loadTexture('img/' + i + '.jpg', {}, function(){
+                    renderer.render(scene, camera); 
+                    }), 
+                    overdraw: true
+                }));
+            }
+            var box = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5),
+                    new THREE.MeshFaceMaterial(materials)
+            );
+            */
+            var texture = THREE.ImageUtils.loadTexture('img/chess.jpg', {}, function(){
+                renderer.render(scene, camera);
+            });
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(4, 4);
+            var material = new THREE.MeshLambertMaterial({
+                map: texture
+            });
+            var plane = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), material); 
+            scene.add(plane);
+
+            renderer.render(scene, camera);
+        } 
+    </script>
+</head>
+<body onload="init()">
+   <canvas id="mainCanvas" width="400px" height="300px"></canvas>
+</body>
+</html>

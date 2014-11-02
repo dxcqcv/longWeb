@@ -1,0 +1,52 @@
+/****小图标类****/
+/**equipmentmanagement_gzgl.html**/
+.ico-Op { display: inline-block; width: 18px; height: 16px; background: url(../img/caozuo.png) left top no-repeat; }
+.ico-bpgl { display: inline-block; width: 18px; height: 16px; background: url(../img/bp-caozuo.png) no-repeat; }
+.ico-state { display: inline-block; width: 17px; height: 16px; background: url(../img/weixiuzhuangtai.png) left top no-repeat; }
+.ico-sbjx { display: inline-block; width: 17px; height: 16px; background: url(../img/sbjxgl-zt.png) no-repeat; }
+.ico-sbgl { display: inline-block; width: 18px; height: 16px; background: url(../img/sbjxgl-cz.png) no-repeat; }
+.ico-Update { background-position: left top; }
+.ico-Delete { background-position: -30px top; }
+.ico-Set { background-position: right top; }
+.ico-NoUpdate { background-position: left bottom; }
+.ico-NoDelete { background-position: -30px bottom; }
+.ico-NoSet { background-position: right bottom; }
+
+.ico-Nodispose { background-position: top; }
+.ico-dispose { background-position: 0 -27px; }
+.ico-complete { background-position: bottom; }
+.td-ico { float: left; margin-left: 47px; }
+	.td-ico span { margin-left: 25px; }
+	.td-ico a { position: absolute; margin-top: 0px; }
+
+/****equipmentmanagement_bpbjgl.html****/
+.ico-Add { background-position: left top; }
+.ico-Remove { background-position: -27px top; }
+.ico-Update1 { background-position: -54px top; }
+
+/****equipmentmanagement_sbjxgl.html****/
+.ico-Maintenance { background-position: top; }
+.ico-Nomaintenance { background-position: 0 -28px; }
+.ico-Waitmaintenance { background-position: 0 -58px; }
+.ico-Ongoingmaintenance { background-position: 0 -88px; }
+.sb-td-ico { float: left; margin-left: 47px; }
+	.sb-td-ico span { margin-left: 25px; }
+	.sb-td-ico a { position: absolute; margin-top: 0px; }
+
+.ico-Update2 { background-position: left top; }
+.ico-Delete2 { background-position: right top; }
+
+/**********************************
+	小图标类
+*********************************/
+.ico-time {vertical-align:sub; margin-right: 5px; display: inline-block; width: 14px; height: 14px; background: url(../img/icon-time.png) left bottom no-repeat; }
+.ico-hd { display: inline-block; width: 17px; height: 17px; background: url(../img/datalist-img.png) right center no-repeat; }
+.ico-yxxl { display: inline-block; width: 17px; height: 17px; background: url(../img/datalist-img.png) left center no-repeat; }
+
+.ico-status { display: inline-block; width: 15px; height: 16px; background: url(../img/system-so.png) left top no-repeat; }
+.ico-statusRight { background-position: left top; }
+.ico-statusError { background-position: left bottom; }
+
+.ico-op { width: 16px; height: 16px; background: url(../img/system-so.png) -80px bottom no-repeat; }
+.ico-opUpdate { background-position: right bottom; }
+.ico-opSave { background-position: -80px top; }
