@@ -12,24 +12,782 @@
     <script src="Scripts/base.js"></script>
 	<script src="Scripts/jquery/jquery.cookies.2.2.0.min.js"></script>
 	<script src="Scripts/jquery/jquery.fancybox.js"></script>
+    <!--for ie6-8 support css3-->
+    <!--[if lt IE 9]>
+    <script src="Scripts/ie7-2.1(beta4)/ie7/IE9.js"></script>
+    <script src="Scripts/PIE/PIE.js"></script>
+    <![endif]-->
+<script>
+// for ie progress
+if (typeof window.screenX !== "number") {
+	document.createElement("progress");	
+	document.createElement("ie");	
+	document.createElement("ieVal");	
+}
+// for PIE
+if(window.PIE) {
+    $('.xtyyjclBlock').each(function(){
+        PIE.attach(this);         
+    }); 
+    $('.xtyyjcBottom').each(function(){
+        PIE.attach(this);         
+    });
+}
+</script>
 </head>
 <body>
+<div class="xtyyjcWrapper">
 <div class="xtyyjcTop">
-    <span class="xtyyjcArrow xtyyjcaL"></span><!--
+    <span id="xtyyjcPrev" class="xtyyjcArrow xtyyjcaL"></span><!--
     --><div class="xttyjctlBlock">
-        <ul class="xtyyjctList clearfix">
-            <li>11</li>
-            <li>22</li>
-            <li>33</li>
-            <li>44</li>
-            <li>55</li>
-            <li>66</li>
-            <li>77</li>
+        <ul id="xtyyjcList" class="xtyyjctList clearfix">
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbDian">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">1554337.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcFlash"></span>
+                                    <span class="xtyyjcWords">耗电</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="100"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress  class="orangeBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbQi">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">1554337.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcFire"></span>
+                                    <span class="xtyyjcWords">耗气</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="xtyyjclBlock">
+                    <div class="xtyyjclbHead xtyyjclbShui">
+                        <div class="xtyyjclbhInner">
+                            <p class="xtyyjclbNum">37.00</p>
+                            <div class="xtyyjcType">
+                                <div class="xtyyjcDefault">
+                                    <span class="xtyyjcLogo xtyyjcWater"></span>
+                                    <span class="xtyyjcWords">耗水</span>
+                                </div>
+                                <p class="xtyyjctDanWei hide">千瓦时</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">日用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="redBar" max="100" value="20"><ie><ieVal class="redBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">月用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="greenBar" max="100" value="20"><ie><ieVal class="greenBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                    <div class="xtyyjcYLBlock">
+                        <p class="clearfix">
+                            <span class="ylFonts">年用量</span>
+                            <span class="lastFonts cY fr">2,200元</span>
+                            <span class="dwFonts fr">kWh</span>
+                            <span class="szFonts fr">512.00</span>
+                        </p>
+                        <progress class="orangeBar" max="100" value="20"><ie><ieVal class="orangeBar"></ieVal></ie></progress> 
+                        <p class="clearfix">
+                            <span class="fs12 cB">限额</span>
+                            <span class="fs12 cB fr">545.00kWh</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div><!--
-    --><span class="xtyyjcArrow xtyyjcaR"></span>
+    --><span id="xtyyjcNext" class="xtyyjcArrow xtyyjcaR"></span>
 </div>
-<div class="xtyyjcBottom"></div>
+<div class="xtyyjcBottom">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>发电量<span class="fs12">（量KWh / 成本）</span></th>
+                <th>供冷/热<span class="fs12">（量GJ / 成本）</span></th>
+                <th>供热水<span class="fs12">（量T / 成本）</span></th>
+                <th>供蒸汽<span class="fs12">（量T / 成本）</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>日供量</td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+            </tr>
+            <tr>
+                <td>月供量</td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+            </tr>
+            <tr>
+                <td>年供量</td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+            </tr>
+            <tr>
+                <td>累计总量</td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+                <td>12,354,687.00 <span class="slashColor">/</span> 123,456.00<span class="danweiColor">元</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<script src="Scripts/web/SystemEnergy.js"></script>
+<script>
+(function(){
+    var list = $('#xtyyjcList'),
+        unitNum = list.find('li').length,
+        unitWid = 375,
+        step = -375,
+        prev = $('#xtyyjcPrev'),
+        next = $('#xtyyjcNext'),
+        arrow = $('.xtyyjcArrow');
+
+        $(document).on('click','#xtyyjcPrev',{offset: 375}, move);
+        $(document).on('click','#xtyyjcNext',{offset: -375}, move);
+        $('.xtyyjcTop').on('mouseenter', arrowShow);
+        $('.xtyyjcTop').on('mouseleave', arrowHide);
+// for display unit
+        list.find('li').each(function(){
+            $(this).mouseenter(function(){
+                $(this).find('.xtyyjcDefault').hide().siblings('p.xtyyjctDanWei').show();        
+                }
+                ).mouseleave(function(){
+                                    
+                $(this).find('.xtyyjcDefault').show().siblings('p.xtyyjctDanWei').hide();        
+                }); 
+        });
+// init
+        switch(unitNum) {
+            case 0:
+                list.width(0);
+                break;
+            case 1:
+                list.parent('div.xttyjctlBlock').width(unitNum*unitWid-56);
+                break;
+            case 2:
+                list.parent('div.xttyjctlBlock').width(unitNum*unitWid- 28);
+                list.find('li:nth-child(2)').css({'margin': '0 0 0 28px'});
+                break;
+            default:
+                list.width(unitNum*unitWid);
+        }
+function arrowHide() {
+    arrow.css({'display':'none'});
+    prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
+    next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
+}
+function arrowShow() {
+    var bound = parseInt(list.css('margin-left'));
+    if(unitNum > 3) {
+        arrow.css({'display':'inline-block'});
+        if(bound === 0) {
+            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
+        }
+        if(bound === (unitNum - 3)*step) {
+            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
+        }
+    }  
+}
+function animate(offset) {
+    var offset = offset;
+
+    var bound = parseInt(list.css('margin-left'));
+
+    if(offset > 0 || unitNum < 3) {
+        offset = '+=' + offset;
+        if(bound === 0) {
+            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
+            offset = 0;
+        } else {
+            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
+            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
+        }
+    } else {
+        offset = '-=' + Math.abs(offset);
+        if(bound === (unitNum - 3)*step) {
+            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
+            offset = (unitNum - 3)*step;
+        } else {
+            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
+            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
+        } 
+
+    }
+
+    list.animate({'margin-left':offset})
+} 
+function move(event) {
+    var offset = event.data.offset;
+    if(!list.is(':animated')) {
+        animate(offset);
+    }
+}
+
+}());
+
+</script>
 </body>
 </html>
-<script src="Scripts/web/SystemEnergy.js"></script>
