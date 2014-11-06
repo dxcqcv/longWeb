@@ -816,6 +816,9 @@ div.MainCol-sbjxgl { height: 92%; }
     overflow-y: auto;
 }
 /*系统运营监测*/
+.xtyyjcWrapper {
+    min-width: 1280px;    
+}
 .xtyyjcTop {
     width: 1181px;
     margin: 7px auto 0;
@@ -871,14 +874,14 @@ progress {
     color: #0064B4; /*IE10*/
 }
 /*ie6-ie9*/
-progress ie {
+progress div.xtyyjcProgressBar {
     display:block;
     width: 310px;
     height: 14px;
     background: url('../img/img/xtyyjcBar.png') no-repeat;
     position: relative;
 }
-progress ie ieVal {
+progress div.xtyyjcProgressBar > span {
     display:block;
     width: 20%;
     height: 100%;
@@ -886,13 +889,13 @@ progress ie ieVal {
     top: 3px;
     left: 5px;
 }
-progress ie ieVal.redBar {
+progress div.xtyyjcProgressBar > span.redBar {
     background: url('../img/img/xtyyjcBarRed.png') no-repeat; 
 }
-progress ie ieVal.greenBar {
+progress div.xtyyjcProgressBar > span.greenBar {
     background: url('../img/img/xtyyjcBarGreen.png') no-repeat; 
 }
-progress ie ieVal.orangeBar {
+progress div.xtyyjcProgressBar > span.orangeBar {
     background: url('../img/img/xtyyjcBarOrange.png') no-repeat; 
 }
 
@@ -914,10 +917,18 @@ progress::-webkit-progress-bar {
     position: relative;
 }
 progress::-webkit-progress-value  { 
-    background: url('../img/img/xtyyjcBarRed.png') no-repeat; 
     position: absolute;
     top: 3px;
     left: 5px;
+}
+progress.redBar::-webkit-progress-value  { 
+    background: url('../img/img/xtyyjcBarRed.png') no-repeat; 
+}
+progress.greenBar::-webkit-progress-value  { 
+    background: url('../img/img/xtyyjcBarGreen.png') no-repeat; 
+}
+progress.orangeBar::-webkit-progress-value  { 
+    background: url('../img/img/xtyyjcBarOrange.png') no-repeat; 
 }
 .xtyyjclBlock { 
     position: relative;
