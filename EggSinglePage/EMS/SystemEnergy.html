@@ -697,16 +697,29 @@ if(window.PIE) {
 <script src="Scripts/web/SystemEnergy.js"></script>
 <script>
 (function(){
+    layout(); 
+ $(window).resize(function(){
+     window.location.reload();
+ });
+ function layout(){
+        var ww = $('.xtyyjcTop').width() -74; // 74是箭头
+        $('.xttyjctlBlock').width(ww);
+        var sep = (ww - 1041)/4; // 10 是阴影 
+        var v=p=0; // 计数
+
     var list = $('#xtyyjcList'),
         unitNum = list.find('li').length,
-        unitWid = 375,
-        step = -375,
+        unitWid = list.find('li').width() + sep ,
+        step = -(unitWid),
         prev = $('#xtyyjcPrev'),
         next = $('#xtyyjcNext'),
         arrow = $('.xtyyjcArrow');
+        console.log(step);
 
-        $(document).on('click','#xtyyjcPrev',{offset: 375}, move);
-        $(document).on('click','#xtyyjcNext',{offset: -375}, move);
+        list.find('li:nth-child(odd)').css({'margin':'0 '+ sep +'px'});
+
+        $(document).on('click','#xtyyjcPrev',{offset: unitWid}, move);
+        $(document).on('click','#xtyyjcNext',{offset: step}, move);
         $('.xtyyjcTop').on('mouseenter', arrowShow);
         $('.xtyyjcTop').on('mouseleave', arrowHide);
 // for display unit
@@ -732,7 +745,7 @@ if(window.PIE) {
                 list.find('li:nth-child(2)').css({'margin': '0 0 0 28px'});
                 break;
             default:
-                list.width(unitNum*unitWid);
+                list.width(unitNum*(unitWid+sep) );
         }
 function arrowHide() {
     arrow.css({'display':'none'});
@@ -758,22 +771,33 @@ function animate(offset) {
 
     if(offset > 0 || unitNum < 3) {
         offset = '+=' + offset;
+        v--;
         if(bound === 0) {
             prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
             offset = 0;
+            v = 0;
         } else {
             prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
             next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
         }
+        v != -1 
+        && list.find('li').eq(v).children('div.xtyyjclBlock').css({'box-shadow':'0 0 4px 2px rgba(0,0,0,.33)'});
     } else {
         offset = '-=' + Math.abs(offset);
+        v += 1;
         if(bound === (unitNum - 3)*step) {
             next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
             offset = (unitNum - 3)*step;
+            v = unitNum-3;
         } else {
             next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
             prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
         } 
+        if(v != (unitNum-2)) {
+            for(var i = 0; i<v; i++) {
+                list.find('li').eq(i).children('div.xtyyjclBlock').css({'box-shadow':'none'});
+            }
+        }
 
     }
 
@@ -793,7 +817,7 @@ function move(event) {
         animate(offset);
     }
 }
-
+}
 }());
 
 </script>
