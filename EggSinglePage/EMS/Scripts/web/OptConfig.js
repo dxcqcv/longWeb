@@ -104,7 +104,6 @@ $(document).ready(function () {
         return false; 
     });
     */
-    alert('hi');
 
 	$(window).scroll(function () {
 		var yhpzLeft = $('.yhpzLeft');
@@ -136,27 +135,6 @@ $(document).ready(function () {
             } else if(s >= pos[7]) {
                 scrollSpy('no');
             }
-        /*
-            if(s < 150) {
-                scrollSpy(ytpz);          
-            } else if(s >= 150 && s < 328) {
-                scrollSpy(rzlpz);          
-            } else if(s >= 328 && s < 544) {
-                scrollSpy(nyjgpz);
-            } else if(s >= 544 && s < 713) {
-                scrollSpy(yhfwgl);
-            } else if(s >= 713 && s < 1008) {
-                scrollSpy(jhsjgl);
-            } else if(s >= 1008 && s < 1303) {
-                scrollSpy(sxbsjpz);
-            } else if(s >= 1303 && s < 1510) {
-                scrollSpy(ynyxjpz);
-            } else if(s >= 1510 && s < 1547) {
-                scrollSpy(sbsyyxj);
-            } else if(s >= 1547) {
-                scrollSpy('no');
-            }
-            */
 		} else if (s <= 0) {
 			yhpzLeft.removeClass('fixPanel');
 			yhpzRight.removeClass('ml13');

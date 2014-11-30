@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * { margin: 0; padding: 0; }
+        body {
+            position: relative;
+            overflow-y: hidden;
+        }
+        .slider {
+           position: fixed;
+           top: 0;
+           left: 0;
+           background: #39c;
+        }
+        .slider > ul > li {
+            padding: 10px;
+            color: #ff0000;
+            background: #333;
+        }
+        .slider > ul > li.active { 
+            color: #fff;
+            background: blue;
+        }
+        .content { 
+            background: pink;
+            overflow: hidden;
+            margin-left: 100px; 
+        }
+        .content > div {
+           height: 400px;
+           background: #696969;
+           margin-top: 20px;
+           color: #fff;
+           text-align: center;
+           font: bold 18px/1.5 Arail;
+        }
+    </style>
+</head>
+<body id="bb">
+<div class="slider">
+    <ul>
+        <li class="active">one</li>
+        <li>two</li>
+        <li>three</li>
+        <li>four</li>
+        <li>five</li>
+    </ul>
+</div>
+<div class="content">
+    <div class="one">one</div>
+    <div class="two">two</div>
+    <div class="three">three</div>
+    <div class="four">four</div>
+    <div class="five">five</div>
+</div>
+<!--
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    -->
+	<script src="Scripts/jquery/jquery-1.10.2.min.js"></script>
+	<script src="Scripts/jquery/jquery.slimscroll.min.js"></script>
+    <script>
+    (function(){
+   var h = $(window).height() 
+    $('.content').slimScroll({
+        height: h,
+        allowPageScroll: true
+    });
+        var one = $('.one') 
+          , two = $('.two')
+          , three = $('.three')
+          , four = $('.four')
+          , five = $('.five')
+          , content = $('.content')
+          , s
+          , l
+          , arr = []
+          , ul = $('.slider').children('ul')
+    var t = $('body').on('click',function(){alert(111)})
+    //console.log(t);
+    var i
+    for(i = 5; i--;) {
+        console.log(i)
+    }
+        l = content.children('div').length;
+        //console.log(arr);
+        for(var i = 0; i < l; i++) {
+            arr[i] = content.children('div').eq(i).position().top; 
+        }
+        content.scroll(function(){
+            s = content.scrollTop(); 
+                s >= arr[0] 
+                && s < arr[1] 
+                && ul.children('li').eq(0).siblings('li').removeClass('active').end().addClass('active') 
+                s >= arr[1] 
+                && s < arr[2] 
+                && ul.children('li').eq(1).siblings('li').removeClass('active').end().addClass('active') 
+                s >= arr[2] 
+                && s < arr[3] 
+                && ul.children('li').eq(2).siblings('li').removeClass('active').end().addClass('active') 
+                s >= arr[3] 
+                && s < arr[4] 
+                && ul.children('li').eq(3).siblings('li').removeClass('active').end().addClass('active') 
+                s >= arr[4] 
+                && s < arr[5] 
+                && ul.children('li').eq(4).siblings('li').removeClass('active').end().addClass('active') 
+
+        });
+          /*
+        alert('content pos is ' + content.position().top);
+        alert('one pos is ' + one.position().top);
+        alert('two pos is ' +two.position().top);
+
+        alert('content off is ' + content.offset().top);
+        alert('one off is ' + one.offset().top);
+        alert('two off is ' +two.offset().top);
+        */
+    }());    
+    </script>
+</body>
+</html>
