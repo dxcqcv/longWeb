@@ -827,9 +827,9 @@ div.MainCol-sbjxgl { height: 92%; }
     width: 15px;
     height: 27px;
     cursor: pointer;
-    display: none;
     vertical-align: middle;
     margin-top: 114px;
+    display: inline-block;
 }
 .xtyyjcaL {
     background: url('../img/img/xtyyjcArrow.png') no-repeat 0 0;

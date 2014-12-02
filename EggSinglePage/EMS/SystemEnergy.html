@@ -697,11 +697,108 @@ if(window.PIE) {
 <script src="Scripts/web/SystemEnergy.js"></script>
 <script>
 (function(){
-    layout(); 
+    //together(); 
+    var v=0 // 计数
+    var totalWid = $('.xtyyjcBottom').width() 
+      , wrap  = $('.xttyjctlBlock')
+      , list = wrap.find('.xtyyjctList')
+      , lis = list.find('li')
+      , liNum = lis.length
+      , arrowSep = 74 // 15*2+22*2 
+      , wrapVal, step, doubleStep
+
+    layout();
+    $(document).on('click','#xtyyjcPrev',function(){move(1,step,list,liNum);} );
+    $(document).on('click','#xtyyjcNext',function(){move(-1,step,list,liNum);});
  $(window).resize(function(){
-     window.location.reload();
+    var totalWid = $('.xtyyjcBottom').width() 
+      , wrap  = $('.xttyjctlBlock')
+      , list = wrap.find('.xtyyjctList')
+      , lis = list.find('li')
+      , liNum = lis.length
+      , arrowSep = 74 // 15*2+22*2 
+      , wrapVal, step, doubleStep
+
+    layout();
+    $(document).on('click','#xtyyjcPrev',function(){move(1,step,list,liNum);} );
+    $(document).on('click','#xtyyjcNext',function(){move(-1,step,list,liNum);});
  });
- function layout(){
+ function layout() {
+
+    wrapVal = totalWid - arrowSep;
+    wrap.width(wrapVal); 
+    marSep = ((wrapVal - (lis.width()*3))/4)/2;
+    doubleMarsep = marSep*2;
+    step = lis.width() + doubleMarsep;
+    lis.css({'margin': '0 ' + marSep + 'px'});
+    lis.eq(0).css({'margin-left': doubleMarsep + 'px'});
+    lis.eq(liNum - 1).css({'margin-right': doubleMarsep + 'px'});
+    list.width((lis.outerWidth()+doubleMarsep)*liNum + doubleMarsep).css({'margin-left': -v*step}); // ul总宽度和偏移量 
+//    alert('one ' + step);
+ }
+function animate(dir,step, list, unitNum) {
+    var offset = dir 
+      , step = Math.abs(step)
+      , prev = $('#xtyyjcPrev')
+      , next = $('#xtyyjcNext')
+//alert(step);
+    var bound = parseInt(list.css('margin-left'));
+    if(offset > 0 || unitNum < 3) {
+        offset = '+=' + step;
+        v--;
+        if(bound === 0) {
+            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
+            offset = 0;
+            v = 0;
+        } else {
+            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
+            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
+        }
+        v != -1 
+        && list.find('li').eq(v).children('div.xtyyjclBlock').css({'box-shadow':'0 0 4px 2px rgba(0,0,0,.33)'});
+    } else {
+        offset = '-=' + step;
+        v += 1;
+        if(bound === (unitNum - 3)*step) {
+            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
+            offset = (unitNum - 3)*step;
+            v = unitNum-3;
+        } else {
+            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
+            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
+        } 
+        if(v != (unitNum-2)) {
+            for(var i = 0; i<v; i++) {
+                list.find('li').eq(i).children('div.xtyyjclBlock').css({'box-shadow':'none'});
+            }
+        }
+
+    }
+
+    list.animate({'margin-left':offset},function(){
+        bound = parseInt(list.css('margin-left'));
+        if(bound === 0) {
+            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
+        }
+        if(bound === (unitNum - 3)*step) {
+            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
+        }
+    });
+} 
+function move(dir, step,list,unitNum) {
+    var step = step
+      , list = list
+      , unitNum = unitNum
+      , dir = dir
+    if(!list.is(':animated')) {
+        //alert('two '+step);
+        animate(dir,step, list, unitNum);
+    }
+}
+}());
+
+
+ function together(){
         var ww = $('.xtyyjcTop').width() -74; // 74是箭头
         $('.xttyjctlBlock').width(ww);
         var sep = (ww - 1041)/4; // 10 是阴影 
@@ -718,8 +815,6 @@ if(window.PIE) {
 
         list.find('li:nth-child(odd)').css({'margin':'0 '+ sep +'px'});
 
-        $(document).on('click','#xtyyjcPrev',{offset: unitWid}, move);
-        $(document).on('click','#xtyyjcNext',{offset: step}, move);
         $('.xtyyjcTop').on('mouseenter', arrowShow);
         //$('.xtyyjcTop').on('mouseleave', arrowHide);
 // for display unit
@@ -764,61 +859,7 @@ function arrowShow() {
         }
     }  
 }
-function animate(offset) {
-    var offset = offset;
-
-    var bound = parseInt(list.css('margin-left'));
-
-    if(offset > 0 || unitNum < 3) {
-        offset = '+=' + offset;
-        v--;
-        if(bound === 0) {
-            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
-            offset = 0;
-            v = 0;
-        } else {
-            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
-            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
-        }
-        v != -1 
-        && list.find('li').eq(v).children('div.xtyyjclBlock').css({'box-shadow':'0 0 4px 2px rgba(0,0,0,.33)'});
-    } else {
-        offset = '-=' + Math.abs(offset);
-        v += 1;
-        if(bound === (unitNum - 3)*step) {
-            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
-            offset = (unitNum - 3)*step;
-            v = unitNum-3;
-        } else {
-            next.removeClass('xtyyjcarE').addClass('xtyyjcaR');
-            prev.removeClass('xtyyjcalE').addClass('xtyyjcaL');
-        } 
-        if(v != (unitNum-2)) {
-            for(var i = 0; i<v; i++) {
-                list.find('li').eq(i).children('div.xtyyjclBlock').css({'box-shadow':'none'});
-            }
-        }
-
-    }
-
-    list.animate({'margin-left':offset},function(){
-        bound = parseInt(list.css('margin-left'));
-        if(bound === 0) {
-            prev.removeClass('xtyyjcaL').addClass('xtyyjcalE');
-        }
-        if(bound === (unitNum - 3)*step) {
-            next.removeClass('xtyyjcaR').addClass('xtyyjcarE');
-        }
-    });
-} 
-function move(event) {
-    var offset = event.data.offset;
-    if(!list.is(':animated')) {
-        animate(offset);
-    }
 }
-}
-}());
 
 </script>
 </body>
