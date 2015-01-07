@@ -1,0 +1,150 @@
+﻿.fl{float:left!important;}
+.fr{float:right!important;}
+
+.tleft{text-align:left!important;}
+.tright{text-align:right!important;}
+.tcenter{text-align:center!important;}
+
+.clear{clear:both;}
+
+.p9{padding:9px;}
+.p10{padding:10px;}
+.p15{padding:15px;}
+.pl20{padding-left:20px!important;}
+
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mb10{margin-bottom:10px;}
+.mb15{margin-bottom:15px;}
+.mb20{margin-bottom:20px;}
+.mb30{margin-bottom:30px;}
+.mb48{margin-bottom:48px;}
+
+.mb5f{margin-bottom:-5px;}
+
+.mr5{margin-right:5px}
+
+.ml5{margin-left:5px}
+.ml10{margin-left:10px}
+.ml20{margin-left:20px}
+
+.mauto{margin-left:auto;margin-right:auto;}
+
+.w60{width:60px!important;}
+.w80{width:80px;}
+.w100{width:100px;}
+.w120{width:120px;}
+.w140{width:140px;}
+.w200{width:200px;}
+.w250{width:250px;}
+
+.f-songti{font-family:宋体!important;}
+.f-wryh{font-family:微软雅黑!important;}
+.f-arial{font-family:Arial!important;}
+.bshadow{box-shadow:2px 2px 2px #ccc;}
+.bwhite{background:#fff;}
+.yred{color:#ff6a6a;}
+
+.dblock{display:block!important;}
+
+.itxt{height:21px;line-height:21px;font-size:11px;vertical-align:middle;color:#738391;padding:2px 3px;border:1px solid #e5e5e5;border-radius:4px;background:url(../img/txtbg.png) left top repeat-x;}
+.viewbtn{width:74px;background:url(../img/cksj-bt.png) left top no-repeat;color:#fff;text-align:center;line-height:27px;font-size:13px;}
+.viewbtn2 {
+width: 64px;
+background: url(../img/btn6427.png) left top no-repeat;
+color: #fff;
+text-align: center;
+line-height: 27px;
+font-size: 13px;
+}
+.topFilter .down-popup{width:74px;background:url(../img/cksj-bt.png) left top no-repeat;color:#fff;text-align:center;line-height:27px;font-size:13px;}
+
+.ttxt{border:1px solid #c9ced1;border-radius:4px;height:20px;padding:2px 5px;}
+
+.tck-save{display:inline-block;width:80px;height:29px;text-align:center;line-height:29px;background:url(../img/tck-bt.png) left top no-repeat;color:#fff;}
+.tck-cancel{display:inline-block;width:82px;height:29px;text-align:center;line-height:29px;background:url(../img/tck-bt.png) right top no-repeat;color:#747474;}
+.tck-add{width:27px;height:26px;background:url(../img/tck-add.png) left top no-repeat;}
+
+
+.tdform td{height:auto;}
+.putform{border-collapse:collapse;width:100%;table-layout:auto;}
+.putform td{text-align:center;height:30px;line-height:30px;font-size:12px;}
+.lineform td{border-bottom:1px solid #ccc;}
+.tdform td{height:auto;}
+.putform thead td{border-top:3px solid #ccc; background:#F3F3F3;}
+.putform tbody td{}
+
+.putform .name{cursor:pointer;}
+.putform .name:hover{text-decoration:underline;}
+
+/**升降图标**/
+.ico-lift{display:inline-block;width:8px;height:9px;background:url(../img/icon-lift.png) left top no-repeat;}
+.lift-up{background-position:left bottom;}
+.lift-down{background-position:left top;}
+.lift-none{background:none;}
+
+.ico-green{color:#00ff00;}
+.ico-red{color:#ff0000;}
+
+/**搜索框**/
+.search{height:21px;float: right;width:197px;background:url(../img/search-bg.png) left top no-repeat;padding: 1px 0px 1px 1px;border-radius:3px;position: relative;top:6px;overflow: hidden;}
+.search input{position:absolute;top:1px;left:1px;width:145px;background:none;font-size: 12px;line-height: 20px;padding: 0px 0px 0px 5px;height:19px;border:0;/*box-shadow: inset 0 0 5px #dbd8d8;*/overflow: hidden;color: #b8b8b8;}
+.search .empty{color: #b4b4b4;}
+.search button{font-weight:700;cursor:pointer;position:absolute;top:0;right:0;width:27px;background: url(../img/search-bt.png) 0 0px repeat-x;border:0;height:21px;color: #fff;font-size: 12px;border-radius: 0 3px 3px 0;}
+.search button:hover{background-position: 0px 0px;}
+
+/**首页地图弹出框**/
+.sel-city-td-letter div {color: #ccc;font-size: 24px;font-weight: 700;line-height: 24px;margin: 0;padding: 0;}
+.sel-city-tr-splitline {height: 12px; visibility: hidden;}
+.sel-city-searchbar form .sel-city-tip {background: none repeat scroll 0 0 #fefaf1;border: 1px solid #e8aa6c;color: #ae6b42;display: none; height: 20px;left: 0;line-height: 20px;position: absolute;text-align: center;top: 26px;width: 121px;}
+
+
+
+
+.map_popup{display:none;width:387px;height:393px;position:absolute;}
+.map_popup .popup_main {background: none repeat scroll 0 0 #fafafa;border: 1px solid #cdcdcd;height: 100%;overflow: hidden;position: absolute;width: 100%;z-index: 9000;}
+.map_popup .poput_shadow {background: url("../img/pop_shadow.png") no-repeat scroll right bottom rgba(0, 0, 0, 0); height: 100%;left: 4px;position: absolute;top: 4px;width: 100%;z-index: 1;}
+.map_popup .title {background: none repeat scroll 0 0 #f9f9f9;border-bottom: 1px solid #dadada;color: #4c4c4c;font-size: 12px;height: 25px;line-height: 25px;padding-left: 7px;}
+.map_popup button {background: url("../img/popup_close.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);border: 0 none;cursor: pointer;height: 12px;position: absolute;right: 4px;top: 7px;width: 12px;z-index: 50;}
+.map_popup .shade {background: none repeat scroll 0 0 #fff; display: none;height: 100%;left: 0;opacity: 0.7;position: absolute;top: 0;width: 100%;z-index: 50;}
+.blueC a{color:#3d6dcc;text-decoration:none;}
+.blueC a:hover{color:#3d6dcc;text-decoration:underline;}
+.sel_city{margin:7px 5px 5px;}
+.sel_city a{ line-height: 18px;margin-right: 9px;white-space: nowrap;}
+.sel_city .sel-city-td-sf a{margin:0px;}
+.sel-city-hotcity{padding:0px 5px;}
+.sel-city-letterbar {margin: 0 11px 10px;}
+.sel-city-searchbar {background: none repeat scroll 0 0 #f9f9f9;height: 24px;margin: 10px 0;padding: 5px 6px;}
+.sel-city-searchbar form { float: right;position: relative;}
+.sel-city-searchbar .btnbar {background: url("../img/index.png") no-repeat scroll -302px 0 rgba(0, 0, 0, 0);float: left;height: 23px;width: 108px;}
+.sel-city-searchbar .sel-city-btnl, .sel-city-searchbar .sel-city-btnr {background: url("../img/index.png") no-repeat scroll -1300px -1000px rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 23px;line-height: 23px;margin-left: 0;text-align: center;width: 54px;}
+.sel-city-searchbar .sel-city-btnr {margin-left: -1px;}
+.sel-city-searchbar .sel-city-btnl:hover {background-position: -302px -48px;}
+.sel-city-searchbar .sel-city-btnl-sel {background-position: -302px -24px;font-weight: 700;}
+.sel-city-searchbar .sel-city-btnl-sel:hover {background-position: -302px -73px;}
+.sel-city-searchbar .sel-city-btnr:hover {background-position: -355px -48px;}
+.sel-city-searchbar .sel-city-btnr-sel {background-position: -355px -24px;font-weight: 700;}
+.sel-city-searchbar .sel-city-btnr-sel:hover {background-position: -355px -73px;}
+.sel-city-btn-submit { background: url("../img/index.png") no-repeat scroll -302px -98px rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 24px;line-height: 24px;margin-left: 5px;text-align: center;width: 48px;}
+.sel-city-btn-submit:hover {background-position: -355px -98px;}
+.sel-city-searchbar .sel-city-btn-submit-down {background-position: -302px -123px;font-weight: 700;}
+.sel-city-searchinput { border: 1px solid #ccc;float: left;height: 20px;line-height: 20px;text-indent: 4px;width: 121px;color:gray;}
+
+/**首页新闻弹出框**/
+.news_popup{display:none;width:387px;height:393px;position:absolute;}
+.news_popup button {background: url("../img/popup_close.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);border: 0 none;cursor: pointer;height: 12px;position: absolute;right: 4px;top: 7px;width: 12px;z-index: 50;}
+
+/*#selCityPlaceListId{height: 247px;overflow: hidden;width: 368px;}*/
+.sel_city .sel-city-td-sf {font-weight: 700;}
+.sel_city td {vertical-align: top;}
+.sel_city td.sel-city-td-letter {padding: 0 14px 0 7px;}
+.sel_city td.sel-city-td-sf {padding-right: 8px;}
+
+/**area下拉**/
+.area_popup{display:none;position:absolute;width:280px;height:455px;z-index:80;}
+.area_popup .area-tit{height:25px;background:url(../img/area-titbg.png) left top repeat-x;border-bottom:1px solid #e2e2e2;}
+.area_popup .smalllogo{width:74px;height:18px;margin:4px 8px;background:url(../img/smlllogo.png) left top no-repeat;}
+
+.progressBar { display:block; width:148px; height:28px; position:fixed; top:50%; left:50%; margin-left:-74px; margin-top:-14px; padding:10px 10px 10px 50px; text-align:left; line-height:27px; font-weight:bold; position:absolute; z-index:9999; }
+.background { display:block; width:100%; height:100%; opacity:0.4; filter:alpha(opacity=40); background:#FFF; position:absolute; top:0; left:0; z-index:9998;}

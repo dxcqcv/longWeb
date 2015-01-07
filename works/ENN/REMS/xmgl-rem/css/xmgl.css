@@ -1,0 +1,425 @@
+﻿html {
+}
+body {
+    background: #dfe2e4;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif,"songti";
+}
+.tests {
+    overflow: auto!important;
+    width: 100%;
+}
+.xmglWrapper {
+    /*
+    width: 1600px;
+    width: 160rem;
+    */
+    width: 100%;
+    min-height: 870px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 5% 0;
+    margin: 0 auto;
+    min-width: 1280px;
+    overflow: auto;
+}
+.xmglWrapper div {
+    box-sizing: border-box;
+}
+.xmglLeft {
+    overflow: hidden;
+    /*
+    width: 180px;
+    width: 18rem;
+    */
+    width: 12%;
+    background: #eaeced;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.26) inset;
+    text-align: center;
+}
+.xmglListWrapper {
+    height: 776px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.xmglListWrapper > ul {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 100%;
+}
+.xmglListWrapper > ul > li {
+/*
+    height: 303px;
+    */
+    padding: 44px 0;
+    width: 100%;
+}
+.xmglArrow {
+    cursor: pointer;
+    width: 38px;
+    height: 19px;
+    margin: 10px auto;
+}
+.xmglaUp {
+    background: url('../img/xmglArrow.png') no-repeat 0 0;
+}
+.xmglaUpH {
+    background: url('../img/xmglArrow.png') no-repeat -38px 0;
+}
+.xmglaDown {
+    background: url('../img/xmglArrow.png') no-repeat 0 -19px;
+}
+.xmglaDownH {
+    background: url('../img/xmglArrow.png') no-repeat -38px -19px;
+}
+.xmglIcon {
+    display: inline-block;
+    vertical-align: top;
+}
+.haodianPic {
+    background-image: url('../img/xmglIcon22.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 163px;
+    height: 155px;
+}
+.haoqiPic {
+    background: url('../img/xmglIcon21.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haoyouPic {
+    background: url('../img/xmglIcon20.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haoshuiPic {
+    background: url('../img/xmglIcon19.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haomeiPic {
+    background: url('../img/xmglIcon18.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haoguangPic {
+    background: url('../img/xmglIcon17.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haofengPic {
+    background: url('../img/xmglIcon16.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.haodiPic {
+    background: url('../img/xmglIcon15.png') no-repeat;
+    width: 163px;
+    height: 155px;
+}
+.fcGray {
+    color: #4f4f4f;
+}
+.fcRed {
+    color: #fc5f40;
+}
+.fs18 {
+    font-size: 1.8rem;
+}
+.fs16 {
+    font-size: 1.6rem;
+}
+.fs14 {
+    font-size: 1.4rem;
+}
+.fs12 {
+    font-size: 1.2rem;
+}
+.xmglTitle {
+/*
+    font-size: 26px;
+    */
+    font-size: 2.6rem;
+    color: #000;
+    text-align: center;
+}
+.clearfix:after {
+    content: '';
+    clear: both;
+    width: 0;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+.left {
+    float: left;
+}
+.mt20 { margin-top: 20px; }
+.mt155 { margin-top: 155px; }
+.xmglmiddle {
+    /*
+    min-width: 900px;
+    width: 90rem;
+    */
+    width: 56%;
+}
+.xmglmbArrowUP {
+    background: url('../img/xmglIcon7.png') no-repeat;
+    width: 104px;
+    height: 82px;
+    display: block;
+}
+.xmglmbArrowDown {
+    background: url('../img/xmglIcon2.png') no-repeat;
+    width: 104px;
+    height: 82px;
+    display: block;
+}
+.italicArrow { margin-top: 18.3rem; }
+.mt87 { margin-top: 87px; }
+.ml25 { margin-left: 25px; }
+.xmglFactoryPic {
+    width: 664px;
+    height: 429px;
+}
+
+.ml13 { margin-left: 13px; }
+.mt33 { margin-top: 33px; }
+.ml30 { margin-left: 30px;}
+.ml40 { margin-left: 40px; }
+.ml15 { margin-left: 15px; }
+.tbBlock {
+    position: relative;
+    /*
+    width: 126px;
+    */
+    width: 19%;
+    height: 84px;
+    cursor: pointer;
+    float: left;
+    margin-left: 37px;
+}
+.tbBlock:first-child {
+    margin-left: 0;
+}
+.tbBlock > img {
+    /*
+    width: 126px;
+    height: 84px;
+    */
+    width: 100%;
+    background-size: cover;
+    opacity: 0.5;
+}
+.tbBlock:hover > img {
+    opacity: 1;
+}
+.tbBlock:hover > .tbFonts {
+    color: #fff;
+}
+.tbbSel > img {
+    opacity: 1;
+}
+.tbbSel > .tbFonts{
+    color: #fff;
+}
+.tbFonts {
+    font-size: 19px;
+    color: #a4d7fa; 
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    border-radius: 20px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 25px;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+}
+
+.fcBlack { color: #000; }
+.taCenter { text-align: center; }
+.ml110 {margin-left: 110px;}
+.ml50 {margin-left: 50px;}
+.fs16 { font-size: 16px; }
+.xmglRedRightArrow {
+    width: 153px;
+    background-image: url('../img/xmglIcon5.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 44px;
+}
+.xmglBlueRightArrow {
+    background-image: url('../img/xmglIcon4.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 153px;
+    height: 44px;
+}
+.xmglLightBlueRightArrow {
+    background-image: url('../img/xmglIcon14.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 153px;
+    height: 44px;
+}
+.xmglOrangeRightArrow {
+    background-image: url('../img/xmglIcon13.png') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 153px;
+    height: 44px;
+}
+.xmglBlueLeftArrow {
+    background-image: url('../img/xmglIcon1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60px;
+    width: 153px;
+}
+.lh13 {line-height: 1.3em;}
+.mt30 { margin-top: 30px; }
+.mt40 { margin-top: 40px; }
+.mt106 { margin-top: 106px; }
+.xmglRight {
+    /*
+    width: 475px;
+    width: 47.5rem;
+    */
+    width: 30%;
+background-image: url('../img/xmglIcon9.jpg') ;
+background-repeat: no-repeat;
+background-size: cover;
+
+    height: 862px;
+    box-shadow: 2px 2px 8px 2px rgba(0,0,0,0.62);
+    border: 3px solid #fff;
+    border-radius: 5px;
+    position: relative;
+}
+.ie8 .xmglRight {
+    background:url(../img/xmglIcon9.jpg) center bottom no-repeat;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='../img/xmglIcon9.jpg',
+    sizingMethod='scale'); /*For IE 8 and less*/
+
+}
+.xmglrInner {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    background: rgba(14,21,4,0.5);
+    width: 100%;
+    font-family: "songti",Arial, Helvetica, sans-serif;
+    /*
+    font-size: 12px;
+    height: 271px;
+    */
+    font-size: 1.2rem;
+    height: 20.1rem;
+    padding: 0 17px;
+}
+.xmglrTitle {
+    text-align: center;
+    /*
+    font-size: 26px;
+    */
+    font-size: 2.6rem;
+    padding: 10px 0 20px;
+}
+.xmglriTwoCol p span {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.xmglriTwoCol p {
+/*
+    line-height: 1.5rem;
+    */
+}
+.mt15 { margin-top: 15px; }
+.xmglriThreeCol p {
+    font-size: 0;
+}
+.xmglriThreeCol p span {
+    width: 33%;
+    display: inline-block;
+    /*
+    font-size: 12px;
+    */
+    font-size: 1.2rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.xmglPageRightArrow {
+    background: url('../img/xmglIcon10.jpg') no-repeat;
+    width: 20px;
+    height: 36px;
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    cursor: pointer;
+}
+.mt120 { margin-top: 120px; }
+.mb30 { margin-bottom: 30px; }
+.xmglmbLeft {
+    position: absolute;
+}
+.xmglmBlock {
+    position: relative;
+}
+.temWords {
+}
+.xmglmbMiddle {
+    width: 74%;
+    margin-left: 3%;
+}
+.xmglmbRight {
+    width: 100%!important;
+    height: 817px;
+    overflow-y: auto;
+}
+.mb7 { margin-bottom: 6px; }
+/*
+.xmglmbRight:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+*/
+.xmglmbInner {
+    display: inline-block;
+    vertical-align: middle;
+}
+.xmglmbTable {
+    display: table;
+    height: 817px;
+    width: 95%;
+}
+.xmglmbCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.ml10 { margin-left: 10px; }
+.mt67 {margin-top: 67px;}
+.xmglFactoryPicBlock > img {
+    width: 100%;
+    max-height: 600px;
+    background-size: cover;
+}
+.xmglFactoryPicBlock {
+    min-height: 375px;
+}

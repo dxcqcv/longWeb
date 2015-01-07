@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <!--
+    
+    <link href="css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="js/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />
+    <link href="css/demo.css" rel="stylesheet" />
+    <link href="css/frame.css" rel="stylesheet" />
+    <link href="css/context.css" rel="stylesheet" />
+    <link href="css/nygl.css" rel="stylesheet" />
+    <script src="js/jquery.fancybox.js"></script>
+    <script src="js/jquery.ztree.core-3.5.min.js"></script>
+    <script src="js/energyArea.js"></script>
+    <script src="js/common.js"></script>
+    -->
+    <link href="css/global.css" rel="stylesheet" />
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/xmgl.css" rel="stylesheet" />
+
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="lib/jquery.slimscroll.min.js"></script>
+    <script src="js/my.js"></script>
+    <script>
+/*
+        $(function () {
+            //window.onresize = function () { alert("改变大小"); }
+            var scwidth = screen.width;
+            var schei = screen.height;
+            alert(scwidth)
+            if (scwidth > 1024) {
+                $("#remote_tbl_left").css("width", "636px");
+               // $("#remote_tbl_left").css("width", "512px");
+            }
+            else {
+                $("#remote_tbl_left").css("width", "512px");
+            }
+            
+        });
+        */
+    </script>
+
+</head>
+<body>
+<div class="remsHeader">
+    <div class="remsTopBar clearfix">
+         <a class="remsLogo" href=""></a>
+         <ul class="remsNav">
+            <li><a data-nav = "-1" href="">首页</a></li>
+            <li><a data-nav = "0" class="active" href="">远程检测</a></li>
+            <li><a data-nav = "1" href="">能源管理</a></li>
+            <li><a data-nav = "2" href="">项目管理</a></li>
+            <li><a data-nav = "3" href="">配置管理</a></li>
+            <li><a data-nav = "4" href="">系统管理</a></li>
+         </ul>
+         <div class="remsUsernameBox">
+            <span>李玲玲</span>
+            <ul class="hide">
+                <li><a>修改信息</a></li>
+                <li><a>安全退出</a></li>
+            </ul>
+         </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="remsSubNav">
+        <div class="ycjc">
+            <ul>
+                <li><a>项目概览</a></li>
+                <li><a>运行监测</a></li>
+            </ul>
+        </div>
+        <div class="nygl hide">
+            <ul>
+                <li><a>能效分析</a></li>
+                <li><a>同比分析</a></li>
+                <li><a>环比分析</a></li>
+                <li><a>能效指标对比</a></li>
+                <li><a>运行参数对比</a></li>
+                <li><a>成本</a></li>
+                <li><a>泛能站排名</a></li>
+                <li><a>历史数据查询</a></li>
+            </ul>
+        </div>
+        <div class="xmgl hide">
+            <ul>
+                <li><a>项目信息管理</a></li>
+                <li><a>设施设备管理</a></li>
+                <li><a>工艺属性配置</a></li>
+                <li><a>模块数据配置</a></li>
+            </ul>
+        </div>
+        <div class="pzgl hide">
+            <ul>
+                <li><a href="">能源配额管理</a></li>
+                <li><a href="">类管理</a></li>
+                <li><a href="">类属性管理</a></li>
+                <li><a href="">运行监测配置</a></li>
+                <li><a href="">新闻配置</a></li>
+            </ul>
+        </div>
+        <div class="xtgl hide">
+            <ul>
+                <li><a href="">用户管理</a></li>
+                <li><a href="">角色管理</a></li>
+                <li><a href="">权限管理</a></li>
+                <li><a href="">导航管理</a></li>
+                <li><a href="">日志管理</a></li>
+            </ul>     
+        </div>
+    </div>
+    <div class="ztreeBar"></div>
+</div>
+    <!--xmgl0915 start-->
+    <div class="tests">
+    <div class="xmglWrapper clearfix">
+       <div class="xmglLeft ml10 left">
+           <div id="xmglaUp" class="xmglArrow xmglaUp"></div>
+           <div class="xmglListWrapper">
+               <ul>
+                   <li>
+                        <span class="xmglIcon haodianPic"></span>
+                        <p class="fs14 fcGray mt20">当日耗电</p>
+                        <p class="fs14 fcRed">1234567890Whs</p>
+                        <p class="fs14 fcGray mt20">累计耗电</p>
+                        <p class="fs14 fcRed">50000Whs</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haoqiPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haoyouPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haoshuiPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haomeiPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haoguangPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haofengPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+                   <li>
+                        <span class="xmglIcon haodiPic "></span>
+                        <p class="fs14 fcGray mt20">当日耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                        <p class="fs14 fcGray mt20">累计耗气</p>
+                        <p class="fs14 fcRed">1000M3</p>
+                   </li>
+               </ul>
+           </div>
+           <div id="xmglaDown" class="xmglArrow xmglaDown"></div>
+       </div>
+       <div class="xmglmiddle left">
+            <div class="xmglmBlock ">
+                <div class="xmglmbLeft left mt87">
+                    <span class="xmglIcon xmglmbArrowUP"></span>
+                    <span class="xmglIcon xmglmbArrowDown italicArrow"></span>
+                </div>
+                <div class="xmglmbMiddle left ">
+                    <p class="xmglTitle">黄花机场1号站项目运行概览</p>
+                    <div class="temWords">
+                        <p class="taCenter ml13 mt15">
+                            <span class="fs14 fcBlack ">室外温度:20c</span>
+                            <span class="fs14 fcBlack ml40">室外湿度:55%</span>
+                            <span class="fs14 fcBlack ml40">室外照度:30</span>
+                        </p>
+                        <p class="taCenter ml13 mt15">
+                            <span class="fs12">供水温度:20c</span>
+                            <span class="fs12 ml15">流量：1,954m3/h</span>
+                            <span class="fs12 ml15">回水温度：16c</span>
+                        </p>
+                    </div>
+                    <!--
+                    <span class="xmglIcon xmglFactoryPic mt40"></span>
+                    -->
+                    <div class="xmglFactoryPicBlock mt40">
+                        <img data-se="1" src="img/newXmglBigPic.png" alt="">
+                        <img class="hide" data-se="2" src="img/newXmglBigPic1.png" alt="">
+                        <img class="hide" data-se="3" src="img/newXmglBigPic2.png" alt="">
+                        <img class="hide" data-se="4" src="img/newXmglBigPic3.png" alt="">
+                    </div>
+                    <div class="thumbnailBox clearfix ml13 mt67">
+                        <div data-thse="1" class="tbBlock tbbSel">
+                            <span class="tbFonts">①</span>
+                            <img src="img/newXmglBigPic.png" alt="">
+                        </div>
+                        <div data-thse="2" class="tbBlock">
+                            <span class="tbFonts">②</span>
+                            <img src="img/newXmglBigPic.png" alt="">
+                        </div>
+                        <div data-thse="3" class="tbBlock">
+                            <span class="tbFonts">③</span>
+                            <img src="" alt="">
+                        </div>
+                        <div data-thse="4" class="tbBlock">
+                            <span class="tbFonts">④</span>
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="xmglmbRight left taCenter">
+                    <div class="xmglmbTable">
+                        <div class="xmglmbCell">
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs12 lh13 fcGray">当日发电量</p>
+                                <p class="fs12 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs12 lh13 fcGray ">累计发电量</p>
+                                <p class="fs12 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglRedRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs12 lh13 fcGray">当日发电量</p>
+                                <p class="fs12 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs12 lh13 fcGray ">累计发电量</p>
+                                <p class="fs12 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglBlueRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs12 lh13 fcGray">当日发电量</p>
+                                <p class="fs12 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs12 lh13 fcGray ">累计发电量</p>
+                                <p class="fs12 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglLightBlueRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs12 lh13 fcGray">当日发电量</p>
+                                <p class="fs12 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs12 lh13 fcGray ">累计发电量</p>
+                                <p class="fs12 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs12 lh13 fcGray">当日发电量</p>
+                                <p class="fs12 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs12 lh13 fcGray ">累计发电量</p>
+                                <p class="fs12 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs16 lh13 fcGray">当日发电量</p>
+                                <p class="fs16 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs16 lh13 fcGray ">累计发电量</p>
+                                <p class="fs16 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs16 lh13 fcGray">当日发电量</p>
+                                <p class="fs16 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs16 lh13 fcGray ">累计发电量</p>
+                                <p class="fs16 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs16 lh13 fcGray">当日发电量</p>
+                                <p class="fs16 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs16 lh13 fcGray ">累计发电量</p>
+                                <p class="fs16 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs16 lh13 fcGray">当日发电量</p>
+                                <p class="fs16 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs16 lh13 fcGray ">累计发电量</p>
+                                <p class="fs16 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                            <div class="xmglmbrBlock mb30">
+                                <p class="fs16 lh13 fcGray">当日发电量</p>
+                                <p class="fs16 lh13 fcGray mb7">1234567890Whs</p>
+                                <p class="fs16 lh13 fcGray ">累计发电量</p>
+                                <p class="fs16 lh13 fcGray">5000Whs</p>
+                                <span class="xmglIcon xmglOrangeRightArrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <p class="fs16 fcGray mt106">供水温度:20</p>
+                    <span class="xmglIcon xmglBlueRightArrow"></span>
+                    <p class="fs16 fcGray">流量:2</p>
+                    <span class="xmglIcon xmglBlueLeftArrow"></span>
+                    <p class="fs16 fcGray">回水温度:2</p>
+                    <p class="fs16 fcGray mt40">当日供冷/热量</p>
+                    <p class="fs16 fcGray">500m3</p>
+                    <p class="fs16 fcGray mt40">累计供冷/热量</p>
+                    <p class="fs16 fcGray">500m3</p>
+                    -->
+                </div>
+            </div>
+       </div>
+       <div class="xmglRight left" style="">
+           <!--
+            <div class="xmglIconx xmglPageRightArrow"></div>
+            -->
+            <div class="xmglrInner">
+                <p class="xmglrTitle">黄花机场T2航站楼</p>
+                <div class="xmglriTwoCol">
+                    <p>
+                        <span>项目名称:长沙黄花机场</span>
+                        <span>供冷期:6/1--10/15</span>
+                    </p>
+                    <p>
+                        <span>项目类型:工业企业</span>
+                        <span>供热期:6/1--10/15</span>
+                    </p>
+                    <p>
+                        <span>所属行业:机械</span>
+                        <span>投资单位:新奥能源服务有限公司</span>
+                    </p>
+                    <p>
+                        <span>商业模式:BOT</span>
+                        <span title="设计单位:长沙有色冶金设计研究院">设计单位:长沙有色冶金设计研究院</span>
+                    </p>
+                    <p>
+                        <span>运营商:新奥能源服务有限公司</span>
+                        <span>项目地址:湖北省长沙市长沙县黄花机场</span>
+                    </p>
+                    <p>
+                        <span>供能/建设:12345m2/12345m2</span>
+                        <span>建筑单位:新奥能源服务有限公司</span>
+                    </p>
+                </div>
+                <div class="xmglriThreeCol mt20">
+                    <p>
+                        <span>冷负荷:1234567890kw</span>
+                        <span>热负荷:1234kw</span>
+                        <span>电负荷:1234kw</span>
+                    </p>
+
+                </div>
+            </div>
+       </div>
+    </div>
+    </div>
+    <!--xmgl0915 end-->
+    <!--for ie8 support css3-->
+    <!--[if lt IE 9]>
+    <script src="lib/PIE/PIE.js"></script>
+    <![endif]-->
+    <script>
+(function(){
+    xmglMove();
+    // for html font size
+        recalc();
+    // for scroll bar
+        remsScroll();
+    $(window).resize(function(){
+        remsScroll();
+        recalc();
+    xmglMove();
+    });
+    // for nav
+    $(document).on('click', '.remsNav > li > a', remsNav) 
+    // for select pic
+    var tbBlock = $('.tbBlock')
+    $(document).on('click', '.tbBlock', function() {
+        var $this = $(this)    
+          , num = $this.data('thse')
+          , pic = $('.xmglFactoryPicBlock').children('img')
+          $this.siblings('.tbBlock').removeClass('tbbSel').end().addClass('tbbSel')
+          pic.each(function(){
+             var $this = $(this)
+             $this.data('se') == num
+             && $this.siblings('img').hide().end().show() 
+          });
+    });
+    // for PIE
+    if(window.PIE) {
+        $('.xmglLeft').each(function(){
+            PIE.attach(this);    
+        }); 
+        $('.xmglRight').each(function(){
+            PIE.attach(this);    
+        }); 
+    }
+
+    // custom scroll
+    $('.xmglmbRight').slimScroll({
+        size: '5px',
+        height: '862px',
+        alwaysVisible: true,
+        width: '22%'
+    });
+    // for xmgl arrow
+function xmglMove(){
+    
+    var animated = false
+      //, step = -388 
+      , wrap = $('.xmglListWrapper')
+      , step = -wrap.children('ul').children('li').outerHeight()
+
+    wrap.height(-step*2)// 动态外框高度
+/*
+    $(document).on('click', '#xmglaUp', {offset: -388}, xmglArrow); 
+    $(document).on('click', '#xmglaDown', {offset: 388}, xmglArrow); 
+    */
+    $(document).on('click', '#xmglaUp', {offset: step}, xmglArrow); 
+    $(document).on('click', '#xmglaDown', {offset: -step}, xmglArrow); 
+
+    $(document).on('click', '#xmglaUp', {dir: 'up'}, hoverEnd); 
+    $(document).on('click', '#xmglaDown', {dir: 'down'}, hoverEnd); 
+    $(document).on('mouseover', '#xmglaUp', {dir: 'up'}, hoverIn); 
+    $(document).on('mouseover', '#xmglaDown', {dir: 'down'}, hoverIn); 
+    $(document).on('mouseleave', '#xmglaUp', {dir: 'up'}, hoverOut); 
+    $(document).on('mouseleave', '#xmglaDown', {dir: 'down'}, hoverOut); 
+
+function hoverOut(event) {
+    var dir = event.data.dir;
+    var $this = $(this);
+    if(dir == 'up') {
+        $this.removeClass('xmglaUpH');
+    } else {
+        $this.removeClass('xmglaDownH');
+    }
+}
+function hoverIn(event) {
+    var dir = event.data.dir;
+    var $this = $(this);
+    var ul = $this.siblings('div.xmglListWrapper').find('ul');
+    var num = ul.find('li').length;
+    if(dir == 'up') {
+        if(!(parseInt(ul.css('top')) ==(num - 2) * step )){
+            $this.addClass('xmglaUpH');
+        }
+    } else {
+        if(!(parseInt(ul.css('top')) == 0)){
+            $this.addClass('xmglaDownH');
+        }
+    }
+}
+function hoverEnd(event) {
+    var $this = $(this);
+    var ul = $this.siblings('div.xmglListWrapper').find('ul');
+    var num = ul.find('li').length;
+    var dir = event.data.dir;
+    if(parseInt(ul.css('top')) == (num - 2) * step && dir == 'up') {
+        $this.removeClass('xmglaUpH');
+    } else if(parseInt(ul.css('top')) == 0 && dir == 'down') {
+        $this.removeClass('xmglaDownH');
+    } 
+}
+function xmglArrow(event) {
+   var $this = $(this),
+       ul = $this.siblings('div.xmglListWrapper').find('ul'),
+       num = ul.find('li').length;
+   var left = parseInt(ul.css('top')) + event.data.offset;
+       if (event.data.offset > 0) {
+            offset = '+=' + event.data.offset; 
+           if(parseInt(ul.css('top')) == 0) {
+                offset = 0;
+           }
+       } else {
+           offset = '-=' + Math.abs(event.data.offset);
+           if(parseInt(ul.css('top')) == (num - 2) * step ) {
+                offset = (num - 2) * step;
+           }
+       }
+       if(!ul.is(':animated')) {
+           ul.animate({top: offset},
+                   {start: function() {
+                        animated = true;
+                   },
+                    progress: function() {
+                        animated = false;
+                    },
+                   complete: function() {
+                        animated = false;
+                    }}        
+            );
+       }
+}
+}
+
+})();
+// 选择导航
+function remsNav(e) {
+    e.preventDefault()
+    var $this = $(this)   
+      , num = $this.data('nav')
+      , subNav = $('.remsSubNav').children('div')
+    $this.addClass('active').parents('li').siblings('li').children('a').removeClass('active')
+    // 判断总导航选择子导航
+    switch(num) {
+        case -1:
+            subNav.addClass('hide')
+            break
+        case 0:
+           subSel(subNav.eq(0),'hide')
+           break
+        case 1:
+           subSel(subNav.eq(1),'hide')
+           break
+        case 2:
+           subSel(subNav.eq(2),'hide')
+           break
+        case 3:
+           subSel(subNav.eq(3),'hide')
+           break
+        case 4:
+           subSel(subNav.eq(4),'hide')
+           break
+    }
+}
+// 子导航选择函数
+function subSel(sel,className) {
+   sel.removeClass(className).siblings('div').addClass(className) 
+}
+// 滚动条函数 
+function remsScroll() {
+    var height = $(window).height()
+      , headerH = $('.remsHeader').height()
+      , tests = $('.tests');
+    tests.height(height-headerH);
+}
+// 计算字体大小
+function recalc() {
+    var winWid = $(window).width()
+      , fs = 15 * (winWid / 1366) + 'px' 
+    if(winWid <= 1200) return
+    $('html').css('fontSize',fs)
+} 
+    </script>
+</body>
+</html>
+<!--
+    <div class="head tab mb48">
+        <a class="logo"></a>
+        <div class="navbar tab-nav">
+            <ul class="pdl">
+                <li class="on"><a class="">远程监测</a></li>
+                <li class=""><a>能源管理</a></li>
+                <li><a>项目管理</a></li>
+                <li><a>配置管理</a></li>
+                <li><a>系统管理</a></li>
+                <li class="index no"><a class="">首页</a></li>
+
+
+            </ul>
+        </div>
+        <div class="tab-panel menubg" style="display: block;">
+            <ul class="nygl ycjc">
+                <li class="on"><a class="xmgl"><span class="ico"></span><span class="txt">项目概览</span></a></li>
+                <li><a class="yxjc"><span class="ico"></span><span class="txt">运行监测</span></a></li>
+
+            </ul>
+        </div>
+        <div class="tab-panel menubg">
+            <ul class="nygl">
+                <li class="on"><a class="nxfx"><span class="ico"></span><span class="txt">能效分析</span></a></li>
+                <li><a class="tbfx"><span class="ico"></span><span class="txt">同比分析</span></a></li>
+                <li><a class="hbfx"><span class="ico"></span><span class="txt">环比分析</span></a></li>
+                <li><a class="nxzbdb"><span class="ico"></span><span class="txt">能效指标对比</span></a></li>
+                <li><a class="yxcsdb"><span class="ico"></span><span class="txt">运行参数对比</span></a></li>
+                <li><a class="cb"><span class="ico"></span><span class="txt">成本</span></a></li>
+                <li><a class="fnzpm"><span class="ico"></span><span class="txt">泛能站排名</span></a></li>
+                <li><a class="lssjcx"><span class="ico"></span><span class="txt">历史数据查询</span></a></li>
+            </ul>
+        </div>
+
+        <div class="tab-panel menubg">
+            <ul class="nygl xmgl-nav">
+                <li class="on"><a class="xmxxgl"><span class="ico"></span><span class="txt">项目信息管理</span></a></li>
+                <li><a class="sssbgl"><span class="ico"></span><span class="txt">设施设备管理</span></a></li>
+                <li><a class="gysxpz"><span class="ico"></span><span class="txt">工艺属性配置</span></a></li>
+                <li><a class="mksjpz"><span class="ico"></span><span class="txt">模块数据配置</span></a></li>
+
+            </ul>
+        </div>
+        <div class="tab-panel menubg">
+            <ul class="nygl pzgl">
+                <li class="on"><a class="nypegl"><span class="ico"></span><span class="txt">能源配额管理</span></a></li>
+                <li><a class="lgl"><span class="ico"></span><span class="txt">类管理</span></a></li>
+                <li><a class="lsxgl"><span class="ico"></span><span class="txt">类属性管理</span></a></li>
+                <li><a class="yxjcpz"><span class="ico"></span><span class="txt">运行监测配置</span></a></li>
+                <li><a class="xwpz"><span class="ico"></span><span class="txt">新闻配置</span></a></li>
+
+            </ul>
+        </div>
+        <div class="tab-panel menubg">
+            <ul class="nygl xtgl">
+                <li class="on"><a class="yhgl"><span class="ico"></span><span class="txt">用户管理</span></a></li>
+                <li><a class="jsgl"><span class="ico"></span><span class="txt">角色管理</span></a></li>
+                <li><a class="qxgl"><span class="ico"></span><span class="txt">权限管理</span></a></li>
+                <li><a class="dhgl"><span class="ico"></span><span class="txt">导航管理</span></a></li>
+                <li><a class="rzgl"><span class="ico"></span><span class="txt">日志管理</span></a></li>
+
+            </ul>
+        </div>
+        <div class="down-popup fr">
+            李玲玲
+                            <div class="arr-group">
+                            </div>
+            <div class="list">
+
+                <ul>
+                    <li><a>修改信息</a></li>
+                    <li><a>安全退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nav-nav nav-secnav clear">
+
+        <div class="sel_nav ml10">
+            <a title="修改城市" data-target=".area_popup" class="curcity-expand showdiv" id="curCity"><span>华东区</span>-<span>黄花机场</span>-<span>1号泛能站</span></a>
+        </div>
+
+    </div>
+-->
