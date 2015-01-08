@@ -667,7 +667,11 @@ div { box-sizing: border-box; }
 }
 .remsSubNav {
     height: 3.1rem;
-    background: pink;
+    background: #f2f8fd;
+    background: -moz-linear-gradient(top, #f2f8fd 0%, #dae8f4 100%);
+    background: -webkit-linear-gradient(top, #f2f8fd 0%, #dae8f4 100%);
+    background: -ms-linear-gradient(top, #f2f8fd 0%, #dae8f4 100%);
+    background: linear-gradient(top, #f2f8fd 0%, #dae8f4 100%);
     min-width: 1200px;
 }
 .remsSubNav > div > ul > li{

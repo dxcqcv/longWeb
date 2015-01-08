@@ -368,7 +368,6 @@
     <![endif]-->
     <script>
 (function(){
-    xmglMove();
     // for html font size
         recalc();
     // for scroll bar
@@ -376,7 +375,10 @@
     $(window).resize(function(){
         remsScroll();
         recalc();
-    xmglMove();
+
+    var wrap = $('.xmglListWrapper')
+      , step = -wrap.children('ul').children('li').outerHeight()
+    wrap.height(-step*2)// 动态外框高度
     });
     // for nav
     $(document).on('click', '.remsNav > li > a', remsNav) 
@@ -411,7 +413,6 @@
         width: '22%'
     });
     // for xmgl arrow
-function xmglMove(){
     
     var animated = false
       //, step = -388 
@@ -498,7 +499,6 @@ function xmglArrow(event) {
             );
        }
 }
-}
 
 })();
 // 选择导航
@@ -551,88 +551,3 @@ function recalc() {
     </script>
 </body>
 </html>
-<!--
-    <div class="head tab mb48">
-        <a class="logo"></a>
-        <div class="navbar tab-nav">
-            <ul class="pdl">
-                <li class="on"><a class="">远程监测</a></li>
-                <li class=""><a>能源管理</a></li>
-                <li><a>项目管理</a></li>
-                <li><a>配置管理</a></li>
-                <li><a>系统管理</a></li>
-                <li class="index no"><a class="">首页</a></li>
-
-
-            </ul>
-        </div>
-        <div class="tab-panel menubg" style="display: block;">
-            <ul class="nygl ycjc">
-                <li class="on"><a class="xmgl"><span class="ico"></span><span class="txt">项目概览</span></a></li>
-                <li><a class="yxjc"><span class="ico"></span><span class="txt">运行监测</span></a></li>
-
-            </ul>
-        </div>
-        <div class="tab-panel menubg">
-            <ul class="nygl">
-                <li class="on"><a class="nxfx"><span class="ico"></span><span class="txt">能效分析</span></a></li>
-                <li><a class="tbfx"><span class="ico"></span><span class="txt">同比分析</span></a></li>
-                <li><a class="hbfx"><span class="ico"></span><span class="txt">环比分析</span></a></li>
-                <li><a class="nxzbdb"><span class="ico"></span><span class="txt">能效指标对比</span></a></li>
-                <li><a class="yxcsdb"><span class="ico"></span><span class="txt">运行参数对比</span></a></li>
-                <li><a class="cb"><span class="ico"></span><span class="txt">成本</span></a></li>
-                <li><a class="fnzpm"><span class="ico"></span><span class="txt">泛能站排名</span></a></li>
-                <li><a class="lssjcx"><span class="ico"></span><span class="txt">历史数据查询</span></a></li>
-            </ul>
-        </div>
-
-        <div class="tab-panel menubg">
-            <ul class="nygl xmgl-nav">
-                <li class="on"><a class="xmxxgl"><span class="ico"></span><span class="txt">项目信息管理</span></a></li>
-                <li><a class="sssbgl"><span class="ico"></span><span class="txt">设施设备管理</span></a></li>
-                <li><a class="gysxpz"><span class="ico"></span><span class="txt">工艺属性配置</span></a></li>
-                <li><a class="mksjpz"><span class="ico"></span><span class="txt">模块数据配置</span></a></li>
-
-            </ul>
-        </div>
-        <div class="tab-panel menubg">
-            <ul class="nygl pzgl">
-                <li class="on"><a class="nypegl"><span class="ico"></span><span class="txt">能源配额管理</span></a></li>
-                <li><a class="lgl"><span class="ico"></span><span class="txt">类管理</span></a></li>
-                <li><a class="lsxgl"><span class="ico"></span><span class="txt">类属性管理</span></a></li>
-                <li><a class="yxjcpz"><span class="ico"></span><span class="txt">运行监测配置</span></a></li>
-                <li><a class="xwpz"><span class="ico"></span><span class="txt">新闻配置</span></a></li>
-
-            </ul>
-        </div>
-        <div class="tab-panel menubg">
-            <ul class="nygl xtgl">
-                <li class="on"><a class="yhgl"><span class="ico"></span><span class="txt">用户管理</span></a></li>
-                <li><a class="jsgl"><span class="ico"></span><span class="txt">角色管理</span></a></li>
-                <li><a class="qxgl"><span class="ico"></span><span class="txt">权限管理</span></a></li>
-                <li><a class="dhgl"><span class="ico"></span><span class="txt">导航管理</span></a></li>
-                <li><a class="rzgl"><span class="ico"></span><span class="txt">日志管理</span></a></li>
-
-            </ul>
-        </div>
-        <div class="down-popup fr">
-            李玲玲
-                            <div class="arr-group">
-                            </div>
-            <div class="list">
-
-                <ul>
-                    <li><a>修改信息</a></li>
-                    <li><a>安全退出</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="nav-nav nav-secnav clear">
-
-        <div class="sel_nav ml10">
-            <a title="修改城市" data-target=".area_popup" class="curcity-expand showdiv" id="curCity"><span>华东区</span>-<span>黄花机场</span>-<span>1号泛能站</span></a>
-        </div>
-
-    </div>
--->
