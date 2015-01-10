@@ -117,9 +117,9 @@
     <div class="tests">
     <div class="xmglWrapper clearfix">
        <div class="xmglLeft ml10 left">
-           <div id="xmglaUp" class="xmglArrow xmglaUp"></div>
+           <div id="xmglaUp" data-dir="up" class="xmglArrow xmglaUp"></div>
            <div class="xmglListWrapper">
-               <ul>
+               <ul style="top:0">
                    <li>
                         <span class="xmglIcon haodianPic"></span>
                         <p class="fs14 fcGray mt20">当日耗电</p>
@@ -178,7 +178,7 @@
                    </li>
                </ul>
            </div>
-           <div id="xmglaDown" class="xmglArrow xmglaDown"></div>
+           <div id="xmglaDown" data-dir="down" class="xmglArrow xmglaDown"></div>
        </div>
        <div class="xmglmiddle left">
             <div class="xmglmBlock ">
@@ -377,7 +377,19 @@
         recalc();
 
     var wrap = $('.xmglListWrapper')
+      , ul = wrap.children('ul')
+      , topV = parseInt(ul.css('top')) || 0
       , step = -wrap.children('ul').children('li').outerHeight()
+      , times = parseInt(Math.ceil(step/topV))
+
+      console.log('step is ' + step)
+      console.log('top is ' + topV)
+      console.log('times is ' + parseInt(Math.ceil(step/topV)))
+      /*
+      console.log('offset is '+  parseInt(step)*times)
+      console.log('times is '+times)
+      */
+    ul.css('top',step*times)
     wrap.height(-step*2)// 动态外框高度
     });
     // for nav
@@ -414,18 +426,16 @@
     });
     // for xmgl arrow
     
+      // step = -388 just backup 
+
     var animated = false
-      //, step = -388 
       , wrap = $('.xmglListWrapper')
       , step = -wrap.children('ul').children('li').outerHeight()
 
     wrap.height(-step*2)// 动态外框高度
-/*
-    $(document).on('click', '#xmglaUp', {offset: -388}, xmglArrow); 
-    $(document).on('click', '#xmglaDown', {offset: 388}, xmglArrow); 
-    */
-    $(document).on('click', '#xmglaUp', {offset: step}, xmglArrow); 
-    $(document).on('click', '#xmglaDown', {offset: -step}, xmglArrow); 
+
+    $(document).on('click', '#xmglaUp',  xmglArrow); 
+    $(document).on('click', '#xmglaDown', xmglArrow); 
 
     $(document).on('click', '#xmglaUp', {dir: 'up'}, hoverEnd); 
     $(document).on('click', '#xmglaDown', {dir: 'down'}, hoverEnd); 
@@ -469,18 +479,21 @@ function hoverEnd(event) {
         $this.removeClass('xmglaDownH');
     } 
 }
-function xmglArrow(event) {
+function xmglArrow() {
    var $this = $(this),
        ul = $this.siblings('div.xmglListWrapper').find('ul'),
+       step = ul.children('li').outerHeight(),
+       offset = $this.data('dir') == 'up'? -step: step, 
        num = ul.find('li').length;
-   var left = parseInt(ul.css('top')) + event.data.offset;
-       if (event.data.offset > 0) {
-            offset = '+=' + event.data.offset; 
+   var left = parseInt(ul.css('top')) + offset;
+
+       if (offset > 0) {
+            offset = '+=' + offset; 
            if(parseInt(ul.css('top')) == 0) {
                 offset = 0;
            }
        } else {
-           offset = '-=' + Math.abs(event.data.offset);
+           offset = '-=' + Math.abs(offset);
            if(parseInt(ul.css('top')) == (num - 2) * step ) {
                 offset = (num - 2) * step;
            }
