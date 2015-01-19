@@ -1,0 +1,1744 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>数据集中器</title>
+		<link href="css/global.css" rel="stylesheet" charset="UTF-8"/>
+		<script src="js/jquery.min.js"></script>
+		<!-- <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script> -->
+        <script src="js/menu.js"></script>
+		<script src="js/data.js"></script>
+		<script> </script>
+	</head>
+	<body>
+		<div class="data_concentrator">
+			<div class="head">
+				<div class="en_logo"><img src="img/enn-logo.png">
+				</div>
+				<div class="en_text">
+					<p>
+						数据集中器 <span>TL-984300</span>
+					</p>
+				</div>
+				<div class="config">
+					<div class="acc_ment">
+						<div class="user_ico">
+							<a>张三</a>
+						</div>
+						<div class="pass_ico">
+							<a href="#">密码管理</a>
+						</div>
+						<div class="exit_ico">
+							<a href="#">退出</a>
+						</div>
+					</div>
+					<ul>
+						<li>
+							<div class="menu clmenu">
+								<span>状态信息</span>
+							</div>
+							<div class="drop_down cldrop_down">
+								<div class="content">
+									<div class="content_left">
+										<div class="serial_port zeserial">
+											<div class="info_text clinfotext" id="stin_network">
+												<span>网络</span>
+											</div>
+											<div class="content_right bloserial">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>网络</span>
+													</p>
+													
+												</div>
+												<table >
+													<thead>
+														<tr>
+															<th><span>项目</span></th>
+															<th><span>端口</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><span>webport</span></td>
+															<td><span class="webport">未知</span></td>
+															<td>
+																<span class="sucdhcp" title="正常"> </span>
+															</td>
+														</tr>
+														<tr>
+															<td><span>modbusport</span></td>
+															<td><span class="modbusport">未知</span></td>
+															<td>
+																<span class="sucdhcp" title="正常"> </span>
+																<!-- <span class="open">开启</span>
+																<span class="shut_down spac">关闭</span> -->
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port fiserial">
+											<div class="info_text  netser_port" val="1">
+												<span>串口1</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position" >
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口1</span>
+													</p>
+													<!-- <div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div> -->
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div  class="serial_port twserial">
+											<div class="info_text  netser_port" val="2">
+												<span>串口2</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口2</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port thserial">
+											<div class="info_text netser_port " val="3">
+												<span>串口3</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口3</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port foserial">
+											<div class="info_text netser_port" val="4">
+												<span>串口4</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口4</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port fivserial">
+											<div class="info_text netser_port" val="5">
+												<span>串口5</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口5</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port siserial">
+											<div class="info_text netser_port" val="6">
+												<span>串口6</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口6</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port seserial">
+											<div class="info_text netser_port" val="7">
+												<span>串口7</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口7</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port eiserial">
+											<div class="info_text netser_port" val="8">
+												<span>串口8</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口8</span>
+													</p>
+													
+												</div>
+												<table class="state_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>设备</span></th>
+															<th><span>状态</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														<!-- <tr>
+															<td><span>1</span></td>
+															<td><span> </span></td>
+															<td><span class="dhcp_state" title="故障"> </span></td>
+														</tr>
+														<tr>
+															<td><span>2</span></td>
+															<td><span> </span></td>
+															<td><span class="sucdhcp" title="正常"> </span></td>
+														</tr> -->
+														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="menu">
+								<span>端口配置</span>
+							</div>
+							<div class="drop_down ">
+								<div class="content twcontent">
+									<div class="content_left">
+										<div class="serial_port zeserial">
+											<div class="twserial_info twclinfotext" id="sernetwork">
+												<span>网络</span>
+											</div>
+											<div class="content_right twbloserial">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>网络</span>
+													</p>
+													
+												</div>
+												<table id="sernettable">
+													<thead>
+														<tr>
+															<th><span>项目</span></th>
+															<th><span>端口</span></th>
+
+														</tr>
+													</thead>
+													<tbody id="dhcpsele_tbody">
+														<tr>
+															<td><span>DHCP</span></td>
+															<td>
+																<select id="dhcpsele" class="dhcpsele">
+																    <option value="1" selected="selected">打开</option>
+																    <option value="2">关闭</option>
+ 															    </select>
+															</td>
+
+														</tr>
+														<tr>
+															<td><span>IP地址</span></td>
+															<td><div  contenteditable="false"><span class="serip">192.168.11.10</span></div></td>
+
+														</tr>
+														<tr>
+															<td><span>子网</span></td>
+															<td><div  contenteditable="false"><span class="sersubnet">192.168.11.1</span></div></td>
+
+														</tr>
+														<tr>
+															<td><span>网关</span></td>
+															<td><div  contenteditable="false"><span class="sergateway">192.168.11.1</span></div></td>
+
+														</tr>														
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save netportsa">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels netportca">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port fiserial">
+											<div class="twserial_info portserial " val="1">
+												<span>串口1</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口1</span>
+													</p>
+													
+												</div>
+
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div  class="serial_port twserial">
+											<div class="twserial_info portserial" val="2">
+												<span>串口2</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口2</span>
+													</p>
+													
+												</div>
+										
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port thserial">
+											<div class="twserial_info portserial" val="3">
+												<span>串口3</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口3</span>
+													</p>
+													
+												</div>
+												
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port foserial">
+											<div class="twserial_info portserial" val="4">
+												<span>串口4</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口4</span>
+													</p>
+													
+												</div>
+												
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port fivserial">
+											<div class="twserial_info portserial" val="5">
+												<span>串口5</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口5</span>
+													</p>
+													
+												</div>
+												
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port siserial">
+											<div class="twserial_info portserial" val="6">
+												<span>串口6</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口6</span>
+													</p>
+													
+												</div>
+												
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port seserial">
+											<div class="twserial_info portserial" val="7">
+												<span>串口7</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口7</span>
+													</p>
+													
+												</div>
+												
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port eiserial">
+											<div class="twserial_info portserial" val="8">
+												<span>串口8</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：端口配置 > <span>串口8</span>
+													</p>
+													
+												</div>
+											
+												<div class="port_config">
+													
+													<div class="portbotel">
+														<label>波特率：</label>
+														<select class="baudop">
+															<option value="4800" >4800</option>
+															<option value="9600" >9600</option>
+															<option value="19200">19200</option>
+															<option value="38400">38400</option>
+															<option value="56000" >56000</option>
+															<option value="57600" >57600</option>
+															<option value="115200">115200</option>
+														</select>
+													</div>
+													<div class="portdata">
+														<label>数据位：</label>
+														<select>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+													<div class="portstop">
+														<label>停止位：</label>
+														<select>
+															<option value="1">1</option>
+															<option value="2">2</option>
+														</select>
+													</div>
+													<div class="portcheck">
+														<label>校验位：</label>
+														<select>
+															<option value="0">None</option>
+															<option value="1">Odd</option>
+															<option value="2">Even</option>
+															<option value="3">Mark</option>
+															<option value="4">Space</option>
+														</select>
+													</div>
+													
+												</div>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save saportser">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels caportser">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</li>
+						<li>
+							<div  id="xdybpz" class="menu">
+								<span>下端仪表配置</span>
+							</div>
+							<div class="drop_down " >
+								<div class="content thcontent">
+									<div class="content_left">										
+										<div class="serial_port zeserial">
+											<div class="thserial_info thclinfotext" val='1'>
+												<span>串口1</span>
+											</div>
+											<div class="content_right thbloserial">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：下端仪表配置 > <span>串口1</span>
+													</p>
+													
+												</div>
+                                                <!--port start-->
+												<div class="screequt">
+													<div class="equt_left">
+														<div>
+															<p>
+																<label><span> </span>设备名称 : </label>
+																<input class="xdybpzsbmcV" type="text" />
+															</p>
+															<p>
+																<label><span> </span>设备地址 : </label>
+																<input class="xdybpzsbdzV" type="text" />
+															</p>
+															<div class="addequt" val="1">
+																<span>增加</span>
+															</div>
+														</div>
+                                                        <div class="equt_menufos gloequtmenu">
+                                                            <span>设备列表</span>
+                                                        </div>
+														<div class="equt_lefthead">
+																<div class="equt_right">
+
+																</div>
+                                                            <!--clone start-->
+															<div class="equt_menufo cleqmenfo fiequtmenu clearfix">
+                                                                <div class="xdybpzItem">
+                                                                    <span class="equt_menufotext">设备1</span>
+                                                                    <span class="xdybpzListDel">删除</span>
+                                                                </div>
+																<div class="equt_right clequt">
+																	<div class="curequi">
+																		<div class="curequifi sibtext">
+																			<label><span> </span>设备名称 : </label>
+																			<div class="sibtextst xdybpzsbmc">设备列表</div>
+																		</div>
+																		<div class="sibtext">
+																			<label><span> </span>设备地址 : </label>
+																			<div class="sibtextst xbybpzsbdz">表</div>
+																		</div>
+																		<div class="modify_equ modify">
+																			<span>修改设备</span>
+																		</div>
+																	</div>
+																	<table  class="equts_table newinstr xdybpzTable">
+																		<thead>
+																		<tr>
+																			<th class="instrfith">
+																				<span>功能码</span>
+																			  <select class="xdybpzSel">
+																				<option selected="selected">全部</option>
+																				<option>1</option>
+																				<option>2</option>
+																				<option>3</option>
+																				<option>4</option>
+																				<option>5</option>
+																				<option>16</option>
+																			  </select>
+																			</th>
+																			<th>寄存器地址</th>
+																			<th>寄存器长度</th>
+																			<th>字节序</th>
+																			<th>寄存器名</th>
+																			<th>寄存器描述</th>
+																			<th>K系数</th>
+																			<th>D系数</th>
+																			<th>备注</th>
+																		</tr>
+																		</thead>
+																		<tbody>
+																		<tr>
+																			<td>1</td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+                                                                            <td><span class="open xdybpzEdit xdybpzDef">编辑</span><span class="open xdybpzDel xdybpzDef">删除</span><span class="open xdybpzSave hide">保存</span></td>
+																		</tr>
+																		</tbody>
+																		
+																	</table>
+																	<div class="newpaging">
+													                   <div class="newaddconfig">
+														                   <div class="dataadd" ><span>数据新增项</span></div>
+														                   <div class="saveconfig" ><span>保存配置</span></div>
+                                                                            <div  class="maskbg"> </div>
+
+                                                                            <div  class="pop-up">
+                                                                                
+                                                                                    <div class="pop-upinfo"> 
+                                                                                       <p>
+                                                                                         <label><span>功能码 : </span></label>
+                                                                                          <select class="gnmPopSel">
+                                                                                            <option>1</option>
+                                                                                            <option>2</option>
+                                                                                            <option>3</option>
+                                                                                            <option>4</option>
+                                                                                            <option>5</option>
+                                                                                            <option>16</option>
+                                                                                          </select>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>寄存器地址  : </span></label>
+                                                                                         <input class="jcqAddr" type="text"/>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>寄存器长度  : </span></label>
+                                                                                         <input class="jcqLength" type="text" value="1" readonly="readonly"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>字节序  : </span></label>
+                                                                                         <input class="jzxV" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>寄存器名  : </span></label>
+                                                                                         <input class="jcqName" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>寄存器描述  : </span></label>
+                                                                                         <input class="jcqDes" type="text"/>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>K系数  : </span></label>
+                                                                                         <input class="kxsV" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>D系数  : </span></label>
+                                                                                         <input class="dxsV" type="text"/>
+                                                                                       </p>
+                                                                                    </div>					
+                                                                                    <div class="popupButBox">
+                                                                                        <a class="saveform xdybpzpop-upSave">
+                                                                                            <span>保存</span>
+                                                                                        </a>
+                                                                                        <a  class="cancelform cancelpop-up">
+                                                                                            <span>取消</span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    
+                                                                                
+                                                                              </div>
+													                   </div>
+												                   </div>
+																</div>
+
+															</div>
+                                                            <!--clone end-->
+														</div>
+													</div>
+
+												</div>		
+											</div>
+										</div>
+										<div  class="serial_port fiserial">
+											<div class="thserial_info" val='2'>
+												<span>串口2</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口2</span>
+													</p>
+													
+												</div>
+                                                <!--port start-->
+												<div class="screequt">
+													<div class="equt_left">
+														<div>
+															<p>
+																<label><span> </span>设备名称 : </label>
+																<input id="xdybpzsbmcV" type="text" />
+															</p>
+															<p>
+																<label><span> </span>设备地址 : </label>
+																<input id="xdybpzsbdzV" type="text" />
+															</p>
+															<div class="addequt" val="2">
+																<span>增加</span>
+															</div>
+														</div>
+														<div class="equt_lefthead">
+															<div class="equt_menufos gloequtmenu">
+																<span>设备列表</span>
+																<div class="equt_right">
+
+																</div>
+															</div>
+                                                            <!--clone start-->
+															<div class="equt_menufo cleqmenfo fiequtmenu clearfix">
+																<span class="equt_menufotext">设备1</span>
+                                                                <span class="xdybpzListDel">删除</span>
+																<div class="equt_right clequt">
+																	<div class="curequi">
+																		<div class="curequifi sibtext">
+																			<label><span> </span>设备名称 : </label>
+																			<div class="sibtextst xdybpzsbmc">设备列表</div>
+																		</div>
+																		<div class="sibtext">
+																			<label><span> </span>设备地址 : </label>
+																			<div class="sibtextst xbybpzsbdz">表</div>
+																		</div>
+																		<div class="modify_equ modify">
+																			<span>修改设备</span>
+																		</div>
+																	</div>
+																	<table  class="equts_table newinstr xdybpzTable">
+																		<thead>
+																		<tr>
+																			<th class="instrfith">
+																				<span>功能码</span>
+																			  <select class="xdybpzSel">
+																				<option selected="selected">全部</option>
+																				<option>1</option>
+																				<option>2</option>
+																				<option>3</option>
+																				<option>4</option>
+																				<option>5</option>
+																				<option>16</option>
+																			  </select>
+																			</th>
+																			<th>寄存器地址</th>
+																			<th>寄存器长度</th>
+																			<th>字节序</th>
+																			<th>寄存器名</th>
+																			<th>寄存器描述</th>
+																			<th>K系数</th>
+																			<th>D系数</th>
+																			<th>备注</th>
+																		</tr>
+																		</thead>
+																		<tbody>
+																		<tr>
+																			<td>1</td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+																			<td> </td>
+                                                                            <td><span class="open xdybpzEdit xdybpzDef">编辑</span><span class="open xdybpzDel xdybpzDef">删除</span><span class="open xdybpzSave hide">保存</span></td>
+																		</tr>
+																		</tbody>
+																		
+																	</table>
+																	<div class="newpaging">
+													                   <div class="newaddconfig">
+														                   <div class="dataadd" ><span>数据新增项</span></div>
+														                   <div class="saveconfig" ><span>保存配置</span></div>
+                                                                            <div  class="maskbg"> </div>
+
+                                                                            <div  class="pop-up">
+                                                                                
+                                                                                    <div class="pop-upinfo"> 
+                                                                                       <p>
+                                                                                         <label><span>功能码 : </span></label>
+                                                                                          <select class="gnmPopSel">
+                                                                                            <option>1</option>
+                                                                                            <option>2</option>
+                                                                                            <option>3</option>
+                                                                                            <option>4</option>
+                                                                                            <option>5</option>
+                                                                                            <option>16</option>
+                                                                                          </select>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>寄存器地址  : </span></label>
+                                                                                         <input class="jcqAddr" type="text"/>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>寄存器长度  : </span></label>
+                                                                                         <input class="jcqLength" type="text" value="1" readonly="readonly"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>字节序  : </span></label>
+                                                                                         <input class="jzxV" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>寄存器名  : </span></label>
+                                                                                         <input class="jcqName" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>寄存器描述  : </span></label>
+                                                                                         <input class="jcqDes" type="text"/>
+                                                                                       </p>
+                                                                                       <p>
+                                                                                         <label><span>K系数  : </span></label>
+                                                                                         <input class="kxsV" type="text"/>
+                                                                                       </p>
+                                                                                        <p>
+                                                                                         <label><span>D系数  : </span></label>
+                                                                                         <input class="dxsV" type="text"/>
+                                                                                       </p>
+                                                                                    </div>					
+                                                                                    <div class="popupButBox">
+                                                                                        <a class="saveform xdybpzpop-upSave">
+                                                                                            <span>保存</span>
+                                                                                        </a>
+                                                                                        <a  class="cancelform cancelpop-up">
+                                                                                            <span>取消</span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    
+                                                                                
+                                                                              </div>
+													                   </div>
+												                   </div>
+																</div>
+
+															</div>
+                                                            <!--clone end-->
+														</div>
+													</div>
+
+												</div>		
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port twserial">
+											<div class="thserial_info" val='3'>
+												<span>串口3</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口3</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port thserial">
+											<div class="thserial_info" val='4'>
+												<span>串口4</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口4</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port foserial">
+											<div class="thserial_info" val='5'>
+												<span>串口5</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口5</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port fivserial">
+											<div class="thserial_info" val='6'>
+												<span>串口6</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口6</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port siserial">
+											<div class="thserial_info" val='7'>
+												<span>串口7</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口7</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+										<div class="serial_port seserial">
+											<div class="thserial_info" val='8'>
+												<span>串口8</span>
+											</div>
+											<div class="content_right">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：状态信息 > <span>串口8</span>
+													</p>
+													<div class="current_sele">
+														<input type="text"/>
+														<select>
+															<option></option>
+															<option></option>
+														</select>
+													</div>
+												</div>
+                                                <!---->
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</li>
+						<li>
+							<div id="sjjzpzPage" class="menu">
+								<span>数据集中配置</span>
+							</div>
+							<div class="drop_down " >
+								<div class="content focontent">
+									<div class="newcontent">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：数据集中配置 > <span>集中器</span>
+													</p>
+													<div class="equt">
+														<ul class="equtinfo">
+															<li class="fiequtinfo">
+																<label><span class="fiequtsp">功能码 : </span></label>
+																<select id="sjjzpzSel">
+																	<option selected="selected">全部</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>
+																	<option>4</option>
+																	<option>5</option>
+																	<option>16</option>
+																</select>
+															</li>
+
+														</ul>
+
+													</div>
+												</div>
+
+												<table class="newdatatable">
+													<thead>
+														<tr>
+															<th><span>数据项地址</span></th>
+															<th><span>寄存器个数</span></th>
+															<th><span>通道</span></th>
+															<th><span>设备号</span></th>
+															<th><span>寄存器地址</span></th>
+															<th><span>字节序</span></th>
+															<th><span>寄存器名称</span></th>
+															<th><span>寄存器描述</span></th>
+															<th><span>K系数</span></th>
+															<th><span>D系数</span></th>
+															<th><span>备注</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr >
+															<td><span>001</span></td>
+															<td><span>1</span></td>
+															<td><span>1</span></td>
+															<td><span>0001</span></td>
+															<td><span>001</span></td>
+															<td><span>1</span></td>
+															<td><span>1</span></td>
+															<td><span>0001</span></td>
+															<td><span>58.4</span></td>
+															<td><span>58.4</span></td>
+															<td><span class="open uptd" >上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														<tr >
+															<td><span>002</span></td>
+															<td><span>2</span></td>
+															<td><span>2</span></td>
+															<td><span>0002</span></td>
+															<td><span>001</span></td>
+															<td><span>1</span></td>
+															<td><span>1</span></td>
+															<td><span>0001</span></td>
+															<td><span>58.4</span></td>
+															<td><span>58.4</span></td>
+															<td><span class="open uptd" >上移</span><span  class="open spac downtd">下移</span></td>
+														</tr>
+													</tbody>
+												</table>
+												<div class="save_cancel">
+													<div class="save_cancelrig">
+														<div class="save">
+															<span >保存</span>
+														</div>
+														<div class="cancel cancels">
+															<span >取消</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+								</div>
+							</div>
+						</li>
+						<li >
+							<div class="menu">
+								<span>系统配置</span>
+							</div>
+							<div class="drop_down " >
+								<div class="content fivcontent">
+									<div class="content_left">
+										<div class="serial_port fodata">
+											<div class="fivserial_info fivclinfotext">
+												<span>备份和恢复</span>
+											</div>
+											<div class="content_right fivbloserial">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：系统配置> <span>备份和恢复</span>
+													</p>
+													
+												</div>
+                                               
+												<div class="backup_restore">
+													<div class="backup">
+														<div class="backup_title">备份</div>
+														<div class="filepath">
+															<label>备份文件保存路径 : </label><input type="text" /><input type="button" value="浏览..."/>
+														</div>
+													</div>
+													<div class="restore">
+														<div class="restore_title">恢复</div>
+														<ul>
+															<li class="rfaset" id="rfaset">恢复出厂设置</li>
+															<li>
+																<span>从备份中恢复</span>
+																<div><label>选择备份文件 : </label><input type="text" /><input type="button" value="浏览..."/></div>
+															</li>
+														</ul>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+										<div class="serial_port twfodata">
+											<div class="fivserial_info ">
+												<span>重启路由器</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：系统配置> <span>重启路由器</span>
+													</p>
+													
+												</div>
+                                                <div class="backup_restore">
+                                                   <div class="restart"><span>重启</span></div>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port thfodata">
+											<div class="fivserial_info ">
+												<span>修改密码</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：系统配置> <span>修改密码</span>
+													</p>
+													
+												</div>
+                                                <div class="backup_restore">
+                                                	<div class="passwords">
+	                                                   <div class="password">
+	                                                   	   <label><span>原有密码 : </span></label><input type="text" />
+	                                                   	</div>
+	                                                   	<div class="password">
+	                                                   	   <label><span>新密码 : </span></label><input class="twpassinput" type="text" />
+	                                                   	</div>
+	                                                   	<div class="password">
+	                                                   	   <label><span>确认新密码 : </span></label><input type="text" />
+	                                                   	</div>
+                                                   	</div>
+												</div>
+												
+												
+											</div>
+										</div>
+										<div class="serial_port fofodata">
+											<div class="fivserial_info">
+												<span>系统日志</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position">
+													<p >
+														<img src="img/cur_ico.png">当前位置：系统配置> <span>系统日志</span>
+													</p>
+													
+												</div>
+                                             <div class="backup_restore">
+												<table class="equt_table">
+													<thead>
+														<tr>
+															<th><span>设备号</span></th>
+															<th><span>端口</span></th>
+															<th><span>设备地址</span></th>
+															<th><span>寄存器</span></th>
+															<th><span>数据</span></th>
+															<th><span>备注</span></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr >
+															<td><span>001</span></td>
+															<td><span>1</span></td>
+															<td><span>1</span></td>
+															<td><span>0001</span></td>
+															<td><span>58.4</span></td>
+															<td><span class="open uptd" >上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														<tr >
+															<td><span>002</span></td>
+															<td><span>2</span></td>
+															<td><span>2</span></td>
+															<td><span>0002</span></td>
+															<td><span>20.4</span></td>
+															<td><span class="open uptd" >上移</span><span  class="open spac downtd">下移</span></td>
+														</tr>
+														<tr >
+															<td><span>003</span></td>
+															<td><span>3</span></td>
+															<td><span>3</span></td>
+															<td><span>0003</span></td>
+															<td><span>20.4</span></td>
+															<td><span class="open uptd">上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														<tr>
+															<td><span>004</span></td>
+															<td><span>4</span></td>
+															<td><span>4</span></td>
+															<td><span>0004</span></td>
+															<td><span>20.4</span></td>
+															<td><span class="open uptd">上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														<tr>
+															<td><span>005</span></td>
+															<td><span>5</span></td>
+															<td><span>5</span></td>
+															<td><span>0005</span></td>
+															<td><span>20.4</span></td>
+															<td><span class="open uptd">上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														<tr>
+															<td><span>006</span></td>
+															<td><span>6</span></td>
+															<td><span>6</span></td>
+															<td><span>0006</span></td>
+															<td><span>20.6</span></td>
+															<td><span class="open uptd">上移</span><span class="open spac downtd">下移</span></td>
+														</tr>
+														
+													</tbody>
+												 </table>
+												</div>
+											</div>
+										</div>
+										<div class="serial_port fivfodata">
+											<div class="fivserial_info ">
+												<span>版本信息</span>
+											</div>
+											<div class="content_right ">
+												<div class="current_position">
+													<p>
+														<img src="img/cur_ico.png">当前位置：系统配置> <span>版本信息</span>
+													</p>
+													
+												</div>
+
+												
+												
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		
+		
+		
+	</body>
+</html>
+

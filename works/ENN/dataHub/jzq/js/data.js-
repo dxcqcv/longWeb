@@ -1,0 +1,168 @@
+/**
+ * @author ada
+ */
+
+$(document).ready(function() {
+	//alert("xx");
+	//状态信息 网路对接数据
+	var $trq = $("#stin_network").siblings(".content_right").find("table tbody tr");
+	var $curvaeluq = $(".webport");
+	var $mbp = $(".modbusport");
+	//$curvaeluq.html('iii');
+	$("#stin_network").click(function() {
+		
+		if ($(this).siblings(".content_right").hasClass("bloserial")) {
+			// var $tr = $(this).siblings(".content_right").find("table tbody tr");
+			// var $curTdva = $tr.find("td span:eq(1)").html();
+
+			stateinfoNetwork();
+		}
+
+	});
+
+	//状态信息 网路对接数据函数
+	function stateinfoNetwork() {
+		//alert("ss");
+
+		$.ajax({
+			type : "POST",
+			url : "../../../cgi-bin/slave.cgi",
+			data : {
+				cmd : 11
+			},
+			success : function(data) {
+				// console.log(data);
+				var escape = JSON.parse(data);
+				$curvaeluq.html(escape.webport);
+				$mbp.html(escape.modbusport);
+			}
+		});
+	}
+
+	//状态信息 串口对接数据函数
+	$(".netser_port").bind('click', function() {
+		//alert("ss");
+		if ($(this).siblings(".content_right").hasClass("bloserial")) {
+
+			netserPort($(this).attr("val"));
+		}
+	});
+
+	function netserPort(cha) {
+		//alert("ss");
+		$.ajax({
+		   contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			type : "POST",
+			url : "../../../cgi-bin/slave.cgi",
+			data : {
+				cmd : 13,
+				channel : cha
+			},
+			success : function(data) {
+				console.log(data);
+				
+				var curser = JSON.parse(data), sla = curser.slave, tr = "";
+				if(sla){
+					$.each(sla, function(index, curvalue) {
+						tr += '<tr><td><span>'+curvalue[0]+'</span></td><td><span>'+parseInt(curvalue[1]) +'</span></td><td><span class="sucdhcp" title="正常"> </span></td></tr>';
+					});
+				}
+				$(".state_table tbody").empty().html(tr);
+			}
+		});
+    }
+
+    //端口配置 网络对接数据函数
+
+   $("#sernetwork").bind('click', function() {
+		//alert("ss");
+		if ($(this).siblings(".content_right").hasClass("twbloserial")) {
+             
+			// netserPort($(this).attr("val"));
+			sernetwork();
+		}
+	});
+	
+	function sernetwork(){
+		//alert("ss");
+		
+		$.ajax({
+			type:"POST",
+			url:"../../../cgi-bin/slave.cgi",
+			data:{
+				cmd:15
+			},
+			
+			success:function(data){
+				console.log(data);
+				var curserne = JSON.parse(data);
+				var $cursertr =  $("#sernettable").find("tbody tr");
+				var $curdadhcp = $cursertr.find(".serdhcp");
+				var $curdaip = $cursertr.find(".serip");
+		        var $curdamask = $cursertr.find(".sersubnet");
+		        var $curdagateway = $cursertr.find(".sergateway");
+				//console.log($curdaip);
+				//$curdaip.html('ii');
+				$curdaip.html(curserne.ip);
+				$curdamask.html(curserne.mask);
+				$curdagateway.html(curserne.gateway);				
+			}
+		});
+	}
+ //端口配置 串口对接数据函数	twserial_info
+	$(".portserial").bind('click', function() {
+		
+		if ($(this).siblings(".content_right").hasClass("twbloserial")) {
+              //alert("ss");
+			portSerial($(this).attr("val"));
+		}
+	});
+
+	function portSerial(curcha) {
+		//alert("ss");
+		$.ajax({
+		   contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			type : "POST",
+			url : "../../../cgi-bin/slave.cgi",
+			data : {
+				cmd : 19,
+				channel : curcha
+			},
+			success : function(data) {
+				console.log(data);
+				var curpor = JSON.parse(data), bau = curpor.baudrate,
+				dat = curpor.databit,sto =curpor.stopbit, 
+				par= curpor.partiybit,op = "";
+				$.each(curpor.baudrate, function(cur,curbau) {
+				      // var i = curpor.baudrate;
+				      op += '<option>'+curbau+'</option>';
+				      console.log(curbau);
+				});				
+				$.each(curpor.databit, function(cur,curdat) {
+				     
+				      opdat += '<option>'+curdat+'</option>';
+				      console.log( opdat += '<option>'+curdat+'</option>');
+				});	
+				$.each(curpor.stopbit, function(cur,cursto) {  
+				      opsto += '<option>'+cursto+'</option>';
+				});	
+				$.each(curpor.partiybit, function(cur,curpar) {  
+				      oppar += '<option>'+curpar+'</option>';
+				});		
+				$(".portbotel select").html(op);
+				$(".portdata select").html(op);
+				$(".portstop select").html(op);
+				$(".portcheck select").html(op);
+			}
+		});
+    }
+
+	
+	
+	
+	
+	
+	
+	
+});
+

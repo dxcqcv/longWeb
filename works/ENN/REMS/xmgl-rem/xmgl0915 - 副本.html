@@ -376,9 +376,19 @@
         remsScroll();
         recalc();
 
-    var wrap = $('.xmglListWrapper')
-      , step = -wrap.children('ul').children('li').outerHeight()
-    wrap.height(-step*2)// 动态外框高度
+        var wrap = $('.xmglListWrapper')
+          , ul = wrap.children('ul')
+          , topVal = ul.css('top')
+          , step = -ul.children('li').outerHeight()
+          , offset
+        wrap.height(-step*2)// 动态外框高度
+        offset = step * Math.abs(parseInt(topVal)/step)
+        ul.css('top',offset)
+          console.log('resize step is ' +step)
+          console.log('top val is ' +Math.abs(parseInt(topVal)))
+          console.log('top times are ' +Math.abs(parseInt(topVal)/step))
+        $(document).on('click', '#xmglaUp', {offset: step}, xmglArrow); 
+        $(document).on('click', '#xmglaDown', {offset: -step}, xmglArrow); 
     });
     // for nav
     $(document).on('click', '.remsNav > li > a', remsNav) 
@@ -418,6 +428,7 @@
       //, step = -388 
       , wrap = $('.xmglListWrapper')
       , step = -wrap.children('ul').children('li').outerHeight()
+      console.log('step is ' +step)
 
     wrap.height(-step*2)// 动态外框高度
 /*
@@ -474,6 +485,7 @@ function xmglArrow(event) {
        ul = $this.siblings('div.xmglListWrapper').find('ul'),
        num = ul.find('li').length;
    var left = parseInt(ul.css('top')) + event.data.offset;
+   console.log('offset is ' + event.data.offset)
        if (event.data.offset > 0) {
             offset = '+=' + event.data.offset; 
            if(parseInt(ul.css('top')) == 0) {
