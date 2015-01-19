@@ -8,7 +8,9 @@ $(document).ready(function(){
         oldTempMC,
         oldTempDZ;
 
-// alert("ss");
+$(document).ajaxStart(function(){
+    alert(222);
+});
 //导航栏菜单切换功能
 $(".menu").click(function() {
 
