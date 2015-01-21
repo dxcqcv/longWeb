@@ -1,16 +1,53 @@
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+        font-size: 100%;
+font: inherit;
+      vertical-align: baseline;
+    }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+display: block;
+    }
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+    q:before, q:after {
+content: '';
+content: none;
+    }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* reset end */
 
-*{
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	font-family:"Microsoft Yahei";
-	text-decoration: none;
-	border-collapse:collapse;
-}
-html,body { height: 100%;}
-img{
-	border: none;
-}
+/* loading css */
 .load-box {
     background: rgba(0,0,0,.8);
     height: 100%;
@@ -73,6 +110,115 @@ transform: scaleY(0.4);
 transform: scaleY(1.0);
            -webkit-transform: scaleY(1.0);
     }
+}
+
+/* global css */
+html, body { height: 100%; font: normal 12px/1.5 "Microsoft YaHei" }
+.wrapper {
+    width: 1280px;
+    margin: 0 auto;
+    background: #39c;
+    height: 100%;
+}
+.left { float: left; }
+.right { float: right; }
+.in-bl { display: inline-block; }
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+.ghost-center:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+div { box-sizing: border-box; }
+a { text-decoration: none; }
+.ver-sub { vertical-align: sub; }
+.list-float > li { float: left;}
+.h100 { height: 100%; }
+.fs20 { font-size: 20px; }
+.fs15 { font-size: 15px; }
+/* header */
+.header {
+	background: url(../img/head_bg.png);
+    height: 72px;
+    position: relative;
+    border-bottom: 3px solid #063060;
+}
+.header-left { 
+    padding-left: 10px;
+}
+.head-logo {
+	width: 134px;
+	height: 33px;
+	background: url(../img/enn-logo.png) no-repeat;
+    vertical-align: middle; /* to vertical center other ele */
+}
+.head-name-box {
+    height: 100%; color: #fff; margin-left: 40px;
+
+}
+.header-right { 
+    padding-right: 65px;
+}
+.user-info-list {
+    padding-top: 8px;
+}
+.user-info-list a {
+    color: #95d2e6;
+    position: relative;
+    padding: 0 26px 0 5px;
+}
+.user-info-list li:last-child a {
+    padding-right: 0;
+}
+.usr-info-icon {
+   width: 16px;
+   height: 16px;
+   display: inline-block;
+   margin-right: 5px;
+   vertical-align: middle;
+}
+.usr-name-icon {
+   background: url('../img/user_ico.png') no-repeat;
+}
+.usr-password-icon {
+   background: url('../img/pass_ico.png') no-repeat;
+   margin-right: -2px;
+}
+.usr-exit-icon {
+   background: url('../img/exit_ico.png') no-repeat;
+}
+.head-nav {
+    position: absolute; bottom: 0; right: 65px;
+}
+.head-nav li {
+    color: #fff;
+    margin-left: 10px;
+    background-color: #19a7e1;
+    padding: 3px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.head-nav li.active {
+    background-color: #063060;
+}
+/*
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family:"Microsoft Yahei";
+	text-decoration: none;
+	border-collapse:collapse;
+}
+html,body { height: 100%;}
+img{
+	border: none;
 }
 .data_concentrator{
 	width: 1280px;
