@@ -34,11 +34,11 @@
             </div>
             <div class="head-nav clearfix">
                 <ul class="list-float">
-                	<li class="active" data-count='9'><a>状态信息</a></li>
-                	<li data-count='9'><a>端口配置</a></li>
-                	<li data-count='8'><a>下端仪表配置</a></li>
-                	<li data-sidebar="no"><a>数据集中配置</a></li>
-                	<li data-count='5'><a>系统配置</a></li>
+                	<li class="active" data-count='9' data-cat='0'><a>状态信息</a></li>
+                	<li data-count='9' data-cat='1'><a>端口配置</a></li>
+                	<li data-count='8' data-cat='2'><a>下端仪表配置</a></li>
+                	<li data-sidebar="no" data-cat='3'><a>数据集中配置</a></li>
+                	<li data-count='5' data-cat='4'><a>系统配置</a></li>
                 </ul>            
             </div>  
        </div>
@@ -46,19 +46,46 @@
     <div class="content clearfix">
         <div class="content-left left">
             <ul>
-            	<li class="active">网络</li>
-            	<li>串口1</li>
-            	<li>串口2</li>
-            	<li>串口3</li>
-            	<li>串口4</li>
-            	<li>串口5</li>
-            	<li>串口6</li>
-            	<li>串口7</li>
-            	<li>串口8</li>
+            	<li class="active" data-type="net" data-num="-1">网络</li>
+            	<li data-num= '0'>串口1</li>
+            	<li data-num= '1'>串口2</li>
+            	<li data-num= '2'>串口3</li>
+            	<li data-num= '3'>串口4</li>
+            	<li data-num= '4'>串口5</li>
+            	<li data-num= '5'>串口6</li>
+            	<li data-num= '6'>串口7</li>
+            	<li data-num= '7'>串口8</li>
             </ul>
         </div>
         <div class="content-right left">
-             
+            <p class="content-nav">
+              当前位置：<span id="contNavStat" class="cont-nav-status">状态信息</span>&nbsp;&gt;&nbsp;<span id="contSubNavStat" class="cont-sub-nav-status">网络</span>
+            </p>            
+            <table id="contentTable">
+            	<thead>
+            		<tr>
+            			<th>项目</th>
+            			<th>端口</th>
+            			<th>状态</th>
+            		</tr>
+            	</thead>
+                <tbody>
+                    <tr>
+                    	<td>webport</td>
+                    	<td>未知</td>
+                    	<td><span class="status-ico success-ico"></span></td>
+                    </tr>
+                    <tr>
+                    	<td>modbusport</td>
+                    	<td>未知</td>
+                    	<td><span class="status-ico success-ico"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cont-box">
+                <span class="cont-btn save-btn">保存</span>
+                <span class="cont-btn cal-btn">取消</span>
+            </div>
         </div> 
     </div>
 </div>
@@ -66,10 +93,6 @@
  <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>');</script>
  <script src="js/common.js"></script>
  <script src="js/index.js"></script>
- <script>
-    (function(){
-    }())
- </script>
 </body>
 </html>
 <!--

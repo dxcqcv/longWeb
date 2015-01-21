@@ -215,11 +215,12 @@ a { text-decoration: none; }
 }
 /* content */
 .content { 
-    height: -moz-calc(100%-72px);
-    height: -webkit-calc(100%-72px);
-    height: calc(100%-72px);
     background: #E6F3FB;
+}
+.content-left {
     width: 10%;
+    height: 100%;
+    border-right: 1px solid #AECBDA;
 }
 .content-left > ul > li {
    font-size: 14px;
@@ -231,6 +232,7 @@ a { text-decoration: none; }
    background: -ms-linear-gradient(top,#e4f5fd 0%, #d0ecf9 100%);
    border-bottom: 1px solid #AECBDA; 
    cursor: pointer;
+   font-size: 12px;
 }
 .content-left > ul > li.active {
     background: #159ae0;
@@ -241,6 +243,7 @@ a { text-decoration: none; }
     width: 83%; 
     position: relative;
     border-bottom: none; 
+    font-size: 14px;
 }
 .content-left > ul > li.active:after {
     content: '>';
@@ -248,6 +251,59 @@ a { text-decoration: none; }
     position: absolute;
     top: 3px; right: 5px;
 }
+.content-right {
+    width: 90%;
+    background: #fff;
+    height: 100%;
+    padding: 25px 60px 0 60px;
+}
+.content-nav {
+    position: relative;
+    padding: 0 0 15px 16px;
+    color: #1E87BC;
+}
+.content-nav:after {
+    content: '';
+    background: url('../img/cur_ico.png') no-repeat;
+    width: 15px; height: 16px;
+    display: inline-block;
+    position: absolute; top: 0; left: 0;
+}
+.cont-sub-nav-status {
+    font-weight: 700;
+}
+.status-ico {
+    width: 14px; height: 14px; cursor: pointer; display: inline-block;
+}
+.success-ico { background: url('../img/sucess_icon.png') no-repeat; vertical-align: middle;}
+.content-right table {
+    width: 100%; text-align: center; color: #266F94;
+    table-layout: fixed; white-space: nowrap; text-align: ellipsis;
+}
+.content-right table > thead > tr > th, 
+.content-right table > tbody > tr > td {
+   padding: 5px 0; width: 33%; background: #E1E4E6;
+   border: 1px solid #C3CDD2;
+}
+.content-right table > tbody > tr > td {
+    background: #fff;
+}
+.cont-box {
+    padding: 20px 60px 0 0;
+    text-align: right;
+}
+.cont-btn {
+    cursor: pointer;
+    background: #134573;
+    background: -moz-linear-gradient(top, #275986 0%, #063161 100%);
+    background: -webkit-linear-gradient(top, #275986 0%, #063161 100%);
+    background: -ms-linear-gradient(top, #275986 0%, #063161 100%);
+    color: #fff;
+    padding: 5px 25px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
 /*
 *{
 	margin: 0;
