@@ -5,10 +5,6 @@
       , conHei = winHei - 72
     $('.content').height(conHei)
 
-    $(document).on('click','.content-left li',sidebarSel)
-    $(document).on('click','.head-nav li',navSel)
-    
-    to();
 }());
 // for test
 function tt(op) { return op.tt ? op.tt : 11}
@@ -31,6 +27,7 @@ function SideNav() {
 }
 SideNav.prototye = Navigation.prototype;
 
+    to();
 function to() {
 
 var n = new Navigation();  console.log(n); n.mod(); }
@@ -121,6 +118,16 @@ function sidebarSel() {
 }
 
 // for ajax 
+function Request(opt) {
+    this.url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi';
+    this.type = opt.type ? opt.type : 'GET'; 
+    this.data = opt.data ? opt.data : {};
+    this.timeout = opt.timeout ? opt.timeout : 3000;
+    this.currentRequest = null;
+    this.done= opt.done;
+    this.fail = opt.fail;
+    this.arg = opt.arg;
+}
 Request.prototype.start = function() {
         var self = this
         self.currentRequest = $.ajax({
@@ -142,13 +149,5 @@ Request.prototype.start = function() {
             self.fail()
         })
     }
-function Request(opt) {
-    this.url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi';
-    this.type = opt.type ? opt.type : 'GET'; 
-    this.data = opt.data ? opt.data : {};
-    this.timeout = opt.timeout ? opt.timeout : 3000;
-    this.currentRequest = null;
-    this.done= opt.done;
-    this.fail = opt.fail;
-    this.arg = opt.arg;
-}
+    $(document).on('click','.content-left li',sidebarSel)
+    $(document).on('click','.head-nav li',navSel)
