@@ -3,12 +3,14 @@
 // for content height
     var winHei = $(window).height()
       , conHei = winHei - 72
-      , opt = {}
     $('.content').height(conHei)
 
     $(document).on('click','.content-left li',sidebarSel)
-    $(document).on('click','.head-left li',navSel)
-    //alert(tt({tt:22}))
+    $(document).on('click','.head-nav li',navSel)
+    
+}());
+// for test
+function tt(op) { return op.tt ? op.tt : 11}
 
 // for ajax 
 function Request(opt) {
@@ -17,49 +19,67 @@ function Request(opt) {
     this.data = opt.data ? opt.data : {};
     this.timeout = opt.timeout ? opt.timeout : 3000;
     this.currentRequest = null;
-
-    this.start = function() {
+    this.done= opt.done;
+    this.fail = opt.fail;
+    this.arg = opt.arg;
+}
+Request.prototype.start = function() {
         var self = this
         self.currentRequest = $.ajax({
-            url: this.url
-          , type: this.type    
-          , timeout: this.timeout
-          , data: this.data
+            url: self.url
+          , type: self.type    
+          , timeout: self.timeout
+          , data: self.data
           , beforeSend: function() {
                 //$('#loading').removeClass('hide')
-                if(this.currentRequest != null) this.currentRequest.abort()
+                if(self.currentRequest != null) self.currentRequest.abort()
           }
         })
-        .done(function(){
+        .done(function(data){
           $('#loading').addClass('hide')
-          opt.done()
+          self.done(data)
         })
         .fail(function(xhr, textStatus){
             if(textStatus == "timeout") alert('timeout')
-            alert(opt.fail(opt.arg))
+            self.fail()
         })
     }
-}
-Request.prototype.init = function() {
-    this.start();
-}
-
-    var r = new Request({url:111,fail:tt,arg:{tt:22}});
-
-    r.init();
-}());
-// for test
-function tt(op) { return op.tt ? op.tt : 11}
 
 function navSel() {
     var $this = $(this)
+      , cat = $this.data('cat') // nav category 
+      , ztxxTab = $('#ztxxTable')
+      , dkpzTab = $('#dkpzTable')
+    $this.addClass('active').siblings('li').removeClass('active')
+    switch(cat) {
+        case 0:
+            ztxxTab.removeClass('hide')            
+            dkpzTab.addClass('hide')            
+            break
+        case 1:
+            ztxxTab.addClass('hide')            
+            dkpzTab.removeClass('hide')            
+            break
+    }
+}
+function cmd11Done(data) {
+    var escape = JSON.parse(data);
+    $('#webportV').data(escape.webport);
+    $('#modbusportV').html(escape.modbusport);
+}
+function failFn() {
+    console.log('error')
 }
 function sidebarSel() {
     var $this = $(this)
       , type = $this.data('type') || 0
       , num = $this.data('num') 
       , subTitle = $('#contSubNavStat')
-      , th = $('#contentTable').find('th')
+      , table = $('#ztxxTable') 
+      , tbody = table.find('tbody#ztxxNetTbody')
+      , th = table.find('th')
+      , cmd11 = new Request({data:{cmd:11},done:cmd11Done,fail:failFn});
+
     $this.addClass('active').siblings('li').removeClass('active')
 
     if(type === 0) {
@@ -72,30 +92,40 @@ function sidebarSel() {
     switch(num) {
         case -1:
             subTitle.text('网络')
+            tbody.removeClass('hide').siblings('tbody').addClass('hide')
+            cmd11.start();
             break
         case 0:
             subTitle.text('串口1')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 1:
             subTitle.text('串口2')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 2:
             subTitle.text('串口3')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 3:
             subTitle.text('串口4')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 4:
             subTitle.text('串口5')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 5:
             subTitle.text('串口6')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 6:
             subTitle.text('串口7')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
         case 7:
             subTitle.text('串口8')
+            tbody.addClass('hide').siblings('tbody').removeClass('hide')
             break
     }
 }
