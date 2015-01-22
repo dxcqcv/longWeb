@@ -6,7 +6,28 @@
 
     $(document).on('click','.content-left li',sidebarSel)
     $(document).on('click','.head-left li',navSel)
+    alert(tt({}))
 }());
+function tt(op) {
+    return typeof(op.tt) !== 'undefined'||11 
+}
+function request(url, opt) {
+    function fn(){}
+   var jqxhr = null
+     , async = opt.async !== false
+     , type = opt.type || 'POST'
+     , data = opt.data || null
+     , done = opt.done || fn
+     , fail = opt.fail || fn
+   if(xhr && xhr.readyState != 4) {
+        xhr.abort()
+   }
+   jqxhr = $.ajax({
+        beforeSend: function(){
+            
+        }
+   })
+}
 function navSel() {
     var $this = $(this)
 }
