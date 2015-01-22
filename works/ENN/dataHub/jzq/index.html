@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"></meta>
     <title>数据集中器</title>
-    <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="css/global.css" media="all"></link>
 </head>
 <body>
     <div id="loading" class="load-box hide">
@@ -61,7 +61,7 @@
             <p class="content-nav">
               当前位置：<span id="contNavStat" class="cont-nav-status">状态信息</span>&nbsp;&gt;&nbsp;<span id="contSubNavStat" class="cont-sub-nav-status">网络</span>
             </p>            
-            <table id="contentTable">
+            <table id="ztxxTable">
             	<thead>
             		<tr>
             			<th>项目</th>
@@ -69,17 +69,49 @@
             			<th>状态</th>
             		</tr>
             	</thead>
-                <tbody>
+                <tbody id="ztxxNetTbody">
                     <tr>
                     	<td>webport</td>
-                    	<td>未知</td>
+                    	<td id="webportV">未知</td>
                     	<td><span class="status-ico success-ico"></span></td>
                     </tr>
                     <tr>
                     	<td>modbusport</td>
-                    	<td>未知</td>
+                    	<td id="modbusportV">未知</td>
                     	<td><span class="status-ico success-ico"></span></td>
                     </tr>
+                </tbody>
+                <tbody id="ztxxPortTbody" class="hide"></tbody>
+            </table>
+            <table id="dkpzTable" class="hide">
+                <thead>
+                	<tr>
+                		<th>项目</th>
+                		<th>端口</th>
+                	</tr>
+                </thead>
+                <tbody>
+                	<tr>
+                		<td>DHCP</td>
+                		<td>
+                            <select id="dhcpsele" class="dhcpsele">
+                            <option value="1" selected="selected">打开</option>
+                            <option value="2">关闭</option>
+                            </select>
+                        </td>
+                	</tr>
+                	<tr>
+                		<td>IP地址</td>
+                		<td contenteditable="false">192.168.11.10</td>
+                	</tr>
+                	<tr>
+                		<td>子网</td>
+                		<td contenteditable="false">192.168.11.1</td>
+                	</tr>
+                	<tr>
+                		<td>网关</td>
+                		<td contenteditable="false">192.168.11.1</td>
+                	</tr>
                 </tbody>
             </table>
             <div class="cont-box">
