@@ -21,6 +21,9 @@ function sidebarSel() {
     if(type === 0) {
        th.eq(0).text('设备号') 
        th.eq(1).text('设备') 
+       n navSel() {
+        34     var $this = $(this)
+
        th.eq(2).text('状态') 
     } else {
        th.eq(0).text('项目') 
