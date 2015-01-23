@@ -5,8 +5,8 @@
 
     $('.content').height(conHei)
 
-    $(document).on('click','.content-left li',s)
-    $(document).on('click','.head-nav li',m)
+    $(document).on('click','.content-left li',leftNav)
+    $(document).on('click','.head-nav li',topNav)
     //$(document).on('click','.head-nav li',mainNav)
 
 
@@ -42,24 +42,22 @@ Request.prototype.start = function() {
             self.fail()
         })
     }
+// nav class
 function Navigation() {
-    this.pos = [[0,1,2,3,4,5,6,7,8],[0,1,2,3,4,5,6,7,8],[0,1,2,3,4,5,6,7],[0],[0,1,2,3,4]];
+    this.pos = [];
     this.cat = 0;
     this.side = 0;
 }
 Navigation.prototype = {
     mainNav: function(that) {
-        var self = this
+        var self = this // just for closure
           , curPos = 0 
-        self.navShow(that) 
+        self.navShow(that) // highlight nav that is this li
 
-        self.cat= that.data('cat')
-
-curPos = self.pos[self.cat][self.side]
+        self.cat= that.data('cat') // current cat must set before curPos
+        curPos = self.pos[self.cat] || 0 // prev side of nav 
 
         self.navShow($('#sideNav').find('li').eq(curPos))
-       
-        console.log(self.cat)
   }
   , navShow: function(nav) {
         nav.addClass('active').siblings('li').removeClass('active')
@@ -67,22 +65,23 @@ curPos = self.pos[self.cat][self.side]
   , sideNav: function(that) {
         var self = this
         self.side = that.data('side')
-        self.navShow(that) 
-
-        console.log(self.side)
+        self.navShow(that) // that is this li 
+        self.pos[self.cat] = self.side 
   }
 }
 
 // instance nav
-    var m = new Navigation() 
-function m() {
+var nav = new Navigation() 
+
+function topNav() {
    var $this = $(this)
-   m.mainNav($this);
+   nav.mainNav($this);
 }
-function s() {
+function leftNav() {
     var $this = $(this)
-    m.sideNav($this); 
+    nav.sideNav($this); 
 }
+
 function mainNav() {
     var $this = $(this)
       , cat = $this.data('cat') // nav category 
