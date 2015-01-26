@@ -114,7 +114,7 @@
                 	</tr>
                 </tbody>
             </table>
-            <div id="dkpzOptions" class="dkpz-opt-box hide">
+            <div id="dkpzOptions" class="contWrap dkpz-opt-box hide">
                 <div>
                 	<label for="btl">波特率：</label>
                 	<select id="" name="btl">
@@ -156,6 +156,63 @@
                 		<option value="3">Mark</option>
                 		<option value="4">Space</option>
                 	</select>
+                </div>
+            </div>
+            <div id="xdybpzCont">
+                <div class="xdybpz-cont-left">
+                    <p>通讯协议：<span>Modbus</span></p>
+                    <p>
+                    	<label for="">设备名称：</label>
+                    	<input type="">
+                    </p>
+                    <p>
+                    	<label for="">设备地址：</label>
+                    	<input type="">
+                    </p>
+                    <span>增加</span>
+                    <div class="xdybpz-list">
+                        <div class="xdybpz-list-title">设备列表</div>
+                        <ul>
+                        	<li>
+                        		<span>设备1</span>
+                        		<span>删除</span>
+                        	</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="xdybpz-cont-right">
+                    <div class="xdybpz-cont-top">
+                        <span>设备名称：</span>
+                        <span>设备列表</span>
+                        <span>设备地址：</span>
+                        <span>444</span>
+                        <span>修改设备</span>
+                    </div>
+                    <table>
+                        <thead>
+                        	<tr>
+                        		<th>功能码
+                                   <select id="" name="">
+                                    <option value="">全部</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                    <option value="">16</option>
+                                   </select>
+                                </th>
+                        		<th>寄存器地址</th>
+                        		<th>寄存器长度</th>
+                        		<th>字节序</th>
+                        		<th>寄存器名</th>
+                        		<th>寄存器描述</th>
+                        		<th>K系数</th>
+                        		<th>D系数</th>
+                        		<th>备注</th>
+                        	</tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
             <div id="btnBox" class="cont-btn-box">

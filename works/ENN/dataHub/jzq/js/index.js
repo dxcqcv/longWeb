@@ -47,6 +47,7 @@ function Navigation() {
     this.pos = []; // which sidebar under which category
     this.cat = 0; // category
     this.side = 0; // sidebar
+    this.sideLi = $('#sideNav').find('li');
 }
 Navigation.prototype = {
     mainNav: function(that) {
@@ -56,23 +57,24 @@ Navigation.prototype = {
         self.navShow(that) // highlight nav that is this li
         self.cat= that.index() // current cat must set before curPos
         curPos = self.pos[self.cat] || 0 // prev side of nav 
-        self.navShow($('#sideNav').find('li').eq(curPos), curPos)
+        self.navShow(this.sideLi.eq(curPos), curPos)
         this.changeNav()
   }
   , navShow: function(nav, side) {
         nav.addClass('active').siblings('li').removeClass('active')
-        this.changeSide(side)
+        this.changeSide(side) // 
   }
   , sideNav: function(that) {
         var self = this
         self.side = that.index()
-        self.navShow(that) // that is this li 
+        self.navShow(that) // that is this li and no save 
         self.pos[self.cat] = self.side 
   }
   , changeNav: function() {
         switch(this.cat) {
-            case 0: $('#ztxxTable').removeClass('hide').siblings('.contWrap').addClass('hide'); break   
-            case 1: $('#dkpzTable').removeClass('hide').siblings('.contWrap').addClass('hide'); break   
+            case 0: this.sideLi.first().removeClass('hide');this.showCont('#ztxxTable'); break // show default cont   
+            case 1: this.sideLi.first().removeClass('hide');this.showCont('#dkpzTable'); break   
+            case 2: this.sideLi.first().addClass('hide');$('#btnBox').addClass('hide');break  
         }
   }
   , changeSide: function(side) {
@@ -91,11 +93,14 @@ Navigation.prototype = {
       }
       if(realSide !== 0) {
           subTitle.text('串口'+realSide)
+          if(this.cat == 1) { this.showCont('#dkpzOptions') }
       } else {
           subTitle.text('网络')
+          if(this.cat == 1) { this.showCont('#dkpzTable') }
       } 
   }
-  , shiftCont: function() {
+  , showCont: function(ele) {
+       $(ele).removeClass('hide').siblings('.contWrap').addClass('hide') 
   } 
 }
 
