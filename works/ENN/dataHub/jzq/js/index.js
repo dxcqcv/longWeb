@@ -44,30 +44,59 @@ Request.prototype.start = function() {
     }
 // nav class
 function Navigation() {
-    this.pos = [];
-    this.cat = 0;
-    this.side = 0;
+    this.pos = []; // which sidebar under which category
+    this.cat = 0; // category
+    this.side = 0; // sidebar
 }
 Navigation.prototype = {
     mainNav: function(that) {
         var self = this // just for closure
           , curPos = 0 
+
         self.navShow(that) // highlight nav that is this li
-
-        self.cat= that.data('cat') // current cat must set before curPos
+        self.cat= that.index() // current cat must set before curPos
         curPos = self.pos[self.cat] || 0 // prev side of nav 
-
-        self.navShow($('#sideNav').find('li').eq(curPos))
+        self.navShow($('#sideNav').find('li').eq(curPos), curPos)
+        this.changeNav()
   }
-  , navShow: function(nav) {
+  , navShow: function(nav, side) {
         nav.addClass('active').siblings('li').removeClass('active')
+        this.changeSide(side)
   }
   , sideNav: function(that) {
         var self = this
-        self.side = that.data('side')
+        self.side = that.index()
         self.navShow(that) // that is this li 
         self.pos[self.cat] = self.side 
   }
+  , changeNav: function() {
+        switch(this.cat) {
+            case 0: $('#ztxxTable').removeClass('hide').siblings('.contWrap').addClass('hide'); break   
+            case 1: $('#dkpzTable').removeClass('hide').siblings('.contWrap').addClass('hide'); break   
+        }
+  }
+  , changeSide: function(side) {
+      var subTitle = $('#contSubNavStat')
+        , table = $('#ztxxTable') 
+        , tbody = table.find('tbody#ztxxNetTbody')
+        , th = table.find('th')
+        , realSide = typeof(side) == 'undefined' ? this.side : side // set side num 
+       
+      if(this.cat === 0 && this.side !== 0) { // 状态信息 
+         th.eq(0).text('设备号') 
+         th.eq(1).text('设备') 
+      } else {
+         th.eq(0).text('项目') 
+         th.eq(1).text('端口') 
+      }
+      if(realSide !== 0) {
+          subTitle.text('串口'+realSide)
+      } else {
+          subTitle.text('网络')
+      } 
+  }
+  , shiftCont: function() {
+  } 
 }
 
 // instance nav

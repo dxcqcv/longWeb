@@ -288,7 +288,7 @@ a { text-decoration: none; }
 .content-right table > tbody > tr > td {
     background: #fff;
 }
-.cont-box {
+.cont-btn-box {
     padding: 20px 60px 0 0;
     text-align: right;
 }
@@ -304,6 +304,20 @@ a { text-decoration: none; }
     margin-left: 10px;
 }
 
+/* 端口配置  */
+.dkpz-opt-box {
+   text-align: center; 
+}
+.dkpz-opt-box > div {
+    margin-bottom: 20px;
+}
+.dkpz-opt-box > div > label {
+    color: #266F94;
+}
+.dkpz-opt-box > div > select {
+    width: 200px;
+    border: 1px solid #BFBFBF;
+}
 /*
 *{
 	margin: 0;
