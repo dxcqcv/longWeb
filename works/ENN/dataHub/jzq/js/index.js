@@ -48,6 +48,7 @@ function Navigation() {
     this.cat = 0; // category
     this.side = 0; // sidebar
     this.sideLi = $('#sideNav').find('li');
+    this.subTitle = $('#contSubNavStat');
 }
 Navigation.prototype = {
     mainNav: function(that) {
@@ -70,16 +71,25 @@ Navigation.prototype = {
         self.navShow(that) // that is this li and no save 
         self.pos[self.cat] = self.side 
   }
+  , showNetSave: function() {
+      this.sideLi.first().removeClass('hide')
+      $('#btnBox').removeClass('hide')
+  }
   , changeNav: function() {
         switch(this.cat) {
-            case 0: this.sideLi.first().removeClass('hide');this.showCont('#ztxxTable'); break // show default cont   
-            case 1: this.sideLi.first().removeClass('hide');this.showCont('#dkpzTable'); break   
-            case 2: this.sideLi.first().addClass('hide');$('#btnBox').addClass('hide');break  
+            case 0: this.showNetSave();this.showCont('#ztxxTable'); break // show default cont   
+            case 1: this.showNetSave();this.showCont('#dkpzTable'); break   
+            case 2: 
+                this.sideLi.first().addClass('hide') // hide net 
+                $('#btnBox').addClass('hide') // hide save and cannel btn
+                this.sideLi.eq(1).addClass('active') // active second
+                this.subTitle.text('串口1')
+                this.showCont('#xdybpzCont')
+                break  
         }
   }
   , changeSide: function(side) {
-      var subTitle = $('#contSubNavStat')
-        , table = $('#ztxxTable') 
+      var table = $('#ztxxTable') 
         , tbody = table.find('tbody#ztxxNetTbody')
         , th = table.find('th')
         , realSide = typeof(side) == 'undefined' ? this.side : side // set side num 
@@ -92,10 +102,10 @@ Navigation.prototype = {
          th.eq(1).text('端口') 
       }
       if(realSide !== 0) {
-          subTitle.text('串口'+realSide)
+          this.subTitle.text('串口'+realSide)
           if(this.cat == 1) { this.showCont('#dkpzOptions') }
       } else {
-          subTitle.text('网络')
+          this.subTitle.text('网络')
           if(this.cat == 1) { this.showCont('#dkpzTable') }
       } 
   }
