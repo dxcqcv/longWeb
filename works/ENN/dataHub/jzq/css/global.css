@@ -354,6 +354,23 @@ a { text-decoration: none; }
 .sjjzpz-cont-box > table > tbody > tr > td > span { cursor: pointer;  } 
 .sjjzpz-cont-box > table > tbody > tr > td > span:last-child { margin-left: 10px;  } 
 .w100 {width: 100%;}
+/* 系统配置  */
+.br-box {
+    border: 1px solid #ccc;
+    width: 650px; height: 200px; margin: 0 auto;
+    position: relative;
+    margin-bottom: 50px;
+}
+.cent-box {text-align: center;}
+.cent-box:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.br-title { position: absolute; top: -10px; left: 10px; background: #fff; }
+.cent-inner { display: inline-block; vertical-align: middle;}
+.pw-box > div > p > label { display: inline-block; width: 72px; }
 /*弹出层样式*/
 .mask-bg {
 	z-index: 3;

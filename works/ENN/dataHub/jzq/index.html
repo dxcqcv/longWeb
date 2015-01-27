@@ -285,19 +285,44 @@
                 </table>
             </div>
             <!--系统配置-->
-            <div id="xtpzCont">
+            <div id="xtpzCont" class="contWrap">
                 <div class="backup-restore-box">
-                    <div class="br-box">
+                    <div class="cent-box br-box">
                         <p class="br-title">备份</p>
-                        <label for="backup">备份文件保存路径：</label>
-                        <input type="file" id="backup">
+                        <div class="cent-inner">
+                            <label for="backup">备份文件保存路径：</label>
+                            <input type="file" id="backup">
+                        </div>
                     </div>
-                    <div class="br-box">
+                    <div class="cent-box br-box">
                         <p class="br-title">恢复</p>
-                        <p>恢复出厂设置</p>
-                        <p>从备份中恢复</p>
-                        <label for="restore"></label>
-                        <input type="file" id="restore">
+                        <div class="cent-inner">
+                            <p>恢复出厂设置</p>
+                            <p>从备份中恢复</p>
+                            <label for="restore"></label>
+                            <input type="file" id="restore">
+                        </div>
+                    </div>
+                </div>
+                <div class="cent-box">
+                	<div class="cent-inner">
+                        <span class="cont-btn">重启</span>
+                    </div>
+                </div>
+                <div class="cent-box pw-box">
+                	<div class="cent-inner">
+                        <p>
+                        	<label for="oldPW">原有密码：</label>
+                        	<input type="" id="oldPW">
+                        </p>
+                        <p>
+                        	<label for="newPW">新密码：</label>
+                        	<input type="" id="newPW">
+                        </p>
+                        <p>
+                        	<label for="againPW">确认新密码：</label>
+                        	<input type="" id="againPW">
+                        </p>
                     </div>
                 </div>
             </div>
