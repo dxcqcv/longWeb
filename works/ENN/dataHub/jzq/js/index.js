@@ -47,6 +47,8 @@ function Navigation() {
     this.pos = []; // which sidebar under which category
     this.cat = 0; // category
     this.side = 0; // sidebar
+    this.sideBar = $('#contLeft'); 
+    this.sideCont = $('#contRight');
     this.sideLi = $('#sideNav').find('li');
     this.subTitle = $('#contSubNavStat');
 }
@@ -76,6 +78,10 @@ Navigation.prototype = {
       $('#btnBox').removeClass('hide')
   }
   , changeNav: function() {
+        if(this.cat !== 3) {
+            this.sideBar.removeClass('hide')
+            this.sideCont.removeClass('w100')
+        }
         switch(this.cat) {
             case 0: this.showNetSave();this.showCont('#ztxxTable'); break // show default cont   
             case 1: this.showNetSave();this.showCont('#dkpzTable'); break   
@@ -86,6 +92,11 @@ Navigation.prototype = {
                 this.subTitle.text('串口1')
                 this.showCont('#xdybpzCont')
                 break  
+            case 3:
+                this.sideBar.addClass('hide')         
+                this.sideCont.addClass('w100')
+                this.showCont('#sjjzpzCont')
+                break;
         }
   }
   , changeSide: function(side) {

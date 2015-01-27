@@ -44,7 +44,7 @@
        </div>
     </div>
     <div class="content clearfix">
-        <div class="content-left left">
+        <div id="contLeft" class="content-left left">
             <ul id="sideNav">
             	<li class="active">网络</li>
             	<li >串口1</li>
@@ -57,7 +57,7 @@
             	<li >串口8</li>
             </ul>
         </div>
-        <div class="content-right left">
+        <div id="contRight" class="content-right left">
             <p class="content-nav">
               当前位置：<span id="contNavStat" class="cont-nav-status">状态信息</span>&nbsp;&gt;&nbsp;<span id="contSubNavStat" class="cont-sub-nav-status">网络</span>
             </p>            
@@ -172,12 +172,12 @@
                     <p>
                         <span class="cont-btn">增加</span>
                     </p>
-                    <div class="xdybpz-list">
+                    <div class="xdybpz-list clearfix">
                         <div class="xdybpz-list-title">设备列表</div>
                         <ul>
-                        	<li>
-                        		<span>设备1</span>
-                        		<span>删除</span>
+                        	<li class="clearfix">
+                        		<span class="left">设备1</span>
+                        		<span class="right">删除</span>
                         	</li>
                         </ul>
                     </div>
@@ -224,17 +224,132 @@
                             	<td>6</td>
                             	<td>7</td>
                             	<td>8</td>
-                            	<td>9</td>
+                            	<td><span>编辑</span><span>删除</span></td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="xdybpz-right-btn-box">
+                        <span class="cont-btn">数据新增项</span>
+                        <span class="cont-btn">保存配置</span>
+                    </div>
                 </div>
             </div>
             <div id="btnBox" class="cont-btn-box">
                 <span class="cont-btn save-btn">保存</span>
                 <span class="cont-btn cal-btn">取消</span>
             </div>
+            <!--数据集中配置-->
+            <div id="sjjzpzCont" class="sjjzpz-cont-box contWrap hide">
+                <div class="sjjzpz-top">
+                    功能码： 
+                    <select id="" name="">
+                    	<option value="">1</option>
+                    	<option value="">2</option>
+                    	<option value="">3</option>
+                    	<option value="">4</option>
+                    	<option value="">5</option>
+                    	<option value="">16</option>
+                    </select>
+                </div>
+                <table>
+                	<thead>
+                		<tr>
+                			<th>数据项地址</th>
+                			<th>寄存器个数</th>
+                			<th>通道</th>
+                			<th>设备号</th>
+                			<th>寄存器地址</th>
+                			<th>字节序</th>
+                			<th>寄存器名称</th>
+                			<th>寄存器描述</th>
+                			<th>K系数</th>
+                			<th>D系数</th>
+                			<th>备注</th>
+                		</tr>
+                	</thead>
+                    <tbody>
+                    	<tr>
+                    		<td>1</td>
+                    		<td>2</td>
+                    		<td>3</td>
+                    		<td>4</td>
+                    		<td>5</td>
+                    		<td>6</td>
+                    		<td>7</td>
+                    		<td>8</td>
+                    		<td>9</td>
+                    		<td>0</td>
+                    		<td><span>上移</span><span>下移</span></td>
+                    	</tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--系统配置-->
+            <div id="xtpzCont">
+                <div class="backup-restore-box">
+                    <div class="br-box">
+                        <p class="br-title">备份</p>
+                        <label for="backup">备份文件保存路径：</label>
+                        <input type="file" id="backup">
+                    </div>
+                    <div class="br-box">
+                        <p class="br-title">恢复</p>
+                        <p>恢复出厂设置</p>
+                        <p>从备份中恢复</p>
+                        <label for="restore"></label>
+                        <input type="file" id="restore">
+                    </div>
+                </div>
+            </div>
         </div> 
+    </div>
+</div>
+<!--pop up-->
+<div class="mask-bg hide">
+	<div class="pop-up">
+        <div>
+        	<label for="gnm">功能码：</label>
+            <select id="" name="" class="gnm-sel">
+            	<option value="">1</option>
+            	<option value="">2</option>
+            	<option value="">3</option>
+            	<option value="">4</option>
+            	<option value="">5</option>
+            	<option value="">16</option>
+            </select>
+        </div>
+        <div>
+        	<label for="jcqdz">寄存器地址：</label>
+        	<input type="" id="jcqdz">
+        </div>
+        <div>
+        	<label for="jcqcd">寄存器长度：</label>
+        	<input type="" id="jcqcd">
+        </div>
+        <div>
+        	<label for="zjx">字节序：</label>
+        	<input type="" id="zjx">
+        </div>
+        <div>
+        	<label for="jcqm">寄存器名：</label>
+        	<input type="" id="jcqm">
+        </div>
+        <div>
+        	<label for="jcqms">寄存器描述：</label>
+        	<input type="" id="jcqms">
+        </div>
+        <div>
+        	<label for="kxs">K系数：</label>
+        	<input type="" id="kxs">
+        </div>
+        <div>
+        	<label for="dxs">D系数：</label>
+        	<input type="" id="dxs">
+        </div>
+        <div>
+            <span class="cont-btn">保存</span>
+            <span class="cont-btn">取消</span>
+        </div>    
     </div>
 </div>
 <!--

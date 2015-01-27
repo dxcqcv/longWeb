@@ -287,6 +287,8 @@ a { text-decoration: none; }
 }
 .content-right table > tbody > tr > td {
     background: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .cont-btn-box {
     padding: 20px 60px 0 0;
@@ -319,13 +321,15 @@ a { text-decoration: none; }
     border: 1px solid #BFBFBF;
 }
 /*下端仪表配置*/
-.xdybpz-cont-box { border: 1px solid #ccc; overflow: hidden;  }
+.xdybpz-cont-box { border: 1px solid #ccc; overflow: hidden; min-height: 300px;  }
 .xdybpz-cont-left { text-align: center; width: 200px;   margin-bottom: -1920px; padding-bottom: 1920px;}
 .xdybpz-cont-left input { width: 120px;  }
 .xdybpz-cont-left > p { margin-top: 10px;  }
 .xdybpz-cont-right { width: 830px; padding: 10px; border-left: 1px solid #ccc; margin-bottom: -1920px; padding-bottom: 1920px;   }
 .xdybpz-cont-right > table { width: auto;  }
-div.xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
+.xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
+.xdybpz-cont-right > table > tbody > tr > td > span { cursor: pointer;  }
+.xdybpz-cont-right > table > tbody > tr > td > span:last-child { margin-left: 10px;  }
 .xdybpz-list-title {
     background: #dcf2fb;
     background: -moz-linear-gradient(top, #e4f5fd 0%, #d0ecf9 100%);
@@ -335,104 +339,55 @@ div.xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
     border: 1px #aecbda;
     border-style: solid none;
     margin-top: 20px;
+    padding: 5px 0;
 }
 .xdybpz-cont-top {
     margin-bottom: 10px;
 }
-
-
+.xdybpz-list > ul > li { text-align:left; padding: 5px 20px; border-bottom: 1px solid #ccc;}
+.xdybpz-list > ul > li > span { cursor: pointer; }
+.xdybpz-list > ul > li > span:first-child { float: left; }
+.xdybpz-list > ul > li > span:last-child { float: right; }
+.xdybpz-right-btn-box { text-align: right; margin-top: 10px; }
+/* 数据集中配置  */
+.sjjzpz-top { margin-bottom: 10px; }
+.sjjzpz-cont-box > table > tbody > tr > td > span { cursor: pointer;  } 
+.sjjzpz-cont-box > table > tbody > tr > td > span:last-child { margin-left: 10px;  } 
+.w100 {width: 100%;}
 /*弹出层样式*/
-
-.maskbg {
-	
-	display:none;
+.mask-bg {
 	z-index: 3;
 	position: fixed;
 	left: 0px;
 	top: 0px;
 	width: 100%;
 	height: 100%;
-	filter: Alpha(Opacity=30);
-	/* IE */
-	-moz-opacity: 0.5;
-	/* Moz + FF */
-	opacity: 0.5;
-	background-color: #000;
+	background-color: rgba(0,0,0,.5);
 }
-
 .pop-up{
-	display:none;
-	position: fixed;
+	position: absolute;
 	left:50%;
 	top:50%;
+    z-index: 4;
 	margin:-160px 0 0 -240px;
 	width: 500px;
 	height: 320px;
 	background: #fff;
-	z-index:10;
-  
     border-radius: 4px;
-}
-.pop-up .pop-upinfo{
-	display: table;
-	width: 240px;
-	height:auto;
-	margin: 3px auto;
-}
-.pop-up div p{
-	float:left;
-	color: #266f94;
-	font-size:12px;
-	margin:10px 0 0 10px;
-	
-}
-.pop-up div p input{
-	font-size:12px;
-	width:120px;
-	margin: 0 0 0 5px;
-}
-.pop-up div p label{
-	float: left;
-	width:80px;
-	
-}
-.pop-up div p label span{
-	float: right;
-}
-.pop-up .saveform{
-    cursor: pointer;
-    float: left;
-    height: 23px;
-    width: 76px;
-     margin:20px 0 0 170px; 
-   	background: url("../img/save_ico.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
-}
-.pop-up .saveform span{
-    color: #fff;
-    float: left;
-    margin-top: 4px;
     text-align: center;
-    width: 76px;
-    font-size: 13px;
-    font-family: "宋体";
+    padding-top: 20px;
 }
-.pop-up .cancelform{
-    cursor: pointer;
-    float: left;
-    height: 23px;
-    width: 76px;
-    margin:20px 0 0 25px; 
-   	background: url("../img/save_ico.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+.pop-up > div {
+    margin-bottom: 10px;
 }
-.pop-up .cancelform span{
-    color: #fff;
-    float: left;
-    margin-top: 4px;
-    text-align: center;
-    width: 76px;
-    font-size: 13px;
-    font-family: "宋体";
+.pop-up > div > label {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    color: #39c;
 }
+.gnm-sel { width: 211px; }
+
 /*登录样式*/
 
 .login{
