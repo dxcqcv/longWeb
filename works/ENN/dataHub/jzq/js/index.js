@@ -21,7 +21,7 @@ function Request() {
 Request.prototype = {
     start: function(opt) {
         var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
-          , type = opt.type ? opt.type : 'GET' 
+          , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 3000
           , currentRequest = null
@@ -29,35 +29,35 @@ Request.prototype = {
           , fail = opt.fail ? opt.fail : failFn
           , arg = opt.arg
           , test = opt.test
+          , self = this
 
-console.log(url)
+//console.log(url)
             currentRequest = $.ajax({
                 url: url
               , type: type    
               , timeout: timeout
               , data: data
+              , dataType: 'json' // set json file type
               , beforeSend: function() {
-                    //this.loading.removeClass('hide')
+                    self.loading.removeClass('hide')
                     if(currentRequest != null) currentRequest.abort()
               }
             })
             .done(function(data){
-              this.loading.addClass('hide')
-              console.log(999)
-              console.log(data.status)
-              done(data)
+              var d = data
+              self.loading.addClass('hide')
+              console.log(opt.data.cmd)
+              done(d)
             })
             .fail(function(xhr, textStatus){
-              console.log(888)
-              console.log(xhr.statusText)
                 if(textStatus == "timeout") alert('timeout')
                 fail()
             })
         }
 }
 var demand = new Request(); // instance for request
-demand.start({url:'../test.json',type:'POST'})
-demand.start({test:22})
+demand.start({url:'test.json',type:'GET',data:{cmd:11}})
+demand.start({url:'test.json',data:{cmd:13}})
 
 function testSuc(data) {console.log(data.channel)}
 // nav class
