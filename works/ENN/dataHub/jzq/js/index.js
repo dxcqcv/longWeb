@@ -7,7 +7,6 @@ $(window).resize(function() {
 
     $(document).on('click','.content-left li',leftNav)
     $(document).on('click','.head-nav li',topNav)
-    //$(document).on('click','.head-nav li',mainNav)
 
 function layout() {
     var winHei = $(window).height()
@@ -16,37 +15,51 @@ function layout() {
     $('.content').height(conHei)
 }
 // for ajax 
-function Request(opt) {
-    this.url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi';
-    this.type = opt.type ? opt.type : 'GET'; 
-    this.data = opt.data ? opt.data : {};
-    this.timeout = opt.timeout ? opt.timeout : 3000;
-    this.currentRequest = null;
-    this.done= opt.done;
-    this.fail = opt.fail;
-    this.arg = opt.arg;
+function Request() {
+    this.loading = $('#loading');
 }
-Request.prototype.start = function() {
-        var self = this
-        self.currentRequest = $.ajax({
-            url: self.url
-          , type: self.type    
-          , timeout: self.timeout
-          , data: self.data
-          , beforeSend: function() {
-                //$('#loading').removeClass('hide')
-                if(self.currentRequest != null) self.currentRequest.abort()
-          }
-        })
-        .done(function(data){
-          $('#loading').addClass('hide')
-          self.done(data)
-        })
-        .fail(function(xhr, textStatus){
-            if(textStatus == "timeout") alert('timeout')
-            self.fail()
-        })
-    }
+Request.prototype = {
+    start: function(opt) {
+        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+          , type = opt.type ? opt.type : 'GET' 
+          , data = opt.data ? opt.data : {}
+          , timeout = opt.timeout ? opt.timeout : 3000
+          , currentRequest = null
+          , done= opt.done ? opt.done : testSuc
+          , fail = opt.fail ? opt.fail : failFn
+          , arg = opt.arg
+          , test = opt.test
+
+console.log(url)
+            currentRequest = $.ajax({
+                url: url
+              , type: type    
+              , timeout: timeout
+              , data: data
+              , beforeSend: function() {
+                    //this.loading.removeClass('hide')
+                    if(currentRequest != null) currentRequest.abort()
+              }
+            })
+            .done(function(data){
+              this.loading.addClass('hide')
+              console.log(999)
+              console.log(data.status)
+              done(data)
+            })
+            .fail(function(xhr, textStatus){
+              console.log(888)
+              console.log(xhr.statusText)
+                if(textStatus == "timeout") alert('timeout')
+                fail()
+            })
+        }
+}
+var demand = new Request(); // instance for request
+demand.start({url:'../test.json',type:'POST'})
+demand.start({test:22})
+
+function testSuc(data) {console.log(data.channel)}
 // nav class
 function Navigation() {
     this.pos = []; // which sidebar under which category
@@ -87,12 +100,6 @@ Navigation.prototype = {
       this.sideLi.first().removeClass('hide')
       $('#btnBox').removeClass('hide')
   }
-  , changeLiName: function() { // no good
-        this.sideWrap.empty()
-        for(var i = 0, l = arguments.length; i < l; i++) {
-            this.sideWrap.append('<li>'+arguments[i]+'</li>')
-        }
-  }
   , changeNav: function() {
         if(this.cat !== 3) {
             this.contLeft.removeClass('hide')
@@ -125,7 +132,6 @@ Navigation.prototype = {
                 this.title.text('系统配置')
                 this.showCont('#xtpzCont', '.contWrap')
                 this.funBtn.addClass('hide') // hide save and cannel btn
-                //this.changeLiName('备份和恢复','重启集中器','修改密码','系统日志','版本信息') // change li name
                 this.showCont('#xtpzSideNav','.sidebarNav' ) // 显示系统配置侧导航 show xtpz side nav
         }
   }
