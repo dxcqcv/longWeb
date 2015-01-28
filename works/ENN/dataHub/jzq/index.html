@@ -45,7 +45,7 @@
     </div>
     <div class="content clearfix">
         <div id="contLeft" class="content-left left">
-            <ul id="sideNav">
+            <ul id="sideNav" class="sidebarNav">
             	<li class="active">网络</li>
             	<li >串口1</li>
             	<li >串口2</li>
@@ -55,6 +55,13 @@
             	<li >串口6</li>
             	<li >串口7</li>
             	<li >串口8</li>
+            </ul>
+            <ul id="xtpzSideNav" class="hide sidebarNav">
+            	<li class="active">备份和恢复</li>
+            	<li>重启集中器</li>
+            	<li>修改密码</li>
+            	<li>系统日志</li>
+            	<li>版本信息</li>
             </ul>
         </div>
         <div id="contRight" class="content-right left">
@@ -285,8 +292,9 @@
                 </table>
             </div>
             <!--系统配置-->
-            <div id="xtpzCont" class="contWrap">
-                <div class="backup-restore-box">
+            <div id="xtpzCont" class="contWrap hide">
+                <div id="tempBox" class="xtpzBox"></div>
+                <div id="backupRestore" class="backup-restore-box xtpzBox">
                     <div class="cent-box br-box">
                         <p class="br-title">备份</p>
                         <div class="cent-inner">
@@ -304,12 +312,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="cent-box">
+                <div id="reboot" class="cent-box hide xtpzBox">
                 	<div class="cent-inner">
                         <span class="cont-btn">重启</span>
                     </div>
                 </div>
-                <div class="cent-box pw-box">
+                <div id="changePW" class="cent-box pw-box xtpzBox">
                 	<div class="cent-inner">
                         <p>
                         	<label for="oldPW">原有密码：</label>

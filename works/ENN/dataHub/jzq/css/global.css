@@ -370,7 +370,8 @@ a { text-decoration: none; }
 }
 .br-title { position: absolute; top: -10px; left: 10px; background: #fff; }
 .cent-inner { display: inline-block; vertical-align: middle;}
-.pw-box > div > p > label { display: inline-block; width: 72px; }
+.pw-box > div > p > label { display: inline-block; width: 72px; text-align: right;}
+.pw-box > div > p { margin-bottom: 10px;}
 /*弹出层样式*/
 .mask-bg {
 	z-index: 3;

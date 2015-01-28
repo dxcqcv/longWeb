@@ -1,15 +1,20 @@
 (function(){
 // for content height
-    var winHei = $(window).height()
-      , conHei = winHei - 72
-
-    $('.content').height(conHei)
+    layout();
+$(window).resize(function() {
+    layout();
+})
 
     $(document).on('click','.content-left li',leftNav)
     $(document).on('click','.head-nav li',topNav)
     //$(document).on('click','.head-nav li',mainNav)
 
+function layout() {
+    var winHei = $(window).height()
+      , conHei = winHei - 72
 
+    $('.content').height(conHei)
+}
 // for ajax 
 function Request(opt) {
     this.url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi';
@@ -45,12 +50,16 @@ Request.prototype.start = function() {
 // nav class
 function Navigation() {
     this.pos = []; // which sidebar under which category
-    this.cat = 0; // category
-    this.side = 0; // sidebar
-    this.sideBar = $('#contLeft'); 
-    this.sideCont = $('#contRight');
-    this.sideLi = $('#sideNav').find('li');
+    this.cat = 0; // category index
+    this.side = 0; // sidebar index
+    this.contLeft = $('#contLeft'); 
+    this.contRight = $('#contRight');
+    this.sideWrap = $('#sideNav');
+    this.sideLi = this.sideWrap.find('li');
+    this.title = $('#contNavStat');
     this.subTitle = $('#contSubNavStat');
+    this.funBtn = $('#btnBox');
+    this.actFlag = true;
 }
 Navigation.prototype = {
     mainNav: function(that) {
@@ -59,44 +68,65 @@ Navigation.prototype = {
 
         self.navShow(that) // highlight nav that is this li
         self.cat= that.index() // current cat must set before curPos
-        curPos = self.pos[self.cat] || 0 // prev side of nav 
-        self.navShow(this.sideLi.eq(curPos), curPos)
+        curPos = self.pos[self.cat] || 0 // prev side pos of nav 
+        self.navShow(this.sideLi.eq(curPos))
         this.changeNav()
+        this.changeSide(curPos) // save side bar pos  
   }
-  , navShow: function(nav, side) {
+  , navShow: function(nav) {
         nav.addClass('active').siblings('li').removeClass('active')
-        this.changeSide(side) // 
   }
   , sideNav: function(that) {
         var self = this
         self.side = that.index()
         self.navShow(that) // that is this li and no save 
         self.pos[self.cat] = self.side 
+        this.changeSide() // no arguments  
   }
   , showNetSave: function() {
       this.sideLi.first().removeClass('hide')
       $('#btnBox').removeClass('hide')
   }
+  , changeLiName: function() { // no good
+        this.sideWrap.empty()
+        for(var i = 0, l = arguments.length; i < l; i++) {
+            this.sideWrap.append('<li>'+arguments[i]+'</li>')
+        }
+  }
   , changeNav: function() {
         if(this.cat !== 3) {
-            this.sideBar.removeClass('hide')
-            this.sideCont.removeClass('w100')
+            this.contLeft.removeClass('hide')
+            this.contRight.removeClass('w100')
         }
+        if(this.cat !== 4) this.showCont('#sideNav','.sidebarNav') // restore nomal side bar
+
         switch(this.cat) {
-            case 0: this.showNetSave();this.showCont('#ztxxTable'); break // show default cont   
-            case 1: this.showNetSave();this.showCont('#dkpzTable'); break   
+            case 0: this.title.text('状态信息'); this.showNetSave();this.showCont('#ztxxTable', '.contWrap'); break // show default cont   
+            case 1: this.title.text('端口配置'); this.showNetSave(); break   
             case 2: 
-                this.sideLi.first().addClass('hide') // hide net 
-                $('#btnBox').addClass('hide') // hide save and cannel btn
-                this.sideLi.eq(1).addClass('active') // active second
+                this.title.text('下端仪表配置')
                 this.subTitle.text('串口1')
-                this.showCont('#xdybpzCont')
+                this.sideLi.first().addClass('hide') // hide net 
+                this.funBtn.addClass('hide') // hide save and cannel btn
+
+                this.actFlag && // if active is false then add active 
+                this.sideLi.eq(1).addClass('active') // active second
+
+                this.showCont('#xdybpzCont', '.contWrap')
                 break  
             case 3:
-                this.sideBar.addClass('hide')         
-                this.sideCont.addClass('w100')
-                this.showCont('#sjjzpzCont')
+                this.title.text('数据集中配置')
+                this.subTitle.text('集中器')
+                this.contLeft.addClass('hide')         
+                this.contRight.addClass('w100')
+                this.showCont('#sjjzpzCont', '.contWrap')
                 break;
+            case 4:
+                this.title.text('系统配置')
+                this.showCont('#xtpzCont', '.contWrap')
+                this.funBtn.addClass('hide') // hide save and cannel btn
+                //this.changeLiName('备份和恢复','重启集中器','修改密码','系统日志','版本信息') // change li name
+                this.showCont('#xtpzSideNav','.sidebarNav' ) // 显示系统配置侧导航 show xtpz side nav
         }
   }
   , changeSide: function(side) {
@@ -112,16 +142,43 @@ Navigation.prototype = {
          th.eq(0).text('项目') 
          th.eq(1).text('端口') 
       }
-      if(realSide !== 0) {
+      //console.log(this.cat)
+      if(realSide !== 0) { // other pages
+          if(this.cat == 2) {this.actFlag = false }// assigment false after active side bar
           this.subTitle.text('串口'+realSide)
-          if(this.cat == 1) { this.showCont('#dkpzOptions') }
+          if(this.cat == 1) { this.showCont('#dkpzOptions', '.contWrap') }
+          if(this.cat == 4) {
+            switch(realSide) {
+                case 1:
+                    this.showCont('#reboot','.xtpzBox')                    
+                    this.subTitle.text('重启集中器')
+                    break
+                case 2:
+                    this.showCont('#changePW','.xtpzBox')
+                    this.subTitle.text('修改密码')
+                    break
+                case 3:
+                    this.subTitle.text('系统日志')
+                    this.showCont('#tempBox', '.xtpzBox') // temp box
+                    break
+                case 4:
+                    this.subTitle.text('版本信息')
+                    this.showCont('#tempBox', '.xtpzBox') // temp box
+                    break
+            }
+          }
       } else {
+          this.showCont('#backupRestore','.xtpzBox')
+          if(this.cat == 4) // 系统配置子导航
+          this.subTitle.text('备份和恢复')
+          //console.log(this.cat)
+          if(this.cat == 0 || this.cat == 1) // set sub title is net when category 1 and 2
           this.subTitle.text('网络')
-          if(this.cat == 1) { this.showCont('#dkpzTable') }
+          if(this.cat == 1) { this.showCont('#dkpzTable', '.contWrap') }
       } 
   }
-  , showCont: function(ele) {
-       $(ele).removeClass('hide').siblings('.contWrap').addClass('hide') 
+  , showCont: function(ele, others) {
+       $(ele).removeClass('hide').siblings(others).addClass('hide') 
   } 
 }
 
@@ -137,6 +194,16 @@ function leftNav() {
     nav.sideNav($this); 
 }
 
+function cmd11Done(data) {
+    var escape = JSON.parse(data);
+    $('#webportV').data(escape.webport);
+    $('#modbusportV').html(escape.modbusport);
+}
+function failFn() {
+    console.log('error')
+}
+}());
+/*
 function mainNav() {
     var $this = $(this)
       , cat = $this.data('cat') // nav category 
@@ -155,14 +222,6 @@ function mainNav() {
     }
     category = cat
     console.log('category is ' +category)
-}
-function cmd11Done(data) {
-    var escape = JSON.parse(data);
-    $('#webportV').data(escape.webport);
-    $('#modbusportV').html(escape.modbusport);
-}
-function failFn() {
-    console.log('error')
 }
 function sideNav() {
     var $this = $(this)
@@ -232,5 +291,5 @@ function sideNav() {
 }
 
 
-}());
 
+*/
