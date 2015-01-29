@@ -38,6 +38,7 @@ Request.prototype = {
               , timeout: timeout
               , data: data
               , dataType: 'json' // set json file type
+              , mimeType: 'application/json'
               , beforeSend: function() {
                     self.loading.removeClass('hide')
                     if(currentRequest != null) currentRequest.abort()
