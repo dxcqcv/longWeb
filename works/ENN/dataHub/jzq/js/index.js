@@ -25,20 +25,19 @@ Request.prototype = {
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 3000
           , currentRequest = null
-          , done= opt.done ? opt.done : testSuc
+          , done= opt.done ? opt.done : doneFn 
           , fail = opt.fail ? opt.fail : failFn
           , arg = opt.arg
           , test = opt.test
           , self = this
 
-//console.log(url)
             currentRequest = $.ajax({
                 url: url
               , type: type    
               , timeout: timeout
               , data: data
               , dataType: 'json' // set json file type
-              , mimeType: 'application/json'
+              , mimeType: 'application/json' // for not well form
               , beforeSend: function() {
                     self.loading.removeClass('hide')
                     if(currentRequest != null) currentRequest.abort()
@@ -47,20 +46,21 @@ Request.prototype = {
             .done(function(data){
               var d = data
               self.loading.addClass('hide')
-              console.log(opt.data.cmd)
+              console.log('cmd is '+opt.data.cmd)
               done(d)
             })
-            .fail(function(xhr, textStatus){
+            .fail(function(jqXHR, textStatus){
                 if(textStatus == "timeout") alert('timeout')
-                fail()
+                fail(jqXHR,textStatus)
             })
         }
 }
 var demand = new Request(); // instance for request
+/*
 demand.start({url:'test.json',type:'GET',data:{cmd:11}})
 demand.start({url:'test.json',data:{cmd:13}})
+*/
 
-function testSuc(data) {console.log(data.channel)}
 // nav class
 function Navigation() {
     this.pos = []; // which sidebar under which category
@@ -106,10 +106,10 @@ Navigation.prototype = {
             this.contLeft.removeClass('hide')
             this.contRight.removeClass('w100')
         }
-        if(this.cat !== 4) this.showCont('#sideNav','.sidebarNav') // restore nomal side bar
+        if(this.cat !== 4) showCont('#sideNav','.sidebarNav') // restore nomal side bar
 
         switch(this.cat) {
-            case 0: this.title.text('状态信息'); this.showNetSave();this.showCont('#ztxxTable', '.contWrap'); break // show default cont   
+            case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxTable', '.contWrap'); break // show default cont   
             case 1: this.title.text('端口配置'); this.showNetSave(); break   
             case 2: 
                 this.title.text('下端仪表配置')
@@ -120,7 +120,7 @@ Navigation.prototype = {
                 this.actFlag && // if active is false then add active 
                 this.sideLi.eq(1).addClass('active') // active second
 
-                this.showCont('#xdybpzCont', '.contWrap')
+                showCont('#xdybpzCont', '.contWrap')
                 break  
             case 3:
                 this.title.text('数据集中配置')
@@ -131,9 +131,9 @@ Navigation.prototype = {
                 break;
             case 4:
                 this.title.text('系统配置')
-                this.showCont('#xtpzCont', '.contWrap')
+                showCont('#xtpzCont', '.contWrap')
                 this.funBtn.addClass('hide') // hide save and cannel btn
-                this.showCont('#xtpzSideNav','.sidebarNav' ) // 显示系统配置侧导航 show xtpz side nav
+                showCont('#xtpzSideNav','.sidebarNav' ) // 显示系统配置侧导航 show xtpz side nav
         }
   }
   , changeSide: function(side) {
@@ -153,44 +153,58 @@ Navigation.prototype = {
       if(realSide !== 0) { // other pages
           if(this.cat == 2) {this.actFlag = false }// assigment false after active side bar
           this.subTitle.text('串口'+realSide)
-          if(this.cat == 1) { this.showCont('#dkpzOptions', '.contWrap') }
+          if(this.cat == 1) { showCont('#dkpzOptions', '.contWrap') }
           if(this.cat == 4) {
             switch(realSide) {
                 case 1:
-                    this.showCont('#reboot','.xtpzBox')                    
+                    showCont('#reboot','.xtpzBox')                    
                     this.subTitle.text('重启集中器')
                     break
                 case 2:
-                    this.showCont('#changePW','.xtpzBox')
+                    showCont('#changePW','.xtpzBox')
                     this.subTitle.text('修改密码')
                     break
                 case 3:
                     this.subTitle.text('系统日志')
-                    this.showCont('#tempBox', '.xtpzBox') // temp box
+                    showCont('#tempBox', '.xtpzBox') // temp box
                     break
                 case 4:
                     this.subTitle.text('版本信息')
-                    this.showCont('#tempBox', '.xtpzBox') // temp box
+                    showCont('#tempBox', '.xtpzBox') // temp box
                     break
             }
           }
+        if(this.cat == 0) {
+            demand.start({url:'test.json',data:{cmd:13,channel:realSide},done:cmd13Done})      
+        }
       } else {
-          this.showCont('#backupRestore','.xtpzBox')
+          showCont('#backupRestore','.xtpzBox')
           if(this.cat == 4) // 系统配置子导航
           this.subTitle.text('备份和恢复')
           //console.log(this.cat)
           if(this.cat == 0 || this.cat == 1) // set sub title is net when category 1 and 2
           this.subTitle.text('网络')
-          if(this.cat == 1) { this.showCont('#dkpzTable', '.contWrap') }
+          if(this.cat == 1) { showCont('#dkpzTable', '.contWrap') }
+          switch(this.cat) {
+            case 0:
+                demand.start({url:'test.json',data:{cmd:11},done:cmd11Done})      
+                break
+            case 1:
+                demand.start({url:'test.json',data:{cmd:15},done:cmd15Done})
+                $('#saveBtn').data('type','hihi')
+                break
+          }
       } 
   }
-  , showCont: function(ele, others) {
-       $(ele).removeClass('hide').siblings(others).addClass('hide') 
-  } 
 }
-
+function showCont(ele, others) {
+       $(ele).removeClass('hide').siblings(others).addClass('hide') 
+}
 // instance nav
 var nav = new Navigation() 
+  , ipV = $('#ipV')
+  , maskV = $('#maskV')
+  , gatewayV = $('#gatewayV')
 
 function topNav() {
    var $this = $(this)
@@ -201,13 +215,35 @@ function leftNav() {
     nav.sideNav($this); 
 }
 
+/* ajax fn */
 function cmd11Done(data) {
-    var escape = JSON.parse(data);
-    $('#webportV').data(escape.webport);
-    $('#modbusportV').html(escape.modbusport);
+    showCont('#ztxxNetTbody', '.ztxxTbody')
+    $('#webportV').text(data.webport)
+    $('#modbusportV').text(data.modbusport)
 }
-function failFn() {
-    console.log('error')
+function cmd13Done(data) {
+    var str = ''
+    showCont('#ztxxPortTbody','.ztxxTbody')
+    for(var i = 0, l = data.slave.length; i < l; i++) {
+        str += '<tr>'               
+             + '<td>' + data.slave[i][0] + '</td>'
+             + '<td>' + data.slave[i][1] + '</td>'
+             + '<td>' + (data.slave[i][2] ? '故障' : '正常') + '</td>'
+    }
+    $('#ztxxPortTbody').empty().append(str)
+}
+function cmd15Done(data) {
+    var str = '' 
+    ipV.text(data.ip)
+    maskV.text(data.mask)
+    gatewayV.text(data.gateway)
+}
+/* global ajax fn */
+function failFn(jqXHR,textStatus) {
+    console.log('error is ' +jqXHR.statusText)
+}
+function doneFn() {
+    console.log('done')
 }
 }());
 /*

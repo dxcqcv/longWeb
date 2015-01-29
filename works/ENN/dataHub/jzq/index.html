@@ -76,7 +76,7 @@
             			<th>状态</th>
             		</tr>
             	</thead>
-                <tbody id="ztxxNetTbody">
+                <tbody id="ztxxNetTbody" class="ztxxTbody">
                     <tr>
                     	<td>webport</td>
                     	<td id="webportV">未知</td>
@@ -88,7 +88,7 @@
                     	<td><span class="status-ico success-ico"></span></td>
                     </tr>
                 </tbody>
-                <tbody id="ztxxPortTbody" class="hide"></tbody>
+                <tbody id="ztxxPortTbody" class="hide ztxxTbody"></tbody>
             </table>
             <table id="dkpzTable" class="contWrap hide">
                 <thead>
@@ -109,15 +109,15 @@
                 	</tr>
                 	<tr>
                 		<td>IP地址</td>
-                		<td contenteditable="false">192.168.11.10</td>
+                		<td id="ipV" contenteditable="false">192.168.11.10</td>
                 	</tr>
                 	<tr>
                 		<td>子网</td>
-                		<td contenteditable="false">192.168.11.1</td>
+                		<td id="maskV" contenteditable="false">192.168.11.1</td>
                 	</tr>
                 	<tr>
                 		<td>网关</td>
-                		<td contenteditable="false">192.168.11.1</td>
+                		<td id="getwayV" contenteditable="false">192.168.11.1</td>
                 	</tr>
                 </tbody>
             </table>
@@ -242,7 +242,7 @@
                 </div>
             </div>
             <div id="btnBox" class="cont-btn-box">
-                <span class="cont-btn save-btn">保存</span>
+                <span id="saveBtn" data-type="nt" class="cont-btn save-btn">保存</span>
                 <span class="cont-btn cal-btn">取消</span>
             </div>
             <!--数据集中配置-->
