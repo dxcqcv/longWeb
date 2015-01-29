@@ -55,9 +55,10 @@ Navigation.prototype = {
         self.navShow(that) // highlight nav that is this li
 
         self.cat= that.data('cat') // current cat must set before curPos
-        curPos = self.pos[self.cat] || 0 // prev side of nav 
+        curPos = self.pos[self.cat] || 0 // set prev side of nav 
 
         self.navShow($('#sideNav').find('li').eq(curPos))
+        this.changeGuide(curPos) // change guide text when change nav
   }
   , navShow: function(nav) {
         nav.addClass('active').siblings('li').removeClass('active')
@@ -66,7 +67,41 @@ Navigation.prototype = {
         var self = this
         self.side = that.data('side')
         self.navShow(that) // that is this li 
-        self.pos[self.cat] = self.side 
+        this.changeGuide(self.side) // change guide text
+        self.pos[self.cat] = self.side // record prev side of nav
+
+  }
+  , changeGuide: function(num) {
+        var subTitle = $('#contSubNavStat')
+        switch(num) {
+            case 0:
+                subTitle.text('网络')
+                break
+            case 1:
+                subTitle.text('串口1')
+                break
+            case 2:
+                subTitle.text('串口2')
+                break
+            case 3:
+                subTitle.text('串口3')
+                break
+            case 4:
+                subTitle.text('串口4')
+                break
+            case 5:
+                subTitle.text('串口5')
+                break
+            case 6:
+                subTitle.text('串口6')
+                break
+            case 7:
+                subTitle.text('串口7')
+                break
+            case 8:
+                subTitle.text('串口8')
+                break
+        }
   }
 }
 
