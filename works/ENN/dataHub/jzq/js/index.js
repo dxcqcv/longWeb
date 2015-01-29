@@ -1,6 +1,7 @@
 (function(){
 // for content height
     layout();
+
 $(window).resize(function() {
     layout();
 })
@@ -55,11 +56,8 @@ Request.prototype = {
             })
         }
 }
-var demand = new Request(); // instance for request
-/*
-demand.start({url:'test.json',type:'GET',data:{cmd:11}})
-demand.start({url:'test.json',data:{cmd:13}})
-*/
+var demand = new Request() // instance for request
+  , saveBtn = $('#saveBtn')
 
 // nav class
 function Navigation() {
@@ -153,7 +151,10 @@ Navigation.prototype = {
       if(realSide !== 0) { // other pages
           if(this.cat == 2) {this.actFlag = false }// assigment false after active side bar
           this.subTitle.text('串口'+realSide)
-          if(this.cat == 1) { showCont('#dkpzOptions', '.contWrap') }
+          if(this.cat == 1) { 
+            showCont('#dkpzOptions', '.contWrap')
+            saveBtn.attr('data-save','port') // change save attr
+          }
           if(this.cat == 4) {
             switch(realSide) {
                 case 1:
@@ -191,7 +192,7 @@ Navigation.prototype = {
                 break
             case 1:
                 demand.start({url:'test.json',data:{cmd:15},done:cmd15Done})
-                $('#saveBtn').data('type','hihi')
+                saveBtn.attr('data-save','net') // change save attr
                 break
           }
       } 
