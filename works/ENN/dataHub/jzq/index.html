@@ -103,7 +103,7 @@
                 		<td>
                             <select id="dhcpsele" class="dhcpsele">
                             <option value="1" selected="selected">打开</option>
-                            <option value="2">关闭</option>
+                            <option value="0">关闭</option>
                             </select>
                         </td>
                 	</tr>
@@ -124,7 +124,7 @@
             <div id="dkpzOptions" class="contWrap dkpz-opt-box hide">
                 <div>
                 	<label for="btl">波特率：</label>
-                	<select id="" name="btl">
+                	<select id="baudrate" name="btl">
                 		<option value="300">300</option>
                 		<option value="600">600</option>
                 		<option value="1200">1200</option>
@@ -140,7 +140,7 @@
                 </div>
                 <div>
                 	<label for="sjw">数据位：</label>
-                	<select id="" name="sjw">
+                	<select id="databit" name="sjw">
                 		<option value="5">5</option>
                 		<option value="6">6</option>
                 		<option value="7">7</option>
@@ -149,14 +149,14 @@
                 </div>
                 <div>
                 	<label for="tzw">停止位：</label>
-                	<select id="" name="tzw">
+                	<select id="stopbit" name="tzw">
                 		<option value="1">1</option>
                 		<option value="2">2</option>
                 	</select>
                 </div>
                 <div>
                 	<label for="xyw">校验位：</label>
-                	<select id="" name="xyw">
+                	<select id="paritybit" name="xyw">
                 		<option value="0">None</option>
                 		<option value="1">Odd</option>
                 		<option value="2">Even</option>
@@ -181,7 +181,7 @@
                     </p>
                     <div class="xdybpz-list clearfix">
                         <div class="xdybpz-list-title">设备列表</div>
-                        <ul>
+                        <ul id="xdybpzList">
                         	<li class="clearfix">
                         		<span class="left">设备1</span>
                         		<span class="right">删除</span>

@@ -8,6 +8,7 @@ $(window).resize(function() {
 
     $(document).on('click','.content-left li',leftNav)
     $(document).on('click','.head-nav li',topNav)
+    $(document).on('click', '#saveBtn', saveBtn )
 
 function layout() {
     var winHei = $(window).height()
@@ -21,7 +22,8 @@ function Request() {
 }
 Request.prototype = {
     start: function(opt) {
-        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        //var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 3000
@@ -125,7 +127,8 @@ Navigation.prototype = {
                 this.subTitle.text('集中器')
                 this.contLeft.addClass('hide')         
                 this.contRight.addClass('w100')
-                this.showCont('#sjjzpzCont', '.contWrap')
+                showCont('#sjjzpzCont', '.contWrap')
+                this.funBtn.addClass('hide') // hide save and cannel btn
                 break;
             case 4:
                 this.title.text('系统配置')
@@ -148,37 +151,45 @@ Navigation.prototype = {
          th.eq(1).text('端口') 
       }
       //console.log(this.cat)
-      if(realSide !== 0) { // other pages
-          if(this.cat == 2) {this.actFlag = false }// assigment false after active side bar
-          this.subTitle.text('串口'+realSide)
-          if(this.cat == 1) { 
-            showCont('#dkpzOptions', '.contWrap')
-            saveBtn.attr('data-save','port') // change save attr
+      if(realSide !== 0) { // when channel 1~8
+          this.subTitle.text('串口'+realSide) // set sub title
+          switch(this.cat) {
+            case 0:
+                demand.start({url:'test.json',data:{cmd:13,channel:realSide},done:cmd13Done})      
+                break
+            case 1:
+                showCont('#dkpzOptions', '.contWrap')
+                saveBtn.attr('data-save','port').attr('data-channel',realSide) // change save attr
+                demand.start({ data:{cmd:19,channel:realSide},done:cmd19Done })
+                break
+            case 2:
+                this.actFlag = false// assigment false after active side bar
+                break 
+            case 3:
+                demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
+            case 4:
+                switch(realSide) {
+                    case 1:
+                        showCont('#reboot','.xtpzBox')                    
+                        this.subTitle.text('重启集中器')
+                        break
+                    case 2:
+                        showCont('#changePW','.xtpzBox')
+                        this.subTitle.text('修改密码')
+                        break
+                    case 3:
+                        this.subTitle.text('系统日志')
+                        showCont('#tempBox', '.xtpzBox') // temp box
+                        break
+                    case 4:
+                        this.subTitle.text('版本信息')
+                        showCont('#tempBox', '.xtpzBox') // temp box
+                        break
+                }
+                break
+
           }
-          if(this.cat == 4) {
-            switch(realSide) {
-                case 1:
-                    showCont('#reboot','.xtpzBox')                    
-                    this.subTitle.text('重启集中器')
-                    break
-                case 2:
-                    showCont('#changePW','.xtpzBox')
-                    this.subTitle.text('修改密码')
-                    break
-                case 3:
-                    this.subTitle.text('系统日志')
-                    showCont('#tempBox', '.xtpzBox') // temp box
-                    break
-                case 4:
-                    this.subTitle.text('版本信息')
-                    showCont('#tempBox', '.xtpzBox') // temp box
-                    break
-            }
-          }
-        if(this.cat == 0) {
-            demand.start({url:'test.json',data:{cmd:13,channel:realSide},done:cmd13Done})      
-        }
-      } else {
+      } else { // first sider 
           showCont('#backupRestore','.xtpzBox')
           if(this.cat == 4) // 系统配置子导航
           this.subTitle.text('备份和恢复')
@@ -192,7 +203,7 @@ Navigation.prototype = {
                 break
             case 1:
                 demand.start({url:'test.json',data:{cmd:15},done:cmd15Done})
-                saveBtn.attr('data-save','net') // change save attr
+                saveBtn.attr('data-save','net').removeAttr('data-channel') // change save attr
                 break
           }
       } 
@@ -206,6 +217,11 @@ var nav = new Navigation()
   , ipV = $('#ipV')
   , maskV = $('#maskV')
   , gatewayV = $('#gatewayV')
+  , dhcpS = $('#dhcpsele')
+  , baudrate = $('#baudrate')
+  , databit = $('#databit')
+  , stopbit = $('#stopbit')
+  , paritybit = $('#paritybit')
 
 function topNav() {
    var $this = $(this)
@@ -235,9 +251,34 @@ function cmd13Done(data) {
 }
 function cmd15Done(data) {
     var str = '' 
+    dhcpS.val(data.dhcp)
     ipV.text(data.ip)
     maskV.text(data.mask)
     gatewayV.text(data.gateway)
+}
+function cmd17Done(data) {
+   if(data.status == 0) saveBtn.text('保存') 
+   else {
+    alert('保存失败')
+    saveBtn.text('保存')
+    }
+
+}
+function cmd19Done(data) {
+   baudrate.val(data.baudrate) 
+   databit.val(data.databit)
+   stopbit.val(data.stopbit)
+   paritybit.val(data.paritybit)
+}
+function cmd21Done(data) {
+   if(data.status == 0) saveBtn.text('保存') 
+   else {
+    alert('保存失败')
+    saveBtn.text('保存')
+    }
+}
+function cmd31Done(data) {
+    $('#xdybpzList').empty()    
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
@@ -246,94 +287,12 @@ function failFn(jqXHR,textStatus) {
 function doneFn() {
     console.log('done')
 }
+// for save btn
+function saveBtn() {
+    var $this = $(this)
+    $this.text('保存中')
+    if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({url:'test.json',data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({url:'test.json', data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
+    else demand.start({data:{cmd:21, channel:$this.data('channel'), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done})
+}
+
 }());
-/*
-function mainNav() {
-    var $this = $(this)
-      , cat = $this.data('cat') // nav category 
-      , ztxxTab = $('#ztxxTable')
-      , dkpzTab = $('#dkpzTable')
-    $this.addClass('active').siblings('li').removeClass('active')
-    switch(cat) {
-        case 0:
-            ztxxTab.removeClass('hide')            
-            dkpzTab.addClass('hide')            
-            break
-        case 1:
-            ztxxTab.addClass('hide')            
-            dkpzTab.removeClass('hide')            
-            break
-    }
-    category = cat
-    console.log('category is ' +category)
-}
-function sideNav() {
-    var $this = $(this)
-      , type = $this.data('type') || 0
-      , pos = position ? position : $this.data('pos') // save prev pos 
-      , subTitle = $('#contSubNavStat')
-      , table = $('#ztxxTable') 
-      , tbody = table.find('tbody#ztxxNetTbody')
-      , th = table.find('th')
-      , cmd11 = new Request({data:{cmd:11},done:cmd11Done,fail:failFn});// instance Request for cmd11
-
-    $this.addClass('active').siblings('li').removeClass('active')
-
-    if(category == null || category == 0)
-    {
-        if(type === 0) {
-           th.eq(0).text('设备号') 
-           th.eq(1).text('设备') 
-        } else {
-           th.eq(0).text('项目') 
-           th.eq(1).text('端口') 
-        }
-        switch(pos) {
-            case -1:
-                subTitle.text('网络')
-                tbody.removeClass('hide').siblings('tbody').addClass('hide')
-                cmd11.start();
-                break
-            case 0:
-                subTitle.text('串口1')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 1:
-                subTitle.text('串口2')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 2:
-                subTitle.text('串口3')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 3:
-                subTitle.text('串口4')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 4:
-                subTitle.text('串口5')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 5:
-                subTitle.text('串口6')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 6:
-                subTitle.text('串口7')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-            case 7:
-                subTitle.text('串口8')
-                tbody.addClass('hide').siblings('tbody').removeClass('hide')
-                break
-        }
-    } else if( category == 1) {
-
-    }
-    position = pos
-    console.log('position is ' +position)
-}
-
-
-
-*/
