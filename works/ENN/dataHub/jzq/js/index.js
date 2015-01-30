@@ -10,6 +10,7 @@ $(window).resize(function() {
     $(document).on('click','.head-nav li',topNav)
     $(document).on('click', '#saveBtn', saveBtn )
 
+
 function layout() {
     var winHei = $(window).height()
       , conHei = winHei - 72
@@ -88,6 +89,7 @@ Navigation.prototype = {
         this.changeSide(curPos) // save side bar pos  
   }
   , navShow: function(nav) {
+      console.log(nav)
         nav.addClass('active').siblings('li').removeClass('active')
   }
   , sideNav: function(that) {
@@ -164,9 +166,8 @@ Navigation.prototype = {
                 break
             case 2:
                 this.actFlag = false// assigment false after active side bar
-                break 
-            case 3:
                 demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
+                break
             case 4:
                 switch(realSide) {
                     case 1:
@@ -191,12 +192,10 @@ Navigation.prototype = {
           }
       } else { // first sider 
           showCont('#backupRestore','.xtpzBox')
-          if(this.cat == 4) // 系统配置子导航
-          this.subTitle.text('备份和恢复')
-          //console.log(this.cat)
-          if(this.cat == 0 || this.cat == 1) // set sub title is net when category 1 and 2
-          this.subTitle.text('网络')
-          if(this.cat == 1) { showCont('#dkpzTable', '.contWrap') }
+          // 系统配置子导航
+          if(this.cat == 4) this.subTitle.text('备份和恢复')
+          // set sub title is net when category 1 and 2
+          if(this.cat == 0 || this.cat == 1) this.subTitle.text('网络')
           switch(this.cat) {
             case 0:
                 demand.start({url:'test.json',data:{cmd:11},done:cmd11Done})      
@@ -204,6 +203,10 @@ Navigation.prototype = {
             case 1:
                 demand.start({url:'test.json',data:{cmd:15},done:cmd15Done})
                 saveBtn.attr('data-save','net').removeAttr('data-channel') // change save attr
+                showCont('#dkpzTable', '.contWrap')
+                break
+            case 2:
+                demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
                 break
           }
       } 
@@ -222,6 +225,8 @@ var nav = new Navigation()
   , databit = $('#databit')
   , stopbit = $('#stopbit')
   , paritybit = $('#paritybit')
+
+$(document).on('click', '#xdybpzList li', nav.navShow)
 
 function topNav() {
    var $this = $(this)
@@ -278,7 +283,14 @@ function cmd21Done(data) {
     }
 }
 function cmd31Done(data) {
-    $('#xdybpzList').empty()    
+    var str = ''
+    for(var i = 0, l = data.slave.length; i < l; i++) {
+        str += '<li class="clearfix ">'
+             + '<span class="left ellipsis">'+data.slave[i][0]+'-'+data.slave[i][1]+'</span>'
+             + '<span class="right">删除</span>'
+             + '</li>'
+    }
+    $('#xdybpzList').empty().append(str)    
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {

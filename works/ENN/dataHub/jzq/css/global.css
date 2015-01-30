@@ -141,6 +141,7 @@ a { text-decoration: none; }
 .h100 { height: 100%; }
 .fs20 { font-size: 20px; }
 .fs15 { font-size: 15px; }
+.ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 /* header */
 .header {
 	background: url(../img/head_bg.png);
@@ -344,11 +345,33 @@ a { text-decoration: none; }
 .xdybpz-cont-top {
     margin-bottom: 10px;
 }
-.xdybpz-list > ul > li { text-align:left; padding: 5px 20px; border-bottom: 1px solid #ccc;}
-.xdybpz-list > ul > li > span { cursor: pointer; }
-.xdybpz-list > ul > li > span:first-child { float: left; }
-.xdybpz-list > ul > li > span:last-child { float: right; }
+.xdybpz-list > ul > li { text-align:left; border-bottom: 1px solid #ccc;}
+.xdybpz-list > ul > li:hover { background: #39c; color: #fff;transition: all 1s;}
+.xdybpz-list > ul > li > span { cursor: pointer; padding: 5px 20px; }
+
+.xdybpz-list > ul > li.active > span:first-child { 
+    color: #39c;
+}
+.xdybpz-list > ul > li.active > span:last-child {
+    color: #fff;
+    background: #39c;
+}
+.xdybpz-list > ul > li.active > span:last-child:after { 
+    content: '';
+    position: absolute;
+    border-right: 14px solid #39c;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    top: 0px;
+    left: -13px;
+}
+.xdybpz-list > ul > li > span:first-child { 
+    float: left; padding-right:0; width: 110px;
+}
+.xdybpz-list > ul > li > span:last-child { position: relative; float: right; }
+.xdybpz-list > ul > li:hover > span:first-child { transition: all 1s; color: #fff; }
 .xdybpz-right-btn-box { text-align: right; margin-top: 10px; }
+
 /* 数据集中配置  */
 .sjjzpz-top { margin-bottom: 10px; }
 .sjjzpz-cont-box > table > tbody > tr > td > span { cursor: pointer;  } 
