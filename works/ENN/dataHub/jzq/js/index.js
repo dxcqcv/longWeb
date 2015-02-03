@@ -6,10 +6,10 @@ $(window).resize(function() {
     layout();
 })
 
-    $(document).on('click','.content-left li',leftNav)
-    $(document).on('click','.head-nav li',topNav)
-    $(document).on('click', '#saveBtn', saveBtn )
-
+    $(document).on('click','.content-left li',leftNav) // sider nav
+    $(document).on('click','.head-nav li',topNav) // top nav
+    $(document).on('click', '#saveBtn', saveBtn ) // 状态信息和端口配置的保存按钮 
+    $(document).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置的编辑
 
 function layout() {
     var winHei = $(window).height()
@@ -229,6 +229,8 @@ var nav = new Navigation()
   , paritybit = $('#paritybit')
   , slaveName = $('#slaveName')
   , slaveAddr = $('#slaveAddr')
+  , xdybpzChannel = xdybpzCont.attr('data-channel')
+  , oldTableRegaddr = ""
 
 $(document).on('click', '#xdybpzList li', xdybpzInnerList)
 
@@ -246,7 +248,7 @@ function xdybpzInnerList() {
     str = $this.find('.slave-addr-val').text().trim()
     slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
     nav.navShow($this) // highlight
-    demand.start({data:{cmd:35,channel:xdybpzCont.attr('data-channel'),slaveaddr: str},done:cmd35Done})     
+    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35Done})     
 }
 
 function gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
@@ -259,7 +261,7 @@ function gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
         + '<td>' + jcqms + '</td>'
         + '<td>' + kxs + '</td>'
         + '<td>' + dxs + '</td>'
-        + '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide">保存</span></td>'
+        + '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide ml10">保存</span></td>'
         + '</tr>';
     return str;
 } 
@@ -338,12 +340,12 @@ function cmd35Done(data) {
                         break;
                     case '3':
                         $.each(v, function(key, val){
-                            str += gnmtTr(3,val[0],val[1],val[2],escape(val[3]),val[4],val[5],val[6]);        
+                            str += gnmtTr(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
                         });
                         break;
                     case '4':
                         $.each(v, function(key, val){
-                            str += gnmtTr(4,val[0],val[1],val[2],encodeURIComponent(val[3]),val[4],val[5],val[6]);        
+                            str += gnmtTr(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
                         });
                         break;
                     case '5':
@@ -362,6 +364,14 @@ function cmd35Done(data) {
     }); 
     tbody.empty().append(str);
 }
+function cmd37SaveDone(data) {
+    if(data.status == 0) {
+        $this.parents('tr').find('td').attr('contenteditable','false').css('background-color','#fff');
+        
+    } else {
+        alert('保存失败')
+    }
+}
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
     console.log('error is ' +jqXHR.statusText)
@@ -375,6 +385,71 @@ function saveBtn() {
     $this.text('保存中')
     if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({url:'test.json',data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({url:'test.json', data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
     else demand.start({data:{cmd:21, channel:$this.data('channel'), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done})
+}
+// 下端仪表配置的编辑
+function xdybpzEdit() {
+        var $this = $(this)
+        oldTableRegaddr = $this.parent('td').siblings('td:eq(1)').text();
+
+        $this.siblings('.xdybpzSave').removeClass('hide').end().addClass('hide')
+        $this.parents('tr').find('td').slice(1,8).attr('contenteditable','true').css('background-color','pink');
+} 
+
+// 下端仪表配置的保存
+function xdybpzSave() {
+    var $this = $(this)
+      , td = $this.parents('tr').find('td')
+      , v0 = td.eq(0).text()
+      , v1 = td.eq(1).text()
+      , v2 = td.eq(2).text()
+      , v3 = td.eq(3).text()
+      , v4 = td.eq(4).text()
+      , v5 = td.eq(5).text()
+      , v6 = td.eq(6).text()
+      , v7 = td.eq(7).text()
+    if( !( voidCheck(v1) && voidCheck(v2) && voidCheck(v3) && voidCheck(v4) && voidCheck(v5) && voidCheck(v6) && voidCheck(v7)) ){
+        alert('每栏必填'); 
+    } else if(!checkRegADDRRanges(v1)) {
+        alert('寄存器地址必须0到255'); 
+	} else if(!(validateRealNum(v6) && numberCheck(v7))) {
+        alert('字节序、D系数必须为整型数字，K系数为实数'); 
+    } else if(!(v2 <= 4)) {
+        alert('寄存器长度必须小于等于4'); 
+    } else {
+    demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr,funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:cmd37SaveDone})
+    }
+}
+
+// REG 
+function checkRanges(text) {
+    var regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false;
+    }
+    return true;
+}
+
+function checkRegADDRRanges(text) {
+    var regex = /^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false;
+    }
+    return true;
+}
+
+function voidCheck(text) {
+    return (text.length == 0) ? false : true;
+}
+function numberCheck(text) {
+    var regex = /^[+|-]?\d*$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false; 
+    }
+    return true;
+}
+function validateRealNum(val) {
+    var patten = /^-?\d+\.?\d*$/;
+    return patten.test(val);
 }
 
 }());
