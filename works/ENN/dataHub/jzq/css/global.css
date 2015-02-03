@@ -143,6 +143,7 @@ a { text-decoration: none; }
 .fs15 { font-size: 15px; }
 .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .mr10 { margin-right: 10px;  }
+.ml10 { margin-left: 10px;  }
 /* header */
 .header {
 	background: url(../img/head_bg.png);
