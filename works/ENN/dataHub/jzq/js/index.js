@@ -61,6 +61,7 @@ Request.prototype = {
 }
 var demand = new Request() // instance for request
   , saveBtn = $('#saveBtn')
+  , xdybpzCont = $('#xdybpzCont') 
 
 // nav class
 function Navigation() {
@@ -89,7 +90,6 @@ Navigation.prototype = {
         this.changeSide(curPos) // save side bar pos  
   }
   , navShow: function(nav) {
-      console.log(nav)
         nav.addClass('active').siblings('li').removeClass('active')
   }
   , sideNav: function(that) {
@@ -167,6 +167,7 @@ Navigation.prototype = {
             case 2:
                 this.actFlag = false// assigment false after active side bar
                 demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
+                xdybpzCont.attr('data-channel',realSide) // set xdybpz channel
                 break
             case 4:
                 switch(realSide) {
@@ -207,6 +208,7 @@ Navigation.prototype = {
                 break
             case 2:
                 demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
+                xdybpzCont.attr('data-channel',1) // set xdybpz channel num
                 break
           }
       } 
@@ -225,8 +227,10 @@ var nav = new Navigation()
   , databit = $('#databit')
   , stopbit = $('#stopbit')
   , paritybit = $('#paritybit')
+  , slaveName = $('#slaveName')
+  , slaveAddr = $('#slaveAddr')
 
-$(document).on('click', '#xdybpzList li', nav.navShow)
+$(document).on('click', '#xdybpzList li', xdybpzInnerList)
 
 function topNav() {
    var $this = $(this)
@@ -235,6 +239,14 @@ function topNav() {
 function leftNav() {
     var $this = $(this)
     nav.sideNav($this); 
+}
+function xdybpzInnerList() {
+    var $this = $(this)
+      , str = ''
+    str = $this.find('.slave-addr-val').text().trim()
+    slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
+    nav.navShow($this) // highlight
+    demand.start({data:{cmd:35,channel:xdybpzCont.attr('data-channel'),slaveaddr: str},done:cmd35Done})     
 }
 
 /* ajax fn */
@@ -286,11 +298,17 @@ function cmd31Done(data) {
     var str = ''
     for(var i = 0, l = data.slave.length; i < l; i++) {
         str += '<li class="clearfix ">'
-             + '<span class="left ellipsis">'+data.slave[i][0]+'-'+data.slave[i][1]+'</span>'
+             + '<span class="left ellipsis">'+'<span class="slave-name-val">'+data.slave[i][0]+'</span>'+'-'+'<span class="slave-addr-val">'+data.slave[i][1]+'</span>'+'</span>'
              + '<span class="right">删除</span>'
              + '</li>'
     }
     $('#xdybpzList').empty().append(str)    
+}
+function cmd35Done(data) {
+   var tbody = $('.xdybpz-cont-right').find('table').children('tbody')
+     , str = ''
+   slaveAddr.text(data.slaveaddr) 
+   for
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
