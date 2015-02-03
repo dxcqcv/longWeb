@@ -142,6 +142,7 @@ a { text-decoration: none; }
 .fs20 { font-size: 20px; }
 .fs15 { font-size: 15px; }
 .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.mr10 { margin-right: 10px;  }
 /* header */
 .header {
 	background: url(../img/head_bg.png);
@@ -330,7 +331,6 @@ a { text-decoration: none; }
 .xdybpz-cont-right > table { width: auto;  }
 .xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
 .xdybpz-cont-right > table > tbody > tr > td > span { cursor: pointer;  }
-.xdybpz-cont-right > table > tbody > tr > td > span:last-child { margin-left: 10px;  }
 .xdybpz-list-title {
     background: #dcf2fb;
     background: -moz-linear-gradient(top, #e4f5fd 0%, #d0ecf9 100%);

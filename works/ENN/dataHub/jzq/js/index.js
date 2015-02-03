@@ -249,6 +249,20 @@ function xdybpzInnerList() {
     demand.start({data:{cmd:35,channel:xdybpzCont.attr('data-channel'),slaveaddr: str},done:cmd35Done})     
 }
 
+function gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
+    var str = '<tr>'
+        + '<td>' + gnm + '</td>'
+        + '<td>' + jcqdz + '</td>'
+        + '<td>' + jcqcd + '</td>'
+        + '<td>' + zjx + '</td>'
+        + '<td>' + jcqm + '</td>'
+        + '<td>' + jcqms + '</td>'
+        + '<td>' + kxs + '</td>'
+        + '<td>' + dxs + '</td>'
+        + '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide">保存</span></td>'
+        + '</tr>';
+    return str;
+} 
 /* ajax fn */
 function cmd11Done(data) {
     showCont('#ztxxNetTbody', '.ztxxTbody')
@@ -308,7 +322,45 @@ function cmd35Done(data) {
    var tbody = $('.xdybpz-cont-right').find('table').children('tbody')
      , str = ''
    slaveAddr.text(data.slaveaddr) 
-   for
+// loop form
+    $.each(data.funcode, function(index, value){
+          $.each(value, function(k,v){
+              switch(k) {
+                    case '1':
+                        $.each(v, function(key, val){
+                            str += gnmtTr(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                        });
+                        break;
+                    case '2':
+                        $.each(v, function(key, val){
+                        str += gnmtTr(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                    });
+                        break;
+                    case '3':
+                        $.each(v, function(key, val){
+                            str += gnmtTr(3,val[0],val[1],val[2],escape(val[3]),val[4],val[5],val[6]);        
+                        });
+                        break;
+                    case '4':
+                        $.each(v, function(key, val){
+                            str += gnmtTr(4,val[0],val[1],val[2],encodeURIComponent(val[3]),val[4],val[5],val[6]);        
+                        });
+                        break;
+                    case '5':
+                        $.each(v, function(key, val){
+                            str += gnmtTr(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                        });
+                        break;
+                    case '16':
+                        $.each(v, function(key, val){
+                            str += gnmtTr(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                        });
+                        break;
+              }
+
+          });
+    }); 
+    tbody.empty().append(str);
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
