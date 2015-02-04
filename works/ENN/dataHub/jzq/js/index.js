@@ -10,6 +10,12 @@ $(window).resize(function() {
     $(document).on('click','.head-nav li',topNav) // top nav
     $(document).on('click', '#saveBtn', saveBtn ) // 状态信息和端口配置的保存按钮 
     $(document).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置的编辑
+    $(document).on('click', '.xdybpzSave', xdybpzSave) // 下端仪表配置的保存
+    $(document).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
+    $(document).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
+    $(document).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
+    $(document).on('click', '#xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
+    $(document).on('click', '#xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
 
 function layout() {
     var winHei = $(window).height()
@@ -229,10 +235,13 @@ var nav = new Navigation()
   , paritybit = $('#paritybit')
   , slaveName = $('#slaveName')
   , slaveAddr = $('#slaveAddr')
-  , xdybpzChannel = xdybpzCont.attr('data-channel')
+  , xdybpzChannel = xdybpzCont.attr('data-channel') || 1 // 下端仪表配置的串口号
   , oldTableRegaddr = ""
+  , alreadyFlag = true // make sure already save
+  , xdybpzDefault = $('#xdybpzDefault')
+  , popupBox = $('#popupBox')
 
-$(document).on('click', '#xdybpzList li', xdybpzInnerList)
+$(document).on('click', '#xdybpzList li', xdybpzInnerList) // 下端仪表配置内部列表
 
 function topNav() {
    var $this = $(this)
@@ -245,10 +254,15 @@ function leftNav() {
 function xdybpzInnerList() {
     var $this = $(this)
       , str = ''
-    str = $this.find('.slave-addr-val').text().trim()
-    slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
-    nav.navShow($this) // highlight
-    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35Done})     
+      , xdybpzChannel = xdybpzCont.attr('data-channel')
+    if(!alreadyFlag) { alert('请先保存') }
+    else {
+        if(!$this.hasClass('active')) xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide')  
+        str = $this.find('.slave-addr-val').text().trim()
+        slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
+        nav.navShow($this) // highlight
+        demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35Done})     
+    }
 }
 
 function gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
@@ -315,7 +329,7 @@ function cmd31Done(data) {
     for(var i = 0, l = data.slave.length; i < l; i++) {
         str += '<li class="clearfix ">'
              + '<span class="left ellipsis">'+'<span class="slave-name-val">'+data.slave[i][0]+'</span>'+'-'+'<span class="slave-addr-val">'+data.slave[i][1]+'</span>'+'</span>'
-             + '<span class="right">删除</span>'
+             + '<span class="right xdybpzContDel">删除</span>'
              + '</li>'
     }
     $('#xdybpzList').empty().append(str)    
@@ -364,13 +378,13 @@ function cmd35Done(data) {
     }); 
     tbody.empty().append(str);
 }
-function cmd37SaveDone(data) {
-    if(data.status == 0) {
-        $this.parents('tr').find('td').attr('contenteditable','false').css('background-color','#fff');
-        
-    } else {
-        alert('保存失败')
-    }
+function cmd37SaveDone(that) { // restore bg color if done
+        that.parents('tr').find('td').attr('contenteditable','false').css('background-color','#fff');
+        that.siblings('.xdybpzEdit').removeClass('hide').end().addClass('hide')
+        alreadyFlag = true
+}
+function cmd37DelDone(that) {
+    that.parents('tr').remove();
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
@@ -386,6 +400,90 @@ function saveBtn() {
     if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({url:'test.json',data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({url:'test.json', data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
     else demand.start({data:{cmd:21, channel:$this.data('channel'), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done})
 }
+// 新增下端仪表配置列表项目
+function xdybpzShow() {
+    popupBox.removeClass('hide')    
+}
+function xdybpzCancel() {
+    popupBox.addClass('hide')
+}
+$(document).delegate('.xdybpzpop-upSave','click', function(){
+    var str = "";
+    var $this = $(this); 
+    var cha = $this.parents('div.content_right').siblings('div.thserial_info').attr("val"); 
+    var sbdz = $this.parents('div.equt_right').siblings('div.xdybpzItem').find('span.xdybpzdz').text();
+    var wrap = $this.parents('div.popupButBox').siblings('div.pop-upinfo');
+    var gnm = wrap.find('select.gnmPopSel option:selected').text();
+    var jcqAdd = wrap.find('input.jcqAddr').val();
+    var jcqLength = wrap.find('input.jcqLength').val();
+    var jzxV = wrap.find('input.jzxV').val();
+    var jcqName = wrap.find('input.jcqName').val();
+    var jcqDes = wrap.find('input.jcqDes').val();
+    var kxsV = wrap.find('input.kxsV').val();
+    var dxsV = wrap.find('input.dxsV').val();
+    
+    if( !(voidCheck(gnm) && voidCheck(jcqAdd) && voidCheck(jcqLength) && voidCheck(jzxV) && voidCheck(jcqName) && voidCheck(jcqDes) && voidCheck(kxsV) && voidCheck(dxsV)) ){
+        alert('每栏必填'); 
+    } else if(!checkRanges(jcqAdd)) {
+        alert('寄存器地址必须1到255'); 
+    } else if(!(numberCheck(jzxV) && numberCheck(kxsV) && numberCheck(dxsV))) {
+        alert('字节序、K系数、D系数必须为数字'); 
+    } else if(!(jcqLength <= 4)) {
+        alert('寄存器长度必须小于等于4'); 
+    } else {
+        $.ajax({
+                type: "POST",
+                url: "../../../cgi-bin/slave.cgi",
+                //url: "test.json",
+                dataType: "json",
+                data: {
+                    cmd: 37,
+                    channel: cha, 
+                    slaveaddr: sbdz,
+                    funcode: gnm,
+                    type: 1,
+                    oldregaddr: jcqAdd, 
+                    regaddr: jcqAdd,
+                    regnum: jcqLength,
+                    dataformat: jzxV,
+                    regname: jcqName,
+                    regdes: jcqDes,
+                    K: kxsV,
+                    D: dxsV
+                }     
+        })
+        .done(function(){
+            str = '<tr>' 
+            + '<td>' + gnm + '</td>'
+            + '<td>' + jcqAdd + '</td>'
+            + '<td>' + jcqLength + '</td>'
+            + '<td>' + jzxV + '</td>'
+            + '<td>' + jcqName + '</td>'
+            + '<td>' + jcqDes + '</td>'
+            + '<td>' + kxsV + '</td>'
+            + '<td>' + dxsV + '</td>'
+            + '<td><span class="open xdybpzEdit xdybpzDef">编辑</span><span class="open xdybpzDel xdybpzDef">删除</span><span class="open xdybpzSave hide">保存</span></td>'
+            + '</tr>';
+            $this.parents("div.pop-up").css("display", "none");
+            $this.parents().siblings("div.maskbg").css("display", "none");
+
+            $this.parents('div.newpaging').siblings('table.xdybpzTable').append(str);
+        });
+    }
+});
+// 删除下端仪表配置列表项目
+function xdybpzContDel() {
+    var $this = $(this)
+      , xdybpzChannel = xdybpzCont.attr('data-channel')
+      , xdybpzsbmcV = $this.find('.slave-name-val').text().trim() 	
+      , xdybpzsbdzV = $this.find('.slave-addr-val').text().trim()
+      , li = $this.parent('li') 
+    if(!alreadyFlag) { /*alert('请先保存')*/ } // 无须提示，但需判断
+    else {
+       if(!li.hasClass('active')) return
+       else { li.remove(); xdybpzDefault.removeClass('hide').siblings('.xdybpzContWrap').addClass('hide')  }
+    }
+}
 // 下端仪表配置的编辑
 function xdybpzEdit() {
         var $this = $(this)
@@ -393,8 +491,8 @@ function xdybpzEdit() {
 
         $this.siblings('.xdybpzSave').removeClass('hide').end().addClass('hide')
         $this.parents('tr').find('td').slice(1,8).attr('contenteditable','true').css('background-color','pink');
+        alreadyFlag = false
 } 
-
 // 下端仪表配置的保存
 function xdybpzSave() {
     var $this = $(this)
@@ -407,6 +505,7 @@ function xdybpzSave() {
       , v5 = td.eq(5).text()
       , v6 = td.eq(6).text()
       , v7 = td.eq(7).text()
+      , xdybpzChannel = xdybpzCont.attr('data-channel')
     if( !( voidCheck(v1) && voidCheck(v2) && voidCheck(v3) && voidCheck(v4) && voidCheck(v5) && voidCheck(v6) && voidCheck(v7)) ){
         alert('每栏必填'); 
     } else if(!checkRegADDRRanges(v1)) {
@@ -416,9 +515,27 @@ function xdybpzSave() {
     } else if(!(v2 <= 4)) {
         alert('寄存器长度必须小于等于4'); 
     } else {
-    demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr,funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:cmd37SaveDone})
+    demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr.text().trim(),funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:function(){cmd37SaveDone($this)}})
     }
 }
+// 下端仪表配置的保存
+function xdybpzDel() {
+    
+    var $this = $(this)
+      , wrap = $this.parent('td')
+      , gnm =  wrap.siblings('td:eq(0)').text()
+      , jcqAdd = wrap.siblings('td:eq(1)').text()
+      , jcqLength = wrap.siblings('td:eq(2)').text()
+      , jzxV = wrap.siblings('td:eq(3)').text()
+      , jcqName = wrap.siblings('td:eq(4)').text()
+      , jcqDes = wrap.siblings('td:eq(5)').text()
+      , kxsV = wrap.siblings('td:eq(6)').text()
+      , dxsV = wrap.siblings('td:eq(7)').text()
+      , xdybpzChannel = xdybpzCont.attr('data-channel')
+      demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr.text().trim(),funcode: gnm,type: 2,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: jzxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done:function(){cmd37DelDone($this)}})
+
+}
+
 
 // REG 
 function checkRanges(text) {
