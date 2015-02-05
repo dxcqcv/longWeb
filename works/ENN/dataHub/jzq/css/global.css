@@ -294,7 +294,7 @@ a { text-decoration: none; }
     text-overflow: ellipsis;
 }
 .cont-btn-box {
-    padding: 20px 60px 0 0;
+    padding: 20px 0 0 0;
     text-align: right;
 }
 .cont-btn {

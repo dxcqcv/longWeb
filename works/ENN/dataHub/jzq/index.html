@@ -242,25 +242,34 @@
                     </div>
                 </div>
             </div>
-            <div id="btnBox" class="cont-btn-box">
-                <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
-                <span class="cont-btn cal-btn">取消</span>
-            </div>
             <!--数据集中配置-->
             <div id="sjjzpzCont" class="sjjzpz-cont-box contWrap hide">
-                <div class="sjjzpz-top">
-                    功能码： 
-                    <select id="sjjzpzSel" name="">
-                        <option value="0">全部</option>
-                    	<option value="1">1</option>
-                    	<option value="2">2</option>
-                    	<option value="3">3</option>
-                    	<option value="4">4</option>
-                    	<option value="5">5</option>
-                    	<option value="16">16</option>
-                    </select>
+                <div class="sjjzpz-top clearfix">
+                    <div class="left">
+                        功能码： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">全部</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="16">16</option>
+                        </select>
+                    </div>
+                    <div class="right">
+                        存储时间间隔： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">1分钟</option>
+                            <option value="1">5分钟</option>
+                            <option value="2">30分钟</option>
+                            <option value="3">60分钟</option>
+                            <option value="4">12小时</option>
+                            <option value="5">24小时</option>
+                        </select>
+                    </div>
                 </div>
-                <table>
+                <table id="sjjzpzDefTable">
                 	<thead>
                 		<tr>
                 			<th>功能码</th>
@@ -274,6 +283,7 @@
                 			<th>寄存器描述</th>
                 			<th>K系数</th>
                 			<th>D系数</th>
+                			<th>存储</th>
                 			<th>备注</th>
                 		</tr>
                 	</thead>
@@ -290,10 +300,15 @@
                     		<td>8</td>
                     		<td>9</td>
                     		<td>0</td>
+                    		<td><input type="checkbox"></td>
                     		<td><span>上移</span><span>下移</span></td>
                     	</tr>
                     </tbody>
                 </table>
+            </div>
+            <div id="btnBox" class="cont-btn-box">
+                <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
+                <span class="cont-btn cal-btn">取消</span>
             </div>
             <!--系统配置-->
             <div id="xtpzCont" class="contWrap hide">

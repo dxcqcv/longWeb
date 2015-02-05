@@ -76,6 +76,9 @@ var demand = new Request() // instance for request
   , xdybpzList = $('#xdybpzList')
   , xdybpzEquName = $('#xdybpzEquName')
   , xdybpzEquAddr = $('#xdybpzEquAddr')
+  , sjjzpzDefTable = $('#sjjzpzDefTable')
+  , xdybpzDefTable= $('#xdybpzDefTable')
+  , xdybpzDefTbody = $('#xdybpzDefTable').children('tbody')
 
 // nav class
 function Navigation() {
@@ -148,6 +151,7 @@ Navigation.prototype = {
                 showCont('#sjjzpzCont', '.contWrap')
                 this.funBtn.addClass('hide') // hide save and cannel btn
                 demand.start({data:{cmd:41},done:cmd41Done}) // 刷新数据集中配置表格       
+                this.showNetSave() // show save and cancel btn
                 break;
             case 4:
                 this.title.text('系统配置')
@@ -256,7 +260,6 @@ var nav = new Navigation()
   , xdybpzChannel = xdybpzCont.attr('data-channel') || 1 // 下端仪表配置的串口号
   , oldTableRegaddr = ""
   , popupBox = $('#popupBox')
-  , xdybpzDefTbody = $('#xdybpzDefTable').children('tbody')
   , newTempMC, newTempDZ, oldTempMC, oldTempDZ
   , xdybpzSel = $('#xdybpzSel')
 
@@ -285,37 +288,26 @@ function xdybpzInnerList() {
     }
 }
 
-function gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
-    var str = '<tr>'
-        + '<td>' + gnm + '</td>'
-        + '<td>' + jcqdz + '</td>'
-        + '<td>' + jcqcd + '</td>'
-        + '<td>' + zjx + '</td>'
-        + '<td>' + jcqm + '</td>'
-        + '<td>' + jcqms + '</td>'
-        + '<td>' + kxs + '</td>'
-        + '<td>' + dxs + '</td>'
-        + '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide ml10">保存</span></td>'
-        + '</tr>';
+function gnmtTr() {
+    var str = ''
+    str += '<tr>'
+    for(var i = 0, l = arguments.length; i < l; i++) {
+        str += '<td>' + arguments[i] + '</td>'
+    }
+    str += '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide ml10">保存</span></td>'
+    str += '</tr>';
     return str;
 } 
-function sjjzpzStructure(gnm,sjxdz,jcqgs, td, sbh, jcqdz,zjx,jcqmc,jcqms,k,d) {
-    var str = '<tr >'
-    	    + '<td>'+gnm+'</td>'
-    	    + '<td>'+sjxdz+'</td>'
-		    + '<td>'+jcqgs+'</td>'
-		    + '<td>'+td+'</td>'
-			+ '<td>'+sbh+'</td>'						
-		    + '<td>'+jcqdz+'</td>'					
-            + '<td>'+zjx+'</td>'
-			+ '<td>'+jcqmc+'</td>'	
-            + '<td>'+jcqms+'</td>'
-			+ '<td>'+k+'</td>'					
-			+ '<td>'+d+'</td>'					
-            + '<td><span class="" >上移</span><span class="">下移</span></td>'
-            + '</tr>';
+function sjjzpzStructure() {
+    var str = ''
+    str = '<tr >'
+    for(var i = 0, l = arguments.length; i < l; i++) {
+        str += '<td>' + arguments[i] + '</td>'
+    }
+        str += '<td><input type="checkbox"></td>'
+        str += '<td><span class="" >上移</span><span class="">下移</span></td>'
+        str += '</tr>';
     return str;                                            
-														
 }
 /* ajax fn */
 function cmd11Done(data) {
@@ -398,10 +390,10 @@ function cmd33ModDone(that,addr,name) {
 function cmd35Done(data) {
    var str = ''
    slaveAddr.text(data.slaveaddr) 
-   str += loopTable(data.funcode) // calling loop table
+   str += loopTable(data.funcode,gnmtTr,2) // calling loop table and category 2 is this.cat 2 
    xdybpzDefTbody.empty().append(str);
 }
-function loopTable(obj) {
+function loopTable(obj,fn,category) {
     var str = ''
 // loop form
     $.each(obj, function(index, value){
@@ -409,32 +401,38 @@ function loopTable(obj) {
               switch(k) {
                     case '1':
                         $.each(v, function(key, val){
-                            str += gnmtTr(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                         });
                         break;
                     case '2':
                         $.each(v, function(key, val){
-                            str += gnmtTr(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                     });
                         break;
                     case '3':
                         $.each(v, function(key, val){
-                            str += gnmtTr(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                         });
                         break;
                     case '4':
                         $.each(v, function(key, val){
-                            str += gnmtTr(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                         });
                         break;
                     case '5':
                         $.each(v, function(key, val){
-                            str += gnmtTr(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                         });
                         break;
                     case '16':
                         $.each(v, function(key, val){
-                            str += gnmtTr(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6]);        
+                            if(category == 2) str += fn(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                            else str += fn(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                         });
                         break;
               }
@@ -457,13 +455,15 @@ function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
     xdybpzDefTbody.append(str)
     xdybpzCancel()
 }
-function cmd41Done() {
+function cmd41Done(data) {
     var str = ''
-   // str = 
+   str += loopTable(data.reglist,sjjzpzStructure,3) // calling loop table and category 3 is this.cat 3 
+   sjjzpzDefTable.find('tbody').empty().append(str);
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
     console.log('error is ' +jqXHR.statusText)
+    console.log('error is ' +textStatus)
 }
 function doneFn() {
     console.log('done')
@@ -512,12 +512,16 @@ function popupSel(){
 }
 // 下端仪表设备功能码选择
 $(document).on('click','#xdybpzSel',xdybpzSelect)
+$(document).on('click','#sjjzpzSel',sjjzpzSelect)
+function sjjzpzSelect() {
+    $('#sjjzpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,sjjzpzDefTable) }) // pass this num to sort table function 
+}
 function xdybpzSelect() {
-    $('#xdybpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,'#xdybpzDefTable') }) // pass this num to sort table function 
+    $('#xdybpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,xdybpzDefTable) }) // pass this num to sort table function 
 }
 function sortTable(num,table) {
     var num = num 
-      , tr = $(table).find('tbody tr')
+      , tr = table.find('tbody tr')
       switch(num) {
         case '1':
             tr.each(function(){ var $this = $(this); filterTr(1,$this)}) // pass this tr to filter function
