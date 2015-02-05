@@ -147,7 +147,7 @@ Navigation.prototype = {
                 this.contRight.addClass('w100')
                 showCont('#sjjzpzCont', '.contWrap')
                 this.funBtn.addClass('hide') // hide save and cannel btn
-                demand.start({data:{cmd:41,channel:realSide},done:cmd13Done}) // 刷新数据集中配置表格       
+                demand.start({data:{cmd:41},done:cmd41Done}) // 刷新数据集中配置表格       
                 break;
             case 4:
                 this.title.text('系统配置')
@@ -256,7 +256,7 @@ var nav = new Navigation()
   , xdybpzChannel = xdybpzCont.attr('data-channel') || 1 // 下端仪表配置的串口号
   , oldTableRegaddr = ""
   , popupBox = $('#popupBox')
-  , tbody = $('.xdybpz-cont-right').find('table').children('tbody')
+  , xdybpzDefTbody = $('#xdybpzDefTable').children('tbody')
   , newTempMC, newTempDZ, oldTempMC, oldTempDZ
   , xdybpzSel = $('#xdybpzSel')
 
@@ -399,7 +399,7 @@ function cmd35Done(data) {
    var str = ''
    slaveAddr.text(data.slaveaddr) 
    str += loopTable(data.funcode) // calling loop table
-   tbody.empty().append(str);
+   xdybpzDefTbody.empty().append(str);
 }
 function loopTable(obj) {
     var str = ''
@@ -454,8 +454,12 @@ function cmd37DelDone(that) {
 function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
     var str = ''
     str = gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) // rendering table tr
-    tbody.append(str)
+    xdybpzDefTbody.append(str)
     xdybpzCancel()
+}
+function cmd41Done() {
+    var str = ''
+   // str = 
 }
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
