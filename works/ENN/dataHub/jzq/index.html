@@ -29,7 +29,7 @@
                 <ul class="list-float right">
                 	<li><a href=""><i class="usr-info-icon usr-name-icon"></i>张三</a></li>
                 	<li><a href=""><i class="usr-info-icon usr-password-icon"></i>密码管理</a></li>
-                	<li><a href=""><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
+                	<li><a href="login.html"><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
                 </ul>
             </div>
             <div class="head-nav clearfix">
@@ -333,11 +333,15 @@
                 </div>
                 <div id="reboot" class="cent-box hide xtpzBox">
                 	<div class="cent-inner">
-                        <span class="cont-btn">重启</span>
+                        <span id="rebootBtn" class="cont-btn">重启</span>
                     </div>
                 </div>
                 <div id="changePW" class="cent-box pw-box xtpzBox">
                 	<div class="cent-inner">
+                        <p>
+                        	<label for="username">用户名：</label>
+                        	<input type="" id="username">
+                        </p>
                         <p>
                         	<label for="oldPW">原有密码：</label>
                         	<input type="" id="oldPW">
@@ -350,6 +354,8 @@
                         	<label for="againPW">确认新密码：</label>
                         	<input type="" id="againPW">
                         </p>
+
+                        <span id="changePWBtn" class="cont-btn">提交</span>
                     </div>
                 </div>
             </div>

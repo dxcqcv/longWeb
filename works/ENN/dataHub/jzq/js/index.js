@@ -19,6 +19,8 @@ $(window).resize(function() {
     $(document).on('click','#xdybpzListAdd',xdybpzListAdd) // 新增下端仪表配置列表项目
     $(document).on('click','#xdybpzModEqu',xdybpzEquMod) // 修改下端仪表配置列表项目设备
     $(document).on('click','#gnmSel', popupSel) // 下端仪表配置列表特选项
+    $(document).on('click','#rebootBtn', rebootBtn) // reboot 
+    $(document).on('click','#changePWBtn', changePWBtn) // change password 
 
 function layout() {
     var winHei = $(window).height()
@@ -460,6 +462,9 @@ function cmd41Done(data) {
    str += loopTable(data.reglist,sjjzpzStructure,3) // calling loop table and category 3 is this.cat 3 
    sjjzpzDefTable.find('tbody').empty().append(str);
 }
+function cmd50Done(data) {
+    alert('已经重启')
+}
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
     console.log('error is ' +jqXHR.statusText)
@@ -681,8 +686,44 @@ function xdybpzDel() {
 
 }
 
+// 重启
+function rebootBtn() {
+    demand.start({data:{cmd:50},done:cmd50Done})
+}
+// change password
+function changePWBtn() {
+    var username  = $('#username') 
+      , usernameV = username.val().trim()
+      , oldPW     = $('#oldPW')
+      , oldPWV    = oldPW.val().trim()
+      , password  = $('#newPW')
+      , passwordV = newPW.val().trim()
+      , againPW   = $('#againPW')
+      , againPWV  = againPW.val().trim()
+    if(!voidCheck(usernameV)) alert('用户名不能为空')    
+    else if(!checkPW(passwordV)) alert('新密码必须有数字有字母，最小6位，最大15位')
+    else if(!checkSame(passwordV,againPWV)) alert('密码必须一致')
+    else demand.start({data:{cmd:3,user:usernameV,oldpassword:oldPWV,newpassword:passwordV},done:function(){cmd3Done(data,username,oldPW,password,againPW)}})
+}
+function cmd3Done(data,username,oldPW,password,againPW) {
+    switch(data.status) {
+        case 0: alert('修改成功'); username.val('')  break
+        case 1: alert('用户名错误'); break
+        case 2: alert('原密码错误'); break
+    }
+}
 
 // REG 
+function checkSame(text1,text2) {
+   return (text1 == text2) ? true : false 
+}
+function checkPW(text) {
+    var regex = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false;
+    }
+    return true;
+}
 function checkRanges(text) {
     var regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
     if(!regex.test(text) || text.length == 0) {
