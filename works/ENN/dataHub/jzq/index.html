@@ -6,16 +6,34 @@
     <link rel="stylesheet" href="css/global.css" media="all"></link>
 </head>
 <body>
-    <div id="loading" class="load-box hide">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+<div id="loading" class="load-box hide">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<div id="loginBox" class="login">
+    <div class="acc"> 
+        <label><span>账号 : </span></label><input id="loginUsername" type="text" />
+    </div>
+    <div class="pas">
+        <label><span>密码 : </span></label><input id="loginPW" type="password" />
+    </div>
+    <div class="saveacc">
+        <div class="sucess">
+            <span id="loginBtn">确认</span>
+        </div>
+        <div class="cancel">
+            <span>取消</span>
         </div>
     </div>
-<div class="wrapper">
+</div>
+
+<div id="siteWrapper" class="wrapper hide">
     <div class="header clearfix">
        <div class="header-left left h100">
             <div class="head-logo in-bl"></div>
@@ -27,9 +45,9 @@
        <div class="header-right right h100">
             <div class="user-info-list clearfix">
                 <ul class="list-float right">
-                	<li><a href=""><i class="usr-info-icon usr-name-icon"></i>张三</a></li>
+                	<li><a href=""><i class="usr-info-icon usr-name-icon"></i><span id="siteUsername">张三</span></a></li>
                 	<li><a href=""><i class="usr-info-icon usr-password-icon"></i>密码管理</a></li>
-                	<li><a href="login.html"><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
+                	<li><a id="siteLogout" href=""><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
                 </ul>
             </div>
             <div class="head-nav clearfix">
@@ -117,11 +135,20 @@
                 	</tr>
                 	<tr>
                 		<td>网关</td>
-                		<td id="getwayV" contenteditable="false">192.168.11.1</td>
+                		<td id="gatewayV" contenteditable="false">192.168.11.1</td>
                 	</tr>
                 </tbody>
             </table>
             <div id="dkpzOptions" class="contWrap dkpz-opt-box hide">
+                <div>
+                    <label for="txxy">通讯协议：</label>
+                    <select id="protocol" name="txxy">
+                        <option value="0">modbus</option>
+                        <option value="1">645-1997</option>
+                        <option value="2">645-2007</option>
+                        <option value="3">102</option>
+                    </select>
+                </div>
                 <div>
                 	<label for="btl">波特率：</label>
                 	<select id="baudrate" name="btl">

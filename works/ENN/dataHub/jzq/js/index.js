@@ -81,6 +81,13 @@ var demand = new Request() // instance for request
   , sjjzpzDefTable = $('#sjjzpzDefTable')
   , xdybpzDefTable= $('#xdybpzDefTable')
   , xdybpzDefTbody = $('#xdybpzDefTable').children('tbody')
+  , username  = $('#username') 
+  , oldPW     = $('#oldPW')
+  , password  = $('#newPW')
+  , againPW   = $('#againPW')
+  , loginUsername = $('#loginUsername')
+  , loginPassword = $('#loginPW')
+  , loginBox = $('#loginBox')
 
 // nav class
 function Navigation() {
@@ -253,6 +260,7 @@ var nav = new Navigation()
   , maskV = $('#maskV')
   , gatewayV = $('#gatewayV')
   , dhcpS = $('#dhcpsele')
+  , protocol = $('#protocol')
   , baudrate = $('#baudrate')
   , databit = $('#databit')
   , stopbit = $('#stopbit')
@@ -331,6 +339,8 @@ function cmd13Done(data) {
 function cmd15Done(data) {
     var str = '' 
     dhcpS.val(data.dhcp)
+    if(data.dhcp == 0) beEdited(1,ipV,maskV,gatewayV)
+    else beEdited(0,ipV,maskV,gatewayV) // be able to edit if DHCP is close
     ipV.text(data.ip)
     maskV.text(data.mask)
     gatewayV.text(data.gateway)
@@ -344,6 +354,7 @@ function cmd17Done(data) {
 
 }
 function cmd19Done(data) {
+   protocol.val(data.protocol) 
    baudrate.val(data.baudrate) 
    databit.val(data.databit)
    stopbit.val(data.stopbit)
@@ -478,7 +489,7 @@ function saveBtn() {
     var $this = $(this)
     $this.text('保存中')
     if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({url:'test.json',data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({url:'test.json', data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
-    else demand.start({data:{cmd:21, channel:$this.data('channel'), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done})
+    else demand.start({data:{cmd:21, channel:$this.data('channel'), protocol:protocol.val(), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done}) // it's not net 
 }
 // 修改设备
 function xdybpzEquMod() {
@@ -692,27 +703,71 @@ function rebootBtn() {
 }
 // change password
 function changePWBtn() {
-    var username  = $('#username') 
-      , usernameV = username.val().trim()
-      , oldPW     = $('#oldPW')
-      , oldPWV    = oldPW.val().trim()
-      , password  = $('#newPW')
-      , passwordV = newPW.val().trim()
-      , againPW   = $('#againPW')
-      , againPWV  = againPW.val().trim()
+    oldPWV    = oldPW.val().trim()
+    usernameV = username.val().trim()
+    passwordV = password.val().trim()
+    againPWV  = againPW.val().trim()
+
     if(!voidCheck(usernameV)) alert('用户名不能为空')    
     else if(!checkPW(passwordV)) alert('新密码必须有数字有字母，最小6位，最大15位')
     else if(!checkSame(passwordV,againPWV)) alert('密码必须一致')
-    else demand.start({data:{cmd:3,user:usernameV,oldpassword:oldPWV,newpassword:passwordV},done:function(){cmd3Done(data,username,oldPW,password,againPW)}})
+    else demand.start({data:{cmd:3,user:usernameV,oldpassword:oldPWV,newpassword:passwordV},done:cmd3Done})
 }
-function cmd3Done(data,username,oldPW,password,againPW) {
+function cmd3Done(data) {
     switch(data.status) {
-        case 0: alert('修改成功'); username.val('')  break
+        case 0: alert('修改成功'); username.val(''); password.val(''); oldPW.val(''); againPW.val(''); break // clear up input
         case 1: alert('用户名错误'); break
         case 2: alert('原密码错误'); break
     }
 }
+// login
+$(document).on('click','#loginBtn',login)
+function login() {
+    var $this = $(this)
+        wrap = $this.parents('#loginBox')
+        loginUsernameV = loginUsername.val().trim() 
+        loginPasswordV = loginPassword.val().trim()
+    if(!voidCheck(loginUsernameV)) alert('用户名不能为空')
+    else if(!voidCheck(loginPasswordV)) alert('密码不能为空')
+    else demand.start({data: {cmd: 1, user:loginUsernameV, password:loginPasswordV},done:cmd1Done})
+}
+function cmd1Done(data) {
+    switch(data.status) {
+        case 0: loginBox.addClass('hide').siblings('#siteWrapper').removeClass('hide'); $('#siteUsername').text(loginUsername.val().trim()); break
+        case 1: alert('用户名错误'); break
+        case 2: alert('密码错误'); break
+    }
+}
+// logout
+$(document).on('click','#siteLogout',logout)
+function logout() {
+    loginBox.removeClass('hide').siblings('#siteWrapper').addClass('hide')
+    loginUsername.val('') && loginPassword.val('')
+}
 
+// 端口配置 DHCP
+$(document).on('click', dhcpS, dhcpSelect)
+function dhcpSelect() {
+     $('#dhcpsele option:selected').each(function(){
+        var $this = $(this)
+        if($this.val() == 0) {
+           beEdited(1,ipV,maskV,gatewayV)
+        } else {
+           beEdited(0,ipV,maskV,gatewayV)
+        }
+     })  
+}
+function beEdited() {
+// 1 is edited, 0 is unedited
+var v = Array.prototype.shift.call(arguments)
+if(v == 1) for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','true').css('background-color','pink')
+else for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','false').css('background-color','#fff')
+
+}
+$(document).on('click','#sjjzpzSel',sjjzpzSelect)
+function sjjzpzSelect() {
+    $('#sjjzpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,sjjzpzDefTable) }) // pass this num to sort table function 
+}
 // REG 
 function checkSame(text1,text2) {
    return (text1 == text2) ? true : false 
