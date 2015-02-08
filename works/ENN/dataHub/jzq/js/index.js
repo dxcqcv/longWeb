@@ -9,7 +9,8 @@ $(window).resize(function() {
     $(document).on('click','.content-left li',leftNav) // sider nav
     $(document).on('click','.head-nav li',topNav) // top nav
     $(document).on('click', '#saveBtn', saveBtn ) // 状态信息和端口配置的保存按钮 
-    $(document).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置的编辑
+    $(document).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置编辑
+    $(document).on('click', '.xdybpzSave', xdybpzSave) // 下端仪表配置保存
 
 function layout() {
     var winHei = $(window).height()
@@ -407,6 +408,7 @@ function xdybpzSave() {
       , v5 = td.eq(5).text()
       , v6 = td.eq(6).text()
       , v7 = td.eq(7).text()
+console.log(td)
     if( !( voidCheck(v1) && voidCheck(v2) && voidCheck(v3) && voidCheck(v4) && voidCheck(v5) && voidCheck(v6) && voidCheck(v7)) ){
         alert('每栏必填'); 
     } else if(!checkRegADDRRanges(v1)) {
