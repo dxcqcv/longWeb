@@ -6,16 +6,34 @@
     <link rel="stylesheet" href="css/global.css" media="all"></link>
 </head>
 <body>
-    <div id="loading" class="load-box hide">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+<div id="loading" class="load-box hide">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<div id="loginBox" class="login">
+    <div class="acc"> 
+        <label><span>账号 : </span></label><input id="loginUsername" type="text" />
+    </div>
+    <div class="pas">
+        <label><span>密码 : </span></label><input id="loginPW" type="password" />
+    </div>
+    <div class="saveacc">
+        <div class="sucess">
+            <span id="loginBtn">确认</span>
+        </div>
+        <div class="cancel">
+            <span>取消</span>
         </div>
     </div>
-<div class="wrapper">
+</div>
+
+<div id="siteWrapper" class="wrapper hide">
     <div class="header clearfix">
        <div class="header-left left h100">
             <div class="head-logo in-bl"></div>
@@ -27,9 +45,9 @@
        <div class="header-right right h100">
             <div class="user-info-list clearfix">
                 <ul class="list-float right">
-                	<li><a href=""><i class="usr-info-icon usr-name-icon"></i>张三</a></li>
+                	<li><a href=""><i class="usr-info-icon usr-name-icon"></i><span id="siteUsername">张三</span></a></li>
                 	<li><a href=""><i class="usr-info-icon usr-password-icon"></i>密码管理</a></li>
-                	<li><a href=""><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
+                	<li><a id="siteLogout" href=""><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
                 </ul>
             </div>
             <div class="head-nav clearfix">
@@ -117,11 +135,20 @@
                 	</tr>
                 	<tr>
                 		<td>网关</td>
-                		<td id="getwayV" contenteditable="false">192.168.11.1</td>
+                		<td id="gatewayV" contenteditable="false">192.168.11.1</td>
                 	</tr>
                 </tbody>
             </table>
             <div id="dkpzOptions" class="contWrap dkpz-opt-box hide">
+                <div>
+                    <label for="txxy">通讯协议：</label>
+                    <select id="protocol" name="txxy">
+                        <option value="0">modbus</option>
+                        <option value="1">645-1997</option>
+                        <option value="2">645-2007</option>
+                        <option value="3">102</option>
+                    </select>
+                </div>
                 <div>
                 	<label for="btl">波特率：</label>
                 	<select id="baudrate" name="btl">
@@ -170,14 +197,14 @@
                     <p>通讯协议：<span>Modbus</span></p>
                     <p>
                     	<label for="">设备名称：</label>
-                    	<input type="">
+                    	<input id="xdybpzEquName" type="">
                     </p>
                     <p>
                     	<label for="">设备地址：</label>
-                    	<input type="">
+                    	<input id="xdybpzEquAddr" type="">
                     </p>
                     <p>
-                        <span class="cont-btn">增加</span>
+                        <span id="xdybpzListAdd" class="cont-btn">增加</span>
                     </p>
                     <div class="xdybpz-list clearfix">
                         <div class="xdybpz-list-title">设备列表</div>
@@ -189,26 +216,27 @@
                         </ul>
                     </div>
                 </div>
-                <div class="xdybpz-cont-right left">
+                <div id="xdybpzDefault" class="xdybpz-cont-default xdybpzContWrap left hide"></div>
+                <div class="xdybpz-cont-right xdybpzContWrap left">
                     <div class="xdybpz-cont-top">
                         <span>设备名称：</span>
                         <span id="slaveName">设备列表</span>
                         <span>设备地址：</span>
                         <span id="slaveAddr">444</span>
-                        <span class="cont-btn">修改设备</span>
+                        <span id="xdybpzModEqu" data-mod=0 class="cont-btn">修改设备</span>
                     </div>
-                    <table>
+                    <table id="xdybpzDefTable">
                         <thead>
                         	<tr>
                         		<th>功能码
-                                   <select id="" name="">
-                                    <option value="">全部</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                    <option value="">16</option>
+                                   <select id="xdybpzSel" name="">
+                                    <option value="0">全部</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="16">16</option>
                                    </select>
                                 </th>
                         		<th>寄存器地址</th>
@@ -236,31 +264,42 @@
                         </tbody>
                     </table>
                     <div class="xdybpz-right-btn-box">
-                        <span class="cont-btn">数据新增项</span>
+                        <span id="xdybpzShow" class="cont-btn">数据新增项</span>
                         <span class="cont-btn">保存配置</span>
                     </div>
                 </div>
             </div>
-            <div id="btnBox" class="cont-btn-box">
-                <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
-                <span class="cont-btn cal-btn">取消</span>
-            </div>
             <!--数据集中配置-->
             <div id="sjjzpzCont" class="sjjzpz-cont-box contWrap hide">
-                <div class="sjjzpz-top">
-                    功能码： 
-                    <select id="" name="">
-                    	<option value="">1</option>
-                    	<option value="">2</option>
-                    	<option value="">3</option>
-                    	<option value="">4</option>
-                    	<option value="">5</option>
-                    	<option value="">16</option>
-                    </select>
+                <div class="sjjzpz-top clearfix">
+                    <div class="left">
+                        功能码： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">全部</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="16">16</option>
+                        </select>
+                    </div>
+                    <div class="right">
+                        存储时间间隔： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">1分钟</option>
+                            <option value="1">5分钟</option>
+                            <option value="2">30分钟</option>
+                            <option value="3">60分钟</option>
+                            <option value="4">12小时</option>
+                            <option value="5">24小时</option>
+                        </select>
+                    </div>
                 </div>
-                <table>
+                <table id="sjjzpzDefTable">
                 	<thead>
                 		<tr>
+                			<th>功能码</th>
                 			<th>数据项地址</th>
                 			<th>寄存器个数</th>
                 			<th>通道</th>
@@ -271,11 +310,13 @@
                 			<th>寄存器描述</th>
                 			<th>K系数</th>
                 			<th>D系数</th>
+                			<th>存储</th>
                 			<th>备注</th>
                 		</tr>
                 	</thead>
                     <tbody>
                     	<tr>
+                    		<td>16</td>
                     		<td>1</td>
                     		<td>2</td>
                     		<td>3</td>
@@ -286,10 +327,15 @@
                     		<td>8</td>
                     		<td>9</td>
                     		<td>0</td>
+                    		<td><input type="checkbox"></td>
                     		<td><span>上移</span><span>下移</span></td>
                     	</tr>
                     </tbody>
                 </table>
+            </div>
+            <div id="btnBox" class="cont-btn-box">
+                <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
+                <span class="cont-btn cal-btn">取消</span>
             </div>
             <!--系统配置-->
             <div id="xtpzCont" class="contWrap hide">
@@ -314,11 +360,15 @@
                 </div>
                 <div id="reboot" class="cent-box hide xtpzBox">
                 	<div class="cent-inner">
-                        <span class="cont-btn">重启</span>
+                        <span id="rebootBtn" class="cont-btn">重启</span>
                     </div>
                 </div>
                 <div id="changePW" class="cent-box pw-box xtpzBox">
                 	<div class="cent-inner">
+                        <p>
+                        	<label for="username">用户名：</label>
+                        	<input type="" id="username">
+                        </p>
                         <p>
                         	<label for="oldPW">原有密码：</label>
                         	<input type="" id="oldPW">
@@ -331,6 +381,8 @@
                         	<label for="againPW">确认新密码：</label>
                         	<input type="" id="againPW">
                         </p>
+
+                        <span id="changePWBtn" class="cont-btn">提交</span>
                     </div>
                 </div>
             </div>
@@ -338,17 +390,17 @@
     </div>
 </div>
 <!--pop up-->
-<div class="mask-bg hide">
+<div id="popupBox" class="mask-bg hide">
 	<div class="pop-up">
         <div>
         	<label for="gnm">功能码：</label>
-            <select id="" name="" class="gnm-sel">
-            	<option value="">1</option>
-            	<option value="">2</option>
-            	<option value="">3</option>
-            	<option value="">4</option>
-            	<option value="">5</option>
-            	<option value="">16</option>
+            <select id="gnmSel" name="" class="gnm-sel">
+            	<option value="1">1</option>
+            	<option value="2">2</option>
+            	<option value="3">3</option>
+            	<option value="4">4</option>
+            	<option value="5">5</option>
+            	<option value="16">16</option>
             </select>
         </div>
         <div>
@@ -380,8 +432,8 @@
         	<input type="" id="dxs">
         </div>
         <div>
-            <span class="cont-btn">保存</span>
-            <span class="cont-btn">取消</span>
+            <span id="xdybpzAdd" class="cont-btn">保存</span>
+            <span id="xdybpzCancel" class="cont-btn">取消</span>
         </div>    
     </div>
 </div>

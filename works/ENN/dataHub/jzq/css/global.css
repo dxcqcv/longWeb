@@ -294,7 +294,7 @@ a { text-decoration: none; }
     text-overflow: ellipsis;
 }
 .cont-btn-box {
-    padding: 20px 60px 0 0;
+    padding: 20px 0 0 0;
     text-align: right;
 }
 .cont-btn {
@@ -317,7 +317,7 @@ a { text-decoration: none; }
     margin-bottom: 20px;
 }
 .dkpz-opt-box > div > label {
-    color: #266F94;
+    color: #266F94; display: inline-block; width: 60px; text-align: right;
 }
 .dkpz-opt-box > div > select {
     width: 200px;
@@ -328,6 +328,7 @@ a { text-decoration: none; }
 .xdybpz-cont-left { text-align: center; width: 200px;   margin-bottom: -1920px; padding-bottom: 1920px;}
 .xdybpz-cont-left input { width: 120px;  }
 .xdybpz-cont-left > p { margin-top: 10px;  }
+.xdybpz-cont-default { width: 830px; padding: 10px; border-left: 1px solid #ccc; margin-bottom: -1920px; padding-bottom: 1920px;   }
 .xdybpz-cont-right { width: 830px; padding: 10px; border-left: 1px solid #ccc; margin-bottom: -1920px; padding-bottom: 1920px;   }
 .xdybpz-cont-right > table { width: auto;  }
 .xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
@@ -423,12 +424,12 @@ a { text-decoration: none; }
     margin-bottom: 10px;
 }
 .pop-up > div > label {
-    width: 100px;
+    width: 80px;
     display: inline-block;
     text-align: right;
     color: #39c;
 }
-.gnm-sel { width: 211px; }
+.gnm-sel { width: 148px; }
 
 /*登录样式*/
 
