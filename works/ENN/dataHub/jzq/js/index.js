@@ -476,6 +476,14 @@ function cmd41Done(data) {
 function cmd50Done(data) {
     alert('已经重启')
 }
+function cmd37SaveDone(data) {
+    if(data.status == 0) {
+        $this.parents('tr').find('td').attr('contenteditable','false').css('background-color','#fff');
+        
+    } else {
+        alert('保存失败')
+    }
+}
 /* global ajax fn */
 function failFn(jqXHR,textStatus) {
     console.log('error is ' +jqXHR.statusText)
@@ -779,6 +787,71 @@ function checkPW(text) {
     }
     return true;
 }
+function checkRanges(text) {
+    var regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false;
+    }
+    return true;
+}
+
+function checkRegADDRRanges(text) {
+    var regex = /^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false;
+    }
+    return true;
+}
+
+function voidCheck(text) {
+    return (text.length == 0) ? false : true;
+}
+function numberCheck(text) {
+    var regex = /^[+|-]?\d*$/;
+    if(!regex.test(text) || text.length == 0) {
+        return false; 
+    }
+    return true;
+}
+function validateRealNum(val) {
+    var patten = /^-?\d+\.?\d*$/;
+    return patten.test(val);
+}
+// 下端仪表配置的编辑
+function xdybpzEdit() {
+        var $this = $(this)
+        oldTableRegaddr = $this.parent('td').siblings('td:eq(1)').text();
+
+        $this.siblings('.xdybpzSave').removeClass('hide').end().addClass('hide')
+        $this.parents('tr').find('td').slice(1,8).attr('contenteditable','true').css('background-color','pink');
+} 
+
+// 下端仪表配置的保存
+function xdybpzSave() {
+    var $this = $(this)
+      , td = $this.parents('tr').find('td')
+      , v0 = td.eq(0).text()
+      , v1 = td.eq(1).text()
+      , v2 = td.eq(2).text()
+      , v3 = td.eq(3).text()
+      , v4 = td.eq(4).text()
+      , v5 = td.eq(5).text()
+      , v6 = td.eq(6).text()
+      , v7 = td.eq(7).text()
+    if( !( voidCheck(v1) && voidCheck(v2) && voidCheck(v3) && voidCheck(v4) && voidCheck(v5) && voidCheck(v6) && voidCheck(v7)) ){
+        alert('每栏必填'); 
+    } else if(!checkRegADDRRanges(v1)) {
+        alert('寄存器地址必须0到255'); 
+	} else if(!(validateRealNum(v6) && numberCheck(v7))) {
+        alert('字节序、D系数必须为整型数字，K系数为实数'); 
+    } else if(!(v2 <= 4)) {
+        alert('寄存器长度必须小于等于4'); 
+    } else {
+    demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr,funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:cmd37SaveDone})
+    }
+}
+
+// REG 
 function checkRanges(text) {
     var regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/;
     if(!regex.test(text) || text.length == 0) {

@@ -5,6 +5,7 @@
     "baudrate":9600,
     "databit":7,
     "stopbit":2,
+    "slaveaddr":888,
     "paritybit": 4,
     "protocol": 2,
 	"status":0,
