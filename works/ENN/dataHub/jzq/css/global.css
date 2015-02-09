@@ -136,6 +136,7 @@ html, body { height: 100%; font: normal 12px/1.5 "Microsoft YaHei" }
 }
 div { box-sizing: border-box; }
 a { text-decoration: none; }
+input { vertical-align: sub; }
 .ver-sub { vertical-align: sub; }
 .list-float > li { float: left;}
 .h100 { height: 100%; }
@@ -326,11 +327,13 @@ a { text-decoration: none; }
 /*下端仪表配置*/
 .xdybpz-cont-box { border: 1px solid #ccc; overflow: hidden; min-height: 300px;  }
 .xdybpz-cont-left { text-align: center; width: 200px;   margin-bottom: -1920px; padding-bottom: 1920px;}
-.xdybpz-cont-left input { width: 120px;  }
-.xdybpz-cont-left > p { margin-top: 10px;  }
+.xdybpz-cont-left label { width: 60px; display: inline-block; text-align: right; }
+.xdybpz-cont-left label.xdybpz-timeout { width: 85px; display: inline-block; text-align: right; }
+.xdybpz-cont-left input[type=""] { width: 120px; }
+.xdybpz-cont-left p { margin-top: 10px;  }
 .xdybpz-cont-default { width: 830px; padding: 10px; border-left: 1px solid #ccc; margin-bottom: -1920px; padding-bottom: 1920px;   }
 .xdybpz-cont-right { width: 830px; padding: 10px; border-left: 1px solid #ccc; margin-bottom: -1920px; padding-bottom: 1920px;   }
-.xdybpz-cont-right > table { width: auto;  }
+.xdybpz-cont-right > table.xdybpz-def-table { width: auto;  }
 .xdybpz-cont-right > table > thead > tr > th { width: 10%;  }
 .xdybpz-cont-right > table > tbody > tr > td > span { cursor: pointer;  }
 .xdybpz-list-title {

@@ -195,14 +195,40 @@
             <div id="xdybpzCont" class="contWrap hide clearfix xdybpz-cont-box" >
                 <div class="xdybpz-cont-left left">
                     <p>通讯协议：<span>Modbus</span></p>
-                    <p>
-                    	<label for="">设备名称：</label>
-                    	<input id="xdybpzEquName" type="">
-                    </p>
-                    <p>
-                    	<label for="">设备地址：</label>
-                    	<input id="xdybpzEquAddr" type="">
-                    </p>
+                    <div id="xdybpzPotocol645">
+                        <p>
+                            <label class="xdybpz-timeout" for="">是否允许对时：</label>
+                            <input id="radio645" type="radio">
+                        </p>
+                        <p>
+                            <label for="">广播密码：</label>
+                            <input id="" type="">
+                        </p>
+                    </div>
+                    <div id="xdybpzPotocolModbus">
+                        <p>
+                            <label for="xdybpzEquName">设备名称：</label>
+                            <input id="xdybpzEquName" type="">
+                        </p>
+                        <p>
+                            <label for="xdybpzEquAddr">设备地址：</label>
+                            <input id="xdybpzEquAddr" type="">
+                        </p>
+                    </div>
+                    <div id="xdybpzPotocol102">
+                        <p>
+                            <label for="">主站IP：</label>
+                            <input id="" type="">
+                        </p>
+                        <p>
+                            <label for="">链路ID：</label>
+                            <input id="" type="">
+                        </p>
+                        <p>
+                            <label for="">超时时间：</label>
+                            <input id="" type="">
+                        </p>
+                    </div>
                     <p>
                         <span id="xdybpzListAdd" class="cont-btn">增加</span>
                     </p>
@@ -225,7 +251,54 @@
                             <span id="slaveAddr">444</span>
                             <span id="xdybpzModEqu" data-mod=0 class="cont-btn">修改设备</span>
                     </div>
-                    <table id="xdybpzDefTable">
+                    <table id="xdybpz645Table">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>功能码</th>
+                                <th>数据项地址</th>
+                                <th>寄存器描述</th>
+                                <th>删除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<tr>
+                        		<td>1</td>
+                        		<td>22</td>
+                        		<td>66</td>
+                        		<td>88</td>
+                        		<td>del</td>
+                        	</tr>
+                        </tbody>
+                    </table>
+                    <table id="xdybpz645Table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>数据项</th>
+                                <th>数据类型</th>
+                                <th>K系数</th>
+                                <th>D系数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>11</td>
+                                <td>
+                                   <label for="">浮点数</label>
+                                   <input type="radio" name="dataType">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType">
+                                </td>
+                                <td>22</td>
+                                <td>33</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="xdybpzDefTable" class="xdybpz-def-table">
                         <thead>
                         	<tr>
                         		<th>功能码
