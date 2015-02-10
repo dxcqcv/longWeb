@@ -1,29 +1,30 @@
-(function(){
+(function(doc,win){
 // for content height
     layout();
 
-$(window).resize(function() {
+$(win).resize(function() {
     layout();
 })
 
-    $(document).on('click','.content-left li',leftNav) // sider nav
-    $(document).on('click','.head-nav li',topNav) // top nav
-    $(document).on('click', '#saveBtn', saveBtn ) // 状态信息和端口配置的保存按钮 
-    $(document).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置的编辑
-    $(document).on('click', '.xdybpzSave', xdybpzSave) // 下端仪表配置的保存
-    $(document).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
-    $(document).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
-    $(document).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
-    $(document).on('click', '#xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
-    $(document).on('click', '#xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
-    $(document).on('click','#xdybpzListAdd',xdybpzListAdd) // 新增下端仪表配置列表项目
-    $(document).on('click','#xdybpzModEqu',xdybpzEquMod) // 修改下端仪表配置列表项目设备
-    $(document).on('click','#gnmSel', popupSel) // 下端仪表配置列表特选项
-    $(document).on('click','#rebootBtn', rebootBtn) // reboot 
-    $(document).on('click','#changePWBtn', changePWBtn) // change password 
+    $(doc).on('click','.content-left li',leftNav) // sider nav
+    $(doc).on('click','.head-nav li',topNav) // top nav
+    $(doc).on('click', '#saveBtn', saveBtn ) // 状态信息和端口配置的保存按钮 
+    $(doc).on('click', '.xdybpzEdit', xdybpzEdit) // 下端仪表配置的编辑
+    $(doc).on('click', '.xdybpzSave', xdybpzSave) // 下端仪表配置的保存
+    $(doc).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
+    $(doc).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
+    $(doc).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
+    $(doc).on('click', '#xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
+    $(doc).on('click', '#xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
+    $(doc).on('click','#xdybpzListAdd',xdybpzListAdd) // 新增下端仪表配置列表项目
+    $(doc).on('click','#xdybpzModEqu',xdybpzEquMod) // 修改下端仪表配置列表项目设备
+    $(doc).on('click','#gnmSel', popupSel) // 下端仪表配置列表特选项
+    $(doc).on('click','#sjjzpzSel',sjjzpzSelect) // 数据集中配置筛选
+    $(doc).on('click','#rebootBtn', rebootBtn) // reboot 
+    $(doc).on('click','#changePWBtn', changePWBtn) // change password 
 
 function layout() {
-    var winHei = $(window).height()
+    var winHei = $(win).height()
       , conHei = winHei - 72
 
     $('.content').height(conHei)
@@ -277,7 +278,7 @@ var nav = new Navigation()
   , newTempMC, newTempDZ, oldTempMC, oldTempDZ
   , xdybpzSel = $('#xdybpzSel')
 
-$(document).on('click', '#xdybpzList li', xdybpzInnerList) // 下端仪表配置内部列表
+$(doc).on('click', '#xdybpzList li', xdybpzInnerList) // 下端仪表配置内部列表
 
 function topNav() {
    var $this = $(this)
@@ -293,12 +294,23 @@ function xdybpzInnerList() {
       , xdybpzChannel = xdybpzCont.attr('data-channel')
     if(!alreadyFlag) { alert('请先保存') }
     else {
-        if(!$this.hasClass('active')) xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide') // show right cont  
+        if(!$this.hasClass('active'))  xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide') // show right cont  
         xdybpzSel.val(0)
         str = $this.find('.slave-addr-val').text().trim()
         slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
         nav.navShow($this) // highlight
-        demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35Done})     
+        switch(potocolType.attr('data-potocol')) { // check potocol type
+            case 0:
+                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35DefDone})     
+                break
+            case 1:
+            case 2:
+                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
+                break
+            case 3:
+                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd102Done})     
+                break
+        }
     }
 }
 
@@ -379,15 +391,36 @@ function cmd21Done(data) {
 function cmd31Done(data) {
     var str = ''
     switch(data.protocol) { // 修改下端仪表配置协议类型
-        case 0: potocolType.text('modbus'); showCont(xdybpzPotocolModbus,'.potocolBox'); break
-        case 1: potocolType.text('645-1997'); break
-        case 2: potocolType.text('645-2007'); break
-        case 3: potocolType.text('102'); break
+        case 0: 
+            potocolType.text('modbus').attr('data-potocol',0)
+            showCont(xdybpzPotocolModbus,'.potocolBox')
+            showCont('#xdybpzDefTable','.xdybpzTable')
+            break
+        case 1: 
+            potocolType.text('645-1997').attr('data-potocol',1)
+            show645Potocol()
+            showCont('#xdybpz645Table','.xdybpzTable')
+            break
+        case 2: 
+            potocolType.text('645-2007').attr('data-potocol',2)
+            show645Potocol()
+            showCont('#xdybpz645Table','.xdybpzTable')
+            break
+        case 3: 
+            potocolType.text('102').attr('data-potocol',3)
+            showCont(xdybpzPotocol102,'.potocolBox')
+            showCont('#xdybpz102Table','.xdybpzTable')
+            break
     }
     for(var i = 0, l = data.slave.length; i < l; i++) { // 生成设备列表
         str += xdybpzGet(data.slave[i][0],data.slave[i][1]) 
     }
     xdybpzList.empty().append(str)    
+}
+function show645Potocol() {
+    xdybpzPotocol645.removeClass('hide')
+    xdybpzPotocolModbus.removeClass('hide')
+    xdybpzPotocol102.addClass('hide')
 }
 function xdybpzGet(name, addr) {
     var str = ''
@@ -415,7 +448,7 @@ function cmd33ModDone(that,addr,name) {
        })
        
 }
-function cmd35Done(data) {
+function cmd35DefDone(data) {
    var str = ''
    slaveAddr.text(data.slaveaddr) 
    str += loopTable(data.funcode,gnmtTr,2) // calling loop table and category 2 is this.cat 2 
@@ -550,8 +583,8 @@ function popupSel(){
     });
 }
 // 下端仪表设备功能码选择
-$(document).on('click','#xdybpzSel',xdybpzSelect)
-$(document).on('click','#sjjzpzSel',sjjzpzSelect)
+$(doc).on('click','#xdybpzSel',xdybpzSelect)
+$(doc).on('click','#sjjzpzSel',sjjzpzSelect)
 function sjjzpzSelect() {
     $('#sjjzpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,sjjzpzDefTable) }) // pass this num to sort table function 
 }
@@ -744,32 +777,42 @@ function cmd3Done(data) {
     }
 }
 // login
-$(document).on('click','#loginBtn',login)
+$(doc).on('click','#loginBtn',login)
 function login() {
     var $this = $(this)
-        wrap = $this.parents('#loginBox')
-        loginUsernameV = loginUsername.val().trim() 
-        loginPasswordV = loginPassword.val().trim()
+      , loginUsernameV = loginUsername.val().trim() 
+      , loginPasswordV = loginPassword.val().trim()
+
     if(!voidCheck(loginUsernameV)) alert('用户名不能为空')
     else if(!voidCheck(loginPasswordV)) alert('密码不能为空')
-    else demand.start({data: {cmd: 1, user:loginUsernameV, password:loginPasswordV},done:cmd1Done})
+    else {
+        createCookie(loginUsernameV,'login',0.1) // set 1 hour expires
+        demand.start({data: {cmd: 1, user:loginUsernameV, password:loginPasswordV},done:cmd1Done})
+    }
+}
+// hide login box if has cookie
+if(!(readCookie(loginUsername.val().trim()) === null)) loginSetting() 
+
+function loginSetting() {
+    showCont('#siteWrapper',loginBox); $('#siteUsername').text(loginUsername.val().trim()); 
 }
 function cmd1Done(data) {
     switch(data.status) {
-        case 0: loginBox.addClass('hide').siblings('#siteWrapper').removeClass('hide'); $('#siteUsername').text(loginUsername.val().trim()); break
+        case 0: loginSetting(); break
         case 1: alert('用户名错误'); break
         case 2: alert('密码错误'); break
     }
 }
 // logout
-$(document).on('click','#siteLogout',logout)
+$(doc).on('click','#siteLogout',logout)
 function logout() {
+    eraseCookie(loginUsername.val().trim()) 
     loginBox.removeClass('hide').siblings('#siteWrapper').addClass('hide')
     loginUsername.val('') && loginPassword.val('')
 }
 
 // 端口配置 DHCP
-$(document).on('click', dhcpS, dhcpSelect)
+$(doc).on('click', dhcpS, dhcpSelect)
 function dhcpSelect() {
      $('#dhcpsele option:selected').each(function(){
         var $this = $(this)
@@ -781,13 +824,11 @@ function dhcpSelect() {
      })  
 }
 function beEdited() {
-// 1 is edited, 0 is unedited
-var v = Array.prototype.shift.call(arguments)
-if(v == 1) for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','true').css('background-color','pink')
-else for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','false').css('background-color','#fff')
-
+    // 1 is edited, 0 is unedited
+    var v = Array.prototype.shift.call(arguments)
+    if(v == 1) for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','true').css('background-color','pink')
+    else for(var i = 0, l = arguments.length; i < l; i++) arguments[i].attr('contenteditable','false').css('background-color','#fff')
 }
-$(document).on('click','#sjjzpzSel',sjjzpzSelect)
 function sjjzpzSelect() {
     $('#sjjzpzSel option:selected').each(function(){ var num = $(this).text(); sortTable(num,sjjzpzDefTable) }) // pass this num to sort table function 
 }
@@ -824,6 +865,39 @@ function xdybpzSave() {
     demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr,funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:cmd37SaveDone})
     }
 }
+
+// cookie
+function createCookie(name, value, days) {
+    var expires
+
+    if(days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toGMTString();
+    } else {
+        expires = '';
+    }
+    doc.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=/';
+}
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + '='
+      , ca = doc.cookie.split(';')
+    for(var i = 0, l = ca.length; i < l; i++) {
+        var c = ca[i]
+        while(c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if(c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length)); // just return value
+    }
+    return null;
+}
+function eraseCookie(name) {
+    createCookie(name, '', -1)
+}
+//createCookie('test','lala1',1)
+//console.log('test'.length)
+//console.log(doc.cookie.split(';')[0].substring(4))
+//console.log(readCookie('test111'))
+//localStorage.setItem('bar','foo')
+//console.log(localStorage.getItem('bar'))
 
 
 // REG 
@@ -867,4 +941,4 @@ function validateRealNum(val) {
     var patten = /^-?\d+\.?\d*$/;
     return patten.test(val);
 }
-}());
+}(document,window));
