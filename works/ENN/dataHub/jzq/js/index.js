@@ -299,15 +299,16 @@ function xdybpzInnerList() {
         str = $this.find('.slave-addr-val').text().trim()
         slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
         nav.navShow($this) // highlight
+        console.log(potocolType.attr('data-potocol'))
         switch(potocolType.attr('data-potocol')) { // check potocol type
-            case 0:
+            case '0':
                 demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35DefDone})     
                 break
-            case 1:
-            case 2:
+            case '1':
+            case '2':
                 demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
                 break
-            case 3:
+            case '3':
                 demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd102Done})     
                 break
         }
