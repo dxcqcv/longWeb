@@ -88,6 +88,10 @@ var demand = new Request() // instance for request
   , loginUsername = $('#loginUsername')
   , loginPassword = $('#loginPW')
   , loginBox = $('#loginBox')
+  , potocolType = $('#xdybpzPotocolType')
+  , xdybpzPotocol645 = $('#xdybpzPotocol645')
+  , xdybpzPotocolModbus = $('#xdybpzPotocolModbus')
+  , xdybpzPotocol102 = $('#xdybpzPotocol102')
 
 // nav class
 function Navigation() {
@@ -367,9 +371,20 @@ function cmd21Done(data) {
     saveBtn.text('保存')
     }
 }
+/*
+  , xdybpzPotocol645 = $('#xdybpzPotocol645')
+  , xdybpzPotocolModbus = $('#xdybpzPotocolModbus')
+  , xdybpzPotocol102 = $('#xdybpzPotocol102')
+  */
 function cmd31Done(data) {
     var str = ''
-    for(var i = 0, l = data.slave.length; i < l; i++) {
+    switch(data.protocol) { // 修改下端仪表配置协议类型
+        case 0: potocolType.text('modbus'); showCont(xdybpzPotocolModbus,'.potocolBox'); break
+        case 1: potocolType.text('645-1997'); break
+        case 2: potocolType.text('645-2007'); break
+        case 3: potocolType.text('102'); break
+    }
+    for(var i = 0, l = data.slave.length; i < l; i++) { // 生成设备列表
         str += xdybpzGet(data.slave[i][0],data.slave[i][1]) 
     }
     xdybpzList.empty().append(str)    
