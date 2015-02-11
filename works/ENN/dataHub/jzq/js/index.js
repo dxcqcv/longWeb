@@ -457,31 +457,53 @@ function cmd35DefDone(data) {
 }
 function loopTable(obj,fn,category) {
     var str = ''
-      , arr = []
-        console.log(obj)
+      , sortArr = []
+
       for (var key in obj) {
         var o = obj[key]
-        arr.push(key)
-        //console.log(arr.sort())
         for(var prop in o) {
             if(o.hasOwnProperty(prop)) {
-                console.log(prop + "=" + o[prop])
+                //console.log(prop + "=" + o[prop])
+                sortArr.push([prop,o[prop]]) // push obj to array
             }
         }
       }
-// loop form
-    $.each(obj, function(index, value){
-          $.each(value, function(k,v){
-              switch(k) {
-                    case '1':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                        });
-                        break;
-                    case '2':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+      sortArr.sort() // sort array
+for(var i = 0, l = sortArr.length; i < l; i++) {
+    //console.log(sortArr[i][0]) // gnm number
+    for(var j = 0, k = sortArr[i][1].length; j < k; j++) {
+        //console.log(sortArr[i][1][j]) 
+        for(var s = 0, e = sortArr[i][1][j].length; s < e; s++) {
+            //console.log(sortArr[i][1][j][s]) // td contents
+            var val = []
+            val.push(sortArr[i][1][j][s])
+            console.log(val)
+            if(category == 2) str += fn(sortArr[i][0],sortArr[i][1][j][0],sortArr[i][1][j][1])
+            else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
+            /*
+            if(category == 2) str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+            else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
+            */
+            }
+        }
+        
+    }
+    // loop form
+    /*
+        if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+        else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
+        $.each(obj, function(index, value){
+              $.each(value, function(k,v){
+                  switch(k) {
+                        case '1':
+                            $.each(v, function(key, val){
+                                if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
+                                else str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
+                            });
+                            break;
+                        case '2':
+                            $.each(v, function(key, val){
+                                if(category == 2) str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
                             else str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
                     });
                         break;
@@ -513,6 +535,7 @@ function loopTable(obj,fn,category) {
 
           });
     }); 
+    */
     return str
 }
 function cmd37SaveDone(that) { // restore bg color if done
