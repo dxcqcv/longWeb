@@ -319,7 +319,11 @@ function gnmtTr() {
     var str = ''
     str += '<tr>'
     for(var i = 0, l = arguments.length; i < l; i++) {
-        str += '<td>' + arguments[i] + '</td>'
+        if(typeof arguments[i] === 'string') str += '<td>' + arguments[i] + '</td>' // gnm
+        if(typeof arguments[i] === 'object') { // contents
+            for(var j = 0, k = arguments[i].length; j < k; j++)
+                str += '<td>' + arguments[i][j] + '</td>'
+        }
     }
     str += '<td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide ml10">保存</span></td>'
     str += '</tr>';
@@ -329,7 +333,11 @@ function sjjzpzStructure() {
     var str = ''
     str = '<tr >'
     for(var i = 0, l = arguments.length; i < l; i++) {
-        str += '<td>' + arguments[i] + '</td>'
+        if(typeof arguments[i] === 'string') str += '<td>' + arguments[i] + '</td>' // gnm
+        if(typeof arguments[i] === 'object') { // contents
+            for(var j = 0, k = arguments[i].length; j < k; j++)
+                str += '<td>' + arguments[i][j] + '</td>'
+        }
     }
         str += '<td><input type="checkbox"></td>'
         str += '<td><span class="" >上移</span><span class="">下移</span></td>'
@@ -469,73 +477,17 @@ function loopTable(obj,fn,category) {
         }
       }
       sortArr.sort() // sort array
-for(var i = 0, l = sortArr.length; i < l; i++) {
-    //console.log(sortArr[i][0]) // gnm number
-    for(var j = 0, k = sortArr[i][1].length; j < k; j++) {
-        //console.log(sortArr[i][1][j]) 
-        for(var s = 0, e = sortArr[i][1][j].length; s < e; s++) {
-            //console.log(sortArr[i][1][j][s]) // td contents
-            var val = []
-            val.push(sortArr[i][1][j][s])
-            console.log(val)
-            if(category == 2) str += fn(sortArr[i][0],sortArr[i][1][j][0],sortArr[i][1][j][1])
-            else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-            /*
-            if(category == 2) str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-            else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-            */
-            }
-        }
-        
-    }
-    // loop form
-    /*
-        if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-        else str += fn(sortArr[i][0],val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-        $.each(obj, function(index, value){
-              $.each(value, function(k,v){
-                  switch(k) {
-                        case '1':
-                            $.each(v, function(key, val){
-                                if(category == 2) str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                                else str += fn(1,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                            });
-                            break;
-                        case '2':
-                            $.each(v, function(key, val){
-                                if(category == 2) str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(2,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                    });
-                        break;
-                    case '3':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(3,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                        });
-                        break;
-                    case '4':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(4,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                        });
-                        break;
-                    case '5':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(5,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                        });
-                        break;
-                    case '16':
-                        $.each(v, function(key, val){
-                            if(category == 2) str += fn(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6])
-                            else str += fn(16,val[0],val[1],val[2],val[3],val[4],val[5],val[6],val[7],val[8],val[9]);        
-                        });
-                        break;
-              }
 
-          });
-    }); 
-    */
+    // loop form
+    for(var i = 0, l = sortArr.length; i < l; i++) {
+        //console.log(sortArr[i][0]) // get gnm number
+        for(var j = 0, k = sortArr[i][1].length; j < k; j++) {
+            //console.log(sortArr[i][1][j]) // get contents array 
+            if(category == 2) str += fn(sortArr[i][0],sortArr[i][1][j])
+            else str += fn(sortArr[i][0],sortArr[i][1][j]);        
+        }
+            
+    }
     return str
 }
 function cmd37SaveDone(that) { // restore bg color if done
