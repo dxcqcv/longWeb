@@ -718,7 +718,7 @@ function xdybpzSave() {
     demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr.text().trim(),funcode:v0,type:3,oldregaddr: oldTableRegaddr, regaddr: v1,regnum: v2,dataformat: v3,regname: v4,regdes: v5,K: v6,D: v7 },done:function(){cmd37SaveDone($this)}})
     }
 }
-// 下端仪表配置的保存
+// 下端仪表配置的删除
 function xdybpzDel() {
     
     var $this = $(this)
@@ -732,7 +732,10 @@ function xdybpzDel() {
       , kxsV = wrap.siblings('td:eq(6)').text()
       , dxsV = wrap.siblings('td:eq(7)').text()
       , xdybpzChannel = xdybpzCont.attr('data-channel')
+      if(!alreadyFlag) alert('请先保存')
+      else {
       demand.start({data:{cmd:37,channel:xdybpzChannel,slaveaddr:slaveAddr.text().trim(),funcode: gnm,type: 2,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: jzxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done:function(){cmd37DelDone($this)}})
+      } 
 
 }
 
