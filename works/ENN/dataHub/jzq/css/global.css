@@ -375,7 +375,7 @@ input { vertical-align: sub; }
 }
 .xdybpz-list > ul > li > span:last-child { position: relative; float: right; }
 .xdybpz-list > ul > li:hover > span:first-child { transition: all 1s; color: #fff; }
-.xdybpz-right-btn-box { text-align: right; margin-top: 10px; }
+.xdybpz-right-btn-box { text-align: right; margin: 10px 0; }
 
 /* 数据集中配置  */
 .sjjzpz-top { margin-bottom: 10px; }

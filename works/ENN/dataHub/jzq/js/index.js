@@ -319,7 +319,9 @@ function gnmtTr() {
     var str = ''
     str += '<tr>'
     for(var i = 0, l = arguments.length; i < l; i++) {
-        if(typeof arguments[i] === 'string') str += '<td>' + arguments[i] + '</td>' // gnm
+        if(typeof arguments[i] === 'string') {
+                str += '<td data-gnm='+arguments[i]+'>' + arguments[i] + '</td>' // gnm
+        }
         if(typeof arguments[i] === 'object') { // contents
             for(var j = 0, k = arguments[i].length; j < k; j++)
                 str += '<td>' + arguments[i][j] + '</td>'
@@ -488,6 +490,7 @@ function loopTable(obj,fn,category) {
         }
             
     }
+    //console.log(str)
     return str
 }
 function cmd37SaveDone(that) { // restore bg color if done
