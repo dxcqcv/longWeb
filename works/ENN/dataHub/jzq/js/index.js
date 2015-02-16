@@ -319,8 +319,10 @@ function gnmtTr() {
     var str = ''
     str += '<tr>'
     for(var i = 0, l = arguments.length; i < l; i++) {
-        if(typeof arguments[i] === 'string') {
+        if(typeof arguments[i] === 'string' && i === 0) {
                 str += '<td data-gnm='+arguments[i]+'>' + arguments[i] + '</td>' // gnm
+        } else if(typeof arguments[i] === 'string') {
+                str += '<td>' + arguments[i] + '</td>' // gnm for add 
         }
         if(typeof arguments[i] === 'object') { // contents
             for(var j = 0, k = arguments[i].length; j < k; j++)
@@ -335,7 +337,7 @@ function sjjzpzStructure() {
     var str = ''
     str = '<tr >'
     for(var i = 0, l = arguments.length; i < l; i++) {
-        if(typeof arguments[i] === 'string') str += '<td>' + arguments[i] + '</td>' // gnm
+        if(typeof arguments[i] === 'string') str += '<td data-gnm='+arguments[i]+'>' + arguments[i] + '</td>' // gnm
         if(typeof arguments[i] === 'object') { // contents
             for(var j = 0, k = arguments[i].length; j < k; j++)
                 str += '<td>' + arguments[i][j] + '</td>'
@@ -461,9 +463,18 @@ function cmd33ModDone(that,addr,name) {
 }
 function cmd35DefDone(data) {
    var str = ''
-   slaveAddr.text(data.slaveaddr) 
+     , gnm = getGnmNum(data.funcode) // return funcode gnm
+   gnm = eliminateDuplicates(gnm) // eliminate duplicates funcode gnm
    str += loopTable(data.funcode,gnmtTr,2) // calling loop table and category 2 is this.cat 2 
+   for(var i = 0, l = gnm.length; i < l; i++) {
+        str = mergeGNM(str, gnm[i]) // rebuilt str
+   }
+
+   slaveAddr.text(data.slaveaddr) 
    xdybpzDefTbody.empty().append(str);
+}
+function compareNumbers(a,b) {
+    return a[0] - b[0] // compare first gnm
 }
 function loopTable(obj,fn,category) {
     var str = ''
@@ -478,7 +489,7 @@ function loopTable(obj,fn,category) {
             }
         }
       }
-      sortArr.sort() // sort array
+      sortArr.sort(compareNumbers) // sort array
 
     // loop form
     for(var i = 0, l = sortArr.length; i < l; i++) {
@@ -504,13 +515,54 @@ function cmd37DelDone(that) {
 function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
     var str = ''
     str = gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) // rendering table tr
-    xdybpzDefTbody.append(str)
+    str.replace(/<td data-gnm='+num+'>'+num+'<\/td>/)
+    //console.log(xdybpzDefTbody.find('*[data-gnm="1"]').last().parent())
+    $(str).insertAfter(xdybpzDefTbody.find('*[data-gnm="1"]').last().parent())
+    //console.log(str)
+    //xdybpzDefTbody.append(str)
     xdybpzCancel()
 }
 function cmd41Done(data) {
     var str = ''
+      , gnm = getGnmNum(data.reglist) // return gnm
+   gnm = eliminateDuplicates(gnm) // eliminate duplicates gnm
    str += loopTable(data.reglist,sjjzpzStructure,3) // calling loop table and category 3 is this.cat 3 
-   sjjzpzDefTable.find('tbody').empty().append(str);
+   for(var i = 0, l = gnm.length; i < l; i++) {
+        str = mergeGNM(str, gnm[i]) // rebuilt str
+   }
+
+    sjjzpzDefTable.find('tbody').empty().append(str);
+}
+function getGnmNum(obj) {
+    var gnm = []
+   for(var key in obj) {
+       var o = obj[key]
+       for(var prop in o) {
+          gnm.push(prop) // get gnm num
+       }
+   }
+   return gnm
+}
+function mergeGNM(str,num) {
+    var regGI = new RegExp('<td data-gnm='+num+'>'+num+'<\/td>','gi')
+      , regI = new RegExp('<td data-gnm='+num+'>'+num+'<\/td>','i')
+      , rowsNum = str.match(regGI).length
+    str = str.replace(regI,'<td rowspan="'+rowsNum+'">'+num+'<\/td>' ) // replace does not change origin str 
+    str = str.replace(regGI,'<td class="hide" data-gnm='+num+'>'+num+'<\/td>') // hide others data-gnm
+    return str
+}
+function eliminateDuplicates(arr) {
+    var i
+      , len = arr.length
+      , out = []
+      , obj = {}
+    for(i = 0; i < len; i++) {
+        obj[arr[i]] = 0 // override duplicate key
+    }
+    for( i in obj) {
+        out.push(i)
+    } 
+    return out
 }
 function cmd50Done(data) {
     alert('已经重启')
@@ -644,6 +696,7 @@ function xdybpzAdd() {
     } else if(!(jcqLength <= 4)) {
         alert('寄存器长度必须小于等于4'); 
     } else {
+        
         demand.start({data:{cmd: 37,channel: xdybpzChannel, slaveaddr: slaveAddr.text().trim(),funcode: gnm,type: 1,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: zjxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done: function(){cmd37AddDone(gnm,jcqAdd,jcqLength,zjxV,jcqName,jcqDes,kxsV,dxsV)}})
     }
 }
