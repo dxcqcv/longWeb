@@ -25,9 +25,10 @@ $(win).resize(function() {
 
 function layout() {
     var winHei = $(win).height()
-      , conHei = winHei - 72
+      , conHei = winHei - 72 
+      , cont = $('.content') 
 
-    $('.content').height(conHei)
+    cont.height(conHei) // this'll change content height
 }
 // for ajax 
 function Request() {
@@ -192,7 +193,7 @@ Navigation.prototype = {
           this.subTitle.text('串口'+realSide) // set sub title
           switch(this.cat) {
             case 0:
-                demand.start({url:'test.json',data:{cmd:13,channel:realSide},done:cmd13Done})      
+                demand.start({data:{cmd:13,channel:realSide},done:cmd13Done})      
                 break
             case 1:
                 showCont('#dkpzOptions', '.contWrap')
@@ -239,10 +240,10 @@ Navigation.prototype = {
           if(this.cat == 0 || this.cat == 1) this.subTitle.text('网络')
           switch(this.cat) {
             case 0:
-                demand.start({url:'test.json',data:{cmd:11},done:cmd11Done})      
+                demand.start({data:{cmd:11},done:cmd11Done})      
                 break
             case 1:
-                demand.start({url:'test.json',data:{cmd:15},done:cmd15Done})
+                demand.start({data:{cmd:15},done:cmd15Done})
                 saveBtn.attr('data-save','net').removeAttr('data-channel') // change save attr
                 showCont('#dkpzTable', '.contWrap')
                 break
@@ -514,13 +515,37 @@ function cmd37DelDone(that) {
 }
 function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
     var str = ''
+      , tr = xdybpzDefTbody.find('*[data-gnm="'+gnm+'"]').last().parent()// a class the last tr
+      , arr = []
+      , regGI = new RegExp('<td data-gnm='+gnm+'>'+gnm+'<\/td>','gi')
+
     str = gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) // rendering table tr
-    str.replace(/<td data-gnm='+num+'>'+num+'<\/td>/)
-    //console.log(xdybpzDefTbody.find('*[data-gnm="1"]').last().parent())
-    $(str).insertAfter(xdybpzDefTbody.find('*[data-gnm="1"]').last().parent())
-    //console.log(str)
-    //xdybpzDefTbody.append(str)
-    xdybpzCancel()
+    if(tr.length === 0) { // it's first line
+        str = str.replace(regGI, '<td rowspan="1" data-gnm='+gnm+'>'+gnm+'<\/td>') // add rowspan for first line
+        xdybpzDefTbody.find('tr').children('td').each(function() {
+        var $this = $(this)
+          , eachGnm = $this.attr('data-gnm')
+        if(typeof eachGnm == 'undefined')  return // no gnm return
+            arr.push(eachGnm) // get gnm arr
+        })
+        arr = eliminateDuplicates(arr) // eliminate duplicates in arr
+        for(var i = 0, l = arr.length; i < l; i++) {
+            arr[i] = parseInt(arr[i]) // be number
+            gnm = parseInt(gnm) // be number
+            if(gnm > arr[i] && gnm < arr[i+1]) {
+                $(str).insertAfter(xdybpzDefTbody.find('*[data-gnm="'+arr[i]+'"]').last().parent()) 
+            }
+        }
+    } else {
+        str = str.replace(regGI,'<td class="hide" data-gnm='+gnm+'>'+gnm+'<\/td>') // hide others data-gnm
+        $(str).insertAfter(tr).each(function() { // this is tr
+            var firstTd = $(this).siblings('tr').find('*[data-gnm="'+gnm+'"]').first() // gnm of first is show
+              , num = parseInt(firstTd.attr('rowspan')) // remember to be number
+              firstTd.attr('rowspan',num+1)
+        }) //  
+        
+    }
+    xdybpzCancel() // hide pop-up
 }
 function cmd41Done(data) {
     var str = ''
@@ -547,7 +572,7 @@ function mergeGNM(str,num) {
     var regGI = new RegExp('<td data-gnm='+num+'>'+num+'<\/td>','gi')
       , regI = new RegExp('<td data-gnm='+num+'>'+num+'<\/td>','i')
       , rowsNum = str.match(regGI).length
-    str = str.replace(regI,'<td rowspan="'+rowsNum+'">'+num+'<\/td>' ) // replace does not change origin str 
+    str = str.replace(regI,'<td data-gnm='+num+' rowspan="'+rowsNum+'">'+num+'<\/td>' ) // replace does not change origin str 
     str = str.replace(regGI,'<td class="hide" data-gnm='+num+'>'+num+'<\/td>') // hide others data-gnm
     return str
 }
@@ -579,7 +604,7 @@ function doneFn() {
 function saveBtn() {
     var $this = $(this)
     $this.text('保存中')
-    if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({url:'test.json',data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({url:'test.json', data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
+    if($this.attr('data-save') == 'net') dhcpS.val() == 1 ? demand.start({data:{cmd:17,dhcp:1},done:cmd17Done}): demand.start({data:{cmd:17,dhcp:0,ip:ipV.text(),mask:maskV.text(), gateway:gatewayV.text()},done:cmd17Done}) // submit when it's net 
     else demand.start({data:{cmd:21, channel:$this.data('channel'), protocol:protocol.val(), baudrate:baudrate.val(), databit:databit.val(), stopbit:stopbit.val(), paritybit:paritybit.val()},done:cmd21Done}) // it's not net 
 }
 // 修改设备
@@ -817,16 +842,18 @@ function cmd3Done(data) {
 }
 // login
 $(doc).on('click','#loginBtn',login)
-function login() {
+$(doc).on('keypress','#loginPW',login)
+function login(e) {
     var $this = $(this)
       , loginUsernameV = loginUsername.val().trim() 
       , loginPasswordV = loginPassword.val().trim()
-
-    if(!voidCheck(loginUsernameV)) alert('用户名不能为空')
-    else if(!voidCheck(loginPasswordV)) alert('密码不能为空')
-    else {
-        createCookie(loginUsernameV,'login',0.1) // set 1 hour expires
-        demand.start({data: {cmd: 1, user:loginUsernameV, password:loginPasswordV},done:cmd1Done})
+    if(e.type == 'click' || e.keyCode == 13 || e.which == 13) {
+        if(!voidCheck(loginUsernameV)) alert('用户名不能为空')
+        else if(!voidCheck(loginPasswordV)) alert('密码不能为空')
+        else {
+            createCookie(loginUsernameV,'login',0.1) // set 1 hour expires
+            demand.start({data: {cmd: 1, user:loginUsernameV, password:loginPasswordV},done:cmd1Done})
+        }
     }
 }
 // hide login box if has cookie
@@ -834,6 +861,7 @@ if(!(readCookie(loginUsername.val().trim()) === null)) loginSetting()
 
 function loginSetting() {
     showCont('#siteWrapper',loginBox); $('#siteUsername').text(loginUsername.val().trim()); 
+    demand.start({data:{cmd:11},done:cmd11Done})      
 }
 function cmd1Done(data) {
     switch(data.status) {

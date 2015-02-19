@@ -219,6 +219,7 @@ input { vertical-align: sub; }
 /* content */
 .content { 
     background: #E6F3FB;
+    height: 100%;
 }
 .content-left {
     width: 10%;
