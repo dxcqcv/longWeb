@@ -1,9 +1,9 @@
 (function(doc,win){
 // for content height
-    layout();
+//    layout();
 
 $(win).resize(function() {
-    layout();
+ //   layout();
 })
 
     $(doc).on('click','.content-left li',leftNav) // sider nav

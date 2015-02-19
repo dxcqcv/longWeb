@@ -112,12 +112,13 @@ transform: scaleY(1.0);
 }
 
 /* global css */
-html, body { height: 100%; font: normal 12px/1.5 "Microsoft YaHei" }
+html, body {  height: 100%; font: normal 12px/1.5 "Microsoft YaHei" }
 .wrapper {
     width: 1280px;
     margin: 0 auto;
     background: #39c;
     height: 100%;
+    display: table;
 }
 .left { float: left; }
 .right { float: right; }
@@ -150,6 +151,8 @@ input { vertical-align: sub; }
     height: 72px;
     position: relative;
     border-bottom: 3px solid #063060;
+    display: table-row;
+    width: 100%;
 }
 .header-left { 
     padding-left: 10px;
@@ -220,6 +223,7 @@ input { vertical-align: sub; }
 .content { 
     background: #E6F3FB;
     height: 100%;
+    display: table-row;
 }
 .content-left {
     width: 10%;
