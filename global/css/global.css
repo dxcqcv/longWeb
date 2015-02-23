@@ -104,12 +104,5 @@ vertical-align:middle;
 /* for head and footer */
 
 .hide { display: none; }
-
 ul { list-style: none; }
-body {
-    background-color: #f7f7f7;
-}
-.content {
-    width: 960px;
-    margin: 0 auto;
-}
+html,body {height:100%}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>大屏展示——远程系统</title>
+    <link rel="stylesheet" href="../../../../global/css/global.css" media="all">
+    <style>
+        .map-wrap { width:100%; height: 100%;}
+    </style>
+</head>
+<body>
+<div id="wrap" class="map-wrap"></div>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<script src="../../../../global/js/jquery-1.11.0.min.js"></script>
+<script>
+/*
+var map = new qq.maps.Map(document.getElementById('map')), {
+
+});
+        */
+ var map = new qq.maps.Map(document.getElementById("wrap"), {
+            // 地图的中心地理坐标。
+            center: new qq.maps.LatLng(39.916527, 116.397128)
+        });
+</script>
+</body>
+</html>
