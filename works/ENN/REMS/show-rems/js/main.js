@@ -20,7 +20,7 @@ map.enableAutoResize();
 
 /* ibs map */
 		//初始化地图对象，加载地图
-		var map = new AMap.Map('wrap',{
+		var map = new AMap.Map('mapBox',{
 			resizeEnable: true,
 	        rotateEnable:true,
 	        dragEnable:true,
@@ -29,7 +29,13 @@ map.enableAutoResize();
 	        //设置地图中心点
 	        //设置地图显示的缩放级别
 	        view: new AMap.View2D({
-	            center: new AMap.LngLat(121.498586, 31.239637),
-	            zoom: 15 
+	            //center: new AMap.LngLat(121.498586, 31.239637),
+	            center: new AMap.LngLat(106.387516,37.729803),
+	            zoom: 4 
 	        })
 	    });
+        /*
+        map.setCity('中国');
+        map.setCity('上海');
+        map.setCity('北京');
+        */
