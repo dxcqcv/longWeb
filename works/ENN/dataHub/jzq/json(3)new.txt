@@ -1,0 +1,157 @@
+cmd:  1    	/*REQ*/
+user:     	/*string类型. 用户名*/
+password:	/*string类型. 密码*/
+
+cmd:  2     	/*RSP*/
+status:        	/*int类型. 0:成功，1:用户名错误，2:密码错误*/
+
+cmd:  3 	/*REQ*/   
+user:     	/*string类型. 用户名*/
+oldpassword:	/*string类型. 旧密码*/
+newpassword	/*string类型. 新密码*/
+
+cmd:  4    	/*RSP*/
+status:        	/*int类型. 0:成功，1:用户名错误，2:原密码错误*/
+
+
+cmd:  11    	/*REQ*/
+
+cmd:  12    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+webport:        /*int类型. 8082*/
+modbusport:	/*int类型. 502*/
+
+cmd:  13    	/*REQ*/ 
+channel: 	/*1,2,3,4,5,6,7,8*/
+
+cmd:  14    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+channel: 	/*int类型. 1,2,3,4,5,6,7,8*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
+slave: [[1,2,3],[1,2,3]...]	/*三位数组[int/string,string,int].   1:设备号(protocol=0是int，protocol=1或者2是string) 2:设备名 3:状态(0表示正常，1表示故障)*/
+
+cmd:  15    	/*REQ   获取IP地址*/     
+
+cmd:  16    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+ip:		/*string类型. 0.0.0.0*/
+mask:		/*string类型. 0.0.0.0*/
+gateway:	/*string类型. 0.0.0.0*/
+
+cmd:  17    	/*REQ   设置IP地址*/     
+ip:		/*string类型. 0.0.0.0*/
+mask:		/*string类型. 0.0.0.0*/
+gateway:	/*string类型. 0.0.0.0*/
+
+cmd:  18    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+
+cmd:  19    	/*REQ   获取串口参数配置*/     
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+
+cmd:  20    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
+baudrate:	/*int类型. 波特率: 4800, 9600, 19200, 38400, 56000, 57600, 115200*/
+databit:	/*int类型. 数据位: 5, 6, 7, 8*/
+stopbit:	/*int类型. 停止位: 1, 2*/
+paritybit:	/*int类型. 校验位: None: 0, Odd: 1, Even: 2, Mark: 3, Space: 4*/
+
+cmd:  21    	/*REQ   设置串口参数配置*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
+baudrate:	/*int类型. 波特率: 4800, 9600, 19200, 38400, 56000, 57600, 115200*/
+databit:	/*int类型. 数据位: 5, 6, 7, 8*/
+stopbit:	/*int类型. 停止位: 1, 2*/
+paritybit:	/*string类型. 校验位: None, Odd, Even, Mark, Space*/
+
+cmd:  22    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+
+
+/*仪表配置*/
+
+cmd:  31    	/*REQ   获取设备*/ 
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+
+cmd:  32    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
+slave: [[1,2],[1,2]...]	/*二位数组[int,string].   1:设备号 2:设备名 */
+
+cmd:  33    	/*REQ   设备操作:增加、删除、修改*/ 
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+type:        	/*int类型. 1:增加，2:删除，3:修改*/
+oldslaveaddr:	/*int类型.*/
+slaveaddr:	/*int类型.*/
+slavename:	/*string类型.*/
+
+cmd:  34    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+type:        	/*int类型. 1:增加，2:删除，3:修改*/
+oldslaveaddr:	/*int类型.*/
+slaveaddr:	/*int类型.*/
+slavename:	/*string类型.*/
+
+
+cmd:  35    	/*REQ   获取设备寄存器配置等数据*/ 
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+slaveaddr:		/*int类型. 设备地址*/
+
+cmd:  36    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+slaveaddr:	/*int类型. 设备地址*/
+
+funcode: [[3,1,2,3,4,5,6],[16,1,2,3,4,5,6],...],...]
+
+funcode[1]: {funcode:3,ggcode:[[1,2,3,4,5,6],[1,2,3,4,5,6],...]}	 /*1:寄存器地址int(1~255),2:寄存器个数int(),3:字节序,4:寄存器名字,5:寄存器描述,6:K系数,7:D系数*/
+funcode[2]: {funcode:[[1,2,3,4,5,6],[1,2,3,4,5,6],...]}	 /*1:寄存器地址,2:寄存器个数,3:字节序,4:寄存器名字,5:寄存器描述,6:K系数,7:D系数*/
+...
+['3']=>['2']
+
+cmd:  37    	/*REQ   对应的功能码寄存器操作*/ 
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+slaveaddr:	/*int类型. 设备地址*/
+funcode:	/*int类型. 功能码*/
+type:		/*1:增加   2:删除    3:修改*/
+oldregaddr:	/*int类型(1~255). 寄存器地址,只有修改的时候是原有的寄存器地址，否则跟下面的regaddr是同一个值*/
+regaddr:	/*int类型(1~255). 寄存器地址*/
+regnum:		/*int类型(<=4). 寄存器个数*/
+dataformat:	/*string类型. 字节序*/
+regname:	/*string类型. 寄存器名字*/
+regdes:		/*string类型. 寄存器描述*/
+K:		/*string类型. 寄存器描述*/
+D:		/*string类型. 寄存器描述*/
+
+cmd:  38    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+slaveaddr: 	/*int类型. 设备地址*/
+funcode:	/*int类型. 功能码*/
+type:		/*1:增加   2:删除    3:修改*/
+regaddr:	/*int类型(1~255). 寄存器地址*/
+
+cmd:  39    	/*REQ   保存仪表配置*/ 
+
+
+cmd:  40    	/*RSP*/
+status:        	/*int类型. 0:成功，1:错误*/
+
+
+cmd:  41    	/*REQ*/ 
+
+
+cmd:  42    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+reglist: [{funcode:[[1,2,3,4,5,6,7,8,9,10],[1,2,3,4,5,6,7,8,9,10],...]},
+	  {funcode:[[1,2,3,4,5,6,7,8,9,10],[1,2,3,4,5,6,7,8,9,10],...]}
+         ]    
+
+
+cmd:  50    	/*REQ   重启数据集中器命令*/ 
+ 
