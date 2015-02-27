@@ -36,8 +36,8 @@ function Request() {
 }
 Request.prototype = {
     start: function(opt) {
-        //var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
-        var url = opt.url ? opt.url : 'test.json'
+        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        //var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 1000
@@ -56,7 +56,7 @@ Request.prototype = {
               , dataType: 'json' // set json file type
               , mimeType: 'application/json' // for not well form
               , beforeSend: function() {
-                    self.loading.removeClass('hide')
+                    //self.loading.removeClass('hide')
                     if(currentRequest != null) currentRequest.abort()
               }
             })
@@ -67,7 +67,7 @@ Request.prototype = {
               done(d)
             })
             .fail(function(jqXHR, textStatus){
-                if(textStatus == "timeout") alert('timeout')
+                if(textStatus == "timeout"){  demand.start({url:'../../../cgi-bin/clear.cgi'}); alert('timeout'); $('table').find('tbody').empty() }
                 fail(jqXHR,textStatus)
             })
         }
@@ -361,23 +361,27 @@ function cmd11Done(data) {
 function cmd13Done(data) {
     var str = ''
       , protocol, protocolNum = data.protocol
+      , tbody = $('#ztxxPortTable').find('tbody')
     switch(protocolNum) {
-        case 0: protocol = 'modbus'; break
-        case 1: protocol = '645-1997'; break
-        case 2: protocol = '645-2007'; break
+        case '0': protocol = 'modbus'; break
+        case '1': protocol = '645-1997'; break
+        case '2': protocol = '645-2007'; break
     }
 
     showCont('#ztxxPortTable','.contWrap')
-    for(var i = 0, l = data.slave.length; i < l; i++) {
-        str += '<tr>'               
-             + '<td data-protocol="'+protocolNum+'">' + protocol + '</td>'
-             + '<td>' + data.slave[i][1] + '</td>'
-             + '<td>' + data.slave[i][2] + '</td>'
-             + '<td>' + (data.slave[i][3] ? '故障' : '正常') + '</td></tr>'
-    }
+    if(typeof data.slave === 'undefined') tbody.empty() 
+    else {
+        for(var i = 0, l = data.slave.length; i < l; i++) {
+            str += '<tr>'               
+                 + '<td data-protocol="'+protocolNum+'">' + protocol + '</td>'
+                 + '<td>' + data.slave[i][0] + '</td>'
+                 + '<td>' + data.slave[i][1] + '</td>'
+                 + '<td>' + (data.slave[i][3] ? '故障' : '正常') + '</td></tr>'
+        }
 
-    str = mergeProtocol(str, protocolNum) 
-    $('#ztxxPortTable').find('tbody').empty().append(str)
+        str = mergeProtocol(str, protocolNum) 
+        tbody.empty().append(str)
+    }
 }
 function mergeProtocol(str,num) {
     var regGI = new RegExp('<td data-protocol="'+num+'">','gi')
@@ -886,9 +890,9 @@ function loginSetting() {
 }
 function cmd1Done(data) {
     switch(data.status) {
-        case 0: loginSetting(); break
-        case 1: alert('用户名错误'); break
-        case 2: alert('密码错误'); break
+        case '0': loginSetting(); break
+        case '1': alert('用户名错误'); break
+        case '2': alert('密码错误'); break
     }
 }
 // logout
