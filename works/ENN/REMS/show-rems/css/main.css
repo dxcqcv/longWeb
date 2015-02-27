@@ -9,7 +9,7 @@
 .map-right { 
     right: 0; width: 30%; height: 100%; 
     background: -moz-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
-    background: -webkit-linear-gradient(right,#124ead,#eceef0 );
+    background: -webkit-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
 }
 /*
 
