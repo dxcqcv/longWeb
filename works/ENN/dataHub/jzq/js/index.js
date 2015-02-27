@@ -147,7 +147,7 @@ Navigation.prototype = {
         if(this.cat !== 4) showCont('#sideNav','.sidebarNav') // restore nomal side bar
 
         switch(this.cat) {
-            case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxTable', '.contWrap'); break // show default cont   
+            case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxNetTable', '.contWrap'); break // show default cont   
             case 1: this.title.text('端口配置'); this.showNetSave(); break   
             case 2: 
                 this.title.text('下端仪表配置')
@@ -176,18 +176,21 @@ Navigation.prototype = {
         }
   }
   , changeSide: function(side) {
+      var realSide = typeof(side) == 'undefined' ? this.side : side // set side num 
+  /*
       var table = $('#ztxxTable') 
         , tbody = table.find('tbody#ztxxNetTbody')
         , th = table.find('th')
         , realSide = typeof(side) == 'undefined' ? this.side : side // set side num 
        
       if(this.cat === 0 && this.side !== 0) { // 状态信息 
-         th.eq(0).text('设备号') 
-         th.eq(1).text('设备') 
+         th.eq(0).text('设备地址') 
+         th.eq(1).text('设备名') 
       } else {
          th.eq(0).text('项目') 
          th.eq(1).text('端口') 
       }
+      */
       //console.log(this.cat)
       if(realSide !== 0) { // when channel 1~8
           this.subTitle.text('串口'+realSide) // set sub title
@@ -351,20 +354,38 @@ function sjjzpzStructure() {
 }
 /* ajax fn */
 function cmd11Done(data) {
-    showCont('#ztxxNetTbody', '.ztxxTbody')
+    showCont('#ztxxNetTable','.contWrap')
     $('#webportV').text(data.webport)
     $('#modbusportV').text(data.modbusport)
 }
 function cmd13Done(data) {
     var str = ''
-    showCont('#ztxxPortTbody','.ztxxTbody')
+      , protocol, protocolNum = data.protocol
+    switch(protocolNum) {
+        case 0: protocol = 'modbus'; break
+        case 1: protocol = '645-1997'; break
+        case 2: protocol = '645-2007'; break
+    }
+
+    showCont('#ztxxPortTable','.contWrap')
     for(var i = 0, l = data.slave.length; i < l; i++) {
         str += '<tr>'               
-             + '<td>' + data.slave[i][0] + '</td>'
+             + '<td data-protocol="'+protocolNum+'">' + protocol + '</td>'
              + '<td>' + data.slave[i][1] + '</td>'
-             + '<td>' + (data.slave[i][2] ? '故障' : '正常') + '</td>'
+             + '<td>' + data.slave[i][2] + '</td>'
+             + '<td>' + (data.slave[i][3] ? '故障' : '正常') + '</td></tr>'
     }
-    $('#ztxxPortTbody').empty().append(str)
+
+    str = mergeProtocol(str, protocolNum) 
+    $('#ztxxPortTable').find('tbody').empty().append(str)
+}
+function mergeProtocol(str,num) {
+    var regGI = new RegExp('<td data-protocol="'+num+'">','gi')
+      , regI = new RegExp('<td data-protocol="'+num+'">','i')
+      , rowsNum = str.match(regGI).length
+    str = str.replace(regI,'<td data-protocol='+num+' rowspan="'+rowsNum+'">' ) // replace does not change origin str 
+    str = str.replace(regGI,'<td class="hide" data-protocol='+num+'>'+num+'<\/td>') // hide others data-protocol
+    return str
 }
 function cmd15Done(data) {
     var str = '' 

@@ -156,6 +156,7 @@ input { vertical-align: sub; }
 }
 .header-left { 
     padding-left: 10px;
+    height: 72px;
 }
 .head-logo {
 	width: 134px;

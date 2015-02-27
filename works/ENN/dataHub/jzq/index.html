@@ -86,7 +86,7 @@
             <p class="content-nav">
               当前位置：<span id="contNavStat" class="cont-nav-status">状态信息</span>&nbsp;&gt;&nbsp;<span id="contSubNavStat" class="cont-sub-nav-status">网络</span>
             </p>            
-            <table id="ztxxTable" class="contWrap">
+            <table id="ztxxNetTable" class="contWrap">
             	<thead>
             		<tr>
             			<th>项目</th>
@@ -94,7 +94,7 @@
             			<th>状态</th>
             		</tr>
             	</thead>
-                <tbody id="ztxxNetTbody" class="ztxxTbody">
+                <tbody class="ztxxTbody">
                     <tr>
                     	<td>webport</td>
                     	<td id="webportV">未知</td>
@@ -106,7 +106,18 @@
                     	<td><span class="status-ico success-ico"></span></td>
                     </tr>
                 </tbody>
-                <tbody id="ztxxPortTbody" class="hide ztxxTbody"></tbody>
+            </table>
+            <table id="ztxxPortTable" class="contWrap hide">
+            	<thead>
+            		<tr>
+            			<th>通讯协议</th>
+            			<th>设备地址</th>
+            			<th>设备名</th>
+            			<th>状态</th>
+            		</tr>
+            	</thead>
+                <tbody >
+                </tbody>
             </table>
             <table id="dkpzTable" class="contWrap hide">
                 <thead>
