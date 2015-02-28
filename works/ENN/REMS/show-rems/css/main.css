@@ -11,6 +11,13 @@
     background: -moz-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
     background: -webkit-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
 }
+/* test */
+.testChart{ width:500px; height: 250px; background: #ccc; }
+path {fill:none;stroke:#39c; stroke-width:2;}
+.domain, .tick line {
+    stroke: gray;
+    stroke-width: 1;
+}
 /*
 
     box-shadow: 5px 0 15px 15px rgba(17,77,173,0);
