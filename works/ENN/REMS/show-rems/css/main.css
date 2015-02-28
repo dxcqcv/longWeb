@@ -2,12 +2,12 @@
 .map-box { width:100%; height: 100%;}
 .map-sider { position: absolute; z-index: 1; top: 0;}
 .map-left { 
-    left: 0; width: 30%; height: 100%; 
-    background: -moz-linear-gradient(left,#124ead,#eceef0 );
-    background: -webkit-linear-gradient(left,#124ead,#eceef0 );
+    left: 0; width: 25%; height: 100%; 
+    background: -moz-linear-gradient(left,rgba(17,77,173,1), rgba(17,77,173,0));
+    background: -webkit-linear-gradient(left,rgba(17,77,173,1), rgba(17,77,173,0));
 }
 .map-right { 
-    right: 0; width: 30%; height: 100%; 
+    right: 0; width: 20%; height: 100%; 
     background: -moz-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
     background: -webkit-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
 }

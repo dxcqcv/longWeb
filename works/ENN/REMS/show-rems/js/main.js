@@ -31,7 +31,7 @@ map.enableAutoResize();
 	        view: new AMap.View2D({
 	            //center: new AMap.LngLat(121.498586, 31.239637),
 	            center: new AMap.LngLat(106.387516,37.729803),
-	            zoom: 4 
+	            zoom: 5 
 	        })
 	    });
         /*
