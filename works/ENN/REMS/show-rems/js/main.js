@@ -1,5 +1,54 @@
+(function(doc,win){
 /* index */
+var demand;
+
+function Request() {
+    this.loading = $('#loading')
+}
+$.extend(Request.prototype, {
+    start: function(opt) {
+        var url = opt.url ? opt.url : 'rems-test.json'
+          , type = opt.type ? opt.type : 'POST'
+          , data = opt.data ? opt.data : {}
+          , timeout = opt.timeout ? opt.timeout : 1000
+          , currentRequest = null
+          , done = opt.done ? opt.done : doneFn
+          , fail = opt.fail ? opt.fail : failFn
+          , self = this;
+
+        currentRequest = $.ajax({
+            url: url
+          , type: type
+          , timeout: timeout
+          , data: data
+          , dataType: 'json'
+          , mimeType: 'application/json'
+          , beforeSend: function() {
+                if(currentRequest != null) currentRequest.abort();
+          }
+        })
+        .done(function(data){
+            var d = data;
+            self.loading.addClass('hide');
+            done(d);
+        })
+        .fail(function(jqXHR, textStatus) {
+            if(textStatus == 'timeout') { alert('timeout'); }
+            fail(jqXHR, textStatus);
+        });
+    }
+});
+function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
+function doneFn() { console.log('done'); }
+demand = new Request();
+demand.start({done:getMapLeft})
+function getMapLeft(data) {
+    $('#remsTitle').text(data.title);
+    $('#remsSubtitle').text(data.subtitle);
+    $('#remsSubtitleTranslate').text(data.subtitleTranslate);
+}
 /* test */
+/*
 // d3
 var data = [1,4,7,9,13,5,8,2,9]
   //, barHeight = 50
@@ -50,7 +99,6 @@ bar.append('text')
   //, 'text-anchor': 'end'
   , 'text-anchor': 'middle'
 })
-/*
 var width = 500, height = 250, margin = {left:50, top:30, right:20, bottom:20 }
   , gWidth = width - margin.left - margin.right
   , gHeight = height - margin.top - margin.bottom
@@ -144,3 +192,5 @@ map.enableAutoResize();
         map.setCity('上海');
         map.setCity('北京');
         */
+
+}(document,window)); // end

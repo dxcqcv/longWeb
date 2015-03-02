@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/rems_logo.ico" sizes="16x16 24x24 32x32 48x48"/>
     <title>大屏展示——远程系统</title>
     <link rel="stylesheet" href="../../../../global/css/global.css" media="all">
     <link rel="stylesheet" href="lib/jquery-ui-1.11.3/jquery-ui.css" media="all">
@@ -12,9 +13,17 @@
 </head>
 <body>
 <div id="mapBox" class="map-box"></div>
-<div id="mapLeft" class="map-sider map-left" ></div>
+<div id="mapLeft" class="map-sider map-left" >
+    <div class="map-left-inner">
+        <div class="rems-logo-box"><img src="img/rems_logo.ico" alt="新奥泛能能效平台"></div>
+        <h1 id="remsTitle" class="rems-title"></h1>
+        <h2 id="remsSubtitle" class="rems-subtitle"></h2>
+        <h3 id="remsSubtitleTranslate" class="rems-subtitle-translate"></h3>
+        <div class="rems-description"></div>
+    </div>
+</div>
 <div id="mapRight" class="map-sider map-right"></div>
-<div class="test ">
+<div class="test hide">
     <div class="hide">
         <i class="fa fa-camera-retro"></i> fa-camera-retroL<br>
         <input type="text" name="date" id="date">
@@ -26,6 +35,7 @@
     </div>
 <div id="chart" class="testChart"></div>
 </div>
+<div id="loading" class="loadingBox hide">Loading...</div>
 
 <!--ibs map-->
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=6e3a0f19a1e718c8e43263005c1b2f73"></script>
