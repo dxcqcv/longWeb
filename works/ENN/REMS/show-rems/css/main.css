@@ -1,4 +1,5 @@
 /* global */
+body { font: normal 12px/1.5 'microsoft YaHei'; }
 .loadingBox {
     font-size: 50px; color: #39c;    
     position: absolute; top: 50%; left: 50%; z-index: 1;
@@ -16,11 +17,22 @@
     background: -moz-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
     background: -webkit-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
 }
+.map-right-inner, 
 .map-left-inner {
     padding: 20% 15%;
     text-align: center;
     color: #fff;
 }
+.rems-title {
+    font-size: 24px;
+}
+.map-right-inner {
+    text-align: left;
+}
+.project-box {
+    background: #193b96;
+}
+.project-box-left {}
 /* test */
 .testChart{ width:500px; height: 250px; background: #ccc; }
 path {fill:none;stroke:#39c; stroke-width:2;}

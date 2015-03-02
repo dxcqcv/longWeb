@@ -103,6 +103,7 @@ vertical-align:middle;
 
 /* for head and footer */
 
-.hide { display: none; }
 ul { list-style: none; }
 html,body {height:100%}
+.hide { display: none; }
+.left { float: left; }

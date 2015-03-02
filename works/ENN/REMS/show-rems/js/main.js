@@ -41,11 +41,16 @@ $.extend(Request.prototype, {
 function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
 function doneFn() { console.log('done'); }
 demand = new Request();
-demand.start({done:getMapLeft})
+demand.start({done:getMapLeft});
+demand.start({done:getMapRight});
 function getMapLeft(data) {
     $('#remsTitle').text(data.title);
     $('#remsSubtitle').text(data.subtitle);
     $('#remsSubtitleTranslate').text(data.subtitleTranslate);
+}
+function getMapRight(data) {
+    var num = data.project.length
+    console.log(num)
 }
 /* test */
 /*
