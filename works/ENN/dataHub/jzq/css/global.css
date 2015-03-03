@@ -156,6 +156,7 @@ input { vertical-align: sub; }
 }
 .header-left { 
     padding-left: 10px;
+    height: 72px;
 }
 .head-logo {
 	width: 134px;
@@ -199,7 +200,7 @@ input { vertical-align: sub; }
    background: url('../img/exit_ico.png') no-repeat;
 }
 .head-nav {
-    position: absolute; bottom: 0; right: 65px;
+    padding-top: 17px;
 }
 .head-nav li {
     margin-left: 10px;
@@ -510,9 +511,6 @@ input { vertical-align: sub; }
     content: '';
     clear: both;
     display: block;
-}
-.clearfix {
-    *zoom: 1;
 }
 .equt_menufo .xdybpzItem > span.equt_menufotext {
     display: inline-block;
