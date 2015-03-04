@@ -36,8 +36,8 @@ function Request() {
 }
 Request.prototype = {
     start: function(opt) {
-        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
-        //var url = opt.url ? opt.url : 'test.json'
+        //var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 1000
@@ -67,7 +67,7 @@ Request.prototype = {
               done(d)
             })
             .fail(function(jqXHR, textStatus){
-                if(textStatus == "timeout"){  demand.start({url:'../../../cgi-bin/clear.cgi'}); alert('timeout'); $('table').find('tbody').empty() }
+                if(textStatus == "timeout"){  demand.start({url:'../../../cgi-bin/clear.cgi'}); alert('timeout'); $('.clearTbody').empty() }
                 fail(jqXHR,textStatus)
             })
         }
@@ -146,7 +146,7 @@ Navigation.prototype = {
         }
         if(this.cat !== 4) showCont('#sideNav','.sidebarNav') // restore nomal side bar
 
-        switch(this.cat) {
+        switch(s2n(this.cat)) {
             case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxNetTable', '.contWrap'); break // show default cont   
             case 1: this.title.text('端口配置'); this.showNetSave(); break   
             case 2: 
@@ -194,7 +194,7 @@ Navigation.prototype = {
       //console.log(this.cat)
       if(realSide !== 0) { // when channel 1~8
           this.subTitle.text('串口'+realSide) // set sub title
-          switch(this.cat) {
+          switch(s2n(this.cat)) {
             case 0:
                 demand.start({data:{cmd:13,channel:realSide},done:cmd13Done})      
                 break
@@ -214,7 +214,7 @@ Navigation.prototype = {
                 }
                 break
             case 4:
-                switch(realSide) {
+                switch(s2n(realSide)) {
                     case 1:
                         showCont('#reboot','.xtpzBox')                    
                         this.subTitle.text('重启集中器')
@@ -241,7 +241,7 @@ Navigation.prototype = {
           if(this.cat == 4) this.subTitle.text('备份和恢复')
           // set sub title is net when category 1 and 2
           if(this.cat == 0 || this.cat == 1) this.subTitle.text('网络')
-          switch(this.cat) {
+          switch(s2n(this.cat)) {
             case 0:
                 demand.start({data:{cmd:11},done:cmd11Done})      
                 break
@@ -413,7 +413,7 @@ function cmd19Done(data) {
    baudrate.val(data.baudrate) 
    databit.val(data.databit)
    stopbit.val(data.stopbit)
-   paritybit.val(data.paritybit)
+   paritybit.val(data.partiybit)
 }
 function cmd21Done(data) {
    if(data.status == 0) saveBtn.text('保存') 
@@ -429,7 +429,7 @@ function cmd21Done(data) {
   */
 function cmd31Done(data) {
     var str = ''
-    switch(data.protocol) { // 修改下端仪表配置协议类型
+    switch(s2n(data.protocol)) { // 修改下端仪表配置协议类型
         case 0: 
             potocolType.text('modbus').attr('data-potocol',0)
             showCont(xdybpzPotocolModbus,'.potocolBox')
@@ -859,7 +859,7 @@ function changePWBtn() {
     else demand.start({data:{cmd:3,user:usernameV,oldpassword:oldPWV,newpassword:passwordV},done:cmd3Done})
 }
 function cmd3Done(data) {
-    switch(data.status) {
+    switch(s2n(data.status)) {
         case 0: alert('修改成功'); username.val(''); password.val(''); oldPW.val(''); againPW.val(''); break // clear up input
         case 1: alert('用户名错误'); break
         case 2: alert('原密码错误'); break
@@ -995,5 +995,9 @@ function numberCheck(text) {
 function validateRealNum(val) {
     var patten = /^-?\d+\.?\d*$/;
     return patten.test(val);
+}
+function s2n(s) { // string convert to numbers
+ s = +s
+ return s
 }
 }(document,window));

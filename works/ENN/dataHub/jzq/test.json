@@ -6,7 +6,7 @@
     "databit":7,
     "stopbit":2,
     "slaveaddr":888,
-    "paritybit": 4,
+    "partiybit": 4,
     "protocol": "1",
 	"status":"0",
 	"slave":[[1,2,0],[3,4,1],[1,"你好",1]],

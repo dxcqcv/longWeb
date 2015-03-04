@@ -50,8 +50,240 @@ function getMapLeft(data) {
 }
 function getMapRight(data) {
     var num = data.project.length
-    console.log(num)
+        for(var i = 0; i < num; i++) {
+            //$('.project-box').eq(0).clone().appendTo('.map-right-inner');             
+        }
 }
+
+/* ibs map */
+/*
+var mapObj = new AMap.Map("mapBox");
+//自定义覆盖物dom元素
+var m = document.createElement("div");
+m.className = "marker";
+var n = document.createElement("div");
+n.innerHTML = "Amap";
+m.appendChild(n);
+ 
+function addM(x,y) {
+
+//自定义覆盖物dom元素
+var m = document.createElement("div");
+m.className = "marker";
+var n = document.createElement("div");
+n.innerHTML = "Amap";
+m.appendChild(n);
+ 
+var marker = new AMap.Marker({
+    map:mapObj, //添加到地图
+  //position:new AMap.LngLat(121,32),//基点位置                 
+  position:new AMap.LngLat(x,y),//基点位置                 
+    //offset:new AMap.Pixel(0,-40),//相对于基点的偏移位置
+    //draggable:true, //是否可拖动
+    content:m //自定义覆盖物内容
+});
+            marker.setMap(mapObj);
+//marker.setMap(mapObj);
+//当触发mouseover事件时,换个皮肤
+AMap.event.addListener(marker,"mouseover",function(){
+    n.innerHTML = "高德软件";//修改内容
+    m.className = "marker change";//增加样式
+});
+//当触发mouseout事件时,换回皮肤
+AMap.event.addListener(marker,"mouseout",function(){
+    n.innerHTML = "Amap";//修改内容
+    m.className = m.className.replace("change","");
+});
+}
+addM(121,32);
+addM(131,32);
+*/
+		//初始化地图对象，加载地图
+		var map = new AMap.Map('mapBox',{
+			resizeEnable: true,
+	        rotateEnable:true,
+	        dragEnable:true,
+	        zoomEnable:true,
+	        //二维地图显示视口
+	        //设置地图中心点
+	        //设置地图显示的缩放级别
+	        view: new AMap.View2D({
+	            //center: new AMap.LngLat(121.498586, 31.239637),
+	            center: new AMap.LngLat(106.387516,37.729803),
+	            zoom: 5 
+	        })
+	    });
+        var addMarker = function(lngX, latY, title, size) {
+        
+            var marker = new AMap.Marker({
+                //复杂图标
+                icon: new AMap.Icon({    
+                        //图标大小
+                        //size:new AMap.Size(28,37),
+                        size:new AMap.Size(size.w,size.h),
+                        //大图地址
+                        //image:"http://webapi.amap.com/images/custom_a_j.png", 
+                        //image:"img/defaultProjectListImg.jpg", 
+                        //imageOffset:new AMap.Pixel(-28,0)
+                    }),
+                //在地图上添加点
+                position:new AMap.LngLat(lngX,latY)
+              , topWhenMouseOver: true
+            });
+            marker.setMap(map)
+            marker.setTitle(title);
+
+              var aa = function(e) {
+              //console.log($(this))
+              //$(this)[0].Sc.size.x = 150
+              //console.log($(this)[0].Sc.title)
+              };
+              var bb = function(e) {
+              console.log(this)
+              };
+              AMap.event.addListener(marker, 'mouseover', aa);
+              AMap.event.addListener(marker, 'mouseout', bb);
+        }
+        addMarker(116.405467,39.907761,'北京', {w:28,h:37});
+        addMarker(120.210138,33.40249, '盐城', {w:28, h:37});
+/*
+        var marker = new Array();
+        var windowsArr = new Array();
+        // map search 
+        function placeSearch() {
+            var MSearch;
+            AMap.service(['AMap.PlaceSearch'],function(){
+                MSearch = new AMap.PlaceSearch({ // struct locale
+                    pageSize: 10
+                  , pageIndex: 1
+                  , city: '021' //city
+                });
+                // key words search
+                MSearch.search('东方明珠',function(status, result){
+                    if(status === 'complete' && result.info === 'OK') {
+                        keywordSearch_CallBack(result);
+                    }
+                });
+            });
+        }
+        placeSearch();
+        // add marker & infowindow
+        function addmarker(i, d) {
+            var lngX = d.location.getLng()
+              , latY = d.location.getLat()
+              , markerOption = {
+                    map: map
+                  //, icon: 'http://webapi.amap.com/images/'+(i+1)+'.png'
+                  , icon: new AMap.Icon({
+                        size: new AMap.Size(157,136)
+                      //, image: '\" class="fa fa-map-marker'
+                      //, div: 'class="1"'
+                  })
+                  , position: new AMap.LngLat(lngX, latY)
+                  , topWhenMouseOver: true
+              }
+              , mar = new AMap.Marker(markerOption);
+
+              marker.push(new AMap.LngLat(lngX, latY));
+              var infoWindow = new AMap.infoWindow({
+                content: '<h3><font color="#00a6ac">' +(i+1)+ '.'+d.name + '</font></h3>' + TipContents(d.type, d.address, d.tel)
+              , size: new AMap.Size(300,0)
+              , autoMove: true
+              , offset: new AMap.Pixel(0,-20)
+              });
+              windowsArr.push(infoWindow);
+              var aa = function(e) {infoWindow.open(map, mar.getPosition());};
+              AMap.event.addListener(mar, 'mouseover', aa);
+        }
+        // call back fn
+        function keywordSearch_CallBack(data) {
+            var resultStr = ''
+              , poiArr = data.poiList.pois
+              , resultCount = poiArr.length;
+            for(var i = 0; i < resultCount; i++) {
+                 resultStr += "<div id='divid" + (i + 1) + "' onmouseover='openMarkerTipById1(" + i + ",this)' onmouseout='onmouseout_MarkerStyle(" + (i + 1) + ",this)' style=\"font-size: 12px;cursor:pointer;padding:0px 0 4px 2px; border-bottom:1px solid #C1FFC1;\"><table><tr><td><img src=\"http://webapi.amap.com/images/" + (i + 1) + ".png\"></td>" + "<td><h3><font color=\"#00a6ac\">名称: " + poiArr[i].name + "</font></h3>";
+                 resultStr += TipContents(poiArr[i].type, poiArr[i].address, poiArr[i].tel) + '</td></tr></table></div>';
+                 addmarker(i, poiArr[i]);
+            }
+            map.setFitView();
+        }
+        function TipContents(type, address, tel) {// window content
+               if (type == "" || type == "undefined" || type == null || type == " undefined" || typeof type == "undefined") {
+		        type = "暂无";
+		    }
+		    if (address == "" || address == "undefined" || address == null || address == " undefined" || typeof address == "undefined") {
+		        address = "暂无";
+		    }
+		    if (tel == "" || tel == "undefined" || tel == null || tel == " undefined" || typeof address == "tel") {
+		        tel = "暂无";
+		    }
+		    var str = "  地址：" + address + "<br />  电话：" + tel + " <br />  类型：" + type;
+		    return str;
+        }
+        function openMarkerTipById1(pointid, thiss) { //search by id
+            thiss.style.background = '#CAE1FF';
+            windowsArr[pointid].open(map, marker[pointid]);
+        }
+        function onmouseout_MarkerStyle(pointid, thiss) { // restore ater mouse leave
+            thiss.style.background = '';
+        }
+              */
+        /*
+        map.setCity('中国');
+        map.setCity('上海');
+        map.setCity('北京');
+        */
+	
+
+var id = $('#item_tmpl')
+            console.log(tmpl('item_tmpl',{}))
+
+}(document,window)); // end
+
+    // Simple JavaScript Templating
+    // John Resig - http://ejohn.org/ - MIT Licensed
+    (function(){
+      var cache = {};
+     
+      this.tmpl = function tmpl(str, data){
+        // Figure out if we're getting a template, or if we need to
+        // load the template - and be sure to cache the result.
+        var fn = !/\W/.test(str) ?
+          cache[str] = cache[str] ||
+            tmpl(document.getElementById(str).innerHTML) :
+         
+          // Generate a reusable function that will serve as a template
+          // generator (and which will be cached).
+          new Function("obj",
+            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+           
+            // Introduce the data as local variables using with(){}
+            "with(obj){p.push('" +
+           
+            // Convert the template into pure JavaScript
+            str
+              .replace(/[\r\t\n]/g, " ")
+              .split("<%").join("\t")
+              .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+              .replace(/\t=(.*?)%>/g, "',$1,'")
+              .split("\t").join("');")
+              .split("%>").join("p.push('")
+              .split("\r").join("\\'")
+          + "');}return p.join('');");
+       
+        // Provide some basic currying to the user
+        return data ? fn( data ) : fn;
+      };
+    })();
+/* baidu map */
+/*
+map = new BMap.Map("wrap");
+map.centerAndZoom(new BMap.Point(106.387516,37.729803),5);
+map.enableScrollWheelZoom(); map.setMinZoom(5);
+//map.addControl(new BMap.NavigationControl());
+map.enableAutoResize();
+*/
+
 /* test */
 /*
 // d3
@@ -157,6 +389,8 @@ g.append('g')
 .attr('text-anchor','end')
 .attr('dy','1em')
 */
+
+/*
 $('#date').datepicker()
 // jQuery UI old icon
 $('#btn1').button({icons: {primary: 'ui-icon-volume-on'}});
@@ -166,36 +400,4 @@ $('#btn2').button({icons: {primary: 'fa fa-camera-retro'}});
 $('#btn3').button({icons: {primary: 'icon-volume-up icon-large'}});
 // Font Awesome extending
 $('#btn4').button({icons: {primary: 'icon-fighter-jet icon-large'}});
-
-/* baidu map */
-/*
-map = new BMap.Map("wrap");
-map.centerAndZoom(new BMap.Point(106.387516,37.729803),5);
-map.enableScrollWheelZoom(); map.setMinZoom(5);
-//map.addControl(new BMap.NavigationControl());
-map.enableAutoResize();
 */
-
-/* ibs map */
-		//初始化地图对象，加载地图
-		var map = new AMap.Map('mapBox',{
-			resizeEnable: true,
-	        rotateEnable:true,
-	        dragEnable:true,
-	        zoomEnable:true,
-	        //二维地图显示视口
-	        //设置地图中心点
-	        //设置地图显示的缩放级别
-	        view: new AMap.View2D({
-	            //center: new AMap.LngLat(121.498586, 31.239637),
-	            center: new AMap.LngLat(106.387516,37.729803),
-	            zoom: 5 
-	        })
-	    });
-        /*
-        map.setCity('中国');
-        map.setCity('上海');
-        map.setCity('北京');
-        */
-
-}(document,window)); // end
