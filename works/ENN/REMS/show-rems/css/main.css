@@ -20,7 +20,7 @@ div { box-sizing: border-box; }
 }
 .map-right-inner, 
 .map-left-inner {
-    padding: 20% 10px;
+    padding: 20% 10px 0;
     text-align: center;
     color: #fff;
 }
@@ -30,9 +30,13 @@ div { box-sizing: border-box; }
 .map-right-inner {
     text-align: left;
 }
+
+.map-right-scroll {
+    height: 800px; overflow: auto;
+}
 .project-box {
     background: #193b96;
-    width: 100%; height: 130px;
+    width: 420px; height: 130px;
     padding: 10px; border: 1px solid #fff;
 }
 .project-box-left {}

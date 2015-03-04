@@ -14,8 +14,8 @@ $(win).resize(function() {
     $(doc).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
     $(doc).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
     $(doc).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
-    $(doc).on('click', '#xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
-    $(doc).on('click', '#xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
+    $(doc).on('click', '.xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
+    $(doc).on('click', '.xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
     $(doc).on('click','#xdybpzListAdd',xdybpzListAdd) // 新增下端仪表配置列表项目
     $(doc).on('click','#xdybpzModEqu',xdybpzEquMod) // 修改下端仪表配置列表项目设备
     $(doc).on('click','#gnmSel', popupSel) // 下端仪表配置列表特选项
@@ -36,8 +36,8 @@ function Request() {
 }
 Request.prototype = {
     start: function(opt) {
-        //var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
-        var url = opt.url ? opt.url : 'test.json'
+        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        //var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 1000
@@ -251,7 +251,7 @@ Navigation.prototype = {
                 showCont('#dkpzTable', '.contWrap')
                 break
             case 2:
-                demand.start({data:{cmd:31,channel:realSide},done:cmd31Done})
+                demand.start({data:{cmd:31,channel:realSide == 0 ? realSide+1 : realSide},done:cmd31Done})
                 xdybpzCont.attr('data-channel',1) // set xdybpz channel num
                 xdybpzDefault.removeClass('hide').siblings('.xdybpzContWrap').addClass('hide')
                 xdybpzEquName.val('') && xdybpzEquAddr.val('') // clear up equipment name and address adding input  
@@ -298,23 +298,26 @@ function xdybpzInnerList() {
       , xdybpzChannel = xdybpzCont.attr('data-channel')
     if(!alreadyFlag) { alert('请先保存') }
     else {
-        if(!$this.hasClass('active'))  xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide') // show right cont  
-        xdybpzSel.val(0)
-        str = $this.find('.slave-addr-val').text().trim()
-        slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
-        nav.navShow($this) // highlight
-        //console.log(potocolType.attr('data-potocol'))
-        switch(potocolType.attr('data-potocol')) { // check potocol type
-            case '0':
-                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35DefDone})     
-                break
-            case '1':
-            case '2':
-                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
-                break
-            case '3':
-                demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd102Done})     
-                break
+        if($this.hasClass('active')) return // avoid request 35 when click del
+        else {
+            if(!$this.hasClass('active'))  xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide') // show right cont  
+            xdybpzSel.val(0)
+            str = $this.find('.slave-addr-val').text().trim()
+            slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
+            nav.navShow($this) // highlight
+            //console.log(potocolType.attr('data-potocol'))
+            switch(potocolType.attr('data-potocol')) { // check potocol type
+                case '0':
+                    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd35DefDone})     
+                    break
+                case '1':
+                case '2':
+                    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
+                    break
+                case '3':
+                    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd102Done})     
+                    break
+            }
         }
     }
 }
@@ -363,9 +366,9 @@ function cmd13Done(data) {
       , protocol, protocolNum = data.protocol
       , tbody = $('#ztxxPortTable').find('tbody')
     switch(protocolNum) {
-        case '0': protocol = 'modbus'; break
-        case '1': protocol = '645-1997'; break
-        case '2': protocol = '645-2007'; break
+        case '0': protocol = 'Modbus'; break
+        case '1': protocol = '645-2007'; break
+        case '2': protocol = '645-1997'; break
     }
 
     showCont('#ztxxPortTable','.contWrap')
@@ -429,6 +432,7 @@ function cmd21Done(data) {
   */
 function cmd31Done(data) {
     var str = ''
+       xdybpzCont.attr('protocol',data.protocol) // add protocol to xdybpzCont
     switch(s2n(data.protocol)) { // 修改下端仪表配置协议类型
         case 0: 
             potocolType.text('modbus').attr('data-potocol',0)
@@ -451,10 +455,13 @@ function cmd31Done(data) {
             showCont('#xdybpz102Table','.xdybpzTable')
             break
     }
-    for(var i = 0, l = data.slave.length; i < l; i++) { // 生成设备列表
-        str += xdybpzGet(data.slave[i][0],data.slave[i][1]) 
+    if(typeof data.slave === 'undefined') xdybpzList.empty()
+    else {
+        for(var i = 0, l = data.slave.length; i < l; i++) { // 生成设备列表
+            str += xdybpzGet(data.slave[i][1],data.slave[i][0]) 
+        }
+        xdybpzList.empty().append(str)    
     }
-    xdybpzList.empty().append(str)    
 }
 function show645Potocol() {
     xdybpzPotocol645.removeClass('hide')
@@ -464,7 +471,7 @@ function show645Potocol() {
 function xdybpzGet(name, addr) {
     var str = ''
     str += '<li class="clearfix ">'
-         + '<span class="left ellipsis">'+'<span class="slave-name-val">'+name+'</span>'+'-'+'<span class="slave-addr-val">'+addr+'</span>'+'</span>'
+         + '<span class="left ellipsis">'+'<span class="slave-addr-val">'+addr+'</span>'+'-'+'<span class="slave-name-val">'+name+'</span>'+'</span>'
          + '<span class="right xdybpzContDel">删除</span>'
          + '</li>'
      return str
@@ -651,7 +658,8 @@ function xdybpzEquMod() {
            if(!checkRanges(newTempDZ)){
                alert('设备地址必须为1-255'); 
            } else {
-               demand.start({data:{cmd: 33,channel: xdybpzChannel,type: 3,oldslaveaddr: oldTempDZ,slaveaddr: newTempDZ,slavename: newTempMC},done:function(){cmd33ModDone($this,newTempDZ,newTempMC)}})
+           //console.log(s2n(xdybpzCont.attr('protocol')));
+               demand.start({data:{cmd: 33,channel: xdybpzChannel,type: 3,protocol:s2n(xdybpzCont.attr('protocol')), oldslaveaddr: oldTempDZ,slaveaddr: newTempDZ,slavename: newTempMC},done:function(){cmd33ModDone($this,newTempDZ,newTempMC)}})
            }
        }
     }
@@ -715,6 +723,18 @@ function filterTr(num,that) {
 function xdybpzShow() {
     if(!alreadyFlag) alert('请先保存')
     else {
+    //console.log(s2n(xdybpzCont.attr('protocol')))
+    switch(s2n(xdybpzCont.attr('protocol'))) {
+        case 0:
+            showCont('#popupDef','.pop-up');
+            break
+        case 1:
+            showCont('#popup645','.pop-up');
+            break
+        case 2:
+            showCont('#popup645','.pop-up');
+            break
+    }
         $('#gnmSel').val(1) // clear select 
         popupBox.find('input').val('') // clear all input in pop-up box
         $('#jcqcd').val(1).attr('readonly','readonly')
@@ -727,30 +747,47 @@ function xdybpzCancel() {
 function xdybpzAdd() {
     var $this = $(this) 
       , wrap = $this.parents('.pop-up')
-      , gnm = wrap.find('#gnmSel option:selected').text()
-      , jcqAdd = wrap.find('#jcqdz').val()
-      , jcqLength = wrap.find('#jcqcd').val()
-      , zjxV = wrap.find('#zjx').val()
-      , jcqName = wrap.find('#jcqm').val()
-      , jcqDes = wrap.find('#jcqms').val()
-      , kxsV = wrap.find('#kxs').val()
-      , dxsV = wrap.find('#dxs').val()
       , xdybpzChannel = xdybpzCont.attr('data-channel')
-    
-    if( !(voidCheck(gnm) && voidCheck(jcqAdd) && voidCheck(jcqLength) && voidCheck(zjxV) && voidCheck(jcqName) && voidCheck(jcqDes) && voidCheck(kxsV) && voidCheck(dxsV)) ){
-        alert('每栏必填'); 
-    } else if(!checkRanges(jcqAdd)) {
-        alert('寄存器地址必须1到255'); 
-    } else if(!(numberCheck(zjxV) && numberCheck(kxsV) && numberCheck(dxsV))) {
-        alert('字节序、K系数、D系数必须为数字'); 
-    } else if(!(jcqLength <= 4)) {
-        alert('寄存器长度必须小于等于4'); 
-    } else {
-        
-        demand.start({data:{cmd: 37,channel: xdybpzChannel, slaveaddr: slaveAddr.text().trim(),funcode: gnm,type: 1,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: zjxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done: function(){cmd37AddDone(gnm,jcqAdd,jcqLength,zjxV,jcqName,jcqDes,kxsV,dxsV)}})
+    //console.log(s2n(xdybpzCont.attr('protocol')))
+    switch(s2n(xdybpzCont.attr('protocol'))) {
+        case 0:
+            var gnm = wrap.find('#gnmSel option:selected').text()
+              , jcqAdd = wrap.find('#jcqdz').val()
+              , jcqLength = wrap.find('#jcqcd').val()
+              , zjxV = wrap.find('#zjx').val()
+              , jcqName = wrap.find('#jcqm').val()
+              , jcqDes = wrap.find('#jcqms').val()
+              , kxsV = wrap.find('#kxs').val()
+              , dxsV = wrap.find('#dxs').val()
+            
+            if( !(voidCheck(gnm) && voidCheck(jcqAdd) && voidCheck(jcqLength) && voidCheck(zjxV) && voidCheck(jcqName) && voidCheck(jcqDes) && voidCheck(kxsV) && voidCheck(dxsV)) ){
+                alert('每栏必填'); 
+            } else if(!checkRanges(jcqAdd)) {
+                alert('寄存器地址必须1到255'); 
+            } else if(!(numberCheck(zjxV) && numberCheck(kxsV) && numberCheck(dxsV))) {
+                alert('字节序、K系数、D系数必须为数字'); 
+            } else if(!(jcqLength <= 4)) {
+                alert('寄存器长度必须小于等于4'); 
+            } else {
+                
+                demand.start({data:{cmd: 37,channel: xdybpzChannel, slaveaddr: slaveAddr.text().trim(),funcode: gnm,type: 1,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: zjxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done: function(){cmd37AddDone(gnm,jcqAdd,jcqLength,zjxV,jcqName,jcqDes,kxsV,dxsV)}})
+            }
+            break
+        case 1:
+            var kxs645V = wrap.find('#gnmSel').val()
+              , dxs645V = wrap.find('#jcqm').val()
+            if(!(numberCheck(kxs645V) && numberCheck(dxs645V))) {
+                alert('字节序、K系数、D系数必须为数字'); 
+            } else {
+                demand.start({data:{cmd: 37,channel: xdybpzChannel, slaveaddr: slaveAddr.text().trim(),funcode: gnm,type: 1,oldregaddr: jcqAdd, regaddr: jcqAdd,regnum: jcqLength,dataformat: zjxV,regname: jcqName,regdes: jcqDes,K: kxsV,D: dxsV},done: function(){cmd37Add645Done(gnm,jcqAdd,jcqLength,zjxV,jcqName,jcqDes,kxsV,dxsV)}})
+            } 
+            break
+        case 2:
     }
 }
-
+function cmd37Add645Done() {
+    
+}
 function xdybpzListAdd() {
    if(!alreadyFlag) alert('请先保存')
    else {
@@ -765,23 +802,26 @@ function xdybpzListAdd() {
         } else if(!checkRanges(xdybpzsbdzV)) {
             alert('设备地址必须为1-255'); 
         } else {
-            demand.start({data:{cmd: 33,channel: xdybpzChannel, type: 1,oldslaveaddr: xdybpzsbdzV, slaveaddr: xdybpzsbdzV,slavename: xdybpzsbmcV},done:function(){cmd33AddDone(xdybpzsbmcV,xdybpzsbdzV)}})
+            demand.start({data:{cmd: 33,channel: xdybpzChannel, type: 1, protocol:s2n(xdybpzCont.attr('protocol')), oldslaveaddr: xdybpzsbdzV, slaveaddr: xdybpzsbdzV,slavename: xdybpzsbmcV},done:function(){cmd33AddDone(xdybpzsbmcV,xdybpzsbdzV)}})
         }
     }
 }
 // 删除下端仪表配置列表项目
 function xdybpzContDel() {
     var $this = $(this)
+      , wrap = $this.siblings('span')
       , xdybpzChannel = xdybpzCont.attr('data-channel')
-      , xdybpzsbmcV = $this.find('.slave-name-val').text().trim() 	
-      , xdybpzsbdzV = $this.find('.slave-addr-val').text().trim()
+      , xdybpzsbmcV = wrap.find('.slave-name-val').text().trim() 	
+      , xdybpzsbdzV = wrap.find('.slave-addr-val').text().trim()
       , li = $this.parent('li') 
       , xdybpzChannel = xdybpzCont.attr('data-channel')
     if(!alreadyFlag) { /*alert('请先保存')*/ } // 无须提示，但需判断
     else {
        if(!li.hasClass('active')) return
        else { 
-            demand.start({data:{cmd: 33,channel: xdybpzChannel, type: 2,oldslaveaddr: xdybpzsbdzV, slaveaddr: xdybpzsbdzV,slavename: xdybpzsbmcV},done:function(){cmd33DelDone(li)}})
+           //console.log(s2n(xdybpzCont.attr('protocol')))
+           //console.log($this.find('.slave-addr-val').text().trim())
+            demand.start({data:{cmd: 33,channel: xdybpzChannel, type: 2,protocol:s2n(xdybpzCont.attr('protocol')), oldslaveaddr: xdybpzsbdzV, slaveaddr: xdybpzsbdzV,slavename: xdybpzsbmcV},done:function(){cmd33DelDone(li)}})
        }
     }
 }
@@ -997,7 +1037,6 @@ function validateRealNum(val) {
     return patten.test(val);
 }
 function s2n(s) { // string convert to numbers
- s = +s
- return s
+ return s = +s
 }
 }(document,window));

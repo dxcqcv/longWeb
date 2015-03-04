@@ -84,6 +84,7 @@ slave: [[1,2],[1,2]...]	/*二位数组[int,string].   1:设备号 2:设备名 */
 
 cmd:  33    	/*REQ   设备操作:增加、删除、修改*/ 
 channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
 type:        	/*int类型. 1:增加，2:删除，3:修改*/
 oldslaveaddr:	/*int类型.*/
 slaveaddr:	/*int类型.*/
@@ -91,6 +92,7 @@ slavename:	/*string类型.*/
 
 cmd:  34    	/*RSP*/
 status:        	/*int类型. 0:成功，1:错误*/
+protocol:	/*int类型. 0:modbus，1:645-1997, 2:645-2007*/
 channel：	/*int类型. 1,2,3,4,5,6,7,8*/
 type:        	/*int类型. 1:增加，2:删除，3:修改*/
 oldslaveaddr:	/*int类型.*/

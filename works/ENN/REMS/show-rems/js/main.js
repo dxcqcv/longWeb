@@ -1,5 +1,52 @@
 (function(doc,win){
 /* index */
+/* ibs map */
+		//初始化地图对象，加载地图
+		var map = new AMap.Map('mapBox',{
+			resizeEnable: true,
+	        rotateEnable:true,
+	        dragEnable:true,
+	        zoomEnable:true,
+	        //二维地图显示视口
+	        //设置地图中心点
+	        //设置地图显示的缩放级别
+	        view: new AMap.View2D({
+	            //center: new AMap.LngLat(121.498586, 31.239637),
+	            center: new AMap.LngLat(106.387516,37.729803),
+	            zoom: 5 
+	        })
+	    });
+        var addMarker = function(lngX, latY, title, size) {
+        
+            var marker = new AMap.Marker({
+                //复杂图标
+                icon: new AMap.Icon({    
+                        //图标大小
+                        //size:new AMap.Size(28,37),
+                        size:new AMap.Size(size.w,size.h),
+                        //大图地址
+                        //image:"http://webapi.amap.com/images/custom_a_j.png", 
+                        //image:"img/defaultProjectListImg.jpg", 
+                        //imageOffset:new AMap.Pixel(-28,0)
+                    }),
+                //在地图上添加点
+                position:new AMap.LngLat(lngX,latY)
+              , topWhenMouseOver: true
+            });
+            marker.setMap(map)
+            marker.setTitle(title);
+
+              var aa = function(e) {
+              //console.log($(this))
+              //$(this)[0].Sc.size.x = 150
+              //console.log($(this)[0].Sc.title)
+              };
+              var bb = function(e) {
+              //console.log(this)
+              };
+              AMap.event.addListener(marker, 'mouseover', aa);
+              AMap.event.addListener(marker, 'mouseout', bb);
+        }
 var demand;
 
 function Request() {
@@ -41,21 +88,51 @@ $.extend(Request.prototype, {
 function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
 function doneFn() { console.log('done'); }
 demand = new Request();
-demand.start({done:getMapLeft});
-demand.start({done:getMapRight});
-function getMapLeft(data) {
+demand.start({done:indexInit});
+function indexInit(data) {
+// map left
     $('#remsTitle').text(data.title);
     $('#remsSubtitle').text(data.subtitle);
     $('#remsSubtitleTranslate').text(data.subtitleTranslate);
-}
-function getMapRight(data) {
-    var num = data.project.length
+// map right
+    var num = data.projects.length
+      , str = ''
+      , pic = 'img/defaultProjectListImg.jpg';
         for(var i = 0; i < num; i++) {
-            //$('.project-box').eq(0).clone().appendTo('.map-right-inner');             
+        str += '<div class="project-box clearfix" data-lng="'+data.projects[i].longitude+'" data-lat="'+data.projects[i].latitude+'">'
+            +'<div class="project-box-left left">'
+            +    '<img src="'+pic+'" alt="新奥">'
+            +'</div>'
+            +'<div class="project-box-right left">'
+            +    '<p>'+data.projects[i].projectname+'</p>'
+            +    '<p>项目类型：<span class="projectType">'+data.projects[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data.projects[i].industrytypename+'</span></p>'
+            +    '<p>功能建设：<span class="projectEnergy">'+data.projects[i].buildingarea+'</span></p>'
+            +    '<p>项目地址：<span class="projectAddr">'+data.projects[i].address1+'</span></p>'
+            +'</div>'
+        +'</div>';
+        // map markers
+        addMarker(data.projects[i].longitude,data.projects[i].latitude,data.projects[i].projectname, {w:28,h:37});
         }
+        $('#mapRightScroll').empty().append(str);
+        //console.log(map.getZoom())
 }
-
-/* ibs map */
+$(document).on('click','.project-box',clickProjectBox);
+function clickProjectBox() {
+    var $this = $(this)
+      , lng = $this.attr('data-lng')
+      , lat = $this.attr('data-lat')
+      , doubleW = $this.width()
+      , doubleH = $this.height()*2
+        map.setZoomAndCenter(14, new AMap.LngLat(lng, lat));
+        //console.log($this.height())
+        $this.animate({'height':doubleH})
+             .children('.project-box-right').addClass('hide')
+             .end()
+             .find('img').animate({'heihgt':200})
+             //.find('img').animate({'heihgt':doubleH-22, 'width':doubleW-22})
+             console.log('w '+doubleW)
+             console.log('h '+doubleH)
+}
 /*
 var mapObj = new AMap.Map("mapBox");
 //自定义覆盖物dom元素
@@ -98,54 +175,6 @@ AMap.event.addListener(marker,"mouseout",function(){
 addM(121,32);
 addM(131,32);
 */
-		//初始化地图对象，加载地图
-		var map = new AMap.Map('mapBox',{
-			resizeEnable: true,
-	        rotateEnable:true,
-	        dragEnable:true,
-	        zoomEnable:true,
-	        //二维地图显示视口
-	        //设置地图中心点
-	        //设置地图显示的缩放级别
-	        view: new AMap.View2D({
-	            //center: new AMap.LngLat(121.498586, 31.239637),
-	            center: new AMap.LngLat(106.387516,37.729803),
-	            zoom: 5 
-	        })
-	    });
-        var addMarker = function(lngX, latY, title, size) {
-        
-            var marker = new AMap.Marker({
-                //复杂图标
-                icon: new AMap.Icon({    
-                        //图标大小
-                        //size:new AMap.Size(28,37),
-                        size:new AMap.Size(size.w,size.h),
-                        //大图地址
-                        //image:"http://webapi.amap.com/images/custom_a_j.png", 
-                        //image:"img/defaultProjectListImg.jpg", 
-                        //imageOffset:new AMap.Pixel(-28,0)
-                    }),
-                //在地图上添加点
-                position:new AMap.LngLat(lngX,latY)
-              , topWhenMouseOver: true
-            });
-            marker.setMap(map)
-            marker.setTitle(title);
-
-              var aa = function(e) {
-              //console.log($(this))
-              //$(this)[0].Sc.size.x = 150
-              //console.log($(this)[0].Sc.title)
-              };
-              var bb = function(e) {
-              console.log(this)
-              };
-              AMap.event.addListener(marker, 'mouseover', aa);
-              AMap.event.addListener(marker, 'mouseout', bb);
-        }
-        addMarker(116.405467,39.907761,'北京', {w:28,h:37});
-        addMarker(120.210138,33.40249, '盐城', {w:28, h:37});
 /*
         var marker = new Array();
         var windowsArr = new Array();
@@ -235,8 +264,7 @@ addM(131,32);
         */
 	
 
-var id = $('#item_tmpl')
-            console.log(tmpl('item_tmpl',{}))
+            //console.log(tmpl('item_tmpl',{}))
 
 }(document,window)); // end
 
