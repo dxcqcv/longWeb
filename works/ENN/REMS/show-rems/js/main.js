@@ -128,7 +128,7 @@ function clickProjectBox() {
         $this.animate({'height':doubleH})
              .children('.project-box-right').addClass('hide')
              .end()
-             .find('img').animate({'heihgt':200})
+             .find('img').animate({'width':250,'heihgt':200})
              //.find('img').animate({'heihgt':doubleH-22, 'width':doubleW-22})
              console.log('w '+doubleW)
              console.log('h '+doubleH)

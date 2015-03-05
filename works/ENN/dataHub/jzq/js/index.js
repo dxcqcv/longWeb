@@ -22,6 +22,7 @@ $(win).resize(function() {
     $(doc).on('click','#sjjzpzSel',sjjzpzSelect) // 数据集中配置筛选
     $(doc).on('click','#rebootBtn', rebootBtn) // reboot 
     $(doc).on('click','#changePWBtn', changePWBtn) // change password 
+    $(doc).on('click','#xdybpz645Table input[type="radio"]',changeDataType) //645数据类型选择
 
 function layout() {
     var winHei = $(win).height()
@@ -36,8 +37,8 @@ function Request() {
 }
 Request.prototype = {
     start: function(opt) {
-        var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
-        //var url = opt.url ? opt.url : 'test.json'
+        //var url = opt.url ? opt.url : '../../../cgi-bin/slave.cgi'
+        var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 1000
@@ -281,6 +282,7 @@ var nav = new Navigation()
   , popupBox = $('#popupBox')
   , newTempMC, newTempDZ, oldTempMC, oldTempDZ
   , xdybpzSel = $('#xdybpzSel')
+  , table = $('#xdybpz645Table')
 
 $(doc).on('click', '#xdybpzList li', xdybpzInnerList) // 下端仪表配置内部列表
 
@@ -312,7 +314,7 @@ function xdybpzInnerList() {
                     break
                 case '1':
                 case '2':
-                    demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
+                    demand.start({data:{cmd:60,channel:xdybpzChannel,slaveaddr: str},done:cmd645Done})     
                     break
                 case '3':
                     demand.start({data:{cmd:35,channel:xdybpzChannel,slaveaddr: str},done:cmd102Done})     
@@ -321,7 +323,35 @@ function xdybpzInnerList() {
         }
     }
 }
+function cmd645Done(data) {
+    var tr = table.children('tbody').find('tr')
+      , line = {} 
+      , channelcode, code, radio
+      , len = data.channelcode.length
+    table.find('input[type="checkbox"]').prop('checked',false) // clear checkbox
+    for(var i = 0; i < len; i++) {
+        code = data.channelcode[i]
+        channelcode = code[0]
+        radio = code[1]
 
+        for(var j = 0 , k = 4; j < k; j++) {
+            if( channelcode == '25'+(j+7)) line[j] = radio
+        }
+        for(var r = 0 , s = 9; r < s; r++) {
+            if( channelcode == '51'+(r+3)) line[r+4] = radio
+        }
+    }
+    for(var key in line) { // key is checkbox and line[key] is radio
+        tr.eq(key).find('td').eq(0).find('input').prop('checked',true)
+          .end()
+          .end()
+          .eq(2).find('input[type="radio"]').eq(line[key]).prop('checked', true).parent('td').attr('data-dtype',line[key])
+    }
+}
+function changeDataType() {
+    var $this = $(this) 
+    console.log($this.index() === 1 ? $this.parent('td').attr('data-dtype',0) : $this.parent('td').attr('data-dtype',1) )
+}
 function gnmtTr() {
     var str = ''
     str += '<tr>'
@@ -727,18 +757,34 @@ function xdybpzShow() {
     switch(s2n(xdybpzCont.attr('protocol'))) {
         case 0:
             showCont('#popupDef','.pop-up');
+            $('#gnmSel').val(1) // clear select 
+            popupBox.find('input').val('') // clear all input in pop-up box
+            $('#jcqcd').val(1).attr('readonly','readonly')
+            popupBox.removeClass('hide')    
             break
         case 1:
-            showCont('#popup645','.pop-up');
-            break
         case 2:
-            showCont('#popup645','.pop-up');
+            //showCont('#popup645','.pop-up');
+            var $this = $(this)
+              , xdybpzChannel = xdybpzCont.attr('data-channel')
+              , slaveaddr = $this.parent('div').siblings('#xdybpzContTop').find('#slaveAddr').text()
+              , channelcode = [[258,1,'22','33'],[259,1,'22','33']]
+              //, channelcode = createArray() 
+              , wrap = table.children('tbody').find('input[type="checkbox"]')
+              , num = wrap.filter(':checked').length
+            //console.log(xdybpzChannel)
+            //console.log(slaveaddr)
+            for(var i = 0; i < num; i++) {
+                //channelcode[i].push(wrap.filter(':checked').parents('tr').eq(i).find('td').eq(1).attr('data-dtype'))
+            }
+            //console.log(table.children('tbody').find('input[type="checkbox"]').filter(':checked').parents('tr').eq(0).html())
+
+            demand.start({data:{cmd:62,channel:xdybpzChannel,slaveaddr:slaveaddr, channelcode:channelcode}})
+            //showCont('#popup645','.pop-up');
+            break
+        case 3:
             break
     }
-        $('#gnmSel').val(1) // clear select 
-        popupBox.find('input').val('') // clear all input in pop-up box
-        $('#jcqcd').val(1).attr('readonly','readonly')
-        popupBox.removeClass('hide')    
     }
 }
 function xdybpzCancel() {

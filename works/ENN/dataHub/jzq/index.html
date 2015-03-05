@@ -255,7 +255,7 @@
                 </div>
                 <div id="xdybpzDefault" class="xdybpz-cont-default xdybpzContWrap left hide"></div>
                 <div id="xdybpzContRight" class="xdybpz-cont-right xdybpzContWrap left">
-                    <div class="xdybpz-cont-top">
+                    <div id="xdybpzContTop" class="xdybpz-cont-top">
                             <span>设备名称：</span>
                             <span id="slaveName">设备列表</span>
                             <span>设备地址：</span>
@@ -297,15 +297,197 @@
                                 <td>
                                    <input type="checkbox">
                                 </td>
-                                <td>11</td>
-                                <td>
+                                <td>正向有功总电量</td>
+                                <td data-dtype="0">
                                    <label for="">浮点数</label>
-                                   <input type="radio" name="dataType">
+                                   <input checked="checked" type="radio"  name="dataType1">
                                    <label for="">整数</label>
-                                   <input type="radio" name="dataType">
+                                   <input type="radio" name="dataType1">
                                 </td>
-                                <td>22</td>
-                                <td>33</td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>反向有功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType2">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType2">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>正向无功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType3">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType3">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>反向无功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType4">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType4">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>A相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType5">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType5">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>B相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType6">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType6">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>C相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType7">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType7">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>A相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType8">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType8">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>B相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType9">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType9">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>C相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType10">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType10">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>有功功率总</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType11">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType11">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>无功功率总</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType12">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType12">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>功率因数</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType13">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType13">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>频率</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType14">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType14">
+                                </td>
+                                <td class="bpink" contenteditable="true">22</td>
+                                <td class="bpink" contenteditable="true">33</td>
                             </tr>
                         </tbody>
                     </table>
