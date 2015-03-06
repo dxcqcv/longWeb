@@ -14,6 +14,7 @@ $(win).resize(function() {
     $(doc).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
     $(doc).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
     $(doc).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
+    $(doc).on('click', '#xdybpzSave', xdybpzBigSave) // 下端仪表配置新增显示
     $(doc).on('click', '.xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
     $(doc).on('click', '.xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
     $(doc).on('click','#xdybpzListAdd',xdybpzListAdd) // 新增下端仪表配置列表项目
@@ -41,7 +42,7 @@ Request.prototype = {
         var url = opt.url ? opt.url : 'test.json'
           , type = opt.type ? opt.type : 'POST' 
           , data = opt.data ? opt.data : {}
-          , timeout = opt.timeout ? opt.timeout : 1000
+          , timeout = opt.timeout ? opt.timeout : 50000
           , currentRequest = null
           , done= opt.done ? opt.done : doneFn 
           , fail = opt.fail ? opt.fail : failFn
@@ -68,7 +69,7 @@ Request.prototype = {
               done(d)
             })
             .fail(function(jqXHR, textStatus){
-                if(textStatus == "timeout"){  demand.start({url:'../../../cgi-bin/clear.cgi'}); alert('timeout'); $('.clearTbody').empty() }
+                if(textStatus == "timeout"){  demand.start({url:'../../../cgi-bin/clear.cgi'});  $('.clearTbody').empty() }
                 fail(jqXHR,textStatus)
             })
         }
@@ -95,6 +96,7 @@ var demand = new Request() // instance for request
   , xdybpzPotocol645 = $('#xdybpzPotocol645')
   , xdybpzPotocolModbus = $('#xdybpzPotocolModbus')
   , xdybpzPotocol102 = $('#xdybpzPotocol102')
+  , xdybpzShow = $('#xdybpzShow') 
 
 // nav class
 function Navigation() {
@@ -298,6 +300,7 @@ function xdybpzInnerList() {
     var $this = $(this)
       , str = ''
       , xdybpzChannel = xdybpzCont.attr('data-channel')
+      , slaveShowAddr = $('')
     if(!alreadyFlag) { alert('请先保存') }
     else {
         if($this.hasClass('active')) return // avoid request 35 when click del
@@ -305,6 +308,7 @@ function xdybpzInnerList() {
             if(!$this.hasClass('active'))  xdybpzDefault.addClass('hide').siblings('.xdybpzContWrap').removeClass('hide') // show right cont  
             xdybpzSel.val(0)
             str = $this.find('.slave-addr-val').text().trim()
+            slaveAddr.text(str) // update slave addr
             slaveName.text($this.find('.slave-name-val').text().trim()) // update slave name
             nav.navShow($this) // highlight
             //console.log(potocolType.attr('data-potocol'))
@@ -326,26 +330,39 @@ function xdybpzInnerList() {
 function cmd645Done(data) {
     var tr = table.children('tbody').find('tr')
       , line = {} 
-      , channelcode, code, radio
+      , channelcode, code, radio, kk = {}, d = {} // kk and d all is obj
       , len = data.channelcode.length
     table.find('input[type="checkbox"]').prop('checked',false) // clear checkbox
     for(var i = 0; i < len; i++) {
         code = data.channelcode[i]
         channelcode = code[0]
         radio = code[1]
-
         for(var j = 0 , k = 4; j < k; j++) {
-            if( channelcode == '25'+(j+7)) line[j] = radio
+            if( channelcode == '25'+(j+7)){ 
+                line[j] = radio 
+                kk[j] = code[2] // set k and d obj and sync j
+                d[j] = code[3]
+            }
         }
         for(var r = 0 , s = 9; r < s; r++) {
-            if( channelcode == '51'+(r+3)) line[r+4] = radio
+            var n = r+4
+            if( channelcode == '51'+(r+3)){
+                line[n] = radio 
+                kk[n] = code[2]
+                d[n] = code[3]
+            }
         }
     }
     for(var key in line) { // key is checkbox and line[key] is radio
-        tr.eq(key).find('td').eq(0).find('input').prop('checked',true)
+        tr.eq(key).find('td')
+          .eq(0).find('input').prop('checked',true) // check checkbox
           .end()
           .end()
-          .eq(2).find('input[type="radio"]').eq(line[key]).prop('checked', true).parent('td').attr('data-dtype',line[key])
+          .eq(2).find('input[type="radio"]').eq(line[key]).prop('checked', true).parent('td').attr('data-dtype',line[key]) // set type
+          .end().end().end().end()
+          .eq(3).text(kk[key]) // k 
+          .end()
+          .eq(4).text(d[key]) // d
     }
 }
 function changeDataType() {
@@ -395,10 +412,10 @@ function cmd13Done(data) {
     var str = ''
       , protocol, protocolNum = data.protocol
       , tbody = $('#ztxxPortTable').find('tbody')
-    switch(protocolNum) {
-        case '0': protocol = 'Modbus'; break
-        case '1': protocol = '645-2007'; break
-        case '2': protocol = '645-1997'; break
+    switch(s2n(protocolNum)) {
+        case 0: protocol = 'Modbus'; break
+        case 1: protocol = '645-2007'; break
+        case 2: protocol = '645-1997'; break
     }
 
     showCont('#ztxxPortTable','.contWrap')
@@ -468,16 +485,19 @@ function cmd31Done(data) {
             potocolType.text('modbus').attr('data-potocol',0)
             showCont(xdybpzPotocolModbus,'.potocolBox')
             showCont('#xdybpzDefTable','.xdybpzTable')
+            xdybpzShow.text('数据新增项')
             break
         case 1: 
             potocolType.text('645-1997').attr('data-potocol',1)
             show645Potocol()
             showCont('#xdybpz645Table','.xdybpzTable')
+            xdybpzShow.text('数据下发')
             break
         case 2: 
             potocolType.text('645-2007').attr('data-potocol',2)
             show645Potocol()
             showCont('#xdybpz645Table','.xdybpzTable')
+            xdybpzShow.text('数据下发')
             break
         case 3: 
             potocolType.text('102').attr('data-potocol',3)
@@ -673,6 +693,7 @@ function saveBtn() {
 function xdybpzEquMod() {
     var $this = $(this)
     , xdybpzChannel = xdybpzCont.attr('data-channel')
+    , protocol = xdybpzCont.attr('protocol')
     if(!alreadyFlag && $this.attr('data-mod') == 0 ) alert('请先保存') // alert msg if not already and mod is 0
     else {
         if($this.attr('data-mod') == 0) {
@@ -685,8 +706,11 @@ function xdybpzEquMod() {
        } else {
            newTempMC = slaveName.text() || '';
            newTempDZ = slaveAddr.text() || '';
-           if(!checkRanges(newTempDZ)){
+
+           if(!checkRanges(newTempDZ) && (protocol == 0)){
                alert('设备地址必须为1-255'); 
+           } else if((protocol == 1 || protocol == 2) && !((numberCheck(newTempDZ)) &&(voidCheck(newTempDZ))) ) {
+             alert('设备地址不能为空并必须为数字'); 
            } else {
            //console.log(s2n(xdybpzCont.attr('protocol')));
                demand.start({data:{cmd: 33,channel: xdybpzChannel,type: 3,protocol:s2n(xdybpzCont.attr('protocol')), oldslaveaddr: oldTempDZ,slaveaddr: newTempDZ,slavename: newTempMC},done:function(){cmd33ModDone($this,newTempDZ,newTempMC)}})
@@ -749,6 +773,15 @@ function filterTr(num,that) {
         $this.addClass('hide')
     }
 }
+// 保存下端仪表配置列表项目
+function xdybpzBigSave() {
+    var $this = $(this)
+    //$this.text('保存中')
+    demand.start({data:{cmd:39},done:cmd39Done})
+}
+function cmd39Done(data) {
+    
+}
 // 新增下端仪表配置列表项目
 function xdybpzShow() {
     if(!alreadyFlag) alert('请先保存')
@@ -767,25 +800,56 @@ function xdybpzShow() {
             //showCont('#popup645','.pop-up');
             var $this = $(this)
               , xdybpzChannel = xdybpzCont.attr('data-channel')
-              , slaveaddr = $this.parent('div').siblings('#xdybpzContTop').find('#slaveAddr').text()
-              , channelcode = [[258,1,'22','33'],[259,1,'22','33']]
-              //, channelcode = createArray() 
-              , wrap = table.children('tbody').find('input[type="checkbox"]')
-              , num = wrap.filter(':checked').length
-            //console.log(xdybpzChannel)
-            //console.log(slaveaddr)
+              , slaveaddr = getXdybpzAddr()
+              , channelcode = {}, type = {}, k = {}, d = {}
+              , wrap = table.children('tbody').find('input[type="checkbox"]').filter(':checked')
+              , num = wrap.length // checked num
+              , tr 
             for(var i = 0; i < num; i++) {
-                //channelcode[i].push(wrap.filter(':checked').parents('tr').eq(i).find('td').eq(1).attr('data-dtype'))
+                tr = wrap.eq(i).parents('tr') // must loop wrap
+                channelcode[i] = convert645channelcode(tr.index()) 
+                type[i] = tr.find('td').eq(2).attr('data-dtype')
+                k[i] = tr.find('td').eq(3).text()
+                d[i] = tr.find('td').eq(4).text()
             }
-            //console.log(table.children('tbody').find('input[type="checkbox"]').filter(':checked').parents('tr').eq(0).html())
-
-            demand.start({data:{cmd:62,channel:xdybpzChannel,slaveaddr:slaveaddr, channelcode:channelcode}})
-            //showCont('#popup645','.pop-up');
+            $this.text('下发数据中')
+            demand.start({data:{cmd:62,channel:xdybpzChannel,slaveaddr:slaveaddr,count:num,chanecode:channelcode,type:type,k:k,d:d},done:function(){cmd62Done($this)}})
+            
             break
         case 3:
             break
     }
     }
+}
+function cmd62Done(btn) {
+    console.log(btn.text('数据下发'))
+}
+function convert645channelcode(index) {
+    var channelcode  
+   switch(index) {
+        case 0: return channelcode = 257; break
+        case 1: return channelcode = 258; break
+        case 2: return channelcode = 259; break
+        case 3: return channelcode = 260; break
+        case 4: return channelcode = 513; break
+        case 5: return channelcode = 514; break
+        case 6: return channelcode = 515; break
+        case 7: return channelcode = 516; break
+        case 8: return channelcode = 517; break
+        case 9: return channelcode = 518; break
+        case 10: return channelcode = 519; break
+        case 11: return channelcode = 520; break
+        case 12: return channelcode = 521; break
+        case 13: return channelcode = 522; break
+   } 
+}
+function getXdybpzAddr() {
+       var addr
+       xdybpzList.find('li').each(function(){ // loop all li and find ative li
+           var $this = $(this)
+           if($this.hasClass('active')) addr = $this.find('.slave-addr-val').text() 
+       })
+       return addr
 }
 function xdybpzCancel() {
     popupBox.addClass('hide')
@@ -842,12 +906,15 @@ function xdybpzListAdd() {
          , xdybpzsbmcV = wrap.find('#xdybpzEquName').val() 	
          , xdybpzsbdzV = wrap.find('#xdybpzEquAddr').val() 
          , xdybpzChannel = xdybpzCont.attr('data-channel')
-
+         , protocol = xdybpzCont.attr('protocol')
+           
         if(!(voidCheck(xdybpzsbmcV) && voidCheck(xdybpzsbdzV))) {
             alert('设备名称和设备地址不能为空'); 
-        } else if(!checkRanges(xdybpzsbdzV)) {
-            alert('设备地址必须为1-255'); 
-        } else {
+        } else if(!checkRanges(xdybpzsbdzV) && (protocol == 0)){
+               alert('设备地址必须为1-255'); 
+           } else if( (protocol == 1 || protocol == 2) && (!numberCheck(xdybpzsbdzV))) {
+             alert('设备地址不能为空并必须为数字'); 
+           } else {
             demand.start({data:{cmd: 33,channel: xdybpzChannel, type: 1, protocol:s2n(xdybpzCont.attr('protocol')), oldslaveaddr: xdybpzsbdzV, slaveaddr: xdybpzsbdzV,slavename: xdybpzsbmcV},done:function(){cmd33AddDone(xdybpzsbmcV,xdybpzsbdzV)}})
         }
     }

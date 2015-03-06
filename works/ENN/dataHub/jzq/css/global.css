@@ -221,6 +221,7 @@ input { vertical-align: sub; }
     background-color: #063060;
 }
 /* content */
+span[contenteditable="true"] {  min-width:5px; padding-left: 5px; }
 .content-right table > tbody > tr > td.bpink {background: pink;}
 .content { 
     background: #E6F3FB;
