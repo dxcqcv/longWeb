@@ -600,6 +600,7 @@
                 </table>
             </div>
             <div id="btnBox" class="cont-btn-box">
+                <span id="dataConfShowBtn"  class="cont-btn add-btn">新增</span>
                 <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
                 <span class="cont-btn cal-btn">取消</span>
             </div>
@@ -657,6 +658,63 @@
 </div>
 <!--pop up-->
 <div id="popupBox" class="mask-bg hide">
+    <div id="popupDataConfig" class="pop-up pop-up-data-config">
+        <div>
+            <label for="">功能码：</label>
+            <select id="dataConfGnmSel" name="" class="gnm-sel">
+            	<option value="1">1</option>
+            	<option value="2">2</option>
+            	<option value="3">3</option>
+            	<option value="4">4</option>
+            	<option value="5">5</option>
+            	<option value="16">16</option>
+            </select>
+        </div>
+        <div>
+            <label for="">数据项地址：</label>
+            <input id="v1" type="">
+        </div>
+        <div>
+            <label for="">寄存器个数：</label>
+            <input id="v2" type="">
+        </div>
+        <div>
+            <label for="">通道：</label>
+            <input id="v3" type="" disabled="disabled">
+        </div>
+        <div>
+            <label for="">寄存器地址：</label>
+            <input id="v4" type="" disabled="disabled">
+        </div>
+        <div>
+            <label for="">字节序：</label>
+            <input id="v5" type="">
+        </div>
+        <div>
+            <label for="">寄存器名称：</label>
+            <input id="v6" type="">
+        </div>
+        <div>
+            <label for="">寄存器描述：</label>
+            <input id="v7" type="">
+        </div>
+        <div>
+            <label for="">K系数：</label>
+            <input id="v8" type="">
+        </div>
+        <div>
+            <label for="">D系数：</label>
+            <input id="v9" type="">
+        </div>
+        <div>
+            <label for="">备注：</label>
+            <input id="v10" type="">
+        </div>
+        <div>
+            <span id="dataConfAddBtn" class="cont-btn ">保存</span>
+            <span class="cont-btn xdybpzCancel">取消</span>
+        </div>    
+    </div>
     <div id="popup645" class="pop-up pop-up-645 hide">
         <div>
             <label for="sjx645">数据项</label>

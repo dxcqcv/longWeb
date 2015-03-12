@@ -14,6 +14,8 @@ $(win).resize(function() {
     $(doc).on('click', '.xdybpzDel', xdybpzDel) // 下端仪表配置的删除
     $(doc).on('click', '.xdybpzContDel', xdybpzContDel) // 下端仪表配置内部列表删除
     $(doc).on('click', '#xdybpzShow', xdybpzShow) // 下端仪表配置新增显示
+    $(doc).on('click', '#dataConfShowBtn', dataConfAdd) // 数据集中配置新增显示
+    $(doc).on('click', '#dataConfAddBtn', dataConfAddBtn) // 数据集中配置保存
     $(doc).on('click', '#xdybpzSave', xdybpzBigSave) // 下端仪表配置新增显示
     $(doc).on('click', '.xdybpzCancel', xdybpzCancel) // 下端仪表配置新增隐藏
     $(doc).on('click', '.xdybpzAdd', xdybpzAdd) // 下端仪表配置新增隐藏
@@ -97,6 +99,7 @@ var demand = new Request() // instance for request
   , xdybpzPotocolModbus = $('#xdybpzPotocolModbus')
   , xdybpzPotocol102 = $('#xdybpzPotocol102')
   , xdybpzShow = $('#xdybpzShow') 
+  , dataConfShowBtn = $('#dataConfShowBtn')
 
 // nav class
 function Navigation() {
@@ -150,8 +153,9 @@ Navigation.prototype = {
         if(this.cat !== 4) showCont('#sideNav','.sidebarNav') // restore nomal side bar
 
         switch(s2n(this.cat)) {
-            case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxNetTable', '.contWrap'); break // show default cont   
-            case 1: this.title.text('端口配置'); this.showNetSave(); break   
+            case 0: this.title.text('状态信息'); this.showNetSave();showCont('#ztxxNetTable', '.contWrap'); dataConfShowBtn.addClass('hide'); break // show default cont   
+            case 1: this.title.text('端口配置'); this.showNetSave();dataConfShowBtn.addClass('hide'); break   
+                 
             case 2: 
                 this.title.text('下端仪表配置')
                 this.subTitle.text('串口1')
@@ -160,6 +164,7 @@ Navigation.prototype = {
                 this.actFlag && // if active is false then add active 
                 this.sideLi.eq(1).addClass('active') // active second
                 showCont('#xdybpzCont', '.contWrap')
+                dataConfShowBtn.addClass('hide') 
                 break  
             case 3:
                 this.title.text('数据集中配置')
@@ -167,9 +172,10 @@ Navigation.prototype = {
                 this.contLeft.addClass('hide')         
                 this.contRight.addClass('w100')
                 showCont('#sjjzpzCont', '.contWrap')
-                this.funBtn.addClass('hide') // hide save and cannel btn
+
                 demand.start({data:{cmd:41},done:cmd41Done}) // 刷新数据集中配置表格       
                 this.showNetSave() // show save and cancel btn
+                dataConfShowBtn.removeClass('hide'); 
                 break;
             case 4:
                 this.title.text('系统配置')
@@ -300,7 +306,6 @@ function xdybpzInnerList() {
     var $this = $(this)
       , str = ''
       , xdybpzChannel = xdybpzCont.attr('data-channel')
-      , slaveShowAddr = $('')
     if(!alreadyFlag) { alert('请先保存') }
     else {
         if($this.hasClass('active')) return // avoid request 35 when click del
@@ -596,18 +601,25 @@ function cmd37DelDone(that) {
     that.parents('tr').remove();
 }
 function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
+
+    var str = gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) // rendering table tr
+    console.log(str)
+    sortTr(xdybpzDefTbody, gnm, str)
+    xdybpzCancel() // hide pop-up
+}
+function sortTr(tbody, gnm, outstr) { // sort tbody after insert tr
     var str = ''
-      , tr = xdybpzDefTbody.find('*[data-gnm="'+gnm+'"]').last().parent()// a class the last tr
+      , tr = tbody.find('*[data-gnm="'+gnm+'"]').last().parent()// a class the last tr
       , arr = []
       , regGI = new RegExp('<td data-gnm='+gnm+'>'+gnm+'<\/td>','gi')
 
-    str = gnmtTr(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) // rendering table tr
+    str = outstr // rendering table tr
     if(tr.length === 0) { // it's first line
         str = str.replace(regGI, '<td rowspan="1" data-gnm='+gnm+'>'+gnm+'<\/td>') // add rowspan for first line
-        xdybpzDefTbody.find('tr').children('td').each(function() {
-        var $this = $(this)
-          , eachGnm = $this.attr('data-gnm')
-        if(typeof eachGnm == 'undefined')  return // no gnm return
+        tbody.find('tr').children('td').each(function() {
+            var $this = $(this)
+              , eachGnm = $this.attr('data-gnm')
+            if(typeof eachGnm == 'undefined')  return // no gnm return
             arr.push(eachGnm) // get gnm arr
         })
         arr = eliminateDuplicates(arr) // eliminate duplicates in arr
@@ -615,7 +627,7 @@ function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
             arr[i] = parseInt(arr[i]) // be number
             gnm = parseInt(gnm) // be number
             if(gnm > arr[i] && gnm < arr[i+1]) {
-                $(str).insertAfter(xdybpzDefTbody.find('*[data-gnm="'+arr[i]+'"]').last().parent()) 
+                $(str).insertAfter(tbody.find('*[data-gnm="'+arr[i]+'"]').last().parent()) 
             }
         }
     } else {
@@ -627,7 +639,7 @@ function cmd37AddDone(gnm,jcqdz,jcqcd,zjx,jcqm,jcqms,kxs,dxs) {
         }) //  
         
     }
-    xdybpzCancel() // hide pop-up
+
 }
 function cmd41Done(data) {
     var str = ''
@@ -681,6 +693,23 @@ function failFn(jqXHR,textStatus) {
 }
 function doneFn() {
     console.log('done')
+}
+// for data config add
+function dataConfAddBtn() {
+    var tbody = $('#sjjzpzDefTable').children('tbody')
+      , str, gnm
+      , arr = []
+      , temp
+      , arg
+    gnm = $(this).parents('#popupDataConfig').find('#dataConfGnmSel option:selected').text()
+    str = sjjzpzStructure(gnm,$('#v1').val(),$('#v2').val(),$('#v3').val(),$('#v4').val(),$('#v5').val(),$('#v6').val(),$('#v7').val(),$('#v8').val(),$('#v9').val(),$('#v10').val()) // rendering table tr
+    sortTr(tbody, gnm, str)
+    xdybpzCancel() // hide pop-up
+}
+// for data config popup show 
+function dataConfAdd() {
+    showCont('#popupDataConfig','.pop-up');
+    popupBox.removeClass('hide');    
 }
 // for save btn
 function saveBtn() {

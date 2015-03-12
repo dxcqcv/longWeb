@@ -425,7 +425,6 @@ span[contenteditable="true"] {  min-width:5px; padding-left: 5px; }
     z-index: 4;
 	margin:-160px 0 0 -240px;
 	width: 500px;
-	height: 320px;
 	background: #fff;
     border-radius: 4px;
     text-align: center;

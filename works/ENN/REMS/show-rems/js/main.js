@@ -133,6 +133,740 @@ function clickProjectBox() {
              console.log('w '+doubleW)
              console.log('h '+doubleH)
 }
+
+$(document).on('click', '.arrShow', showArea);
+function showArea() {
+    var $this = $(this)
+      , wrap = $this.closest('#contProWrap')
+      , otherArr = wrap.siblings('.cont-projects-arrow')
+    if(wrap.hasClass('active')) {
+        $this.addClass('arrow-top').removeClass('arrow-bottom')
+        wrap.animate({'height':0, 'padding': 0}).removeClass('active')
+        otherArr.hide()
+    } else {
+        $this.addClass('arrow-bottom').removeClass('arrow-top')
+        wrap.animate({'height':'auto', 'padding':'15px 35px'}).addClass('active')
+        otherArr.show()
+    }
+}
+function inherit(base, methods) {
+    var sub = function() {
+        this.initialize.apply(this, arguments);
+    };
+    sub.prototype = new base();
+    $.extend(sub.prototype, methods);
+    return sub;
+}
+// move fun
+function MoveArea() {
+        this.current = 0;
+        this.isAnimating = false;
+      	this.endCurrPage = false;
+      	this.endNextPage = false;
+        //this.nav = nav || '';
+}
+$.extend(MoveArea.prototype, {
+    initialize: function(nav, step, list) {
+        this.nav = nav; 
+        this.step = step || 0;
+        this.list = list || '';
+        this.move();
+    }
+  , move : function() {
+        var dir = this.nav.attr('data-dir')
+          , offset
+          , listLen = this.list.find('li').length
+        if(typeof dir === 'undefined') return; 
+
+        if( this.isAnimating ) { return false; }
+
+    //console.log(this.list.find('li').length)    
+    if(dir === 'left') {
+    console.log('current '+this.current)
+        if(this.current === listLen-5) {
+           this.current = listLen-5; // display 5 pic 
+        } else {
+           this.current++;
+           offset = '-=' + this.step
+        }
+    }else {
+    console.log('current '+this.current)
+        if(this.current === 0) {
+            this.current = 0;
+        } else {
+            this.current--; 
+            offset =  '+=' + this.step
+        }
+    }
+    this.next(offset)
+  }
+  , next : function(distance) {
+        if(typeof distance === 'undefined') return;
+  console.log('distance '+distance)
+		if( this.isAnimating ) {
+			return false;
+		}
+		this.isAnimating = true;
+        this.list.animate({'margin-left':distance}) 
+		this.isAnimating = false;
+}
+
+
+});
+var m = new MoveArea(); 
+$(document).on('click', '.cont-projects-arrow', function(){
+   m.initialize($(this), $('.cont-project').width(), $('#projectsList'))// nav, step, list 
+});
+
+/* meter start */
+function drawLineGraph(graph, points, container, id) {
+
+
+    var graph = Snap(graph);
+
+
+    /*END DRAW GRID*/
+
+    /* PARSE POINTS */
+    var myPoints = [];
+    var shadowPoints = [];
+
+    function parseData(points) {
+        for (i = 0; i < points.length; i++) {
+            var p = new point();
+            var pv = points[i] / 100 * 40;
+            p.x = 83.7 / points.length * i + 1;
+            p.y = 40 - pv;
+            if (p.x > 78) {
+                p.x = 78;
+            }
+            myPoints.push(p);
+        }
+    }
+
+    var segments = [];
+
+    function createSegments(p_array) {
+        for (i = 0; i < p_array.length; i++) {
+            var seg = "L" + p_array[i].x + "," + p_array[i].y;
+            if (i === 0) {
+                seg = "M" + p_array[i].x + "," + p_array[i].y;
+            }
+            segments.push(seg);
+        }
+    }
+
+    function joinLine(segments_array, id) {
+        var line = segments_array.join(" ");
+        var line = graph.path(line);
+        line.attr('id', 'graph-' + id);
+        var lineLength = line.getTotalLength();
+
+        line.attr({
+            'stroke-dasharray': lineLength,
+                'stroke-dashoffset': lineLength
+        });
+    }
+
+    function calculatePercentage(points, graph) {
+        var initValue = points[0];
+        var endValue = points[points.length - 1];
+        var sum = endValue - initValue;
+        var prefix;
+        var percentageGain;
+        var stepCount = 1300 / sum;
+
+        function findPrefix() {
+            if (sum > 0) {
+                prefix = "+";
+            } else {
+                prefix = "";
+            }
+        }
+
+        var percentagePrefix = "";
+
+        function percentageChange() {
+            percentageGain = initValue / endValue * 100;
+            
+            if(percentageGain > 100){
+              console.log('over100');
+              percentageGain = Math.round(percentageGain * 100*10) / 100;
+            }else if(percentageGain < 100){
+              console.log('under100');
+              percentageGain = Math.round(percentageGain * 10) / 10;
+            }
+            if (initValue > endValue) {
+              
+                percentageGain = endValue/initValue*100-100;
+                percentageGain = percentageGain.toFixed(2);
+              
+                percentagePrefix = "";
+                $(graph).find('.percentage-value').addClass('negative');
+            } else {
+                percentagePrefix = "+";
+            }
+          if(endValue > initValue){
+              percentageGain = endValue/initValue*100;
+              percentageGain = Math.round(percentageGain);
+          }
+        };
+        percentageChange();
+        findPrefix();
+
+        var percentage = $(graph).find('.percentage-value');
+        var totalGain = $(graph).find('.total-gain');
+        var hVal = $(graph).find('.h-value');
+
+        function count(graph, sum) {
+            var totalGain = $(graph).find('.total-gain');
+            var i = 0;
+            var time = 1300;
+            var intervalTime = Math.abs(time / sum);
+            var timerID = 0;
+            if (sum > 0) {
+                var timerID = setInterval(function () {
+                    i++;
+                    totalGain.text(percentagePrefix + i);
+                    if (i === sum) clearInterval(timerID);
+                }, intervalTime);
+            } else if (sum < 0) {
+                var timerID = setInterval(function () {
+                    i--;
+                    totalGain.text(percentagePrefix + i);
+                    if (i === sum) clearInterval(timerID);
+                }, intervalTime);
+            }
+        }
+        count(graph, sum);
+
+        percentage.text(percentagePrefix + percentageGain + "%");
+        totalGain.text("0%");
+        setTimeout(function () {
+            percentage.addClass('visible');
+            hVal.addClass('visible');
+        }, 1300);
+
+    }
+
+
+    function showValues() {
+        var val1 = $(graph).find('.h-value');
+        var val2 = $(graph).find('.percentage-value');
+        val1.addClass('visible');
+        val2.addClass('visible');
+    }
+
+    function drawPolygon(segments, id) {
+        var lastel = segments[segments.length - 1];
+        var polySeg = segments.slice();
+        polySeg.push([78, 38.4], [1, 38.4]);
+        var polyLine = polySeg.join(' ').toString();
+        var replacedString = polyLine.replace(/L/g, '').replace(/M/g, "");
+
+        var poly = graph.polygon(replacedString);
+        var clip = graph.rect(-80, 0, 80, 40);
+        poly.attr({
+            'id': 'poly-' + id,
+            /*'clipPath':'url(#clip)'*/
+                'clipPath': clip
+        });
+        clip.animate({
+            transform: 't80,0'
+        }, 1300, mina.linear);
+    }
+
+      parseData(points);
+      
+      createSegments(myPoints);
+      calculatePercentage(points, container);
+      joinLine(segments,id);
+ 
+      drawPolygon(segments, id);
+}
+function drawCircle(container,id,progress,parent){
+  var paper = Snap(container);
+  var prog = paper.path("M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50");
+  var lineL = prog.getTotalLength();
+  var oneUnit = lineL/100;
+  var toOffset = lineL - oneUnit * progress;
+  var myID = 'circle-graph-'+id;
+  prog.attr({
+    'stroke-dashoffset':lineL,
+    'stroke-dasharray':lineL,
+    'id':myID
+  });
+  
+  //var animTime = 1300/*progress / 100*/
+  var animTime = 2300/*progress / 100*/
+  
+  prog.animate({
+    'stroke-dashoffset':toOffset
+  },animTime,mina.easein);
+  
+  function countCircle(animtime,parent,progress){
+    var textContainer = $(parent).find('.circle-percentage');
+    var i = 0;
+    var time = 1300;
+    var intervalTime = Math.abs(time / progress);
+    var timerID = setInterval(function () {
+      i++;
+      textContainer.text(i+"%");
+      if (i === progress) clearInterval(timerID);
+    }, intervalTime);           
+  }
+  countCircle(animTime,parent,progress);
+}
+
+
+
+
+/* meter end */
+// high chart
+/*
+function Person(name, age, sex) {
+  // Common to all Persons
+  this.name = 'Roy';
+  this.age = 1;
+  this.sex = sex;
+}
+
+Person.prototype = {
+  // common to all Persons
+  say: function(words) {
+    return this.name +'says: '+ words;
+  }
+  , count: function() {
+    this.age++;
+    console.log(this.age)
+  }
+};
+function T() {
+    this.c = 0;
+    this.p = function() {
+        this.c++
+        console.log(this.c)
+    }
+}
+T.prototype.l = function() {
+    this.c++;
+    console.log(this.c)
+}
+var t = new T();
+$(document).on('click', '.cont-projects-arrow', t.p);
+$.extend(MoveArea.prototype, {
+    move: function() {
+
+    }
+    , next: function(distance) {
+        MoveArea.call(this)
+    }
+});
+$('#hcContainer').highcharts({
+    chart: {type: 'bar'}
+  , title: {text:'Fruit Consumption'}
+  , xAxis: {categories: ['Apples', 'Bananas', 'Oranges']}
+  , yAxis: {
+        title: {text: 'Fruit eaten'}
+  }
+  , series: [{
+        name: 'Jane'
+      , data: [1,0,4]
+  }
+  , {
+        name: 'John'
+      , data: [5,7,3]
+  }]
+});
+*/
+// random
+function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+// page transitions
+//var PageTransitions = (function() {
+	var $main = $( '#wrapper' ),
+		$pages = $main.children( 'div.layout' ),
+		//$iterate = $( '.rems-logo-box' ),
+		animcursor = getRandomArbitrary(1,67), // random 67 num
+		pagesCount = $pages.length,
+		current = 0,
+		isAnimating = false,
+		endCurrPage = false,
+		endNextPage = false,
+		animEndEventNames = {
+			'WebkitAnimation' : 'webkitAnimationEnd',
+			'OAnimation' : 'oAnimationEnd',
+			'msAnimation' : 'MSAnimationEnd',
+			'animation' : 'animationend'
+		},
+		// animation end event name
+		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
+		// support css animations
+		support = Modernizr.cssanimations;
+	
+	function init() {
+		$pages.each( function() {
+			var $page = $( this );
+			$page.data( 'originalClassList', $page.attr( 'class' ) );
+		} );
+
+		$pages.eq( current ).addClass( 'pt-page-current' );
+
+
+		//$iterate.on( 'click', function() {
+		$(document).on( 'click','.rems-logo-box', function() { // click event
+
+			if( isAnimating ) {
+				return false;
+			}
+			if( animcursor > 67) {
+				animcursor = 1;
+			}
+			nextPage( animcursor );
+			++animcursor;
+		} );
+
+	}
+
+	function nextPage( animation ) {
+
+		if( isAnimating ) {
+			return false;
+		}
+
+		isAnimating = true;
+		
+		var $currPage = $pages.eq( current );
+
+		if( current < pagesCount - 1 ) {
+			++current;
+		}
+		else {
+			current = 0;
+		}
+
+		var $nextPage = $pages.eq( current ).addClass( 'pt-page-current' ),
+			outClass = '', inClass = '';
+
+		switch( animation ) {
+
+			case 1:
+				outClass = 'pt-page-moveToLeft';
+				inClass = 'pt-page-moveFromRight';
+				break;
+			case 2:
+				outClass = 'pt-page-moveToRight';
+				inClass = 'pt-page-moveFromLeft';
+				break;
+			case 3:
+				outClass = 'pt-page-moveToTop';
+				inClass = 'pt-page-moveFromBottom';
+				break;
+			case 4:
+				outClass = 'pt-page-moveToBottom';
+				inClass = 'pt-page-moveFromTop';
+				break;
+			case 5:
+				outClass = 'pt-page-fade';
+				inClass = 'pt-page-moveFromRight pt-page-ontop';
+				break;
+			case 6:
+				outClass = 'pt-page-fade';
+				inClass = 'pt-page-moveFromLeft pt-page-ontop';
+				break;
+			case 7:
+				outClass = 'pt-page-fade';
+				inClass = 'pt-page-moveFromBottom pt-page-ontop';
+				break;
+			case 8:
+				outClass = 'pt-page-fade';
+				inClass = 'pt-page-moveFromTop pt-page-ontop';
+				break;
+			case 9:
+				outClass = 'pt-page-moveToLeftFade';
+				inClass = 'pt-page-moveFromRightFade';
+				break;
+			case 10:
+				outClass = 'pt-page-moveToRightFade';
+				inClass = 'pt-page-moveFromLeftFade';
+				break;
+			case 11:
+				outClass = 'pt-page-moveToTopFade';
+				inClass = 'pt-page-moveFromBottomFade';
+				break;
+			case 12:
+				outClass = 'pt-page-moveToBottomFade';
+				inClass = 'pt-page-moveFromTopFade';
+				break;
+			case 13:
+				outClass = 'pt-page-moveToLeftEasing pt-page-ontop';
+				inClass = 'pt-page-moveFromRight';
+				break;
+			case 14:
+				outClass = 'pt-page-moveToRightEasing pt-page-ontop';
+				inClass = 'pt-page-moveFromLeft';
+				break;
+			case 15:
+				outClass = 'pt-page-moveToTopEasing pt-page-ontop';
+				inClass = 'pt-page-moveFromBottom';
+				break;
+			case 16:
+				outClass = 'pt-page-moveToBottomEasing pt-page-ontop';
+				inClass = 'pt-page-moveFromTop';
+				break;
+			case 17:
+				outClass = 'pt-page-scaleDown';
+				inClass = 'pt-page-moveFromRight pt-page-ontop';
+				break;
+			case 18:
+				outClass = 'pt-page-scaleDown';
+				inClass = 'pt-page-moveFromLeft pt-page-ontop';
+				break;
+			case 19:
+				outClass = 'pt-page-scaleDown';
+				inClass = 'pt-page-moveFromBottom pt-page-ontop';
+				break;
+			case 20:
+				outClass = 'pt-page-scaleDown';
+				inClass = 'pt-page-moveFromTop pt-page-ontop';
+				break;
+			case 21:
+				outClass = 'pt-page-scaleDown';
+				inClass = 'pt-page-scaleUpDown pt-page-delay300';
+				break;
+			case 22:
+				outClass = 'pt-page-scaleDownUp';
+				inClass = 'pt-page-scaleUp pt-page-delay300';
+				break;
+			case 23:
+				outClass = 'pt-page-moveToLeft pt-page-ontop';
+				inClass = 'pt-page-scaleUp';
+				break;
+			case 24:
+				outClass = 'pt-page-moveToRight pt-page-ontop';
+				inClass = 'pt-page-scaleUp';
+				break;
+			case 25:
+				outClass = 'pt-page-moveToTop pt-page-ontop';
+				inClass = 'pt-page-scaleUp';
+				break;
+			case 26:
+				outClass = 'pt-page-moveToBottom pt-page-ontop';
+				inClass = 'pt-page-scaleUp';
+				break;
+			case 27:
+				outClass = 'pt-page-scaleDownCenter';
+				inClass = 'pt-page-scaleUpCenter pt-page-delay400';
+				break;
+			case 28:
+				outClass = 'pt-page-rotateRightSideFirst';
+				inClass = 'pt-page-moveFromRight pt-page-delay200 pt-page-ontop';
+				break;
+			case 29:
+				outClass = 'pt-page-rotateLeftSideFirst';
+				inClass = 'pt-page-moveFromLeft pt-page-delay200 pt-page-ontop';
+				break;
+			case 30:
+				outClass = 'pt-page-rotateTopSideFirst';
+				inClass = 'pt-page-moveFromTop pt-page-delay200 pt-page-ontop';
+				break;
+			case 31:
+				outClass = 'pt-page-rotateBottomSideFirst';
+				inClass = 'pt-page-moveFromBottom pt-page-delay200 pt-page-ontop';
+				break;
+			case 32:
+				outClass = 'pt-page-flipOutRight';
+				inClass = 'pt-page-flipInLeft pt-page-delay500';
+				break;
+			case 33:
+				outClass = 'pt-page-flipOutLeft';
+				inClass = 'pt-page-flipInRight pt-page-delay500';
+				break;
+			case 34:
+				outClass = 'pt-page-flipOutTop';
+				inClass = 'pt-page-flipInBottom pt-page-delay500';
+				break;
+			case 35:
+				outClass = 'pt-page-flipOutBottom';
+				inClass = 'pt-page-flipInTop pt-page-delay500';
+				break;
+			case 36:
+				outClass = 'pt-page-rotateFall pt-page-ontop';
+				inClass = 'pt-page-scaleUp';
+				break;
+			case 37:
+				outClass = 'pt-page-rotateOutNewspaper';
+				inClass = 'pt-page-rotateInNewspaper pt-page-delay500';
+				break;
+			case 38:
+				outClass = 'pt-page-rotatePushLeft';
+				inClass = 'pt-page-moveFromRight';
+				break;
+			case 39:
+				outClass = 'pt-page-rotatePushRight';
+				inClass = 'pt-page-moveFromLeft';
+				break;
+			case 40:
+				outClass = 'pt-page-rotatePushTop';
+				inClass = 'pt-page-moveFromBottom';
+				break;
+			case 41:
+				outClass = 'pt-page-rotatePushBottom';
+				inClass = 'pt-page-moveFromTop';
+				break;
+			case 42:
+				outClass = 'pt-page-rotatePushLeft';
+				inClass = 'pt-page-rotatePullRight pt-page-delay180';
+				break;
+			case 43:
+				outClass = 'pt-page-rotatePushRight';
+				inClass = 'pt-page-rotatePullLeft pt-page-delay180';
+				break;
+			case 44:
+				outClass = 'pt-page-rotatePushTop';
+				inClass = 'pt-page-rotatePullBottom pt-page-delay180';
+				break;
+			case 45:
+				outClass = 'pt-page-rotatePushBottom';
+				inClass = 'pt-page-rotatePullTop pt-page-delay180';
+				break;
+			case 46:
+				outClass = 'pt-page-rotateFoldLeft';
+				inClass = 'pt-page-moveFromRightFade';
+				break;
+			case 47:
+				outClass = 'pt-page-rotateFoldRight';
+				inClass = 'pt-page-moveFromLeftFade';
+				break;
+			case 48:
+				outClass = 'pt-page-rotateFoldTop';
+				inClass = 'pt-page-moveFromBottomFade';
+				break;
+			case 49:
+				outClass = 'pt-page-rotateFoldBottom';
+				inClass = 'pt-page-moveFromTopFade';
+				break;
+			case 50:
+				outClass = 'pt-page-moveToRightFade';
+				inClass = 'pt-page-rotateUnfoldLeft';
+				break;
+			case 51:
+				outClass = 'pt-page-moveToLeftFade';
+				inClass = 'pt-page-rotateUnfoldRight';
+				break;
+			case 52:
+				outClass = 'pt-page-moveToBottomFade';
+				inClass = 'pt-page-rotateUnfoldTop';
+				break;
+			case 53:
+				outClass = 'pt-page-moveToTopFade';
+				inClass = 'pt-page-rotateUnfoldBottom';
+				break;
+			case 54:
+				outClass = 'pt-page-rotateRoomLeftOut pt-page-ontop';
+				inClass = 'pt-page-rotateRoomLeftIn';
+				break;
+			case 55:
+				outClass = 'pt-page-rotateRoomRightOut pt-page-ontop';
+				inClass = 'pt-page-rotateRoomRightIn';
+				break;
+			case 56:
+				outClass = 'pt-page-rotateRoomTopOut pt-page-ontop';
+				inClass = 'pt-page-rotateRoomTopIn';
+				break;
+			case 57:
+				outClass = 'pt-page-rotateRoomBottomOut pt-page-ontop';
+				inClass = 'pt-page-rotateRoomBottomIn';
+				break;
+			case 58:
+				outClass = 'pt-page-rotateCubeLeftOut pt-page-ontop';
+				inClass = 'pt-page-rotateCubeLeftIn';
+				break;
+			case 59:
+				outClass = 'pt-page-rotateCubeRightOut pt-page-ontop';
+				inClass = 'pt-page-rotateCubeRightIn';
+				break;
+			case 60:
+				outClass = 'pt-page-rotateCubeTopOut pt-page-ontop';
+				inClass = 'pt-page-rotateCubeTopIn';
+				break;
+			case 61:
+				outClass = 'pt-page-rotateCubeBottomOut pt-page-ontop';
+				inClass = 'pt-page-rotateCubeBottomIn';
+				break;
+			case 62:
+				outClass = 'pt-page-rotateCarouselLeftOut pt-page-ontop';
+				inClass = 'pt-page-rotateCarouselLeftIn';
+				break;
+			case 63:
+				outClass = 'pt-page-rotateCarouselRightOut pt-page-ontop';
+				inClass = 'pt-page-rotateCarouselRightIn';
+				break;
+			case 64:
+				outClass = 'pt-page-rotateCarouselTopOut pt-page-ontop';
+				inClass = 'pt-page-rotateCarouselTopIn';
+				break;
+			case 65:
+				outClass = 'pt-page-rotateCarouselBottomOut pt-page-ontop';
+				inClass = 'pt-page-rotateCarouselBottomIn';
+				break;
+			case 66:
+				outClass = 'pt-page-rotateSidesOut';
+				inClass = 'pt-page-rotateSidesIn pt-page-delay200';
+				break;
+			case 67:
+				outClass = 'pt-page-rotateSlideOut';
+				inClass = 'pt-page-rotateSlideIn';
+				break;
+
+		}
+
+		$currPage.addClass( outClass ).on( animEndEventName, function() {
+			$currPage.off( animEndEventName );
+			endCurrPage = true;
+			if( endNextPage ) {
+				onEndAnimation( $currPage, $nextPage );
+			}
+		} );
+
+		$nextPage.addClass( inClass ).on( animEndEventName, function() {
+			$nextPage.off( animEndEventName );
+			endNextPage = true;
+			if( endCurrPage ) {
+				onEndAnimation( $currPage, $nextPage );
+			}
+		} );
+
+		if( !support ) {
+			onEndAnimation( $currPage, $nextPage );
+		}
+
+	}
+
+	function onEndAnimation( $outpage, $inpage ) {
+		endCurrPage = false;
+		endNextPage = false;
+		resetPage( $outpage, $inpage );
+		isAnimating = false;
+	}
+
+	function resetPage( $outpage, $inpage ) {
+		$outpage.attr( 'class', $outpage.data( 'originalClassList' ) );
+		$inpage.attr( 'class', $inpage.data( 'originalClassList' ) + ' pt-page-current' );
+            // call meter
+    drawCircle('#chart-4',2,53,'#circle-2');
+	}
+
+	init();
+
+// page transitions end
+
+	//return { init : init };
+
+//})();
+
+}(document,window)); // end
 /*
 var mapObj = new AMap.Map("mapBox");
 //自定义覆盖物dom元素
@@ -265,9 +999,7 @@ addM(131,32);
 	
 
             //console.log(tmpl('item_tmpl',{}))
-
-}(document,window)); // end
-
+/*
     // Simple JavaScript Templating
     // John Resig - http://ejohn.org/ - MIT Licensed
     (function(){
@@ -303,6 +1035,7 @@ addM(131,32);
         return data ? fn( data ) : fn;
       };
     })();
+    */
 /* baidu map */
 /*
 map = new BMap.Map("wrap");
@@ -429,3 +1162,4 @@ $('#btn3').button({icons: {primary: 'icon-volume-up icon-large'}});
 // Font Awesome extending
 $('#btn4').button({icons: {primary: 'icon-fighter-jet icon-large'}});
 */
+
