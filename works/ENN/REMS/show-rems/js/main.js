@@ -274,7 +274,8 @@ function drawLineGraph(graph, points, container, id) {
         var sum = endValue - initValue;
         var prefix;
         var percentageGain;
-        var stepCount = 1300 / sum;
+        //var stepCount = 1300 / sum;
+        var stepCount = 2300 / sum;
 
         function findPrefix() {
             if (sum > 0) {
@@ -321,7 +322,8 @@ function drawLineGraph(graph, points, container, id) {
         function count(graph, sum) {
             var totalGain = $(graph).find('.total-gain');
             var i = 0;
-            var time = 1300;
+            //var time = 1300;
+            var time = 2300;
             var intervalTime = Math.abs(time / sum);
             var timerID = 0;
             if (sum > 0) {
@@ -345,7 +347,8 @@ function drawLineGraph(graph, points, container, id) {
         setTimeout(function () {
             percentage.addClass('visible');
             hVal.addClass('visible');
-        }, 1300);
+        //}, 1300);
+        }, 2300);
 
     }
 
@@ -373,7 +376,8 @@ function drawLineGraph(graph, points, container, id) {
         });
         clip.animate({
             transform: 't80,0'
-        }, 1300, mina.linear);
+        //}, 1300, mina.linear);
+        }, 2300, mina.linear);
     }
 
       parseData(points);
@@ -407,7 +411,8 @@ function drawCircle(container,id,progress,parent){
   function countCircle(animtime,parent,progress){
     var textContainer = $(parent).find('.circle-percentage');
     var i = 0;
-    var time = 1300;
+    //var time = 1300;
+    var time = 2300;
     var intervalTime = Math.abs(time / progress);
     var timerID = setInterval(function () {
       i++;
@@ -854,8 +859,9 @@ function getRandomArbitrary(min, max) {
 	function resetPage( $outpage, $inpage ) {
 		$outpage.attr( 'class', $outpage.data( 'originalClassList' ) );
 		$inpage.attr( 'class', $inpage.data( 'originalClassList' ) + ' pt-page-current' );
-            // call meter
-    drawCircle('#chart-4',2,53,'#circle-2');
+
+    // call meter
+    drawCircle('#chart-4',2,53,'#circle-2'); // container, id, progress, parent 
 	}
 
 	init();

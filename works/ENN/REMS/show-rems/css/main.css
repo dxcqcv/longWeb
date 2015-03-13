@@ -98,16 +98,30 @@ div { box-sizing: border-box; }
 .cont-project:first-child { margin-left:0;}
 .cont-projects-box {overflow: hidden;}
 .projects-list {width: 999999999999999999px;}
-.cont-meter-box { position: relative; }
-.cont-meter-title { position: absolute; }
+.cont-meter-box {  }
+.cont-meter-title { 
+    position: absolute; 
+    z-index: 1;
+    color: #333;
+    font-size: 24px;
+}
 .cont-meter-detail { text-align: center;  padding-top: 10px; }
 /* meter start */
+.cont-meter-chart {
+    text-align: center;
+    background: #fff;
+    position: relative;
+}
+.chart-circle-energy {
+    width: 144px;
+    height: 151px;
+}
 /* meter end */
 
 .circle-percentage {
   position: absolute;
-  color: white;
-  font-size: 22px;
+  color: #690;
+  font: normal 400 50px Arial;
   left: 50%;
   top: 50%;
   -moz-transform: translate(-50%, -50%);
@@ -137,11 +151,11 @@ div { box-sizing: border-box; }
   padding: 15px 20px 40px 20px;
 }
 .underlay {
-  stroke-width: 5;
+  stroke-width: 10;
   fill: transparent;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke: #24303a;
+  stroke: #ccc;
 }
 
 #circle-graph-1 {
@@ -164,7 +178,7 @@ div { box-sizing: border-box; }
   stroke: url(#gradient-2);
   */
   stroke: #39c;
-  stroke-width: 5;
+  stroke-width: 10;
   fill: transparent;
   stroke-linecap: round;
   stroke-linejoin: round;
