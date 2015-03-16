@@ -1,6 +1,5 @@
 (function(doc,win){
 /* index */
-/* ibs map */
 		//初始化地图对象，加载地图
 		var map = new AMap.Map('mapBox',{
 			resizeEnable: true,
@@ -44,10 +43,12 @@
               var bb = function(e) {
               //console.log(this)
               };
+              /*
               AMap.event.addListener(marker, 'mouseover', aa);
               AMap.event.addListener(marker, 'mouseout', bb);
+              */
         }
-var demand;
+var demand
 
 function Request() {
     this.loading = $('#loading')
@@ -89,6 +90,7 @@ function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText 
 function doneFn() { console.log('done'); }
 demand = new Request();
 demand.start({done:indexInit});
+
 function indexInit(data) {
 // map left
     $('#remsTitle').text(data.title);
@@ -104,7 +106,7 @@ function indexInit(data) {
             +    '<img src="'+pic+'" alt="新奥">'
             +'</div>'
             +'<div class="project-box-right left">'
-            +    '<p>'+data.projects[i].projectname+'</p>'
+            +    '<p class="project-name">'+data.projects[i].projectname+'</p>'
             +    '<p>项目类型：<span class="projectType">'+data.projects[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data.projects[i].industrytypename+'</span></p>'
             +    '<p>功能建设：<span class="projectEnergy">'+data.projects[i].buildingarea+'</span></p>'
             +    '<p>项目地址：<span class="projectAddr">'+data.projects[i].address1+'</span></p>'
@@ -119,22 +121,39 @@ function indexInit(data) {
 $(document).on('click','.project-box',clickProjectBox);
 function clickProjectBox() {
     var $this = $(this)
-      , lng = $this.attr('data-lng')
-      , lat = $this.attr('data-lat')
-      , doubleW = $this.width()
-      , doubleH = $this.height()*2
-        map.setZoomAndCenter(14, new AMap.LngLat(lng, lat));
-        //console.log($this.height())
-        $this.animate({'height':doubleH})
-             .children('.project-box-right').addClass('hide')
-             .end()
-             .find('img').animate({'width':250,'heihgt':200})
-             //.find('img').animate({'heihgt':doubleH-22, 'width':doubleW-22})
-             console.log('w '+doubleW)
-             console.log('h '+doubleH)
+    if($this.hasClass('active')) {
+			if( isAnimating ) {
+				return false;
+			}
+            var projectName  
+
+			if( animcursor > 67) {
+				animcursor = 1;
+			}
+			nextPage( animcursor );
+			++animcursor;
+
+            projectName = $this.find('.project-name').text()
+            $('.project-name').text(projectName)
+    } 
+    else {
+        var lng = $this.attr('data-lng')
+          , lat = $this.attr('data-lat')
+          , doubleW = $this.width()
+          , doubleH = $this.height()*2
+            map.setZoomAndCenter(14, new AMap.LngLat(lng, lat));
+
+            //AMap.event.addListener(map, 'moveend', function(){
+                $this.addClass('active')
+                     .animate({'height':doubleH})
+                     .children('.project-box-right').addClass('hide')
+                     .end()
+                     .find('img').animate({'width':250,'heihgt':200})
+            //});
+     }
 }
 
-$(document).on('click', '.arrShow', showArea);
+$(document).on('click', '.arrShow', showArea); // 内容页项目选择
 function showArea() {
     var $this = $(this)
       , wrap = $this.closest('#contProWrap')
@@ -182,7 +201,7 @@ $.extend(MoveArea.prototype, {
 
     //console.log(this.list.find('li').length)    
     if(dir === 'left') {
-    console.log('current '+this.current)
+    //console.log('current '+this.current)
         if(this.current === listLen-5) {
            this.current = listLen-5; // display 5 pic 
         } else {
@@ -190,7 +209,6 @@ $.extend(MoveArea.prototype, {
            offset = '-=' + this.step
         }
     }else {
-    console.log('current '+this.current)
         if(this.current === 0) {
             this.current = 0;
         } else {
@@ -202,7 +220,7 @@ $.extend(MoveArea.prototype, {
   }
   , next : function(distance) {
         if(typeof distance === 'undefined') return;
-  console.log('distance '+distance)
+  //console.log('distance '+distance)
 		if( this.isAnimating ) {
 			return false;
 		}
@@ -494,6 +512,7 @@ function getRandomArbitrary(min, max) {
 		$pages = $main.children( 'div.layout' ),
 		//$iterate = $( '.rems-logo-box' ),
 		animcursor = getRandomArbitrary(1,67), // random 67 num
+		//animcursor = globalRandomNum, // random 67 num
 		pagesCount = $pages.length,
 		current = 0,
 		isAnimating = false,
@@ -520,7 +539,8 @@ function getRandomArbitrary(min, max) {
 
 
 		//$iterate.on( 'click', function() {
-		$(document).on( 'click','.rems-logo-box', function() { // click event
+        /*
+		$(document).on( 'click','.rems-logo-box', function() { // 首页切换内容页 
 
 			if( isAnimating ) {
 				return false;
@@ -531,6 +551,7 @@ function getRandomArbitrary(min, max) {
 			nextPage( animcursor );
 			++animcursor;
 		} );
+        */
 
 	}
 
@@ -861,7 +882,9 @@ function getRandomArbitrary(min, max) {
 		$inpage.attr( 'class', $inpage.data( 'originalClassList' ) + ' pt-page-current' );
 
     // call meter
-    drawCircle('#chart-4',2,53,'#circle-2'); // container, id, progress, parent 
+    drawCircle('#chart-4',2,70,'#circle-2'); // container, id, progress, parent 
+    drawCircle('#chart-5',2,40,'#circle-3'); // container, id, progress, parent 
+    drawCircle('#chart-6',2,75,'#circle-4'); // container, id, progress, parent 
 	}
 
 	init();
