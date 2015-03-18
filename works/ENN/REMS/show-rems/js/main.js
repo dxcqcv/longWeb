@@ -91,7 +91,7 @@ demand = new Request(); // 统一调用ajax
 demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
 
 function remsLogin(data) {
-    if(data.status === 0) demand.start({done:indexInit}); // 登录成功加载项目
+    if(data.status === 0) demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
 }
 function indexInit(data) {
 // map left
@@ -127,7 +127,8 @@ function clickProjectBox() {
 			if( isAnimating ) {
 				return false;
 			}
-            var projectName  
+            var projectName
+              , projectid = $this.attr('data-projectid')
 
 			if( animcursor > 67) {
 				animcursor = 1;
@@ -136,6 +137,11 @@ function clickProjectBox() {
 			++animcursor;
             projectName = $this.find('.project-name').text()
             $('.project-name').text(projectName)
+            //console.log('rems-labeldataAll+projectid='+projectid+'.json')
+            //setInterval(function(){ processChart(projectid) },60000)
+            setInterval(function(){ processChart(projectid) },600)
+            demand.start({url:'rems-labellist+projectid='+projectid+'.json',done:getLabellist}); // 请求设备列表
+            demand.start({url:'rems-graphlist+projectid='+projectid+'.json',done:getGraphlist}); // 请求设备图像
     } 
     else {
         var lng = $this.attr('data-lng')
@@ -153,7 +159,26 @@ function clickProjectBox() {
             //});
      }
 }
+function getLabelDataAll(data) {
+ var len = data.labeldata.length-1;
+ //for(var i = 0, l = data.labellist.length; i < l; i++) {
+       //console.log(data.labellist[len].datavalue) 
+       $('#labelValue').text(data.labeldata[len].datavalue)
+ //}
+}
+function getLabellist(data){
+ var len = data.labellist.length-1;
+       $('#labelList').text(data.labellist[len].title)
 
+}
+function getGraphlist(data) {
+ var len = data.graphlist.length-1;
+       $('#graphList').attr('src',data.graphlist[len].picturepath)
+
+}
+function processChart(id) {
+    demand.start({url:'rems-labeldataAll+projectid='+id+'.json',done:getLabelDataAll}); // 请求设备数据
+}
 $(document).on('click', '.arrShow', showArea); // 内容页项目选择
 function showArea() {
     var $this = $(this)
