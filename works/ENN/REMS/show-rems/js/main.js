@@ -49,7 +49,6 @@
               */
         }
 var demand
-
 function Request() {
     this.loading = $('#loading')
 }
@@ -88,9 +87,12 @@ $.extend(Request.prototype, {
 });
 function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
 function doneFn() { console.log('done'); }
-demand = new Request();
-demand.start({done:indexInit});
+demand = new Request(); // 统一调用ajax
+demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
 
+function remsLogin(data) {
+    if(data.status === 0) demand.start({done:indexInit}); // 登录成功加载项目
+}
 function indexInit(data) {
 // map left
     $('#remsTitle').text(data.title);
@@ -101,7 +103,7 @@ function indexInit(data) {
       , str = ''
       , pic = 'img/defaultProjectListImg.jpg';
         for(var i = 0; i < num; i++) {
-        str += '<div class="project-box clearfix" data-lng="'+data.projects[i].longitude+'" data-lat="'+data.projects[i].latitude+'">'
+        str += '<div class="project-box clearfix" data-projectid="'+data.projects[i].projectid+'" data-lng="'+data.projects[i].longitude+'" data-lat="'+data.projects[i].latitude+'">'
             +'<div class="project-box-left left">'
             +    '<img src="'+pic+'" alt="新奥">'
             +'</div>'
@@ -132,7 +134,6 @@ function clickProjectBox() {
 			}
 			nextPage( animcursor );
 			++animcursor;
-
             projectName = $this.find('.project-name').text()
             $('.project-name').text(projectName)
     } 

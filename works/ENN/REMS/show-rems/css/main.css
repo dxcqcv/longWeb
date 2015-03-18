@@ -85,7 +85,11 @@ div { box-sizing: border-box; }
 .cont-bottom-center { background: green; height: 100%; width: 60%; position: relative;}
 .cont-bottom-right { background: blue; height: 100%;  width:20%;}
 .cont-3d-box { background: pink; height: 100%;}
-.cont-construct-box { background: yellow; }
+.cont-construct-box { background: yellow; height: 100%;}
+.cont-construct-box-inner {
+    background: url('../img/huanghuaT2.jpg') no-repeat; 
+    height: 100%;
+}
 .cont-projects-wrap { background: rgba(0,0,0,.5); padding: 15px 35px; position: absolute; bottom: 0; width: 100%;}
 .cont-projects-wrap-inner { position: relative; }
 .cont-projects-arrow {  z-index: 1;position: absolute; cursor: pointer;}
@@ -217,6 +221,7 @@ div { box-sizing: border-box; }
     color: #fff;
     font-size: 20px;
 }
+
 /* test */
 /* 定义自定义点样式 */
 div.marker{height:40px;

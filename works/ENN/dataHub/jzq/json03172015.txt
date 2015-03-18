@@ -195,3 +195,28 @@ status:        	/*int类型. 0:成功，1:错误*/
 channel：	/*int类型. 1,2,3,4,5,6,7,8*/
 slaveaddr:	/*string类型. 645设备地址*/
 
+cmd:  64    	/*REQ    合并2个或多个寄存器*/ 
+channel：	/*int类型. 1,2,3,4,5,6,7,8*/
+slaveaddr:	/*int类型：modbus设备    string类型：645设备地址*/
+count:		/*int类型,合并寄存器个数*/
+param1:		/*合并寄存器地址1*/
+param2:		/*合并寄存器地址2*/
+...
+paramN: 	/*合并寄存器地址N*/
+regnum:		/*寄存器长度*/
+regdes:		/*寄存器描述*/
+calculate:	/*string 计算公式*/
+multiple:	/*float： 乘法因子*/
+datatype:	/*int 数据类型*/
+
+cmd:  65    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+
+cmd:  66    	/*REQ    获取设备以及设备通道号*/ 
+
+cmd:  67    	/*RSP*/ 
+status:        	/*int类型. 0:成功，1:错误*/
+slavenum:	/*int类型,设备个数*/
+slave1:[[1,2,3,4],[1,2,3,4]...]		/*数组[int,string,float,int].   1:通道号 2:描述 3:乘法因子 4:数据类型*/
+slave2:[[1,2,3,4],[1,2,3,4]...]		/*数组[int,string,float,int].   1:通道号 2:描述 3:乘法因子 4:数据类型*/
+...
