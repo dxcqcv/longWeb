@@ -93,24 +93,14 @@
                             <div class="cont-meter-history-right left bg-g">当前能耗25406吨标煤</div>
                         </div>
                     </div>
-                    <div class="cont-meter-box">
-                        <div id="circle-5" class="cont-meter-chart">
-                          <p class="cont-meter-title">节能率</p>
-                          <h2 class="circle-percentage"></h2>
-                          <svg class="chart-circle chart-circle-energy" id="chart-7" width="50%" viewBox="0 0 100 100">
-                            <path class="underlay" d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"/>
-                          </svg>
-                        </div>
-                        <p class="cont-meter-detail bg-g">节能量<span class="cont-meter-detail-num">20500.0</span>kWh</p>
-                        <div class="cont-meter-history clearfix ">
-                            <div class="cont-meter-history-left left bg-g">常规能耗123456吨标煤</div>
-                            <div class="cont-meter-history-right left bg-g">当前能耗25406吨标煤</div>
-                        </div>
-                    </div>
                 </div>
                 <div id="hcContainer" class="cont-bottom-center left">
-                    <div class="cont-3d-box hide"></div>
-                    <div class="cont-construct-box ">
+                    <span id="3dBtn" data-type="3" class="threed-btn cont-btn btn-active">3D图</span>
+                    <span id="processChartBtn" data-type="2" class="process-btn cont-btn">工艺图</span>
+                    <div id="cont3DBox" class="cont-3d-box contBox">
+                       <canvas id="canvas3D" width="800px" height="600px"></canvas>
+                    </div>
+                    <div id="processBox" class="cont-construct-box contBox hide">
                         <div class="cont-construct-box-inner">
                             <span id="labelValue"></span>    
                             <span id="labelList"></span>    
@@ -181,6 +171,11 @@
 <script src="../../../../global/js/jquery-1.11.0.min.js"></script>
 <script src="lib/jquery-ui-1.11.3/jquery-ui.min.js"></script>
 
+<!--
+<script src="js/three.min.js"></script>
+-->
+<script src="js/three.js"></script>
+<script src="js/OBJLoader.js"></script>
 <script src="js/modernizr.custom.js"></script>
 <script src="js/highcharts-custom.js"></script>
 <script src='js/snap.svg-min.js'></script>

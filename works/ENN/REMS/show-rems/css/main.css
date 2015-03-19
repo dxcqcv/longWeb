@@ -1,5 +1,8 @@
 /* global */
-body { font: normal 12px/1.5 'microsoft YaHei'; }
+body { 
+    font: normal 12px/1.5 'microsoft YaHei'; 
+    min-width: 1920px; min-height: 951px;  
+}
 div { box-sizing: border-box; }
 .loadingBox {
     font-size: 50px; color: #39c;    
@@ -8,6 +11,7 @@ div { box-sizing: border-box; }
 .c-f {color: #fff;}
 .bg-g { background: green;}
 .bg-w { background: white; }
+.cont-btn { cursor: pointer;}
 /* index */
 .wrapper, .layout,
 .map-box { width:100%; height: 100%;}
@@ -75,6 +79,23 @@ div { box-sizing: border-box; }
 }
 .project-box-left {}
 /* content page */
+.threed-btn,
+.process-btn {
+    position: absolute;
+    padding: 10px;
+    top: 0;
+}
+.threed-btn {
+    right: 150px;
+}
+.process-btn {
+    right: 100px;
+}
+.btn-active {
+    color: #fff;
+    background: #39c;
+    border-radius: 5px;
+}
 .cont-top-box { 
     background: gray; 
     display: table-row; height: 72px; width:100%;

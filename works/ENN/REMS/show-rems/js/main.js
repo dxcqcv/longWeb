@@ -92,6 +92,7 @@ demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done
 
 function remsLogin(data) {
     if(data.status === 0) demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
+    else alert('数据库出错')
 }
 function indexInit(data) {
 // map left
@@ -120,7 +121,19 @@ function indexInit(data) {
         $('#mapRightScroll').empty().append(str);
         //console.log(map.getZoom())
 }
-$(document).on('click','.project-box',clickProjectBox);
+function switchBtn() {
+    var $this = $(this)
+      , type = $this.attr('data-type')
+    $this.addClass('btn-active').siblings('.cont-btn').removeClass('btn-active');
+    console.log(type)
+    if(type == 3) showCont('#cont3DBox', '.contBox') 
+    else if(type == 2) showCont('#processBox', '.contBox')
+}
+function showCont(show, hide) {
+    $(show).removeClass('hide').siblings(hide).addClass('hide')
+}
+$(doc).on('click', '.cont-btn', switchBtn);
+$(doc).on('click','.project-box',clickProjectBox);
 function clickProjectBox() {
     var $this = $(this)
     if($this.hasClass('active')) {
@@ -142,6 +155,7 @@ function clickProjectBox() {
             setInterval(function(){ processChart(projectid) },600)
             demand.start({url:'rems-labellist+projectid='+projectid+'.json',done:getLabellist}); // 请求设备列表
             demand.start({url:'rems-graphlist+projectid='+projectid+'.json',done:getGraphlist}); // 请求设备图像
+init3D();
     } 
     else {
         var lng = $this.attr('data-lng')
@@ -173,7 +187,11 @@ function getLabellist(data){
 }
 function getGraphlist(data) {
  var len = data.graphlist.length-1;
-       $('#graphList').attr('src',data.graphlist[len].picturepath)
+       $('#graphList').attr({
+        'src':data.graphlist[len].picturepath
+      , 'width':data.graphlist[len].width
+      , 'height':data.graphlist[len].height
+        })
 
 }
 function processChart(id) {
@@ -469,8 +487,59 @@ function drawCircle(container,id,progress,parent){
 
 
 
-
 /* meter end */
+
+/* 3D start */
+var scene = null
+  , camera = null
+  , renderer = null
+  , mesh = null
+  , id = null
+function init3D() {
+                renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('canvas3D')
+                });
+                //renderer.setClearColor(0x000000);
+                scene = new THREE.Scene();
+                
+                camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+                camera.position.set(15, 25, 25);
+                camera.lookAt(new THREE.Vector3(0, 2, 0));
+                scene.add(camera);
+                
+                var loader = new THREE.OBJLoader();
+                loader.load('obj/port.obj', function(obj) {
+                    obj.traverse(function(child) {
+                        if (child instanceof THREE.Mesh) {
+                            child.material.side = THREE.DoubleSide;
+                        }
+                    });
+                
+                    mesh = obj;
+                    scene.add(obj);
+                });
+                
+                var light = new THREE.DirectionalLight(0xffffff);
+                light.position.set(20, 10, 5);
+                scene.add(light);
+                
+                id = setInterval(draw, 20);
+
+}
+
+function draw() {
+                renderer.render(scene, camera);
+                
+                mesh.rotation.y += 0.01;
+                if (mesh.rotation.y > Math.PI * 2) {
+                    mesh.rotation.y -= Math.PI * 2;
+                }
+
+}
+
+//init3D();
+/* 3D end */
+
 // high chart
 /*
 function Person(name, age, sex) {
@@ -565,19 +634,6 @@ function getRandomArbitrary(min, max) {
 
 
 		//$iterate.on( 'click', function() {
-        /*
-		$(document).on( 'click','.rems-logo-box', function() { // 首页切换内容页 
-
-			if( isAnimating ) {
-				return false;
-			}
-			if( animcursor > 67) {
-				animcursor = 1;
-			}
-			nextPage( animcursor );
-			++animcursor;
-		} );
-        */
 
 	}
 
@@ -920,7 +976,6 @@ function getRandomArbitrary(min, max) {
 	//return { init : init };
 
 //})();
-
 }(document,window)); // end
 /*
 var mapObj = new AMap.Map("mapBox");
