@@ -542,44 +542,6 @@ function draw() {
 
 // high chart
 /*
-function Person(name, age, sex) {
-  // Common to all Persons
-  this.name = 'Roy';
-  this.age = 1;
-  this.sex = sex;
-}
-
-Person.prototype = {
-  // common to all Persons
-  say: function(words) {
-    return this.name +'says: '+ words;
-  }
-  , count: function() {
-    this.age++;
-    console.log(this.age)
-  }
-};
-function T() {
-    this.c = 0;
-    this.p = function() {
-        this.c++
-        console.log(this.c)
-    }
-}
-T.prototype.l = function() {
-    this.c++;
-    console.log(this.c)
-}
-var t = new T();
-$(document).on('click', '.cont-projects-arrow', t.p);
-$.extend(MoveArea.prototype, {
-    move: function() {
-
-    }
-    , next: function(distance) {
-        MoveArea.call(this)
-    }
-});
 $('#hcContainer').highcharts({
     chart: {type: 'bar'}
   , title: {text:'Fruit Consumption'}
