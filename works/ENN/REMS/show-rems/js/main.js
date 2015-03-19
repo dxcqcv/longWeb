@@ -499,7 +499,7 @@ function init3D() {
                 renderer = new THREE.WebGLRenderer({
                     canvas: document.getElementById('canvas3D')
                 });
-                renderer.setClearColor(0x000000);
+                //renderer.setClearColor(0x000000);
                 scene = new THREE.Scene();
                 
                 camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
@@ -541,7 +541,6 @@ function draw() {
 /* 3D end */
 
 // high chart
-/*
 $('#hcContainer').highcharts({
     chart: {type: 'bar'}
   , title: {text:'Fruit Consumption'}
@@ -558,7 +557,6 @@ $('#hcContainer').highcharts({
       , data: [5,7,3]
   }]
 });
-*/
 // random
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
