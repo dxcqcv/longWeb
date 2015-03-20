@@ -108,6 +108,20 @@ function indexInit(data) {
             +'<div class="project-box-left left">'
             +    '<img src="'+pic+'" alt="新奥">'
             +'</div>'
+            +'<div class="project-detail-box hide">'
+            +  '<div class="project-detail-col">'
+            +        '<p>本月二氧化碳排放总量</p>'
+            +        '<p>62,614.2kgCO₂</p>'
+            +  '</div>'
+            +                '<div class="project-detail-col">'
+            +                    '<p>本月成本总量</p>'
+            +                    '<p>55,721.73RMB</p>'
+            +                '</div>'
+            +                '<div class="project-detail-col">'
+            +                    '<p>本月用电总量</p>'
+            +                    '<p>74,229.7KWH</p>'
+            +                '</div>'
+            +            '</div>'
             +'<div class="project-box-right left">'
             +    '<p class="project-name">'+data.projects[i].projectname+'</p>'
             +    '<p>项目类型：<span class="projectType">'+data.projects[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data.projects[i].industrytypename+'</span></p>'
@@ -121,11 +135,10 @@ function indexInit(data) {
         $('#mapRightScroll').empty().append(str);
         //console.log(map.getZoom())
 }
-function switchBtn() {
+function switchBtn() { // 切换3D与工艺图
     var $this = $(this)
       , type = $this.attr('data-type')
     $this.addClass('btn-active').siblings('.cont-btn').removeClass('btn-active');
-    console.log(type)
     if(type == 3) showCont('#cont3DBox', '.contBox') 
     else if(type == 2) showCont('#processBox', '.contBox')
 }
@@ -134,20 +147,26 @@ function showCont(show, hide) {
 }
 $(doc).on('click', '.cont-btn', switchBtn);
 $(doc).on('click','.project-box',clickProjectBox);
-function clickProjectBox() {
-    var $this = $(this)
-    if($this.hasClass('active')) {
+$(doc).on('click', '#gotoIndex', function(){clearInterval(id3d);switchPage();})
+                
+function switchPage() {
 			if( isAnimating ) {
 				return false;
 			}
-            var projectName
-              , projectid = $this.attr('data-projectid')
-
 			if( animcursor > 67) {
 				animcursor = 1;
 			}
 			nextPage( animcursor );
 			++animcursor;
+}
+function clickProjectBox() {
+    var $this = $(this)
+    if($this.hasClass('active')) {
+            var projectName
+              , projectid = $this.attr('data-projectid')
+
+            switchPage();
+
             projectName = $this.find('.project-name').text()
             $('.project-name').text(projectName)
             //console.log('rems-labeldataAll+projectid='+projectid+'.json')
@@ -166,10 +185,12 @@ init3D();
 
             //AMap.event.addListener(map, 'moveend', function(){
                 $this.addClass('active')
-                     .animate({'height':doubleH})
+                     .animate({width: doubleW,height: doubleH})
                      .children('.project-box-right').addClass('hide')
                      .end()
-                     .find('img').animate({'width':250,'heihgt':200})
+                     .find('img').animate({width: doubleW-20,height: doubleH-20}) 
+                     .end()
+                     .find('.project-detail-box').removeClass('hide')
             //});
      }
 }
@@ -204,7 +225,7 @@ function showArea() {
       , otherArr = wrap.siblings('.cont-projects-arrow')
     if(wrap.hasClass('active')) {
         $this.addClass('arrow-top').removeClass('arrow-bottom')
-        wrap.animate({'height':0, 'padding': 0}).removeClass('active')
+        wrap.animate({'height':0, 'padding': '0 35px'}).removeClass('active')
         otherArr.hide()
     } else {
         $this.addClass('arrow-bottom').removeClass('arrow-top')
@@ -231,7 +252,7 @@ function MoveArea() {
 $.extend(MoveArea.prototype, {
     initialize: function(nav, step, list) {
         this.nav = nav; 
-        this.step = step || 0;
+        this.step = step + 10 || 0;
         this.list = list || '';
         this.move();
     }
@@ -494,7 +515,7 @@ var scene = null
   , camera = null
   , renderer = null
   , mesh = null
-  , id = null
+  , id3d = null
 function init3D() {
                 renderer = new THREE.WebGLRenderer({
                     canvas: document.getElementById('canvas3D')
@@ -523,7 +544,7 @@ function init3D() {
                 light.position.set(20, 10, 5);
                 scene.add(light);
                 
-                id = setInterval(draw, 20);
+                id3d = setInterval(draw, 20);
 
 }
 
@@ -542,12 +563,24 @@ function draw() {
 
 // high chart
 $('#hcContainer').highcharts({
-    chart: {type: 'bar'}
+    chart: {type: 'column'}
   , title: {text:'Fruit Consumption'}
   , xAxis: {categories: ['Apples', 'Bananas', 'Oranges']}
   , yAxis: {
         title: {text: 'Fruit eaten'}
   }
+  /*
+   , tooltip: {
+        xDateFormat: '%Y-%m-%d %H:%M:%S',
+        shared : true
+    }
+   , plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    }
+*/
   , series: [{
         name: 'Jane'
       , data: [1,0,4]

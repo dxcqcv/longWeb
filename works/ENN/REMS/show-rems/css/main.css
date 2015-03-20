@@ -76,8 +76,20 @@ div { box-sizing: border-box; }
     background: #193b96;
     width: 420px; height: 130px;
     padding: 10px; border: 1px solid #fff;
+    position: relative;
 }
-.project-box-left {}
+.project-detail-box {
+    position: absolute;
+    left: 10px; bottom: 10px;
+    background: #000;
+}
+.project-detail-col {
+    float: left;
+    width: 120px;
+}
+.project-box-left > img {
+    width: 100%; height: 100%;
+}
 /* content page */
 .threed-btn,
 .process-btn {
@@ -109,7 +121,7 @@ div { box-sizing: border-box; }
 .cont-construct-box { background: yellow; height: 100%;}
 .cont-construct-box-inner {
     background: url('../img/huanghuaT2.jpg') no-repeat; 
-    height: 100%;
+    height: 500px;
 }
 .cont-projects-wrap { background: rgba(0,0,0,.5); padding: 15px 35px; position: absolute; bottom: 0; width: 100%;}
 .cont-projects-wrap-inner { position: relative; }
@@ -120,8 +132,7 @@ div { box-sizing: border-box; }
 .arrow-right:hover { border-left: 25px solid rgba(255,255,255,1);}
 .arrow-top {  border-left: 25px solid transparent; border-bottom: 25px solid rgba(255,255,255,.8); border-right: 25px solid transparent; top: -45px; right: 50%; }
 .arrow-bottom {  border-left: 25px solid transparent; border-top: 25px solid rgba(255,255,255,.8); border-right: 25px solid transparent; top: -45px; right: 50%; }
-.cont-project { margin-left: 10px; float: left;width: 190px; height: 136px; background: white;} 
-.cont-project:first-child { margin-left:0;}
+.cont-project { background: #fff; margin-left: 10px; float: left;width: 190px; height: 136px; } 
 .cont-projects-box {overflow: hidden;}
 .projects-list {width: 999999999999999999px;}
 .cont-meter-box {  }
