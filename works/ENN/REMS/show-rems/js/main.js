@@ -49,6 +49,7 @@
               */
         }
 var demand
+  , projectBoxIndex = 0 // 项目索引 
 function Request() {
     this.loading = $('#loading')
 }
@@ -147,7 +148,18 @@ function showCont(show, hide) {
 }
 $(doc).on('click', '.cont-btn', switchBtn);
 $(doc).on('click','.project-box',clickProjectBox);
-$(doc).on('click', '#gotoIndex', function(){clearInterval(id3d);switchPage();})
+$(doc).on('click', '#gotoIndex', function(){
+    $('.project-box').eq(projectBoxIndex).removeClass('active').css('height','auto').children('.project-box-right').removeClass('hide').end().find('img').width(150).height(109).end().find('.project-detail-box').addClass('hide')
+    map.setZoomAndCenter(5, new AMap.LngLat(106.387516, 37.729803)); // 恢复地图
+    switchPage();
+    clearInterval(id3d)
+    //console.log($('svg path[id^="circle-graph-"]'))
+    $('path[id^="circle-graph-"]').each(function() {
+        console.log(111)
+        $(this).remove() 
+        $(this).hide() 
+    });
+});
                 
 function switchPage() {
 			if( isAnimating ) {
@@ -174,6 +186,10 @@ function clickProjectBox() {
             setInterval(function(){ processChart(projectid) },600)
             demand.start({url:'rems-labellist+projectid='+projectid+'.json',done:getLabellist}); // 请求设备列表
             demand.start({url:'rems-graphlist+projectid='+projectid+'.json',done:getGraphlist}); // 请求设备图像
+    // call meter
+    drawCircle('#chart-4',2,70,'#circle-2'); // container, id, progress, parent 
+    drawCircle('#chart-5',2,40,'#circle-3'); // container, id, progress, parent 
+    drawCircle('#chart-6',2,75,'#circle-4'); // container, id, progress, parent 
 init3D();
     } 
     else {
@@ -182,7 +198,6 @@ init3D();
           , doubleW = $this.width()
           , doubleH = $this.height()*2
             map.setZoomAndCenter(14, new AMap.LngLat(lng, lat));
-
             //AMap.event.addListener(map, 'moveend', function(){
                 $this.addClass('active')
                      .animate({width: doubleW,height: doubleH})
@@ -192,6 +207,7 @@ init3D();
                      .end()
                      .find('.project-detail-box').removeClass('hide')
             //});
+            projectBoxIndex = $this.index()
      }
 }
 function getLabelDataAll(data) {
@@ -956,10 +972,6 @@ function getRandomArbitrary(min, max) {
 		$outpage.attr( 'class', $outpage.data( 'originalClassList' ) );
 		$inpage.attr( 'class', $inpage.data( 'originalClassList' ) + ' pt-page-current' );
 
-    // call meter
-    drawCircle('#chart-4',2,70,'#circle-2'); // container, id, progress, parent 
-    drawCircle('#chart-5',2,40,'#circle-3'); // container, id, progress, parent 
-    drawCircle('#chart-6',2,75,'#circle-4'); // container, id, progress, parent 
 	}
 
 	init();

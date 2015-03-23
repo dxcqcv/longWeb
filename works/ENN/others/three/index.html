@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三网首页</title>
+    <style>
+        *{margin: 0; padding:0;}
+        html, body { height: 100%; }
+        body { font: normal 12px/1.5 'microsoft YaHei';}
+        .wrapper { 
+            background: url('img/three-wrapper.png') no-repeat;
+            height: 768px; width: 1366px;margin: auto;
+            position: relative; }
+        .btn { 
+        /*
+            box-shadow: 0 0 3px 5px rgba(0,0,0,0.5);
+            background: #39c;
+            */
+            border-radius: 50%; padding: 30px;
+            line-height: 16px; display: inline-block;
+            text-align: center; position: absolute; z-index: 102;
+            color: #fff; font: bold 20px/1.5; cursor: pointer; }
+        .btn > p { line-height: 1.5; display: inline-block; vertical-align: middle; text-align: center;}
+        .fs20 {font: normal 700 20px/106 'microsoft YaHei';}
+        .otherWords { z-index: 102; position: absolute; color: #fff; font: normal 700 16px/1.5 'microsoft YaHei';}
+        .lffnw { top: 550px; left: 80px; width: 100px; height: 100px; line-height: 100px; }
+        .fnz { top: 460px; left: 445px; width: 62px; height: 62px; 
+            line-height: 52px; line-height: 62px;}
+        .xcyfnww { top: 290px; left: 260px; width: 109px; height: 109px;
+             text-align: center; line-height: 109px; }
+        .nybb { top:460px; left: 1130px; width: 80px; height: 80px; line-height: 80px;}
+        .nyjy { top: 460px; left: 960px; width: 50px; height: 50px; line-height: 50px;}
+        .nydd { top: 612px; left: 801px; width: 50px; height: 50px; line-height: 50px;}
+        .nxfx { top: 610px; left: 1044px; width: 40px; height: 40px; line-height: 40px; }
+        .xcygwzx { top: 390px; left: 90px; }
+        .lcfnz { top: 490px; left: 270px;}
+        .zsysjds { top:310px; left: 490px; }
+        .thyy { top: 400px; left: 710px;}
+        .hhjc { top: 670px; left: 390px;}
+        .zzsnc { top: 660px; left: 610px;}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="slider" class="slider">
+            <img src="img/bg01.jpg" alt="">
+            <img src="img/bg02.jpg" alt="">
+            <img src="img/bg03.jpg" alt="">
+        </div>
+        <div class="">
+            <div class="btn lffnw transitions fs20" data-num="1" data-transition="explode" data-params="{'rows': 4}"><p>廊坊泛能网规划</p></div>
+            <div class="btn fnz transitions fs20" data-num="2" data-transition="blinds"><p>泛能站</p></div>
+            <div class="btn xcyfnww transitions fs20" data-num="3" data-transition="zip"><p>新朝阳泛能微网</p></div>
+            <div class="btn nybb fs20"><p>能效报表</p></div>
+            <div class="btn nydd fs20"><p>能源调度</p></div>
+            <div class="btn nxfx fs20"><p>能效分析</p></div>
+            <div class="btn nyjy fs20"><p>能源交易</p></div>
+            <p class="otherWords xcygwzx">新朝阳购物中心</p>
+            <p class="otherWords lcfnz">乐晟泛能站</p>
+            <p class="otherWords zsysjds">中石油设计大厦</p>
+            <p class="otherWords thyy">亭湖医院</p>
+            <p class="otherWords hhjc">黄花机场</p>
+            <p class="otherWords zzsnc">株洲神农城</p>
+        </div>
+    </div>
+		<script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/flux.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(function(){
+				if(!flux.browser.supportsTransitions)
+					console.log("Flux Slider requires a browser that supports CSS3 transitions");
+				var btn = $('.btn')	
+                  , slider = $('#slider')
+				window.f = new flux.slider('#slider', {
+					pagination: false,
+					controls: false,
+					autoplay: false
+				});
+				
+				$('.transitions').mouseenter(function(){
+                    var $this = $(this)
+                      , index = $this.data('num')
+                      , transition = $this.data('transition')
+                      , params = $this.data('params')
+                    //btn.hide()
+					//window.f.next(transition, params);
+					window.f.showImage(index, transition, params);
+				});
+                slider.bind('fluxTransitionEnd', function(){ // callback fn
+                    //btn.show()
+                    //btn.fadeIn(2000)
+                });
+			});
+		</script>
+</body>
+</html>
