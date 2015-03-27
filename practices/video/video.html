@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频加载</title>
+</head>
+<style>
+    *{margin: 0; padding: 0;}
+    html, body { height: 100%;}
+    .video { height: 100%; width: 100%;}
+</style>
+<body>
+<video id="video" class="video" src="sources/demos.mp4" ></video>
+    <!--
+<div id="buttons">
+    <input type="button" id="play" value="Play">
+    <input type="button" id="mute" value="Mute">
+</div>
+-->
+<script>
+(function(win, doc){
+    var v = doc.getElementById('video')
+    /*
+    v.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    */
+    v.play();
+}(window, document));
+</script>
+</body>
+</html>

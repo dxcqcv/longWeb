@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Atom</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            background: radial-gradient(ellipse at center, #34679a 0%, #214163 47%, #0d1926 100%);
+        }
+        body > div {
+            position: absolute;
+            top: 12%; left: 50%; margin-left: -103px;
+            width: 200px; height: 200px; border-radius: 50%;
+            border: 1px solid #fff;
+            /*
+            -ms-transform: none;
+            */
+            -webkit-transform-style: preserve-3d;
+            -webkit-transform: rotateX(80deg) rotateY(20deg);
+            transform-style: preserve-3d;
+            transform: rotateX(80deg) rotateY(20deg);
+            -ms-transform-style: none;
+            -ms-transform: rotateX(80deg) rotateY(20deg);
+        }
+        body > div:first-of-type:after {
+            content: "";
+            position: absolute;
+            height: 40px; width: 40px; background: #fff;
+            border-radius: 50%;
+            /*
+            -ms-transform: rotateX(0) rotateY(20deg); 
+            */
+            -webkit-transform: rotateX(-80deg) rotateY(0);
+            transform: rotateX(-80deg) rotateY(0);
+            -ms-transform-style: none;
+            -ms-transform:none; 
+            box-shadow: 0 0 25px #fff;
+            left: 50%; top: 50%; margin-top: -20px; margin-left: -20px;
+            -webkit-animation: nucleus_ 2s infinite linear;
+            animation: nucleus_ 2s infinite linear;
+        }
+        @keyframes nucleus_ {
+            0% { box-shadow: 0 0 0 transparent; }
+            50% { box-shadow: 0 0 25px #fff; }
+            100% { box-shadow: 0 0 0 transparent; }
+        }
+        @-webkit-keyframes nucleus_ {
+            0% { box-shadow: 0 0 0 transparent; }
+            50% { box-shadow: 0 0 25px #fff; }
+            100% { box-shadow: 0 0 0 transparent; }
+        }
+        /*
+        */
+        body > div > div {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            -webkit-transform-style: preserve-3d;
+            -webkit-animation: trail_ 2s infinite linear;
+            transform-style: preserve-3d;
+            animation: trail_ 2s infinite linear;
+        }
+        @keyframes trail_ {
+            from { transform: rotateZ(0deg); }
+            to { transform: rotateZ(360deg); }
+        }
+        @-webkit-keyframes trail_ {
+            from { -webkit-transform: rotateZ(0deg); }
+            to { -webkit-transform: ratateZ(360deg); }
+        }
+        body > div > div:after {
+            content: '';
+            position: absolute;
+            top: -5px; left: 50%;
+            box-shadow: 0 0 12px #fff;
+            margin-left: -5px;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background-color: #fff;
+            -webkit-animation: particle_ 2s infinite linear;
+            animation: particle_ 2s infinite linear;
+        }
+        @-webkit-keyframes particle_ {
+            from { 
+                -webkit-transform:  rotateX(90deg) rotateY(0deg);
+                transform: rotateX(90deg) rotateY(0deg);    
+            }
+            to {
+                -webkit-transform: rotateX(90deg) rotateY(-360deg);
+                transform: rotateX(90deg) rotateY(-360deg);
+            }
+        }
+        @keyframes particle_ {
+            from { transform: rotateX(90deg) rotateY(0deg); }
+            to { transform: rotateX(90deg) rotateY(0deg); }
+        }
+        .test {
+            width: 15px; height: 15px; border-radius: 50%;
+            background: #fff;
+            transform: rotateX(0) rotateY(0);
+            box-shadow: 0 0 25px #fff;
+            position: absolute;
+            left: 200px;
+        }
+        .gogo { animation: go .5s infinite linear; }
+        #bb { color: #fff; position: absolute; top: 0; left: 100px; }
+        @keyframes go {
+            from { left: 200px;}
+            to { left: 500px; }
+        }
+    </style>
+</head>
+<body>
+<div><div></div></div>
+<div><div></div></div>
+<div><div></div></div>
+<div><div></div></div>
+<p class="test"></p>
+<p id="bb">start animate</p>
+<script>
+    var b = document.getElementById('bb')
+    b.addEventListener('click', toto, false);
+    function toto() {
+        var a = document.querySelector('.test')
+        a.classList.add('gogo')
+    }
+</script>
+</body>
+</html>

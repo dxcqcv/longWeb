@@ -58,7 +58,7 @@ $.extend(Request.prototype, {
         var url = opt.url ? opt.url : 'rems-test.json'
           , type = opt.type ? opt.type : 'POST'
           , data = opt.data ? opt.data : {}
-          , timeout = opt.timeout ? opt.timeout : 1000
+          , timeout = opt.timeout ? opt.timeout : 10000
           , currentRequest = null
           , done = opt.done ? opt.done : doneFn
           , fail = opt.fail ? opt.fail : failFn
@@ -71,6 +71,8 @@ $.extend(Request.prototype, {
           , data: data
           , dataType: 'json'
           , mimeType: 'application/json'
+          , contentType: 'text/plain'
+          , xhrFields: { withCredentials: false }
           , beforeSend: function() {
                 if(currentRequest != null) currentRequest.abort();
           }
@@ -90,6 +92,8 @@ function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText 
 function doneFn() { console.log('done'); }
 demand = new Request(); // 统一调用ajax
 demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
+
+//demand.start({url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',done:remsLogin}); // 请求登录
 
 function remsLogin(data) {
     if(data.status === 0) demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
@@ -149,7 +153,8 @@ function showCont(show, hide) {
 $(doc).on('click', '.cont-btn', switchBtn);
 $(doc).on('click','.project-box',clickProjectBox);
 $(doc).on('click', '#gotoIndex', function(){
-    $('.project-box').eq(projectBoxIndex).removeClass('active').css('height','auto').children('.project-box-right').removeClass('hide').end().find('img').width(150).height(109).end().find('.project-detail-box').addClass('hide')
+console.log($('.project-box').eq(projectBoxIndex).css('height'))
+    $('.project-box').eq(projectBoxIndex).removeClass('active').css({'height':'auto',width:'420px'}).children('.project-box-right').removeClass('hide').end().find('img').width(150).height(109).end().find('.project-detail-box').addClass('hide')
     map.setZoomAndCenter(5, new AMap.LngLat(106.387516, 37.729803)); // 恢复地图
     switchPage();
     clearInterval(id3d)
@@ -545,7 +550,8 @@ function init3D() {
                 scene.add(camera);
                 
                 var loader = new THREE.OBJLoader();
-                loader.load('obj/port.obj', function(obj) {
+                //loader.load('obj/port.obj', function(obj) {
+                loader.load('obj/huanghua02.obj', function(obj) {
                     obj.traverse(function(child) {
                         if (child instanceof THREE.Mesh) {
                             child.material.side = THREE.DoubleSide;
@@ -578,6 +584,7 @@ function draw() {
 /* 3D end */
 
 // high chart
+  /*
 $('#hcContainer').highcharts({
     chart: {type: 'column'}
   , title: {text:'Fruit Consumption'}
@@ -585,7 +592,6 @@ $('#hcContainer').highcharts({
   , yAxis: {
         title: {text: 'Fruit eaten'}
   }
-  /*
    , tooltip: {
         xDateFormat: '%Y-%m-%d %H:%M:%S',
         shared : true
@@ -596,7 +602,6 @@ $('#hcContainer').highcharts({
             borderWidth: 0
         }
     }
-*/
   , series: [{
         name: 'Jane'
       , data: [1,0,4]
@@ -606,6 +611,7 @@ $('#hcContainer').highcharts({
       , data: [5,7,3]
   }]
 });
+*/
 // random
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);

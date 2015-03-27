@@ -11,6 +11,10 @@
             background: url('img/three-wrapper.png') no-repeat;
             height: 768px; width: 1366px;margin: auto;
             position: relative; }
+        .btn:hover { 
+            box-shadow: 0 0 3px 5px rgba(0,0,0,0.5);
+            background: pink;
+        }
         .btn { 
         /*
             box-shadow: 0 0 3px 5px rgba(0,0,0,0.5);
@@ -19,10 +23,10 @@
             border-radius: 50%; padding: 30px;
             line-height: 16px; display: inline-block;
             text-align: center; position: absolute; z-index: 102;
-            color: #fff; font: bold 20px/1.5; cursor: pointer; }
+            color: #fff; font: normal 20px/1.5; cursor: pointer; }
         .btn > p { line-height: 1.5; display: inline-block; vertical-align: middle; text-align: center;}
-        .fs20 {font: normal 700 20px/106 'microsoft YaHei';}
-        .otherWords { z-index: 102; position: absolute; color: #fff; font: normal 700 16px/1.5 'microsoft YaHei';}
+        .fs20 {font: normal 20px/106 'microsoft YaHei';}
+        .otherWords { z-index: 102; position: absolute; color: #fff; font: normal 16px/1.5 'microsoft YaHei';}
         .lffnw { top: 550px; left: 80px; width: 100px; height: 100px; line-height: 100px; }
         .fnz { top: 460px; left: 445px; width: 62px; height: 62px; 
             line-height: 52px; line-height: 62px;}
@@ -43,9 +47,9 @@
 <body>
     <div class="wrapper">
         <div id="slider" class="slider">
-            <img src="img/bg01.jpg" alt="">
-            <img src="img/bg02.jpg" alt="">
-            <img src="img/bg03.jpg" alt="">
+            <img src="img/three-bg01.png" alt="">
+            <img src="img/three-bg02.png" alt="">
+            <img src="img/three-bg03.png" alt="">
         </div>
         <div class="">
             <div class="btn lffnw transitions fs20" data-num="1" data-transition="explode" data-params="{'rows': 4}"><p>廊坊泛能网规划</p></div>
