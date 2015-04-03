@@ -1,0 +1,39 @@
+<html>  
+        <head><title>testing cross sop</title></head>  
+        <body>  
+            Testing.  
+            <script src="jquery-1.8.2.min.js"></script>  
+
+<script type="text/javascript">  
+        // this shows dynamic script insertion  
+ 	var url1='http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311';
+
+   $.ajax({
+     type: "get",
+     async: false,
+     url: url1,
+     dataType: "jsonp",
+     jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数  
+     jsonpCallback: "success_jsonpCallback", //callback的function名称,服务端会把名称和data一起传递回来  
+     success: function(json) {
+         alert(json[0].login);
+     }
+   });
+ /*
+   $.ajax({
+     type: "get",
+     async: false,
+     url: 'http://localhost:8080/reds/ds/gislist',
+     dataType: "jsonp",
+     jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数  
+     jsonpCallback: "success_jsonpCallback", //callback的function名称,服务端会把名称和data一起传递回来  
+     success: function(json) {
+	$.each(json,function(i,item){
+	console.log(item.projectname);
+	}); 
+     }
+   });
+*/
+</script> 
+        </body>  
+</html>  

@@ -56,7 +56,7 @@ function Request() {
 $.extend(Request.prototype, {
     start: function(opt) {
         var url = opt.url ? opt.url : 'rems-test.json'
-          , type = opt.type ? opt.type : 'POST'
+          , type = opt.type ? opt.type : 'GET'
           , data = opt.data ? opt.data : {}
           , timeout = opt.timeout ? opt.timeout : 10000
           , currentRequest = null
@@ -69,10 +69,13 @@ $.extend(Request.prototype, {
           , type: type
           , timeout: timeout
           , data: data
-          , dataType: 'json'
+          , dataType: 'jsonp'
+          , jsonp: 'callbackparam'//服务端用于接收callback调用的function名的参数  
+          , jsonpCallback: 'success_jsonpCallback'//callback的function名称,服务端会把名称和data一起传递回来 
+          , crossDomain: true
           , mimeType: 'application/json'
           , contentType: 'text/plain'
-          , xhrFields: { withCredentials: false }
+          //, xhrFields: { withCredentials: false }
           , beforeSend: function() {
                 if(currentRequest != null) currentRequest.abort();
           }
@@ -91,25 +94,32 @@ $.extend(Request.prototype, {
 function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
 function doneFn() { console.log('done'); }
 demand = new Request(); // 统一调用ajax
-demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
+//demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
 
-//demand.start({url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',done:remsLogin}); // 请求登录
+demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',done:remsLogin}); // 请求登录
 
 function remsLogin(data) {
-    if(data.status === 0) demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
+console.log(data[0].login)
+    //if(data[0].login === 'true') demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
+    if(data[0].login === 'true') demand.start({url:'http://10.36.128.73:8080/reds/ds/gislist',done:indexInit}); // 登录成功加载项目
     else alert('数据库出错')
 }
 function indexInit(data) {
+console.log(data)
 // map left
+/*
     $('#remsTitle').text(data.title);
     $('#remsSubtitle').text(data.subtitle);
     $('#remsSubtitleTranslate').text(data.subtitleTranslate);
+    */
 // map right
-    var num = data.projects.length
+    //var num = data.projects.length
+    var num = data.length
       , str = ''
       , pic = 'img/defaultProjectListImg.jpg';
         for(var i = 0; i < num; i++) {
-        str += '<div class="project-box clearfix" data-projectid="'+data.projects[i].projectid+'" data-lng="'+data.projects[i].longitude+'" data-lat="'+data.projects[i].latitude+'">'
+        //str += '<div class="project-box clearfix" data-projectid="'+data.projects[i].projectid+'" data-lng="'+data.projects[i].longitude+'" data-lat="'+data.projects[i].latitude+'">'
+        str += '<div class="project-box clearfix" data-projectid="'+data[i].projectid+'" data-lng="'+data[i].longitude+'" data-lat="'+data[i].latitude+'">'
             +'<div class="project-box-left left">'
             +    '<img src="'+pic+'" alt="新奥">'
             +'</div>'
@@ -128,14 +138,16 @@ function indexInit(data) {
             +                '</div>'
             +            '</div>'
             +'<div class="project-box-right left">'
-            +    '<p class="project-name">'+data.projects[i].projectname+'</p>'
-            +    '<p>项目类型：<span class="projectType">'+data.projects[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data.projects[i].industrytypename+'</span></p>'
-            +    '<p>功能建设：<span class="projectEnergy">'+data.projects[i].buildingarea+'</span></p>'
-            +    '<p>项目地址：<span class="projectAddr">'+data.projects[i].address1+'</span></p>'
+            //+    '<p class="project-name">'+data.projects[i].projectname+'</p>'
+            +    '<p class="project-name">'+data[i].projectname+'</p>'
+            //+    '<p>项目类型：<span class="projectType">'+data.projects[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data.projects[i].industrytypename+'</span></p>'
+            +    '<p>项目类型：<span class="projectType">'+data[i].industryclassname+'</span>所属行业：<span class="projectIndustry">'+data[i].industrytypename+'</span></p>'
+            +    '<p>功能建设：<span class="projectEnergy">'+data[i].buildingarea+'</span></p>'
+            +    '<p>项目地址：<span class="projectAddr">'+data[i].address+'</span></p>'
             +'</div>'
         +'</div>';
         // map markers
-        addMarker(data.projects[i].longitude,data.projects[i].latitude,data.projects[i].projectname, {w:28,h:37});
+        addMarker(data[i].longitude,data[i].latitude,data[i].projectname, {w:28,h:37});
         }
         $('#mapRightScroll').empty().append(str);
         //console.log(map.getZoom())
