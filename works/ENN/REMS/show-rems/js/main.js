@@ -62,6 +62,7 @@ $.extend(Request.prototype, {
           , currentRequest = null
           , done = opt.done ? opt.done : doneFn
           , fail = opt.fail ? opt.fail : failFn
+          , jsonp = opt.jsonp ? opt.jsonp : 'callbackparam'
           , self = this;
 
         currentRequest = $.ajax({
