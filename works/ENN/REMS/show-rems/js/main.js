@@ -71,8 +71,8 @@ $.extend(Request.prototype, {
           , timeout: timeout
           , data: data
           , dataType: 'jsonp'
-          , jsonp: 'callbackparam'//服务端用于接收callback调用的function名的参数  
-          , jsonpCallback: 'success_jsonpCallback'//callback的function名称,服务端会把名称和data一起传递回来 
+          , jsonp: jsonp //服务端用于接收callback调用的function名的参数  
+          //, jsonpCallback: 'success_jsonpCallback'//callback的function名称,服务端会把名称和data一起传递回来 
           , crossDomain: true
           , mimeType: 'application/json'
           , contentType: 'text/plain'
@@ -95,18 +95,16 @@ $.extend(Request.prototype, {
 function failFn(jqXHR, textStatus) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus); }
 function doneFn() { console.log('done'); }
 demand = new Request(); // 统一调用ajax
-//demand.start({url:'rems-login.json',data:{username:'root', password:'long'},done:remsLogin}); // 请求登录
 
-demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',done:remsLogin}); // 请求登录
+demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',jsonp: 'login' ,done:remsLogin}); // 请求登录
 
 function remsLogin(data) {
-console.log(data[0].login)
-    //if(data[0].login === 'true') demand.start({url:'rems-projects-show.json',done:indexInit}); // 登录成功加载项目
-    if(data[0].login === 'true') demand.start({url:'http://10.36.128.73:8080/reds/ds/gislist',done:indexInit}); // 登录成功加载项目
+//console.log(data[0].login)
+    if(data[0].login === 'true') demand.start({url:'http://10.36.128.73:8080/reds/ds/gislist', jsonp: 'gislist',done:indexInit}); // 登录成功加载项目
     else alert('数据库出错')
 }
 function indexInit(data) {
-console.log(data)
+//console.log(data)
 // map left
 /*
     $('#remsTitle').text(data.title);
@@ -201,14 +199,14 @@ function clickProjectBox() {
             $('.project-name').text(projectName)
             //console.log('rems-labeldataAll+projectid='+projectid+'.json')
             //setInterval(function(){ processChart(projectid) },60000)
-            setInterval(function(){ processChart(projectid) },600)
-            demand.start({url:'rems-labellist+projectid='+projectid+'.json',done:getLabellist}); // 请求设备列表
-            demand.start({url:'rems-graphlist+projectid='+projectid+'.json',done:getGraphlist}); // 请求设备图像
+            //setInterval(function(){ processChart(projectid) },600)
+             demand.start({url:'http://10.36.128.73:8080/reds/ds/weather?projectid='+projectid, jsonp: 'weather',done:getWeather}); // 请求天气信息
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/mainfinance?projectid='+projectid+'&timeradio=years', jsonp: 'mainfinance',done:getCostIncome}); // 请求收益成本
     // call meter
     drawCircle('#chart-4',2,70,'#circle-2'); // container, id, progress, parent 
     drawCircle('#chart-5',2,40,'#circle-3'); // container, id, progress, parent 
     drawCircle('#chart-6',2,75,'#circle-4'); // container, id, progress, parent 
-init3D();
+//init3D();
     } 
     else {
         var lng = $this.attr('data-lng')
@@ -234,6 +232,51 @@ function getLabelDataAll(data) {
        //console.log(data.labellist[len].datavalue) 
        $('#labelValue').text(data.labeldata[len].datavalue)
  //}
+}
+function getWeather(data) {
+console.log(data)
+$('#projectTemperature').text(data[1].datavalue)
+}
+function getCostIncome(data) {
+console.log(data)
+    var costArr = [], incomeArr = [], dataArr = []
+      , wrap = data[0] 
+    $('#yearsCost').text(wrap.costsum);
+    $('#yearsIncome').text(wrap.incomesum);
+for(var i = 0, l = wrap.costdatas.length; i < l; i++) { // 取成本收益数据
+   costArr.push(wrap.costdatas[i].data); 
+   incomeArr.push(wrap.incomedatas[i].data); 
+   dataArr.push(wrap.costdatas[i].rectime);
+}
+    /*
+*/
+// high chart
+$('#hcContainer').highcharts({
+    chart: {type: 'column'}
+  , title: {text:'当年成本收益图表'}
+  , xAxis: {categories: dataArr}
+  , yAxis: {
+        title: {text: '成本收益'}
+  }
+   , tooltip: {
+        xDateFormat: '%Y-%m-%d %H:%M:%S',
+        shared : true
+    }
+   , plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    }
+  , series: [{
+        name: '收益'
+      , data: incomeArr 
+  }
+  , {
+        name: '成本'
+      , data: costArr 
+  }]
+});
 }
 function getLabellist(data){
  var len = data.labellist.length-1;
