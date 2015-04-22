@@ -198,8 +198,8 @@ function clickProjectBox() {
             projectName = $this.find('.project-name').text()
             $('.project-name').text(projectName)
             //console.log('rems-labeldataAll+projectid='+projectid+'.json')
-            //setInterval(function(){ processChart(projectid) },60000)
-            //setInterval(function(){ processChart(projectid) },600)
+processChart(projectid)
+            setInterval(function(){ processChart(projectid) },60000)
              demand.start({url:'http://10.36.128.73:8080/reds/ds/weather?projectid='+projectid, jsonp: 'weather',done:getWeather}); // 请求天气信息
             demand.start({url:'http://10.36.128.73:8080/reds/ds/mainfinance?projectid='+projectid+'&timeradio=years', jsonp: 'mainfinance',done:getCostIncome}); // 请求收益成本
     // call meter
@@ -227,18 +227,20 @@ function clickProjectBox() {
      }
 }
 function getLabelDataAll(data) {
- var len = data.labeldata.length-1;
+ //var len = data.labeldata.length-1;
+ console.log(111)
+ console.log(data)
  //for(var i = 0, l = data.labellist.length; i < l; i++) {
        //console.log(data.labellist[len].datavalue) 
-       $('#labelValue').text(data.labeldata[len].datavalue)
+       //$('#labelValue').text(data.labeldata[len].datavalue)
  //}
 }
 function getWeather(data) {
-console.log(data)
+//console.log(data)
 $('#projectTemperature').text(data[1].datavalue)
 }
 function getCostIncome(data) {
-console.log(data)
+//console.log(data)
     var costArr = [], incomeArr = [], dataArr = []
       , wrap = data[0] 
     $('#yearsCost').text(wrap.costsum);
@@ -279,8 +281,9 @@ $('#hcContainer').highcharts({
 });
 }
 function getLabellist(data){
- var len = data.labellist.length-1;
-       $('#labelList').text(data.labellist[len].title)
+console.log(data)
+ //var len = data.labellist.length-1;
+  //     $('#labelList').text(data.labellist[len].title)
 
 }
 function getGraphlist(data) {
@@ -293,7 +296,10 @@ function getGraphlist(data) {
 
 }
 function processChart(id) {
-    demand.start({url:'rems-labeldataAll+projectid='+id+'.json',done:getLabelDataAll}); // 请求设备数据
+    var pageid = 8301 
+    demand.start({url:'http://10.36.128.73:8080/reds/monitorscreen/labellist?projectid='+id+'&pageid='+pageid, jsonp:'labellist', done:getLabellist}); // 请求设备名
+    demand.start({url:'http://10.36.128.73:8080/reds/monitorscreen/labeldataAll?projectid='+id+'&pageid='+pageid, jsonp:'labeldataAll', done:getLabelDataAll}); // 请求设备数据
+
 }
 $(document).on('click', '.arrShow', showArea); // 内容页项目选择
 function showArea() {
