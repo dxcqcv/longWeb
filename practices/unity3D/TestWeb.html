@@ -3,75 +3,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Unity Web Player | UnityScene</title>
-		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
-		<script type="text/javascript">
-		<!--
-		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
-		if (document.location.protocol == 'https:')
-			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
-		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
-		-->
-		</script>
-		<script type="text/javascript">
-//RecvMsgFormUnity();
-		function RecvMsgFormUnity(str, callback)
-		{
-            $.ajax({
-                url: 'test.json'
-              , type: 'GET'
-            }).done(function(data){
-                console.log(data.labeldata[1].datavalue)
-                var d = JSON.stringify(data)
-                u.getUnity().SendMessage("AnchorPoint", "RecvMessage",d);
-            });
-		}
-		<!--
-			var config = {
-				width: 960, 
-				height: 600,
-				params: { enableDebugging:"0" }
-				
-			};
-			var u = new UnityObject2(config);
-
-			jQuery(function() {
-
-				var $missingScreen = jQuery("#unityPlayer").find(".missing");
-				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
-				$missingScreen.hide();
-				$brokenScreen.hide();
-				
-				u.observeProgress(function (progress) {
-					switch(progress.pluginStatus) {
-						case "broken":
-							$brokenScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$brokenScreen.show();
-						break;
-						case "missing":
-							$missingScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$missingScreen.show();
-						break;
-						case "installed":
-							$missingScreen.remove();
-						break;
-						case "first":
-						break;
-					}
-				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "TestWeb.unity3d");
-			});
-		-->
-		</script>
 		<style type="text/css">
 		<!--
 		body {
@@ -144,5 +75,161 @@
 			</div>
 		</div>
 		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
+        <button class="change3D" data-num="1">change unity 3D to 黄花机场</button>
+        <button class="change3D" data-num="2">change unity 3D to 亭湖医院</button>
+
+        <script src="jquery-1.9.1.js"></script>
+		<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+		<script type="text/javascript">
+;(function(){
+        var gT, demand, flag = 0, model = null; 
+        function Request() {
+        }
+        $.extend(Request.prototype, {
+            start: function(opt) {
+                var url = opt.url ? opt.url : 'test.json'
+                  , type = opt.type ? opt.type : 'GET'
+                  , data = opt.data ? opt.data : {}
+                  , timeout = opt.timeout ? opt.timeout : 10000
+                  , currentRequest = null
+                  , done = opt.done ? opt.done : doneFn
+                  , fail = opt.fail ? opt.fail : failFn
+                  
+                  //, jsonp = opt.jsonp ? opt.jsonp : 'callbackparam'
+
+                  , self = this;
+
+                currentRequest = $.ajax({
+                    url: url
+                  , type: type
+                  , timeout: timeout
+                  , data: data
+
+                  /*
+                  , dataType: 'jsonp'
+                  , jsonp: jsonp //服务端用于接收callback调用的function名的参数  
+                  , crossDomain: true
+
+                  */
+                  , mimeType: 'application/json'
+                  , contentType: 'text/plain'
+                  , beforeSend: function() {
+                        if(currentRequest != null) currentRequest.abourt();
+                  }
+                })
+                .done(function(data){
+                    var d = data;
+                    done(d); 
+                })
+                .fail(function(jqXHR, textStatus){
+                    if(textStatus == 'timeout') alert('timeout');
+                    fail(jqXHR, textStatus);
+                });
+            }
+        });
+        function failFn(jqXHR, textStatus) {console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus)}
+        function doneFn() { console.log('done'); }
+        demand = new Request();
+
+        demand.start({url:'test.json', done:testFn});
+        function testFn(data) {
+            var d = JSON.stringify(data)
+            RecvMsgFormUnity(d)
+        } 
+		function RecvMsgFormUnity(str, callback)
+		{
+        //console.log(str)
+        u.getUnity().SendMessage("AnchorPoint", "RecvMessage",str);
+        /*
+            $.ajax({
+                url: 'test.json'
+              , type: 'GET'
+            }).done(function(data){
+                console.log(data.labeldata[1].datavalue)
+                var d = JSON.stringify(data)
+                u.getUnity().SendMessage("AnchorPoint", "RecvMessage",d);
+            });
+            */
+		}
+		<!--
+			var config = {
+				width: 960, 
+				height: 600,
+				params: { enableDebugging:"0" }
+				
+			};
+			var u = new UnityObject2(config);
+
+			jQuery(function() {
+
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first": 
+                            flag = 1
+						break;
+					}
+				});
+                $('.change3D').on('click', function(){
+                    var n = $(this).data('num')
+                    if(n == 1) {
+                    
+                        u.initPlugin(jQuery("#unityPlayer")[0], "AirPort20150428.unity3d");
+                        model = 'airport';
+                        //demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll', done:testFn});
+
+                    }
+                    else if(n == 2){
+                        model = 'hostial';
+                        //demand.start({url:'hosptial.json', done:testFn});
+                        u.initPlugin(jQuery("#unityPlayer")[0], "Hosptial20150423.unity3d");
+
+                    }
+                }); 
+                    //u.initPlugin(jQuery("#unityPlayer")[0], "city20150423.unity3d");
+                    u.initPlugin(jQuery("#unityPlayer")[0], "demo0429.unity3d");
+                    setInterval(function(){
+                    
+                        if(flag == 1 && model == 'airport') {
+                            //console.log(2222)
+                        demand.start({url:'airport.json', done:testFn});
+                        }
+                    }, 1000);
+			});
+		-->
+}());
+		</script>
 	</body>
 </html>
