@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>practices echart</title>
+    <style>
+        * {margin:0; padding: 0;}
+        #main {width: 600px; height:600px; background: #39c;}
+    </style>
+</head>
+<body>
+    
+    <div id="main"></div>
+    <button id="change">change</button>
+
+    <script src="echarts-all.js"></script>
+    <script src="../../global/js/jquery-1.11.0.min.js"></script>
+    <script>
+        ;(function(){
+            var myChart = echarts.init(document.getElementById('main'), 'macarons');
+            var option = {
+    series : [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:335, name:'直接2访问44648'},
+                {value:310, name:'邮3件营销'},
+                {value:234, name:'联盟4广告'},
+                {value:135, name:'视频广8告'},
+                {value:1548, name:'1搜索引擎9999'}
+            ]
+        }
+    ]
+};
+
+            var option2 = {
+    series : [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:6335, name:'8989898989892访问44648'},
+                {value:310, name:'邮3件营销'},
+                {value:234, name:'联盟4广告'},
+                {value:135, name:'视频广8告'},
+                {value:1548, name:'1搜索引擎9999'}
+            ]
+        }
+    ]
+};
+
+
+            myChart.setOption(option);
+
+            var newData = {
+                data: [
+                    {value:666, name:'hello world'},
+                    {value:999, name:'good morning'}
+                ]
+            }
+
+$('#change').on('click', function(){
+    myChart.setOption(option2);
+});
+        }());
+    </script>
+</body>
+</html>
