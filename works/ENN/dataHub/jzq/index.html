@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>数据集中器</title>
+    <link rel="stylesheet" href="css/global.css" media="all"></link>
+</head>
+<body>
+<div id="loading" class="load-box hide">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<div id="loginBox" class="login hide">
+    <div class="acc"> 
+        <label><span>账号 : </span></label><input id="loginUsername" type="text" />
+    </div>
+    <div class="pas">
+        <label><span>密码 : </span></label><input id="loginPW" type="password" />
+    </div>
+    <div class="saveacc">
+        <div class="sucess">
+            <span id="loginBtn">确认</span>
+        </div>
+        <div class="cancel">
+            <span>取消</span>
+        </div>
+    </div>
+</div>
+
+<div id="siteWrapper" class="wrapper ">
+    <div class="header clearfix">
+       <div class="header-left left h100">
+            <div class="head-logo in-bl"></div>
+            <div class="head-name-box in-bl ghost-center">
+                <h1 class="in-bl fs20 ver-sub">数据集中器</h1>
+                <h2 class="in-bl fs15 ver-sub">TL-984300</h2>
+            </div>
+       </div>
+       <div class="header-right right h100">
+            <div class="user-info-list clearfix">
+                <ul class="list-float right">
+                	<li><a href=""><i class="usr-info-icon usr-name-icon"></i><span id="siteUsername">张三</span></a></li>
+                	<li><a href=""><i class="usr-info-icon usr-password-icon"></i>密码管理</a></li>
+                	<li><a id="siteLogout" href=""><i class="usr-info-icon usr-exit-icon"></i>退出</a></li>
+                </ul>
+            </div>
+            <div class="head-nav clearfix">
+                <ul class="list-float">
+                	<li class="active"><a>状态信息</a></li>
+                	<li><a>端口配置</a></li>
+                	<li><a>下端仪表配置</a></li>
+                	<li><a>数据集中配置</a></li>
+                	<li><a>系统配置</a></li>
+                </ul>            
+            </div>  
+       </div>
+    </div>
+    <div class="content clearfix">
+        <div id="contLeft" class="content-left left">
+            <ul id="sideNav" class="sidebarNav">
+            	<li class="active">网络</li>
+            	<li >串口1</li>
+            	<li >串口2</li>
+            	<li >串口3</li>
+            	<li >串口4</li>
+            	<li >串口5</li>
+            	<li >串口6</li>
+            	<li >串口7</li>
+            	<li >串口8</li>
+            </ul>
+            <ul id="xtpzSideNav" class="hide sidebarNav">
+            	<li class="active">备份和恢复</li>
+            	<li>重启集中器</li>
+            	<li>修改密码</li>
+            	<li>系统日志</li>
+            	<li>版本信息</li>
+            </ul>
+        </div>
+        <div id="contRight" class="content-right left">
+            <p class="content-nav">
+              当前位置：<span id="contNavStat" class="cont-nav-status">状态信息</span>&nbsp;&gt;&nbsp;<span id="contSubNavStat" class="cont-sub-nav-status">网络</span>
+            </p>            
+            <table id="ztxxNetTable" class="contWrap">
+            	<thead>
+            		<tr>
+            			<th>项目</th>
+            			<th>端口</th>
+            			<th>状态</th>
+            		</tr>
+            	</thead>
+                <tbody class="ztxxTbody clearTbody">
+                    <tr>
+                    	<td>webport</td>
+                    	<td id="webportV">未知</td>
+                    	<td><span class="status-ico success-ico"></span></td>
+                    </tr>
+                    <tr>
+                    	<td>modbusport</td>
+                    	<td id="modbusportV">未知</td>
+                    	<td><span class="status-ico success-ico"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="ztxxPortTable" class="contWrap hide">
+            	<thead>
+            		<tr>
+            			<th>通讯协议</th>
+            			<th>设备地址</th>
+            			<th>设备名</th>
+            			<th>状态</th>
+            		</tr>
+            	</thead>
+                <tbody class="clearTbody">
+                </tbody>
+            </table>
+            <table id="dkpzTable" class="contWrap hide">
+                <thead>
+                	<tr>
+                		<th>项目</th>
+                		<th>端口</th>
+                	</tr>
+                </thead>
+                <tbody >
+                	<tr>
+                		<td>DHCP</td>
+                		<td>
+                            <select id="dhcpsele" class="dhcpsele">
+                            <option value="1" selected="selected">打开</option>
+                            <option value="0">关闭</option>
+                            </select>
+                        </td>
+                	</tr>
+                	<tr>
+                		<td>IP地址</td>
+                		<td id="ipV" contenteditable="false">192.168.11.10</td>
+                	</tr>
+                	<tr>
+                		<td>子网</td>
+                		<td id="maskV" contenteditable="false">192.168.11.1</td>
+                	</tr>
+                	<tr>
+                		<td>网关</td>
+                		<td id="gatewayV" contenteditable="false">192.168.11.1</td>
+                	</tr>
+                </tbody>
+            </table>
+            <div id="dkpzOptions" class="contWrap dkpz-opt-box hide">
+                <div>
+                    <label for="txxy">通讯协议：</label>
+                    <select id="protocol" name="txxy">
+                        <option value="0">modbus</option>
+                        <option value="1">645-1997</option>
+                        <option value="2">645-2007</option>
+                        <option value="3">102</option>
+                    </select>
+                </div>
+                <div>
+                	<label for="btl">波特率：</label>
+                	<select id="baudrate" name="btl">
+                		<option value="300">300</option>
+                		<option value="600">600</option>
+                		<option value="1200">1200</option>
+                		<option value="2400">2400</option>
+                		<option value="4800">4800</option>
+                		<option value="9600">9600</option>
+                		<option value="19200">19200</option>
+                		<option value="38400">38400</option>
+                		<option value="56000">56000</option>
+                		<option value="57600">57600</option>
+                		<option value="115200">115200</option>
+                	</select>
+                </div>
+                <div>
+                	<label for="sjw">数据位：</label>
+                	<select id="databit" name="sjw">
+                		<option value="5">5</option>
+                		<option value="6">6</option>
+                		<option value="7">7</option>
+                		<option value="8">8</option>
+                	</select>
+                </div>
+                <div>
+                	<label for="tzw">停止位：</label>
+                	<select id="stopbit" name="tzw">
+                		<option value="1">1</option>
+                		<option value="2">2</option>
+                	</select>
+                </div>
+                <div>
+                	<label for="xyw">校验位：</label>
+                	<select id="paritybit" name="xyw">
+                		<option value="0">None</option>
+                		<option value="1">Odd</option>
+                		<option value="2">Even</option>
+                		<option value="3">Mark</option>
+                		<option value="4">Space</option>
+                	</select>
+                </div>
+            </div>
+            <div id="xdybpzCont" class="contWrap hide clearfix xdybpz-cont-box" >
+                <div class="xdybpz-cont-left left">
+                    <p>通讯协议：<span id="xdybpzPotocolType">Modbus</span></p>
+                    <div id="xdybpzPotocol645" class="hide potocolBox">
+                        <p>
+                            <label class="xdybpz-timeout" for="">是否允许对时：</label>
+                            <input id="radio645" type="radio">
+                        </p>
+                        <p>
+                            <label for="">广播密码：</label>
+                            <input id="" type="">
+                        </p>
+                    </div>
+                    <div id="xdybpzPotocolModbus" class="potocolBox">
+                        <p>
+                            <label for="xdybpzEquName">设备名称：</label>
+                            <input id="xdybpzEquName" type="">
+                        </p>
+                        <p>
+                            <label for="xdybpzEquAddr">设备地址：</label>
+                            <input id="xdybpzEquAddr" type="">
+                        </p>
+                    </div>
+                    <div id="xdybpzPotocol102" class="hide potocolBox">
+                        <p>
+                            <label for="">主站IP：</label>
+                            <input id="" type="">
+                        </p>
+                        <p>
+                            <label for="">链路ID：</label>
+                            <input id="" type="">
+                        </p>
+                        <p>
+                            <label for="">超时时间：</label>
+                            <input id="" type="">
+                        </p>
+                    </div>
+                    <p>
+                        <span id="xdybpzListAdd" class="cont-btn">增加</span>
+                    </p>
+                    <div class="xdybpz-list clearfix">
+                        <div class="xdybpz-list-title">设备列表</div>
+                        <ul id="xdybpzList">
+                        	<li class="clearfix active">
+                        		<span class="left ellipsis">设设设设备1备1设备1备1设设备1备1设备1备1</span>
+                        		<span class="right">删除</span>
+                        	</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="xdybpzDefault" class="xdybpz-cont-default xdybpzContWrap left hide"></div>
+                <div id="xdybpzContRight" class="xdybpz-cont-right xdybpzContWrap left">
+                    <div id="xdybpzContTop" class="xdybpz-cont-top">
+                            <span>设备名称：</span>
+                            <span id="slaveName">设备列表</span>
+                            <span>设备地址：</span>
+                            <span id="slaveAddr">444</span>
+                            <span id="xdybpzModEqu" data-mod=0 class="cont-btn">修改设备</span>
+                    </div>
+                    <table id="xdybpz102Table" class="xdybpzTable">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>功能码</th>
+                                <th>数据项地址</th>
+                                <th>寄存器描述</th>
+                                <th>删除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<tr>
+                        		<td>1</td>
+                        		<td>22</td>
+                        		<td>66</td>
+                        		<td>88</td>
+                        		<td>del</td>
+                        	</tr>
+                        </tbody>
+                    </table>
+                    <table id="xdybpz645Table" class="xdybpzTable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>数据项</th>
+                                <th>数据类型</th>
+                                <th>K系数</th>
+                                <th>D系数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>正向有功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio"  name="dataType1">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType1">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>反向有功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType2">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType2">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>正向无功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType3">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType3">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>反向无功总电量</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType4">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType4">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>A相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType5">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType5">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>B相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType6">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType6">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>C相电压</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType7">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType7">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>A相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType8">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType8">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>B相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType9">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType9">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>C相电流</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType10">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType10">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>有功功率总</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType11">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType11">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>无功功率总</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType12">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType12">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>功率因数</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType13">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType13">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <input type="checkbox">
+                                </td>
+                                <td>频率</td>
+                                <td data-dtype="0">
+                                   <label for="">浮点数</label>
+                                   <input checked="checked" type="radio" name="dataType14">
+                                   <label for="">整数</label>
+                                   <input type="radio" name="dataType14">
+                                </td>
+                                <td class="bpink" contenteditable="true"></td>
+                                <td class="bpink" contenteditable="true"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="xdybpzDefTable" class="xdybpz-def-table xdybpzTable">
+                        <thead>
+                        	<tr>
+                        		<th>功能码
+                                   <select id="xdybpzSel" name="">
+                                    <option value="0">全部</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="16">16</option>
+                                   </select>
+                                </th>
+                        		<th>寄存器地址</th>
+                        		<th>寄存器长度</th>
+                        		<th>字节序</th>
+                        		<th>寄存器名</th>
+                        		<th>寄存器描述</th>
+                        		<th>K系数</th>
+                        		<th>D系数</th>
+                        		<th>备注</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            	<td>1</td>
+                            	<td>2</td>
+                            	<td>3</td>
+                            	<td>4</td>
+                            	<td>5</td>
+                            	<td>6</td>
+                            	<td>7</td>
+                            	<td>8</td>
+                                <td><span class="xdybpzEdit mr10">编辑</span><span class="xdybpzDel">删除</span><span class="xdybpzSave hide ml10">保存</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="xdybpz-right-btn-box">
+                        <span id="xdybpzShow" class="cont-btn">数据新增项</span>
+                        <span id="xdybpzSave" class="cont-btn">保存配置</span>
+                    </div>
+                </div>
+            </div>
+            <!--数据集中配置-->
+            <div id="sjjzpzCont" class="sjjzpz-cont-box contWrap hide">
+                <div class="sjjzpz-top clearfix">
+                    <div class="left">
+                        功能码： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">全部</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="16">16</option>
+                        </select>
+                    </div>
+                    <div class="right">
+                        存储时间间隔： 
+                        <select id="sjjzpzSel" name="">
+                            <option value="0">1分钟</option>
+                            <option value="1">5分钟</option>
+                            <option value="2">30分钟</option>
+                            <option value="3">60分钟</option>
+                            <option value="4">12小时</option>
+                            <option value="5">24小时</option>
+                        </select>
+                    </div>
+                </div>
+                <table id="sjjzpzDefTable">
+                	<thead>
+                		<tr>
+                			<th>功能码</th>
+                			<th>数据项地址</th>
+                			<th>寄存器个数</th>
+                			<th>通道</th>
+                			<th>设备号</th>
+                			<th>寄存器地址</th>
+                			<th>字节序</th>
+                			<th>寄存器名称</th>
+                			<th>寄存器描述</th>
+                			<th>K系数</th>
+                			<th>D系数</th>
+                			<th>存储</th>
+                			<th>备注</th>
+                		</tr>
+                	</thead>
+                    <tbody>
+                    	<tr>
+                    		<td>16</td>
+                    		<td>1</td>
+                    		<td>2</td>
+                    		<td>3</td>
+                    		<td>4</td>
+                    		<td>5</td>
+                    		<td>6</td>
+                    		<td>7</td>
+                    		<td>8</td>
+                    		<td>9</td>
+                    		<td>0</td>
+                    		<td><input type="checkbox"></td>
+                    		<td><span>上移</span><span>下移</span></td>
+                    	</tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="btnBox" class="cont-btn-box">
+                <span id="dataConfShowBtn"  class="cont-btn add-btn">新增</span>
+                <span id="saveBtn" data-save="net"  class="cont-btn save-btn">保存</span>
+                <span class="cont-btn cal-btn">取消</span>
+            </div>
+            <!--系统配置-->
+            <div id="xtpzCont" class="contWrap hide">
+                <div id="tempBox" class="xtpzBox"></div>
+                <div id="backupRestore" class="backup-restore-box xtpzBox">
+                    <div class="cent-box br-box">
+                        <p class="br-title">备份</p>
+                        <div class="cent-inner">
+                            <label for="backup">备份文件保存路径：</label>
+                            <input type="file" id="backup">
+                        </div>
+                    </div>
+                    <div class="cent-box br-box">
+                        <p class="br-title">恢复</p>
+                        <div class="cent-inner">
+                            <p>恢复出厂设置</p>
+                            <p>从备份中恢复</p>
+                            <label for="restore"></label>
+                            <input type="file" id="restore">
+                        </div>
+                    </div>
+                </div>
+                <div id="reboot" class="cent-box hide xtpzBox">
+                	<div class="cent-inner">
+                        <span id="rebootBtn" class="cont-btn">重启</span>
+                    </div>
+                </div>
+                <div id="changePW" class="cent-box pw-box xtpzBox">
+                	<div class="cent-inner">
+                        <p>
+                        	<label for="username">用户名：</label>
+                        	<input type="" id="username">
+                        </p>
+                        <p>
+                        	<label for="oldPW">原有密码：</label>
+                        	<input type="password" id="oldPW">
+                        </p>
+                        <p>
+                        	<label for="newPW">新密码：</label>
+                        	<input type="password" id="newPW">
+                        </p>
+                        <p>
+                        	<label for="againPW">确认新密码：</label>
+                        	<input type="password" id="againPW">
+                        </p>
+
+                        <span id="changePWBtn" class="cont-btn">提交</span>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+<!--pop up-->
+<div id="popupBox" class="mask-bg hide">
+    <div id="popupDataConfig" class="pop-up pop-up-data-config">
+        <div>
+            <label for="">功能码：</label>
+            <select id="dataConfGnmSel" name="" class="gnm-sel">
+            	<option value="1">1</option>
+            	<option value="2">2</option>
+            	<option value="3">3</option>
+            	<option value="4">4</option>
+            	<option value="5">5</option>
+            	<option value="16">16</option>
+            </select>
+        </div>
+        <div>
+            <label for="">数据项地址：</label>
+            <input id="v1" type="">
+        </div>
+        <div>
+            <label for="">寄存器个数：</label>
+            <input id="v2" type="">
+        </div>
+        <div>
+            <label for="">通道：</label>
+            <input id="v3" type="" disabled="disabled">
+        </div>
+        <div>
+            <label for="">寄存器地址：</label>
+            <input id="v4" type="" disabled="disabled">
+        </div>
+        <div>
+            <label for="">字节序：</label>
+            <input id="v5" type="">
+        </div>
+        <div>
+            <label for="">寄存器名称：</label>
+            <input id="v6" type="">
+        </div>
+        <div>
+            <label for="">寄存器描述：</label>
+            <input id="v7" type="">
+        </div>
+        <div>
+            <label for="">K系数：</label>
+            <input id="v8" type="">
+        </div>
+        <div>
+            <label for="">D系数：</label>
+            <input id="v9" type="">
+        </div>
+        <div>
+            <label for="">备注：</label>
+            <input id="v10" type="">
+        </div>
+        <div>
+            <span id="dataConfAddBtn" class="cont-btn ">保存</span>
+            <span class="cont-btn xdybpzCancel">取消</span>
+        </div>    
+    </div>
+    <div id="popup645" class="pop-up pop-up-645 hide">
+        <div>
+            <label for="sjx645">数据项</label>
+            <input type="" id="sjx645">
+        </div>
+        <div>
+            <label for="kxs645">K系数</label>
+            <input type="" id="kxs645">
+        </div>
+        <div>
+            <label for="dxs645">D系数</label>
+            <input type="" id="dxs645">
+        </div>
+        <div>
+            <span class="cont-btn xdybpzAdd">保存</span>
+            <span class="cont-btn xdybpzCancel">取消</span>
+        </div>    
+    </div>
+    <div id="popup102" class="pop-up hide"></div>
+	<div id="popupDef" class="pop-up ">
+        <div>
+        	<label for="gnm">功能码：</label>
+            <select id="gnmSel" name="" class="gnm-sel">
+            	<option value="1">1</option>
+            	<option value="2">2</option>
+            	<option value="3">3</option>
+            	<option value="4">4</option>
+            	<option value="5">5</option>
+            	<option value="16">16</option>
+            </select>
+        </div>
+        <div>
+        	<label for="jcqdz">寄存器地址：</label>
+        	<input type="" id="jcqdz">
+        </div>
+        <div>
+        	<label for="jcqcd">寄存器长度：</label>
+        	<input type="" id="jcqcd">
+        </div>
+        <div>
+        	<label for="zjx">字节序：</label>
+        	<input type="" id="zjx">
+        </div>
+        <div>
+        	<label for="jcqm">寄存器名：</label>
+        	<input type="" id="jcqm">
+        </div>
+        <div>
+        	<label for="jcqms">寄存器描述：</label>
+        	<input type="" id="jcqms">
+        </div>
+        <div>
+        	<label for="kxs">K系数：</label>
+        	<input type="" id="kxs">
+        </div>
+        <div>
+        	<label for="dxs">D系数：</label>
+        	<input type="" id="dxs">
+        </div>
+        <div>
+            <span class="cont-btn xdybpzAdd">保存</span>
+            <span class="cont-btn xdybpzCancel">取消</span>
+        </div>    
+    </div>
+</div>
+<!--
+ <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+ -->
+ <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>');</script>
+ <script src="js/common.js"></script>
+ <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="ie6"> <![endif]-->
+<!--[if IE 7]> <html class="ie7"> <![endif]-->
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9) | (IE) ]> <!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <title>buckete second version</title>
+    <link rel="shortcut icon" href="images/bucketeFavicon.ico" type="image/x-icon" />
+    <link media="all" rel="stylesheet" href="../css/global.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="css/index.css" type="text/css" />
+    <link media="all" rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
+   <!--head start-->
+   <header class="mainHeader"></header>
+   <!--head end-->
+   
+
+	<div class="header-box clearfix">
+        <a href="javascript:;" class="scrollToTop" id="scrollToTop"></a>
+        <div class="registerBox ">
+            <div class="rbInner clearfix">
+                <div class="rClose hide">x</div>
+               <div class="loginBox hide">
+                <div class="lbInner">
+                    <p class="rTitle">WELCOME BACK</p>
+                    <form id="loginForm" onsubmit="return false;" action="" method="POST" name="registerForm">
+                        <input type="hidden" name="next" value=""/>
+                        <p class="loginLine"><input  pattern="[A-Za-z0-9_]{3,}" class="rInput" placeholder="Email/Username"  name="login" required autofocus/></p>
+                        <p class="lbPw"><input  class="rInput" type="password" placeholder="Password" name="password" required/><span class="wrongPWIcon hide">X</span></p>
+                        <p class="forgotLinkBox"><a class="forgotLink" href="#">I forgot</a></p>
+                        <p class="regWarning loginWarning hide">tips</p>
+                        <p class="rememberBox"><span class="rememberIcon "></span>Keep me logged in</p>
+                        <p class="remember"><button class="rButton loginButton">Log in</button></p>
+                        
+                    </form>
+                    <div class="snsBox">
+                       <a class="rTwitter" href="#"></a>
+                       <a class="rFacebook" href="#"></a>
+                    </div>
+                </div>
+               </div>
+               <div class="signupBox hide">
+                   <div class="lbInner">
+                        <p class="rTitle">Create a new account</p>
+                        <form id="signupForm" onsubmit="return false;" action="" method="POST">
+                            <div class="signupLine ">
+                                    <input  pattern="[A-Za-z0-9_]{3,}"  title="username must have a minimum 3 characters" id="signName" class="rInput" type="text" placeholder="Username" name="username" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning usernameWarning hide">Another use with this username already exists.</p>
+                            </div>
+                            <div class="signupLine">
+                                    <input id="signPsw" class="rInput" type="password" class="rYoN" placeholder="Password" name="password1" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning pwd2Warning hide">Choose a password that's at least six characters, including a number or special character.</p>
+                            </div>
+                            <div class="signupLine">
+                                    <input id="signPsw2" class="rInput signupRight" type="password" placeholder="Confirm Password" name="password2"/>
+                                    <span class="rYoN"></span>
+                            </div>
+                            <div class="signupLine ">
+
+                                    <input id="signEmail" class="rInput signupRight" type="text" placeholder="Email" name="email" required/>
+                                    <span class="rYoN"></span>
+                                    <p class="regWarning emailWarning hide"></p>
+                            </div>
+                            <div class="signupLine signupWords">
+                                <span class="rImg rImg01 signupStatementRight"></span>I agree to the <a  href="" class="saInside">Terms of Use</a> and <a href="" class="saInside">Privacy Statement</a>
+                            </div>
+                            <div class="signupAccept">
+                                <button class="rButton signupButton">SIGN UP</button>
+                            </div>
+                        </form>
+                   </div>
+               </div>
+               <div class="sendEmail hide">
+                    <p class="seTitle">Hi, <span>Guimauve</span>. Thanks for signing up!</p>
+                    <p class="seWords">plz check your email and click <a href="#" class="reLinks">Activate Your Account</a> in the email we just sent you.</p>
+               </div>
+            </div>
+        </div>
+
+		<div class="container header ">
+			<h1 class="logo left"><a href=""><img src="images/icon/index/logo.png" alt=""></a></h1>
+
+            <div class="seekBarBox">
+                <span class="sbbDepartment ">shop by department
+                    <ul class="sbbdList hide">
+                        <li>Electronics & Computers</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Home, Garden & Tools</li>
+                        <li>Full Store Directory</li>
+                    </ul>
+                </span>
+                <input placeholder="search for a product" class="seekBar" />
+                <span class="sbbButton"></span>
+            </div>
+
+<ul class="searchBar ">
+        <li class="left login-username hide">
+        <div class="hMenu">
+            <p class="greettingWords"><img class="userAccountAvatar" src="" alt="" /><span class="usersName"></span><span class="userAccountTopArrow"></span></p>
+                <a  class="userAccountInstruct hide usersAccountIcon" href="">My Account</a>
+                <a class="userAccountInstruct hide usersLogout" href="">Sign Out</a>
+        </div>
+        </li>
+        <li class="unlogina login left"><a>Login</a></li>
+        <li class="unlogina sign left"><a>Sign Up</a></li>
+</ul>
+    </div>
+</div>
+
+   <!--content start-->
+    <div class="subHeader"></div>
+    <div class="content">
+        <div class="contentInner">
+            <p class="topWords">A CROWD-SHOPPING PLATFORM</p>
+            <div class="topRegion clearfix">
+                <div class="focusWrap">
+                    <div class="focusImgs">
+                        <ul>
+                            <li><img src="images/focusImg.jpg" alt="" /></li>
+                            <li><img src="images/focusImg2.jpg" alt="" /></li>
+                            <li><img src="images/focusImg3.jpg" alt="" /></li>
+                            <li><img src="images/focusImg4.jpg" alt="" /></li>
+                            <li><img src="images/focusImg5.jpg" alt="" /></li>
+                        </ul>
+                    </div>
+                    <div id="slider-nav">
+                        <div class="fButton fLeft">
+                            <div class="fbInner">
+                                <button class="fArrow" data-dir="prev">&lt;</button>
+                            </div>
+                        </div>
+                        <div class="fButton fRight">
+                            <div class="fbInner">
+                                <button class="fArrow faRight" data-dir="next">&gt;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fTicker">
+                        <button  class="fSelected" data-fNum="1"></button>
+                        <button data-fNum="2"></button>
+                        <button data-fNum="3"></button>
+                        <button data-fNum="4"></button>
+                        <button data-fNum="5"></button>
+                    </div>
+                </div>
+                <div class="howToPlay">
+                    <p class="hTitle">How to play</p>
+                    <p class="hSubTitle">Group</p>
+                    <p class="hDetail">you form or join a group-buy</p>
+                    <p class="hSubTitle">Bid</p>
+                    <p class="hDetail">Retailers submit their bids</p>
+                    <p class="hSubTitle">Win</p>
+                    <p class="hDetail">You win the best price you want</p>
+                    <button class="hButton">create a want &gt;</button>
+                </div>
+            </div>
+            <div></div>
+            <p class="prompt">MOST WANTED</p>
+            <div class="productList clearfix">
+                <ul>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/bigImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand dkfjdsljfl dkfjklajfklas dfjasjf</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy. I feel very good because I like it, I did it for me, and I liked it, I was alive.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="productWrap">
+                            <div class="productImgBlock">
+                                <img src="images/productImg.jpg" alt="" />
+                            </div>
+                            <p class="pLocal">Anywhere in USA</p>
+                            <div class="pDetailBlock">
+                                <p class="pName">Product name / Brand</p>
+                                <p class="pAuthor">By Anicole</p>
+                                <p class="pMessages">Amazingly,this grouper choose not to leave a word of instruction for this grroupbuy.</p>
+                                <p class="pPrice">$ <span>600</span></p>
+                                <div class="pBar">
+                                   <div class="bNum pGroup hide">Grouping</div> 
+                                   <div class="bNum pBid ">Bidding</div>
+                                </div>
+                                <div class="pStatistic clearfix">
+                                    <span class="pBuyers"><span class="sColor">224</span> buyers</span>
+                                    <span class="pBids"><span class="sColor">0</span> bids</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   <!--content end-->
+   <section class="focusImgWrapper">
+        <ul class="focusImgBox clearfix">
+            <li class="fibBlock one">
+                <div class="fibbLeft">
+                   <img src="images/bigImg.jpg" alt="buckete" /> 
+                   <span class="fibblWords">Yamaha dealers in San Jose loves Buckete because we brought them tons business. Yamaha dealers in San Jose hates Buckete because we forced them to compete with each other.</span>
+                </div>
+                <div class="fibbRight">
+                    <p class="fibbrTitle">1111111111111</p>
+                    <p class="fibbrContent">Buckete's unique business model forces retailers and dealers to compete with each other for your "want".Competition is your best friend.</p>
+                </div>
+            </li>
+            <li class="fibBlock two">
+                <div class="fibbLeft">
+                   <img src="images/bigImg.jpg" alt="buckete" /> 
+                   <span class="fibblWords">Yamaha dealers in San Jose loves Buckete because we brought them tons business. Yamaha dealers in San Jose hates Buckete because we forced them to compete with each other.</span>
+                </div>
+                <div class="fibbRight">
+                    <p class="fibbrTitle">22222222222222222</p>
+                    <p class="fibbrContent">Buckete's unique business model forces retailers and dealers to compete with each other for your "want".Competition is your best friend.</p>
+                </div>
+            </li>
+            <li class="fibBlock three">
+                <div class="fibbLeft">
+                   <img src="images/bigImg.jpg" alt="buckete" /> 
+                   <span class="fibblWords">Yamaha dealers in San Jose loves Buckete because we brought them tons business. Yamaha dealers in San Jose hates Buckete because we forced them to compete with each other.</span>
+                </div>
+                <div class="fibbRight">
+                    <p class="fibbrTitle">333333333333</p>
+                    <p class="fibbrContent">Buckete's unique business model forces retailers and dealers to compete with each other for your "want".Competition is your best friend.</p>
+                </div>
+            </li>
+        </ul>
+        <nav class="focusTicker">
+            <ul class="ftList clearfix">
+                <li class="ftlBall"></li>
+                <li class="ftlBall"></li>
+                <li class="ftlBall"></li>
+            </ul>
+        </nav>
+   </section>
+   
+   <!--footer start-->
+   <footer class="footer"></footer>
+   <!--footer end-->
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

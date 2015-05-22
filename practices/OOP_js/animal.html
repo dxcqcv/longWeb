@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OOP Practices from web dev easy</title>
+</head>
+<body>
+<script>
+(function(win, doc){
+
+function inherit(base, methods) {
+    var sub = function() {
+        //base.apply(this, arguments); // call base class constructor
+        // call sub class initialize method that will act like a constructor
+        this.initialize.apply(this, arguments);
+    };
+    sub.prototype = new base(); // both prototype and constructor
+    extend(sub.prototype, methods);
+    return sub;
+}
+var extend = function(out) {
+    out = out || {};
+    for(var i = 1, l = arguments.length; i < l; i++) {
+        var obj = arguments[i]
+        if(!obj) continue;
+
+        for(var key in obj) {
+            if(Object.prototype.hasOwnProperty.call(obj, key)) {
+                if(typeof obj[key] === 'object') // deep copy
+                    extend(out[key],obj[key])
+                else
+                    out[key] = obj[key];
+            }
+        }
+    }
+//   console.log(out) 
+    return out;
+};
+var Animal = function() {
+    this.color = 'Pink';
+};
+extend(Animal.prototype, {
+    run: function() { console.log('Wuuuuuuuushhhhhhh'); }
+  , sleep: function() { console.log('ZzzZZZzzZzzzzz...'); }
+  , eat: function() { console.log('HmnHmnmnm..BURP'); } 
+},{lala:'hihi'});
+
+var Cat = inherit(Animal,{
+    initialize: function(name) {
+        this.name = name;
+        console.log('My name is ' + this.name +
+                    ' and my color is ' + this.color);
+    }
+  , drinkMilk: function(){ console.log('lplplplplplplp'); }
+  , fightOtherCat: function() { console.log('Mirrrrrcccchhhh'); }
+  , sleep: function() { console.log('rrr...rrr...rrr'); Animal.prototype.sleep();  }
+}); 
+
+var c = new Cat()
+  , a = new Animal()
+//c.sleep()
+//a.sleep()
+
+}(window, document));
+</script>
+</body>
+</html>

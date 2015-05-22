@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06 Functions As Objects</title>
+</head>
+<body>
+<script>
+var calculate = function() {
+    var fn = Array.prototype.pop.apply(arguments); // to get the last fun and removed it
+    return fn.apply(null, arguments); // to pass the arguments, note apply pass the arguments is [], but call is arg1, arg2
+}
+var sum = function() {
+    var total = 0;
+    for(var i = 0, l = arguments.length; i < l; i = i + 1) {
+        total = total + arguments[i];
+    }
+    return total;
+}
+var diff = function() {
+    var total = Array.prototype.shift.apply(arguments); // to get the first elem and removed it
+    for(var i = 0, l = arguments.length; i < l; i = i + 1) {
+        total = total - arguments[i];
+    }
+    return total;
+}
+var sumResult  = calculate(1,2,3,4,5, sum),
+    diffResult = calculate(1,2,3,4,5, diff);
+
+alert(sumResult);
+alert(diffResult);
+</script>
+</body>
+</html>

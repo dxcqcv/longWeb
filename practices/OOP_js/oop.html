@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object Oriented Programming Concepts</title>
+</head>
+<body>
+    <script>
+    /*
+    // Object
+        // 1. Creating Object through literal
+        var obj = {};
+        // 2. Creating with Object create
+        var obj = Object.create(null);
+        // 3. Creating with new keyword
+        function Person() {}
+        var obj = new Person();
+    // Class
+        function Person() {
+            // Properties
+            this.name = "Roy";
+            this.age = '31';
+            // functions
+            this.sayHi = function(){
+                return this.name + " say hi";
+            }
+        }
+        // creating Person instance
+        var p = new Person();
+        alert(p.sayHi());
+    // Constructor
+        function Person(name, age) {
+            // assigning values through constructor
+            this.name = name;
+            this.age = age;
+            // functions
+            this.sayHi = function() {
+                return this.name + " say hi";
+            }
+        }
+        var p = new Person('Roy',31);
+        alert(p.sayHi());
+        var d = new Person('Clyde',100);
+        alert(d.sayHi());
+    // Inheritance
+        // prototype based inheritance
+        function Student() {}
+        Student.prototype = new Person();
+        var s = new Student();
+        alert(s.sayHi());
+    // Encapsulation
+        function Person() {
+            // this is private variable
+            var dob = "8 June 2012";
+            // public properties and functions
+            return {
+                age: 23
+              , name: 'Roy'
+              , getDob: function() {
+                return dob;
+              }
+            }
+        }
+        var p = new Person();
+        // this will get undefined because it is private to Person
+        console.log(p.dob);
+        // will get dob value we using public function to get private data
+        console.log(p.getDob());
+    */
+    // Polymorphism
+        function Person() {
+            this.sayHi = function() {}
+        }
+        // this will create student class
+        function Student() {}
+        Student.prototype = new Person();
+        Student.prototype.sayHi = function() { return "I am a student"; }
+        // this will create teacher class
+        function Teacher() {}
+        Teacher.prototype = new Person();
+        Teacher.prototype.sayHi = function() { return "I am a teacher"; }
+        var sObj = new Student();
+        // this will check if the student
+        // object is instance of Person or not 
+        // if not it won't execute our alert code
+        if(sObj instanceof Person) {
+            alert(sObj.sayHi());
+        }
+    </script>    
+</body>
+</html>

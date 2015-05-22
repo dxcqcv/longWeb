@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>joint js demo</title>
+    <link rel="stylesheet" href="joint.css" media="all">
+</head>
+<body>
+   <div id="myholder"></div>
+   <script src="joint.js"></script>
+   <script>
+   var graph = new joint.dia.Graph;
+
+var paper = new joint.dia.Paper({
+    el: $('#myholder'),
+    width: 1800,
+    height: 800,
+    model: graph,
+    gridSize: 1
+});
+
+var rect = new joint.shapes.basic.Rect({
+    position: { x: 100, y: 30 },
+    size: { width: 100, height: 30 },
+    attrs: { rect: { fill: 'blue' }, text: { text: 'my box', fill: 'white' } }
+});
+
+var img = new joint.shapes.basic.Image({
+    position: { x:300, y: 300 },
+    size: { width: 250, height: 257 },
+    attrs: {
+        text: { text: '冷却塔', magnet: true },
+        image: { 'xlink:href': 'img/cooling-tower.png', width: 250, height: 257 }
+    }
+});
+
+var img2 = img.clone();
+img2.translate(500);
+
+var rect2 = rect.clone();
+rect2.translate(300, 100);
+
+var link = new joint.dia.Link({
+    source: { id: rect.id },
+    target: { id: rect2.id }
+});
+var link2 = new joint.dia.Link({
+    source: { id: img.id },
+    target: { id: img2.id }
+});
+
+graph.addCells([img, img2, link2, rect, rect2, link]);
+
+/*
+graph.on('all', function(eventName, cell){
+    console.log(arguments);
+});
+*/
+rect.on('change:position', function(element) {
+    console.log(element.id, ':', element.get('position'));
+});
+
+   </script>
+</body>
+</html>

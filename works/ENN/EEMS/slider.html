@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test slider</title>
+    <style>
+        *{margin:0; padding: 0;} 
+        ul {list-style: none;}
+        .wrapper {
+            background: green; 
+        }
+        .wrapperInner {
+            width: 1121px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: pink; 
+        }
+        .wrapperInner > ul {
+            width: 10000px;
+        }
+        .wrapperInner > ul > li {
+            box-shadow: 0px 0px 5px #000;
+            width: 347px;
+            background: #39c;
+            height: 300px;
+            float: left;
+            margin: 0 10px;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .wrapperInner > ul > li:last-child,
+        .wrapperInner > ul > li:first-child {
+           margin-left: 20px; 
+        }
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="wrapperInner">
+            <ul class="clearfix">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </div>
+<script src="Scripts/jquery/jquery-1.10.2.min.js"></script>
+<script>
+;(function(){
+    layout();
+    $(window).resize(function(){
+        layout();
+    });
+}());
+function layout() {
+    var windowWid = $(window).width()
+      , wrapInWid = $('.wrapperInner')
+      , lis = wrapInWid.find('li')
+      , liNum = lis.length
+      , sildSep = 74 
+      , shadow = 15  
+      , formula 
+      , sep
+    wrapInWidVal = (windowWid - sildSep);
+    wrapInWid.width(wrapInWidVal - shadow);
+    sep = ((wrapInWidVal - (lis.width()*3 ))/4)/2
+    lis.css({'margin':'0 '+ sep +'px'}); 
+    lis.eq(0).css({'margin-left': (sep*2) +'px'})
+    lis.eq(liNum-1).css({'margin-right': (sep*2) +'px'})
+}
+</script>
+</body>
+</html>

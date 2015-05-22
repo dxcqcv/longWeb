@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery plug-in</title>
+    <style>
+        * { margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+   <a href="http://google.com">hello world</a>
+    <script src="../../global/js/jquery-1.11.0.min.js"></script>
+    <script>
+    ;(function(a,h,k,l){a.extend({sayHello:function(a){console.log("Hello,"+(a?a:"Dude")+"!")}});a.sayHello();a.sayHello("Wayou");a.extend({log:function(a){var b=new Date,c=b.getFullYear(),d=b.getMonth()+1,e=b.getDate(),f=b.getHours(),g=b.getMinutes(),b=b.getSeconds();time=c+"/"+d+"/"+e+" "+f+":"+g+":"+b;console.log(time+"My App:"+a)}});a.log("initializing...");var c=function(c,b){this.$element=c;this.defaults={color:"red",fontSize:"12px",textDecoration:"none"};this.options=a.extend({},this.defaults,b)};
+c.prototype={beautify:function(){return this.$element.css({color:this.options.color,fontSize:this.options.fontSize,textDecoration:this.options.textDecoration})}};a.fn.myPlugin=function(a){return(new c(this,a)).beautify()};a("a").myPlugin({color:"green",fontSize:"19px",textDecoration:"underline"})})(jQuery,window,document);
+                /*
+        ;(function($, window, document, undefined) {
+           $.extend({
+                sayHello: function(name) {
+                    console.log('Hello,' + (name ? name : 'Dude') + '!');
+                }
+           }); 
+           $.sayHello();
+           $.sayHello('Wayou');
+           $.extend({
+                log: function(message) {
+                    var now = new Date()
+                      , y = now.getFullYear()
+                      , m = now.getMonth() + 1 //! Javascript中月份从0开始
+                      , d = now.getDate()
+                      , h = now.getHours()
+                      , min = now.getMinutes()
+                      , s = now.getSeconds()
+                      time = y + '/' + m + '/' + d + ' ' + h + ':' + min + ':' + s;
+                      console.log(time + 'My App:' + message);
+                }
+           });
+           $.log('initializing...'); // 调用
+           $.fn.myPlugin = function(options) {
+                var defaults = {
+                    'color': 'red'
+                  , 'fontSize': '12px'
+                };
+                var settings = $.extend({}, defaults, options);
+                return this.css({
+                    'color': settings.color
+                  , 'fontSize': settings.fontSize
+                });
+                //在这里面，this指的是用jQuery选中的元素
+                //example :$('a'), 则this=$('a')
+                this.css('color', 'red');
+                return this.each(function() {
+                    //对每个元素进行操作
+                    $(this).append(' ' + $(this).attr('href'));
+                });
+           }
+
+           //定义Beautifier的构造函数
+           var Beautifier = function(ele, opt) {
+                this.$element = ele
+              , this.defaults = {
+                    'color': 'red'
+                  , 'fontSize': '12px'
+                  , 'textDecoration': 'none'
+                }
+              , this.options = $.extend({}, this.defaults, opt)
+           }
+           //定义Beautifier的方法
+           Beautifier.prototype = {
+                beautify: function() {
+                    return this.$element.css({
+                        'color': this.options.color
+                      , 'fontSize': this.options.fontSize
+                      , 'textDecoration': this.options.textDecoration
+                    });
+                }
+           }
+           //在插件中使用Beautifier对象
+           $.fn.myPlugin = function(options) {
+                //创建Beautifier的实体
+                var beautifier = new Beautifier(this, options);
+                //调用其方法
+                return beautifier.beautify();
+           }
+           $('a').myPlugin({
+                'color': 'green'
+              , 'fontSize': '19px'
+              , 'textDecoration': 'underline'
+           });
+        }(jQuery,window,document));
+                */
+    </script>
+</body>
+</html>

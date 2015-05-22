@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://evolutionjay.bitbucket.org/testcc/ -->
+<html class=" -webkit-" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <!-- Basic Page Needs
+  ================================================== -->
+        <meta charset="utf-8">
+        <title>Title</title>
+        <meta name="description" content="">
+        <meta name="author" content="J.Chen">
+        <!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+  ================================================== -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- IOS6全屏 Chrome高版本全屏
+  ================================================== -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes"> 
+        <!-- 让360双核浏览器用webkit内核渲染页面
+  ================================================== -->
+	<meta name="renderer" content="webkit">
+        <!-- Mobile Specific Metas
+  ================================================== -->
+		<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+
+        <!-- CSS
+  ================================================== -->
+	<style media="" data-href="css/reset.css">@charset "utf-8";
+/*
+	http://meyerweb.com/eric/tools/css/reset/ 
+	v1.0 | 20080212 
+ 	-----------------------------------------
+	J.Chen edited | 2014(yy)/04(mm)/04(dd) 
+	http://jchen.lofter.com
+*/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1; 
+	-webkit-font-smoothing: antialiased;		/* Fix for webkit rendering */
+	-webkit-text-size-adjust: 100%;				/* Fix for webkit minFont size */
+	-webkit-tap-highlight-color	:rgba(0,0,0,0);	/* Remove highlight on tap event*/
+	-moz-tap-highlight-color	:rgba(0,0,0,0);
+	-ms-tap-highlight-color		:rgba(0,0,0,0);
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	/* -webkit-touch-callout: none;  
+	-webkit-user-select: none;  
+	-khtml-user-select: none;  
+	-moz-user-select: none;  
+	-ms-user-select: none;  
+	-webkit-user-select: none; */	
+	/* 上面的css是用来禁止用户选中 */
+	font-family: "Helvetica Neue",\5FAE\8F6F\96C5\9ED1,Tohoma; /* mac字体，微软雅黑，xp字体，宋体有点问题，所以不用，除非自写*/
+}
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+/* remember to define focus styles! */
+:focus { outline: 0; }
+/* remember to highlight inserts somehow! */
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse: collapse; border-spacing: 0; }
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  float:none !important;
+}
+table, th, td {
+  vertical-align: middle;
+}
+em,i {font-style:normal;}
+/* Remove annoying border on linked images. */
+a img { border: none; text-decoration:none; }
+
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+/* #Clearing
+================================================== */
+.clearfix:before, .clearfix:after { content: ""; display: table; font-size:0 !important; line-height:0!important; height:0!important;}  
+.clearfix:after { clear: both; }  
+  
+/* IE 6/7 */  
+.clearfix { *zoom: 1; } 
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+/* 重置安卓Pad下面input焦点状态白底的样式 */  
+input{
+   -webkit-user-modify: read-write-plaintext-only;
+   -webkit-tap-highlight-color:#3072af;
+}
+
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner{
+	border:none;padding:0;
+}
+
+
+
+
+
+
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+/* Styles */
+}
+
+
+
+
+
+
+
+/*
+
+ Smaller than standard 960 (devices and browsers)
+@media only screen and (max-width: 959px) {}
+
+ Tablet Portrait size to standard 960 (devices and browsers) 
+@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+ All Mobile Sizes (devices and browser) 
+@media only screen and (max-width: 767px) {}
+
+ Mobile Landscape Size to Tablet Portrait (devices and browsers) 
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+ Mobile Portrait Size to Mobile Landscape Size (devices and browsers) 
+@media only screen and (max-width: 479px) {}
+
+*/
+
+/* 视网膜显示屏CSS */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 2) {}</style>
+	<style media="" data-href="css/style.css">@charset "utf-8";
+html { background: #a3efff}
+.container {
+	position: relative;
+	height:800px;
+	-webkit-perspective:700px;
+	perspective:700px;
+	-webkit-perspective-origin:center center;
+	perspective-origin:center center;
+	/*background:rgba(0,132,134,0.50);*/
+}
+.posCent {
+	position: absolute;
+	margin:auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+}
+
+.aurhor {
+	position: absolute;
+	width: 125px;
+	height: 80px;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@-webkit-keyframes testanimate {
+	from { transform: translateZ(-350px) rotateY(-45deg); }
+	to { transform: translateZ(-350px) rotateY(-405deg); }
+}
+.box-3d-warp {
+	position: absolute;
+	width: 700px;
+	height:700px;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	border: solid 1px #000;
+	border-style: dashed;
+	transform: translateZ(-350px) rotateY(45deg);
+	-webkit-animation: testanimate 20s linear infinite;
+}
+.box-3d {
+	position: relative;
+	width:100%;
+	height:100%;
+	background: url("http://evolutionjay.bitbucket.org/testcc/css/../images/glasses.jpg") rgba(0,124,255,0.68);
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform:rotateX(90deg) translateY(0) translateZ(-350px) translateY(0);
+	transform:rotateX(90deg) translateY(0) translateZ(-350px) translateY(0);
+}
+.box-shadow {
+	position: absolute;
+	margin:auto;
+	width: 100%;
+	height: 100%;
+	background: url("http://evolutionjay.bitbucket.org/testcc/css/../images/shadow.png");
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: rotateX(90deg) translateZ(-430px);
+	transform-style: preserve-3d;
+}
+.container .box-3d .box-3d-left {
+	-webkit-transform: rotateX(90deg) rotateY(90deg) translateY(-20px) translateZ(-350px);
+	transform: rotateX(90deg) rotateY(90deg) translateY(-20px) translateZ(-350px);	
+}
+.container .box-3d .box-3d-right {
+	-webkit-transform: rotateX(90deg) rotateY(90deg) translateY(-20px) translateZ(350px);
+	transform: rotateX(90deg) rotateY(90deg) translateY(-20px) translateZ(350px);	
+}
+.container .box-3d .box-3d-front {
+	-webkit-transform: rotateX(90deg) rotateY(0deg) translateY(-20px) translateZ(-350px);
+	transform: rotateX(90deg) rotateY(0deg) translateY(-20px) translateZ(-350px);	
+}
+.container .box-3d .box-3d-back {
+	-webkit-transform: rotateX(90deg) rotateY(0deg) translateY(-20px) translateZ(350px);
+	transform: rotateX(90deg) rotateY(0deg) translateY(-20px) translateZ(350px);	
+}
+
+.container .box-3d .box-3d-left ,
+.container .box-3d .box-3d-right ,
+.container .box-3d .box-3d-front ,
+.container .box-3d .box-3d-back {
+	position: absolute;
+	-webkit-transform-origin: center center;
+	-ms-transform-origin: center center;
+	transform-origin: center center;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	width: 100%;
+	height: 40px;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/glasses-side.jpg") rgba(49, 36, 51, 0.86);
+}
+
+
+.pool {
+	position: absolute;
+	left: 460px;
+	top: 327px;
+	width: 200px;
+	height: 200px;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/pool-chair-shadow.jpg") #fff;
+	-webkit-transform: translateZ(8px);
+	transform: translateZ(8px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-3d-left,
+.pool-3d-right,
+.pool-3d-front,
+.pool-3d-back {
+	position: absolute;
+	background: #e5e5e5;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 8px;
+}
+
+.pool-3d-left{
+	-webkit-transform: rotateX(90deg) rotateY(90deg) translateY(-4px) translateZ(-100px);
+	transform: rotateX(90deg) rotateY(90deg) translateY(-4px) translateZ(-100px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-3d-right{
+	-webkit-transform: rotateX(90deg) rotateY(90deg) translateY(-4px) translateZ(100px);
+	transform: rotateX(90deg) rotateY(90deg) translateY(-4px) translateZ(100px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #cecece;
+}
+.pool-3d-front {
+	-webkit-transform: rotateX(90deg) rotateY(0deg) translateY(-4px) translateZ(-100px);
+	transform: rotateX(90deg) rotateY(0deg) translateY(-4px) translateZ(-100px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;	
+}
+.pool-3d-back {
+	-webkit-transform: rotateX(90deg) rotateY(0deg) translateY(-4px) translateZ(100px);
+	transform: rotateX(90deg) rotateY(0deg) translateY(-4px) translateZ(100px);	
+	-webkit-transform-style: preserve-3d;	
+	transform-style: preserve-3d;
+	background: #b1b1b1;
+}
+
+.pool-water {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 180px;
+	height: 140px;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/blue-water-wallpaper-2.jpg") #23a7e2;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	-webkit-box-shadow: inset 0 0 12px 0 #000;
+	box-shadow: inset 0 0 12px 0 #000;
+	-webkit-transform: translateZ(0.1px);
+	transform: translateZ(0.1px);
+	/*opacity: 0.1;*/
+}
+
+.chair {
+	position: absolute;
+	width: 60px;
+	height: 30px;
+	background: #e7e7dd;
+	-webkit-transform: translateZ(5px);
+	transform: translateZ(5px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.chair-1 {
+	top: 160px;
+	left: 10px;	
+}
+.chair-2 {
+	top: 160px;
+	left: 130px;
+}
+
+.chair-left {
+	left: 0;
+	top: 0;
+	-webkit-transform: rotateY(90deg);
+	transform: rotateY(90deg);
+	-webkit-transform-origin: left center;
+	-ms-transform-origin: left center;
+	transform-origin: left center;
+}
+.chair-right {
+	right: 0;
+	top: 0;
+	-webkit-transform: rotateY(-90deg);
+	transform: rotateY(-90deg);
+	-webkit-transform-origin: right center;
+	-ms-transform-origin: right center;
+	transform-origin: right center;
+}
+
+.chair-left,
+.chair-right {
+	position: absolute;
+	height: 100%;
+	width: 5px;
+	background: #bab59f;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.chair-shadow {
+	position: absolute;
+	left: -5px;
+	bottom: 0;
+	width: 120%;
+	height: 120%;
+	background: rgba(0, 0, 0, 0.16);
+	-webkit-transform: translateZ(-5px) translateZ(0.1px) skewX(-25deg);
+	transform: translateZ(-5px) translateZ(0.1px) skewX(-25deg);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform-origin: left bottom;
+	-ms-transform-origin: left bottom;
+	transform-origin: left bottom;
+	-webkit-filter: blur(3px);
+}
+
+
+.pool-banner {
+	position: absolute;
+	top: 50px;
+	left: 30px;
+	width: 140px;
+	height: 4px;
+	background: #575757;
+	-webkit-transform: translateZ(56px);
+	transform: translateZ(56px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.pool-banner-shadow {
+	width: 209px;
+	height: 106px;
+	position: absolute;
+	left: 0;
+	bottom: -10px;
+	background: url("http://evolutionjay.bitbucket.org/testcc/css/../images/pool-banner-shadow.png");
+	-webkit-transform: translateZ(-55.8px);
+	transform: translateZ(-55.8px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-banner {}
+.pool-banner {}
+.pool-banner {}
+
+.pool-banner-font{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+	width: 100%;
+	height: 48px;
+	-webkit-transform: rotateX(90deg) translateY(-24px) translateZ(-2px);
+	transform: rotateX(90deg) translateY(-24px) translateZ(-2px);
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/pool-banner-font.gif") #454444;
+	-webkit-background-size:100% 100%;
+	background-size:100% 100%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-banner-back{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+	width: 100%;
+	height: 48px;
+	-webkit-transform: rotateX(90deg) translateY(-24px) translateZ(2px);
+	transform: rotateX(90deg) translateY(-24px) translateZ(2px);
+	background: #454444;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-banner-left{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: auto;
+	bottom: auto;	
+	width: 48px;
+	height: 100%;
+	-webkit-transform: rotateY(-90deg) translateX(-48px) translateZ(0px);
+	transform: rotateY(-90deg) translateX(-48px) translateZ(0px);
+	background: #464646;
+	-webkit-transform-origin: left center;
+	-ms-transform-origin: left center;
+	transform-origin: left center;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.pool-banner-right{
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: auto;
+	bottom: auto;	
+	width: 48px;
+	height: 100%;
+	-webkit-transform: rotateY(90deg) translateX(48px) translateZ(0px);
+	transform: rotateY(90deg) translateX(48px) translateZ(0px);
+	background: #1a1a1a;
+	-webkit-transform-origin: right center;
+	-ms-transform-origin: right center;
+	transform-origin: right center;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.pool-banner-font,
+.pool-banner-back,
+.pool-banner-left,
+.pool-banner-right{
+	
+}
+
+.pool-banner-foot {
+	position: absolute;
+	left: 18px;
+	top: -8px;
+	width: 12px;
+	height: 8px;
+	background: #000;
+}
+
+.pool-banner-foot-2 {
+	left: auto;
+	right: 18px;
+}
+
+
+
+.house-1 {
+	position: absolute;
+	width: 140px;
+	height: 120px;
+	top: 80px;
+	left: 460px;
+	background: #fff;
+	-webkit-transform: translateZ(40px);
+	transform: translateZ(40px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.hose-1-left,
+.hose-1-right,
+.hose-1-front,
+.hose-1-back{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.hose-1-left{
+	width: 40px;
+	height: 100%;
+	background: red;
+	-webkit-transform: rotateY(-90deg) translateX(-20px) translateZ(70px);
+	transform: rotateY(-90deg) translateX(-20px) translateZ(70px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #f0f0f0;
+}
+.hose-1-right{
+	width: 40px;
+	height: 100%;
+	background: red;
+	-webkit-transform: rotateY(90deg) translateX(20px) translateZ(70px);
+	transform: rotateY(90deg) translateX(20px) translateZ(70px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #e0dbcd;
+}
+.hose-1-front{
+	width: 100%;
+	height: 40px;
+	background: red;
+	-webkit-transform: rotateX(-90deg) translateY(20px) translateZ(60px);
+	transform: rotateX(-90deg) translateY(20px) translateZ(60px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #eeece3;
+}
+.hose-1-back{
+	width: 100%;
+	height: 40px;
+	background: red;
+	-webkit-transform: rotateX(90deg) translateY(-20px) translateZ(60px);
+	transform: rotateX(90deg) translateY(-20px) translateZ(60px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #b1b1b1;
+}
+.hose-cye {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 19px;
+	height: 19px;
+	/*background: #a29b8b;*/
+	/*border-radius: 50%;*/
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+
+.hose-cye-i:before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	content: " ";
+	width: 6PX;
+	height: 100px;
+	background: #a29b8b;
+	-webkit-transform: rotateX(90deg);
+	transform: rotateX(90deg);
+	-webkit-transform-origin: center top;
+	-ms-transform-origin: center top;
+	transform-origin: center top;
+}
+
+.hose-cye-i:nth-child(2) {-webkit-transform:rotate(36deg);-ms-transform:rotate(36deg);transform:rotate(36deg)}
+.hose-cye-i:nth-child(3) {-webkit-transform:rotate(72deg);-ms-transform:rotate(72deg);transform:rotate(72deg);}
+.hose-cye-i:nth-child(4) {-webkit-transform:rotate(108deg);-ms-transform:rotate(108deg);transform:rotate(108deg);}
+.hose-cye-i:nth-child(5) {-webkit-transform:rotate(144deg);-ms-transform:rotate(144deg);transform:rotate(144deg);}
+.hose-cye-i:nth-child(6) {-webkit-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg);}
+.hose-cye-i:nth-child(7) {-webkit-transform:rotate(216deg);-ms-transform:rotate(216deg);transform:rotate(216deg);}
+.hose-cye-i:nth-child(8) {-webkit-transform:rotate(252deg);-ms-transform:rotate(252deg);transform:rotate(252deg);}
+.hose-cye-i:nth-child(9) {-webkit-transform:rotate(288deg);-ms-transform:rotate(288deg);transform:rotate(288deg);}
+.hose-cye-i:nth-child(10) {-webkit-transform:rotate(324deg);-ms-transform:rotate(324deg);transform:rotate(324deg);}
+.hose-cye-i:nth-child(11) {-webkit-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}
+.hose-cye-i:nth-child(12) {-webkit-transform:rotate(396deg);-ms-transform:rotate(396deg);transform:rotate(396deg)}
+
+.hose-cye-i:nth-child(2):before {background: #7e796b;}
+.hose-cye-i:nth-child(3):before {background: #837f71;}
+.hose-cye-i:nth-child(4):before {background: #8d8776;}
+.hose-cye-i:nth-child(5):before {background: #8e8778;}
+.hose-cye-i:nth-child(6):before {background: #a29b8b;}
+.hose-cye-i:nth-child(7):before {background: #a29b8b;}
+.hose-cye-i:nth-child(8):before {background: #918a7d;}
+.hose-cye-i:nth-child(9):before {background: #847d72;}
+.hose-cye-i:nth-child(10):before {background: #6d685e;}
+.hose-cye-i:nth-child(11):before {background: #5c584f;}
+.hose-cye-i:nth-child(12):before {background: #4d4942;}
+
+
+.hose-cye-i {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 48.9%;
+	width: 5.72px;
+	-webkit-transform-origin: center bottom;
+	-ms-transform-origin: center bottom;
+	transform-origin: center bottom;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+
+
+
+
+.house-2 {
+	position: absolute;
+	width: 140px;
+	height: 100px;
+	top: 20px;
+	left: 200px;
+	background: #fff;
+	-webkit-transform: translateZ(100px);
+	transform: translateZ(100px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.hose-2-left,
+.hose-2-right,
+.hose-2-front,
+.hose-2-back{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.hose-2-left{
+	width: 100px;
+	height: 100%;
+	background: red;
+	-webkit-transform: rotateY(-90deg) translateX(-50px) translateZ(70px);
+	transform: rotateY(-90deg) translateX(-50px) translateZ(70px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #f0f0f0;
+}
+.hose-2-right{
+	width: 100px;
+	height: 100%;
+	background: red;
+	-webkit-transform: rotateY(90deg) translateX(50px) translateZ(70px);
+	transform: rotateY(90deg) translateX(50px) translateZ(70px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #e0dbcd;
+}
+.hose-2-front{
+	width: 100%;
+	height: 100px;
+	background: red;
+	-webkit-transform: rotateX(-90deg) translateY(50px) translateZ(50px);
+	transform: rotateX(-90deg) translateY(50px) translateZ(50px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #eeece3;
+}
+.hose-2-back{
+	width: 100%;
+	height: 100px;
+	background: red;
+	-webkit-transform: rotateX(90deg) translateY(-50px) translateZ(50px);
+	transform: rotateX(90deg) translateY(-50px) translateZ(50px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #b1b1b1;
+}
+
+
+
+
+
+
+
+.house-3 {
+	position: absolute;
+	width: 160px;
+	height: 100px;
+	top: 40px;
+	left: 24px;
+	background: #fff;
+	-webkit-transform: translateZ(250px);
+	transform: translateZ(250px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.hose-3-left,
+.hose-3-right,
+.hose-3-front,
+.hose-3-back{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.hose-3-left{
+	margin: 0;
+	top: 0;
+	left: 0;
+	right: auto;
+	bottom: 0;
+	width: 250px;
+	height: 100%;
+	transform: rotateY(-90deg) translateX(-125px) translateZ(125px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/house-3-left.jpg") #f0f0f0;
+}
+.hose-3-right{
+	margin: 0;
+	top: 0;
+	left: auto;
+	right: 0;
+	bottom: 0;
+	width: 250px;
+	height: 100%;
+	background: red;
+	transform: rotateY(90deg) translateX(125px) translateZ(125px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/house-3-right.jpg") #e0dbcd;
+}
+.hose-3-front{
+	margin: 0;
+	top: auto;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 250px;
+	transform: rotateX(-90deg) translateY(125px) translateZ(125px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background:url("http://evolutionjay.bitbucket.org/testcc/css/../images/house-3-font.jpg") #eeece3;
+}
+.hose-3-back{
+	margin: 0;
+	width: 100%;
+	height: 250px;
+	top: 0;
+	bottom: auto;
+	transform: rotateX(90deg) translateY(-125px) translateZ(125px);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #b1b1b1;
+}
+
+.tree-box {
+	position: absolute;
+	left: 50px;
+	top: 250px;
+	width: 50px;
+	height: 50px;
+	margin: auto;
+	background: red;
+	border-radius: 55%;
+	transform: translateZ(0.001px);
+	transform-style: preserve-3d;
+}
+
+.tree-surface-1,
+.tree-surface-2,
+.tree-surface-3 {
+	position: absolute;
+	
+	width: 44px;
+	height: 200px;
+	/*background: blue;*/
+	transform-origin: center bottom;
+	transform: rotateX(-90deg) translateZ(0px);
+	transform-style: preserve-3d;
+}
+
+.tree-surface-1 {
+	left: 0;
+	right: 0;
+	margin: auto;
+	bottom: 50%;
+	margin-bottom: 12px;
+	transform: rotateX(-90deg) rotateY(180deg) translateZ(0px);
+}
+.tree-surface-2 {
+	left: 0;
+	right: 0;
+	margin: auto;
+	bottom: 50%;
+	/*display: none;*/
+	margin-bottom: 12px;
+	transform-origin: left bottom;
+	transform: rotateX(-90deg) rotateY(-60deg) translateZ(0px);
+}
+.tree-surface-3 {
+	left: 0;
+	right: 0;
+	margin: auto;
+	bottom: 50%;
+	margin-bottom: 10px;
+	/*display: none;*/
+	transform-origin: right bottom;
+	transform: rotateX(-90deg) rotateY(60deg) translateZ(0px);
+}
+
+.tree-surface-1:before,
+.tree-surface-2:before,
+.tree-surface-3:before {
+	transform: rotateX(8.2deg);
+	transform-origin: center bottom;
+	transform-style: preserve-3d;
+	display: block;
+	content: " ";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 24px 100px 24px;
+	border-color: transparent transparent #00ff00 transparent;
+}
+.tree-surface-1:before {border-color: transparent transparent #2b8577 transparent;}
+.tree-surface-2:before {border-color: transparent transparent #1d615b transparent;}
+.tree-surface-3:before {border-color: transparent transparent #006b5f transparent;}
+</style>
+
+        <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Favicons
+        ================================================== -->
+	<link rel="shortcut icon" href="http://evolutionjay.bitbucket.org/testcc/favicon.ico">
+		<!-- Android 主屏图标
+        ================================================== -->	
+	<link rel="icon" sizes="196x196" href="http://evolutionjay.bitbucket.org/testcc/touch-icon.png">
+		<!-- IOS 主屏图标
+        ================================================== -->
+	<link rel="apple-touch-icon" href="http://evolutionjay.bitbucket.org/testcc/touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="http://evolutionjay.bitbucket.org/testcc/touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="http://evolutionjay.bitbucket.org/testcc/touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="http://evolutionjay.bitbucket.org/testcc/touch-icon-ipad-retina.png">
+		<!-- Javascript
+        ================================================== -->
+	<script type="text/javascript" src="./Title_files/prefixfree.min.js"></script>
+	<script type="text/javascript" src="./Title_files/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="./Title_files/jay.js"></script>
+</head>
+<body>
+<div class="container"><!-- Everything started here -->
+	<div class="box-3d-warp posCent">
+		<div class="aurhor">
+			3D - demo <br>
+			Author:Jay Chen<br>
+			Date:2014-7-18
+		</div>
+		<div class="box-3d">
+			<!-- 树 -->
+			<div class="tree-box">
+				<div class="tree-surface-1"></div>
+				<div class="tree-surface-2"></div>
+				<div class="tree-surface-3"></div>
+			</div>
+			<!--小屋子-3-->
+			<div class="house-3">
+				<div class="hose-3-left"></div>
+				<div class="hose-3-right"></div>
+				<div class="hose-3-front"></div>
+				<div class="hose-3-back"></div>
+			</div>
+		
+			<!--小屋子-2-->
+			<div class="house-2">
+				<div class="hose-2-left"></div>
+				<div class="hose-2-right"></div>
+				<div class="hose-2-front"></div>
+				<div class="hose-2-back"></div>
+			</div>
+			
+			<!--小屋子-带烟囱-->
+			<div class="house-1">
+				<div class="hose-cye">
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+					<div class="hose-cye-i"></div>
+				</div>
+				
+				
+				<div class="hose-1-left"></div>
+				<div class="hose-1-right"></div>
+				<div class="hose-1-front"></div>
+				<div class="hose-1-back"></div>
+			</div>
+			<!--水池-->
+			<div class="pool">
+				<div class="pool-banner">
+					<div class="pool-banner-shadow"></div>
+					<div class="pool-banner-font"></div>
+					<div class="pool-banner-back">
+						<div class="pool-banner-foot  pool-banner-foot-1"></div>
+						<div class="pool-banner-foot  pool-banner-foot-2"></div>
+					</div>
+					<div class="pool-banner-left"></div>
+					<div class="pool-banner-right"></div>
+				</div>
+			
+				<!-- 椅子-1 -->
+				<div class="chair chair-1">
+					<div class="chair-left"></div>
+					<div class="chair-right"></div>
+					<!--<div class="chair-shadow"></div>-->
+				</div>
+				<div class="chair chair-2">
+					<div class="chair-left"></div>
+					<div class="chair-right"></div>
+					<!--<div class="chair-shadow"></div>-->
+				</div>
+				<!-- 椅子-2 -->
+				<!--水池的水-->
+				<div class="pool-water"></div>
+				<!--立体侧边-->
+				<div class="pool-3d-left"></div>
+				<div class="pool-3d-right"></div>
+				<div class="pool-3d-front"></div>
+				<div class="pool-3d-back"></div>
+			</div>
+			<!--侧面-->
+			<div class="box-3d-left"></div>
+			<div class="box-3d-right"></div>
+			<div class="box-3d-front"></div>
+			<div class="box-3d-back"></div>
+		</div>
+		<div class="box-shadow"></div>		
+	</div>
+
+</div>
+
+
+
+<iframe id="rdbIndicator" width="100%" height="270" border="0" src="./Title_files/indicator.html" style="display: none; border: 0; position: fixed; left: 0; top: 0; z-index: 2147483647"></iframe></body></html>

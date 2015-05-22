@@ -1,0 +1,318 @@
+/* global */
+body { 
+    font: normal 12px/1.5 'microsoft YaHei'; 
+    min-width: 1920px; min-height: 951px;  
+}
+div { box-sizing: border-box; }
+.loadingBox {
+    font-size: 50px; color: #39c;    
+    position: absolute; top: 50%; left: 50%; z-index: 1;
+}
+.c-f {color: #fff;}
+.bg-g { background: green;}
+.bg-w { background: white; }
+.cont-btn { cursor: pointer;}
+/* index */
+.wrapper, .layout,
+.map-box { width:100%; height: 100%;}
+.wrapper {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.layout {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.pt-page-current,
+.no-js .pt-page {
+	visibility: visible;
+	z-index: 1;
+}
+
+.map-sider { position: absolute; z-index: 1; top: 0;}
+.map-left { 
+    left: 0; width: 25%; height: 100%; 
+    background: -moz-linear-gradient(left,rgba(17,77,173,1), rgba(17,77,173,0));
+    background: -webkit-linear-gradient(left,rgba(17,77,173,1), rgba(17,77,173,0));
+}
+.map-right { 
+    right: 0; width: 20%; height: 100%; 
+    background: -moz-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
+    background: -webkit-linear-gradient(right,rgba(17,77,173,1), rgba(17,77,173,0));
+}
+.map-right-inner, 
+.map-left-inner {
+    padding: 20% 10px 0;
+    text-align: center;
+    color: #fff;
+}
+.rems-title {
+    font-size: 24px;
+}
+.map-right-inner {
+    text-align: left;
+}
+
+.map-right-scroll {
+    height: 800px; overflow: auto;
+}
+.project-box {
+    background: #193b96;
+    width: 420px; height: 130px;
+    padding: 10px; border: 1px solid #fff;
+    position: relative;
+}
+.project-detail-box {
+    position: absolute;
+    left: 10px; bottom: 10px;
+    background: #000;
+}
+.project-detail-col {
+    float: left;
+    width: 120px;
+}
+.project-box-left > img {
+    width: 100%; height: 100%;
+}
+/* content page */
+.threed-btn,
+.process-btn {
+    position: absolute;
+    padding: 10px;
+    top: 0;
+}
+.threed-btn {
+    right: 150px;
+}
+.process-btn {
+    right: 100px;
+}
+.btn-active {
+    color: #fff;
+    background: #39c;
+    border-radius: 5px;
+}
+.cont-top-box { 
+    background: gray; 
+    display: table-row; height: 72px; width:100%;
+}
+.cont-wrap { display: table; width:100%; height:100%; }
+.cont-bottom-box { background: black; display: table-row; height: 100%; width: 100%; }
+.cont-bottom-left { background: orange; height: 100%; width:20%;}
+.cont-bottom-center { background: green; height: 100%; width: 60%; position: relative;}
+.cont-bottom-right { background: blue; height: 100%;  width:20%;}
+.cont-3d-box { background: pink; height: 100%;}
+.cont-construct-box { background: yellow; height: 100%;}
+.cont-construct-box-inner {
+    background: url('../img/huanghuaT2.jpg') no-repeat; 
+    height: 500px;
+}
+.cont-projects-wrap { background: rgba(0,0,0,.5); padding: 15px 35px; position: absolute; bottom: 0; width: 100%;}
+.cont-projects-wrap-inner { position: relative; }
+.cont-projects-arrow {  z-index: 1;position: absolute; cursor: pointer;}
+.arrow-left {  border-bottom: 25px solid transparent; border-right: 25px solid rgba(255,255,255,.8); border-top: 25px solid transparent; bottom: 50px;  left: 0; }
+.arrow-left:hover { border-right: 25px solid rgba(255,255,255,1);}
+.arrow-right {  border-bottom: 25px solid transparent; border-left: 25px solid rgba(255,255,255,.8); border-top: 25px solid transparent; bottom: 50px;  right: 0; }
+.arrow-right:hover { border-left: 25px solid rgba(255,255,255,1);}
+.arrow-top {  border-left: 25px solid transparent; border-bottom: 25px solid rgba(255,255,255,.8); border-right: 25px solid transparent; top: -45px; right: 50%; }
+.arrow-bottom {  border-left: 25px solid transparent; border-top: 25px solid rgba(255,255,255,.8); border-right: 25px solid transparent; top: -45px; right: 50%; }
+.cont-project { background: #fff; margin-left: 10px; float: left;width: 190px; height: 136px; } 
+.cont-projects-box {overflow: hidden;}
+.projects-list {width: 999999999999999999px;}
+.cont-meter-box {  }
+.cont-meter-title { 
+    position: absolute; 
+    z-index: 1;
+    color: #333;
+    font-size: 24px;
+    left: 40px;
+}
+.cont-meter-detail { font-size: 20px; text-align: center;  padding-top: 10px; }
+/* meter start */
+.cont-meter-chart {
+    text-align: center;
+    background: #fff;
+    position: relative;
+}
+.chart-circle-energy {
+    width: 144px;
+    height: 151px;
+}
+/* meter end */
+
+.circle-percentage {
+  position: absolute;
+  color: #690;
+  font: normal 400 50px Arial;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.align-center {
+  text-align: center;
+}
+.chart {
+  color: #4a667a;
+  text-align: left;
+  position: relative;
+  height: auto;
+  background-color: #1e2730;
+  display: inline-block;
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 15px 20px 65px 20px;
+}
+.chart.circle {
+  padding: 15px 20px 40px 20px;
+}
+.underlay {
+  stroke-width: 10;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #ccc;
+}
+
+#circle-graph-1 {
+  stroke: url(#gradient-1);
+  stroke-width: 5;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-circle {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#circle-graph-2 {
+/*
+  stroke: url(#gradient-2);
+  stroke-linecap: round;
+  */
+  stroke: #690;
+  stroke-width: 10;
+  fill: transparent;
+  stroke-linejoin: round;
+}
+#poly-1 {
+  fill: linear-gradient(top, #cfddac 0%, #fff 100%);
+}
+.cont-meter-history {
+    font-size: 20px;
+    border-top: 1px solid #fff;
+}
+.cont-meter-history-left:after {
+   content: '';
+   height: 60px;
+   border-right: 1px solid #FFF;
+   content: "";
+   display: block;
+   position: absolute;
+   top: 0px;
+   right: 0px;
+}
+.cont-meter-history-left {
+    position: relative;
+}
+.cont-meter-history-left,
+.cont-meter-history-right {
+    width: 50%;
+    padding: 0 30px;
+}
+.cont-meter-detail-num {
+    font-size: 36px;
+}
+.cont-top-box {
+    color: #fff;
+    font-size: 20px;
+}
+
+/* test */
+/* 定义自定义点样式 */
+div.marker{height:40px;
+background:url(http://webapi.amap.com/images/marker.png) left top no-repeat;}
+div.marker div{height:28px;line-height:28px;margin:0 10px;color:#FFF;
+background:url(http://webapi.amap.com/images/marker_bg_170x28.gif)
+right top no-repeat;padding-right:10px;}
+ 
+/* 修改背景URL */
+div.change{background-image:url(http://webapi.amap.com/images/marker-h.png);}
+div.change div{background-image:url(http://webapi.amap.com/images/marker-h-l.gif);}
+/*
+.testChart{ width:500px; height: 250px; background: #ccc; }
+path {fill:none;stroke:#39c; stroke-width:2;}
+.domain, .tick line {
+    stroke: gray;
+    stroke-width: 1;
+}
+
+    box-shadow: 5px 0 15px 15px rgba(17,77,173,0);
+*/
+.test { position:absolute; top: 0; left: 0; z-index: 99999;}
+/* test end */
+
+
+/* replacing / extending jquery ui with font awesome */
+[class^="fa-"],
+[class*=" fa-"] {
+    display: inline;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    vertical-align: baseline;
+}
+ /* Allow Font Awesome Icons in lieu of jQuery UI and only apply when using a FA icon */
+.ui-icon[class*=" icon-"],
+.ui-icon[class*=" fa-"] {
+    /* Remove the jQuery UI Icon */
+    background: none repeat scroll 0 0 transparent;
+    /* Remove the jQuery UI Text Indent */
+    text-indent: 0;
+    /* Bump it up - jQuery UI is -8px */
+    margin-top: -0.5em;
+}
+
+.ui-button-icon-only .ui-icon[class*=" icon-"],
+.ui-button-icon-only .ui-icon[class*=" fa-"] {
+    /* Bump it - jQuery UI is -8px */
+    margin-left: -7px;
+}
+
+/* Allow use of icon-large to be properly aligned */
+.ui-icon.icon-large {
+    margin-top: -0.75em;
+}
+/* remove baidu map logo */
+.BMap_cpyCtrl { display:none; }
+.anchorBL { display:none; }
+
+/* remove ibs map logo */
+.amap-logo { display: none; }
+.amap-copyright { display: none; }

@@ -1,0 +1,103 @@
+﻿/* http://keleyi.com */
+#popup_container {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+    /*
+	border: solid 5px #999;
+    */
+    box-shadow: 1px 1px 5px #000;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#popup_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+    /*
+	background: #CCC url(../../Content/img/title.gif) top repeat-x;
+	border: solid 1px #FFF;
+	border-bottom: solid 1px #999;
+	color: #666;
+    */
+    color: #fff;
+    background: #009900;
+    background: -moz-linear-gradient(top, #369eb0 0%,#217d92 100%);
+    background: -webkit-linear-gradient(top, #369eb0 0%,#217d92 100%);
+    background: -webkit-gradient(linear, color-stop(0%,#369eb0),color-stop(100%,#217d92));
+    background: -o-linear-gradient(top, #369eb0 0%,#217d92 100%);
+    background: -ms-linear-gradient(top, #369eb0 0%,#217d92 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#369eb0', endColorstr='#217d92', GradientType=0);
+    background: linear-gradient(top, #369eb0 0%,#217d92 100%);
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+input#popup_ok {
+    background: #43afbf;
+    background: -moz-linear-gradient(top, #43afbf 0%, #2896a9 100%);
+    background: -webkit-linear-gradient(top, #43afbf 0%, #2896a9 100%);
+    background: -webkit-gradient(linear, color-stop(0%, #43afbf), color-stop(100%, #2896a9));
+    background: -o-linear-gradient(top, #43afbf 0%, #2896a9 100%);
+    background: -ms-linear-gradient(top, #43afbf 0%, #2896a9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43afbf', endColorstr='#2896a9', GradientType=0);
+    background: linear-gradient(top, #43afbf 0%, #2896a9 100%);
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #227f90;
+    padding: 4px 10px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+input#popup_cancel {
+    background: #fff;
+    background: -moz-linear-gradient(top, #fff 0%, #f1f1f1 100%);
+    background: -webkit-linear-gradient(top, #fff 0%, #f1f1f1 100%);
+    background: -webkit-gradient(linear, color-stop(0%, #fff), color-stop(100%, #f1f1f1));
+    background: -o-linear-gradient(top, #fff 0%, #f1f1f1 100%);
+    background: -ms-linear-gradient(top, #fff 0%, #f1f1f1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f1f1f1', GradientType=0);
+    background: linear-gradient(top, #fff 0%, #f1f1f1 100%);
+    color: #747474;
+    border: 1px solid #d9d9d9;
+    border-bottom: 2px solid #ddd;
+    padding: 4px 10px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#popup_content {
+	background: 16px 16px no-repeat url(../../Content/img/info.gif);
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+#popup_content.alert {
+	background-image: url(../../Content/img/info.gif);
+}
+
+#popup_content.confirm {
+	background-image: url(../../Content/img/important.gif);
+}
+
+#popup_content.prompt {
+	background-image: url(../../Content/img/help.gif);
+}
+
+#popup_message {
+	padding-left: 48px;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0:00 to 24:00</title>
+    <style>
+    * {margin: 0; padding: 0;}
+    body {background: #999;}
+    .timeBar {
+        background: #39c;
+        width: 500px;
+        height: 40px;
+        margin: 150px auto 0;
+        position: relative;
+    }
+    .arrow:after {
+        border-top: 15px solid #fff;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        cursor: pointer;
+    }
+    .time:before {
+        content: attr(data-content);
+        color: #fff;
+        position: absolute;
+        top: 40px;
+        left: -15px;
+    }
+    </style>
+</head>
+<body>
+<div class="timeBar" data-content="0:00"></div>
+<script src="../../../global/js/jquery-1.11.0.min.js"></script>
+<script>
+!function($){
+"use strict"
+/* TimeBar class definition */
+function TimeBar(element, options) {
+    this.ele = $(element)
+    this.getTime()
+    this.startX = 0
+    this.moveX = 0
+    this.enable = false
+    this.ele.on('mousedown', this.start)
+    this.ele.on('mousemove', this.move)
+    this.ele.on('mouseup', this.end)
+}
+
+TimeBar.prototype = {
+    constructor: TimeBar
+  , getTime: function() {
+    var date = new Date()
+      , hours = date.getHours()
+      , minutes = date.getMinutes()
+      , time = hours + ':' + minutes
+   // alert(date.valueOf())
+  }
+  , dateConverter: function() {
+  
+  }
+  , start: function(e) {
+    var pos = e.pageX
+    this.startX = pos
+    this.enable = true
+  } 
+  , end: function(e) {
+    this.enable = false
+    var pos = e.pageX
+    this.startX = pos
+  }
+  , move: function(e) {
+    var pos = e.pageX
+      , distance
+    this.moveX = pos
+    this.distance = (this.moveX - this.startX)
+    this.enable 
+    &&
+    $('head').append('<style>.arrow:after{left:'+ this.distance +'px;}</style>');
+  }
+}
+/* TimeBar plugin deinition */
+$.fn.timebar = function(option) {
+    return this.each(function(){
+        var $this = $(this)
+          , data = $this.data('timebar')
+          , options = typeof option == 'object' && option
+          if(!data) $this.data('timebar',(data = new TimeBar(this, options)))
+          if(typeof option == 'string') data[option]()
+    })
+}
+$.fn.timebar.Constructor = TimeBar
+$.fn.timebar.defaults = {
+    
+}
+/* TimeBar data-api */
+$(function() {
+    $('.timeBar').each(function(){
+        var $bar = $(this)
+        $bar.timebar($bar.data())
+    })
+    $('.timeBar').addClass('arrow')
+    $('.timeBar').addClass('time')
+})
+}(window.jQuery);
+</script>
+</body>
+</html>

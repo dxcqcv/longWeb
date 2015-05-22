@@ -1,0 +1,6 @@
+1. rems-projects-show.json 为首页所需json数据
+此json为测试数据，测试时可用本地，但在ajax请求时加入跨域需求
+
+2. obj为3D模型, FBX为导出obj的原文件
+
+初步demo能实现这2个功能就好，谢谢

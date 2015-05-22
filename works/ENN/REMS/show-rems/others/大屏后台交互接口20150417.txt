@@ -1,0 +1,164 @@
+GIS页：
+内置登录：
+http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311
+{"projectids":"1,4,5,15,16,3,9,14,23,25,6,7,12,13,8,11,24,26,10,17","login":"true"}
+
+=============================================================================================================
+首页 项目列表+gis地图：
+http://10.36.128.73:8080/reds/ds/gislist
+[{"projectid":"1","projectname":"黄花机场1#站","industryclassname":"公共建筑","industrytypename":"机场","businesstypename":"BOT","buildingarea":"154000","supplyarea":"120000","pictureptah":"upload/HHJC.jpg","address":"湖南省长沙市长沙县","longitude":113.23,"latitude":28.2,"state":"2"},{"projectid":"3","projectname":"亭湖医院泛能站","industryclassname":"公共建筑","industrytypename":"医院","businesstypename":"EPC","buildingarea":"101308.6","supplyarea":"60785.16","pictureptah":"upload/THYY.jpg","address":"江苏省盐城市亭湖区","longitude":120.210138,"latitude":33.40249,"state":"2"},{"projectid":"4","projectname":"株洲神农城1#站","industryclassname":"公共建筑","industrytypename":"综合","businesstypename":"BOT","buildingarea":"640000","supplyarea":"69000","pictureptah":"upload/shnch.jpg","address":"湖南省株洲市天元区","longitude":113.082,"latitude":27.827,"state":"2"},{"projectid":"6","projectname":"肇庆新区2#能源站","industryclassname":"公共建筑","industrytypename":"学校","businesstypename":"PM","buildingarea":"109188","supplyarea":"69166","pictureptah":"upload/ZQ2.jpg","address":"广东省肇庆市肇庆ZB14区","longitude":112.45,"latitude":23.033333,"state":"2"},{"projectid":"24","projectname":"新奥生态城能源站","industryclassname":"工业企业","industrytypename":"产业园区","businesstypename":null,"buildingarea":"0","supplyarea":"0","pictureptah":"upload/ENNSTC.jpg","address":"河北廊坊经济开发区华祥路新源东道","longitude":116.77712,"latitude":39.558454,"state":"2"}....
+
+=============================================================================================================
+点击单个项目：
+设置session中选中的项目
+http://10.36.128.73:8080/reds/ds/setProject?projectid=1
+=============================================================================================================
+详细页气象数据：
+
+在每个页面属性已经固定：室外温度(520)、室外湿度(521)、室外照度(524)，单位固定，故只需根据切换不同项目后台查询出不同环境设备的id，结合前面固定的属性id，查询出当前最新数据。
+http://10.36.128.73:8080/reds/ds/weather
+
+[{"classinstanceid":0,"classpropertyid":520,"rectime":"2015-03-18 14:21:00","datavalue":8.75,"propertytypeid":null,"datavalue1":"9"},{"classinstanceid":0,"classpropertyid":521,"rectime":"2015-03-18 14:21:00","datavalue":98.35,"propertytypeid":null,"datavalue1":"98"},{"classinstanceid":0,"classpropertyid":584,"rectime":"2015-03-18 14:21:00","datavalue":103.16,"propertytypeid":null,"datavalue1":"103"}]
+
+
+=============================================================================================================
+详细页成本收益：
+
+timeradio 时间类型  days/mons/years
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+
+http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now
+
+{"costsum":7176.41,"incomesum":39592.09,"costdatas":[{"rectime":"03-01","data":0.0},{"rectime":"03-02","data":0.0},{"rectime":"03-03","data":0.0},{"rectime":"03-04","data":0.0},{"rectime":"03-05","data":0.0},{"rectime":"03-06","data":0.0},{"rectime":"03-07","data":0.0},{"rectime":"03-08","data":0.0},{"rectime":"03-09","data":0.0},{"rectime":"03-10","data":0.0},{"rectime":"03-11","data":0.0},{"rectime":"03-12","data":0.0},{"rectime":"03-13","data":0.0},{"rectime":"03-14","data":0.0},{"rectime":"03-15","data":0.0},{"rectime":"03-16","data":0.0},{"rectime":"03-17","data":0.0},{"rectime":"03-18","data":0.0},{"rectime":"03-19","data":7176.41}],"incomedatas":[{"rectime":"03-01","data":0.0},{"rectime":"03-02","data":0.0},{"rectime":"03-03","data":0.0},{"rectime":"03-04","data":0.0},{"rectime":"03-05","data":0.0},{"rectime":"03-06","data":0.0},{"rectime":"03-07","data":0.0},{"rectime":"03-08","data":0.0},{"rectime":"03-09","data":0.0},{"rectime":"03-10","data":0.0},{"rectime":"03-11","data":0.0},{"rectime":"03-12","data":0.0},{"rectime":"03-13","data":0.0},{"rectime":"03-14","data":0.0},{"rectime":"03-15","data":0.0},{"rectime":"03-16","data":0.0},{"rectime":"03-17","data":0.0},{"rectime":"03-18","data":0.0},{"rectime":"03-19","data":39592.09}]}
+
+http://10.36.128.73:8080/reds/ds/mainfinance?projectid=3&timeradio=years
+
+=============================================================================================================
+详细页2：right
+http://10.36.128.73:8080/reds/ds/mainRight?projectid=3&timeradio=days
+project可为1或3  
+timeradio 可为hours、days、mons、years
+location 0 代表耗能 1代表供能
+data1 当日累计
+data2 当月累计
+data3 当年累计
+
+([{"name":"耗气","location":"0","classinstanceid":150,"classpropertyid":551,"datavalue":0.0,"unitname":"Nm3","maxdata":null,"mindata":null,"data1":{"name":"当天累计","classinstanceid":0,"classpropertyid":0,"datavalue":97.97,"unitname":"Nm3","datavalue1":"98"},"data2":{"name":"当月累计","classinstanceid":0,"classpropertyid":0,"datavalue":30898.31,"unitname":"Nm3","datavalue1":"30,898"},"data3":{"name":"当年累计","classinstanceid":0,"classpropertyid":0,"datavalue":125039.61,"unitname":"Nm3","datavalue1":"125,040"}},{"name":"耗水","location":"0","classinstanceid":150,"classpropertyid":552,"datavalue":0.0,"unitname":"t","maxdata":null,"mindata":null,"data1":{"name":"当天累计","classinstanceid":0,"classpropertyid":0,"datavalue":6.06,"unitname":"t","datavalue1":"6"},"data2":{"name":"当月累计","classinstanceid":0,"classpropertyid":0,"datavalue":326.49,"unitname":"t","datavalue1":"326"},"data3":{"name":"当年累计","classinstanceid":0,"classpropertyid":0,"datavalue":1023.01,"unitname":"t","datavalue1":"1,023"}},{"name":"耗电","location":"0","classinstanceid":150,"classpropertyid":471,"datavalue":0.0,"unitname":"kWh","maxdata":null,"mindata":null,"data1":{"name":"当天累计","classinstanceid":0,"classpropertyid":0,"datavalue":308.2,"unitname":"kWh","datavalue1":"308"}.....
+
+=============================================================================================================
+详细页: left
+http://10.36.128.73:8080/reds/ds/mainLeft?projectid=3&timeradio=mons
+
+project可为1或3  
+timeradio 可为hours、days、mons、years
+json上层元素为4个圆盘数据，location 代表圆盘排列顺序，下层 
+data1 代表代表指标下方的对应量1
+data2 代表代表指标下方的对应量2
+data3 代表代表指标下方的对应量3(有的指标对应3个量，有的对应两个量，所以data3可能出现为null的情况)
+
+
+([{"name":"节能率","location":"1","classinstanceid":150,"classpropertyid":479,"datavalue":2.3,"unitname":"%","maxdata":"1","mindata":"100","data1":{"name":"节能量","classinstanceid":0,"classpropertyid":0,"datavalue":0.0,"unitname":"KWH","datavalue1":"0"},"data2":{"name":"常规能耗","classinstanceid":150,"classpropertyid":9500,"datavalue":56739.0,"unitname":"Kgce","datavalue1":"56,739"},"data3":{"name":"当前能耗","classinstanceid":150,"classpropertyid":606,"datavalue":55088.1,"unitname":"Kgce","datavalue1":"55,088"}},{"name":"CO2减排率","location":"2","classinstanceid":150,"classpropertyid":480,"datavalue":5.1,"unitname":"%","maxdata":"1","mindata":"100","data1":{"name":"碳减排量","classinstanceid":0,"classpropertyid":0,"datavalue":0.0,"unitname":"kg","datavalue1":"0"},"data2":{"name":"常规CO2排放量","classinstanceid":150,"classpropertyid":9550,"datavalue":112996.8,"unitname":"kg ","datavalue1":"112,997"},"data3":{"name":"当前CO2排放量","classinstanceid":150,"classpropertyid":9502,"datavalue":105074.2,"unitname":"kg ","datavalue1":"105,074"}},{"name":"系统能效","location":"3","classinstanceid":150,"classpropertyid":474,"datavalue":493.0,"unitname":"%","maxdata":"1","mindata":"150","data1":{"name":"综合供能","classinstanceid":0,"classpropertyid":0,"datavalue":0.0,"unitname":"GJ","datavalue1":"0"},"data2":null,"data3":null},{"name":"可再生能源利用率","location":"4","classinstanceid":150,"classpropertyid":467,"datavalue":33.0,"unitname":"%","maxdata":"1","mindata":"100","data1":{"name":"综合耗能","classinstanceid":0,"classpropertyid":0,"datavalue":0.0,"unitname":"GJ","datavalue1":"0"},"data2":{"name":"可再生能源","classinstanceid":0,"classpropertyid":0,"datavalue":0.0,"unitname":"KWH","datavalue1":"0"},"data3":null}])
+
+===============================================================================================================
+弹出页 能源多项曲线：
+type  0 耗能 1 供能
+timeradio 时间类型  days/mons/years
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+
+时间尚未格式化 
+
+http://10.36.128.73:8080/reds/ds/multiEnergy?type=0&timeradio=days&date=2015-04-01
+
+null([{"div":{"name":"耗气","classinstanceid":150,"classpropertyid":551,"datavalue":0.0,"unitname":"Nm3","datavalue1":"0"},"list":[{"rectime":"2015-04-01 00:00:00","data":0.0},{"rectime":"2015-04-01 01:00:00","data":0.0},{"rectime":"2015-04-01 02:00:00","data":0.0},{"rectime":"2015-04-01 03:00:00","data":45.6},{"rectime":"2015-04-01 04:00:00","data":17.08},{"rectime":"2015-04-01 05:00:00","data":38.58},{"rectime":"2015-04-01 06:00:00","data":12.74},{"rectime":"2015-04-01 07:00:00","data":6.72},{"rectime":"2015-04-01 08:00:00","data":28.54},{"rectime":"2015-04-01 09:00:00","data":21.11},{"rectime":"2015-04-01 10:00:00","data":36.24},{"rectime":"2015-04-01 11:00:00","data":28.7},{"rectime":"2015-04-01 12:00:00","data":40.39},{"rectime":"2015-04-01 13:00:00","data":26.81},{"rectime":"2015-04-01 14:00:00","data":67.83},{"rectime":"2015-04-01 15:00:00","data":75.99},{"rectime":"2015-04-01 16:00:00","data":80.18},{"rectime":"2015-04-01 17:00:00","data":18.47},{"rectime":"2015-04-01 18:00:00","data":17.26},{"rectime":"2015-04-01 19:00:00","data":0.0},{"rectime":"2015-04-01 20:00:00","data":0.0},{"rectime":"2015-04-01 21:00:00","data":0.0},{"rectime":"2015-04-01 22:00:00","data":0.19},{"rectime":"2015-04-01 23:00:00","data":11.57}]},.....
+
+===============================================================================================================
+
+弹出页 能源单项曲线：
+
+pid  选中的能源项id
+timeradio 时间类型  days/mons/years
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+
+http://10.36.128.73:8080/reds/ds/singleEnergy?pid=473&timeradio=mons&date=now
+
+null([{"div":{"name":"供热","classinstanceid":150,"classpropertyid":473,"datavalue":0.0,"unitname":"kWh","datavalue1":"0"},"list":[{"rectime":"2015-04-01 00:00:00","data":4234.33},{"rectime":"2015-04-02 00:00:00","data":2222.27},{"rectime":"2015-04-03 00:00:00","data":3572.86},{"rectime":"2015-04-04 00:00:00","data":3555.77},{"rectime":"2015-04-05 00:00:00","data":3260.19},{"rectime":"2015-04-06 00:00:00","data":3319.58},{"rectime":"2015-04-07 00:00:00","data":3842.13},{"rectime":"2015-04-08 00:00:00","data":4347.47},{"rectime":"2015-04-09 00:00:00","data":1653.52},{"rectime":"2015-04-10 00:00:00","data":0.0},{"rectime":"2015-04-11 00:00:00","data":0.0},{"rectime":"2015-04-12 00:00:00","data":0.0},{"rectime":"2015-04-13 00:00:00","data":0.0},{"rectime":"2015-04-14 00:00:00","data":0.0},{"rectime":"2015-04-15 00:00:00","data":0.0},{"rectime":"2015-04-16 00:00:00","data":0.0}]}])
+
+弹出页 能源单项饼图：
+pid：选中的能源项id
+timeradio 可为days、mons、years
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+
+http://10.36.128.73:8080/reds/ds/energyPie?pid=471&timeradio=days&date=now 
+null([{"o":"261.98 kWh","y":261.98,"name":"冷温水循环泵1"},{"o":"0.27 kWh","y":0.27,"name":"锅炉循环水泵1"},{"o":"81.2 kWh","y":"81.2","name":"其他"}])
+
+===============================================================================================================
+弹出页  成本收益柱状图：
+
+timeradio 时间类型  days/mons/years
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+
+http://10.36.128.73:8080/reds/ds/mainfinance?projectid=3&timeradio=days&date=2015-04-15
+
+null([{"costsum":2415.2,"incomesum":1243.9,"costdatas":[{"rectime":"00H","data":22.9},{"rectime":"01H","data":22.92},{"rectime":"02H","data":22.77},{"rectime":"03H","data":202.2},{"rectime":"04H","data":68.63},{"rectime":"05H","data":99.08},{"rectime":"06H","data":50.91},{"rectime":"07H","data":99.0},{"rectime":"08H","data":63.45},{"rectime":"09H","data":126.4},{"rectime":"10H","data":130.59},{"rectime":"11H","data":142.63},{"rectime":"12H","data":128.11},{"rectime":"13H","data":116.57},{"rectime":"14H","data":66.45},{"rectime":"15H","data":311.13},{"rectime":"16H","data":311.78},{"rectime":"17H","data":210.5},{"rectime":"18H","data":102.21},{"rectime":"19H","data":23.63},{"rectime":"20H","data":24.01},{"rectime":"21H","data":23.44},{"rectime":"22H","data":22.91},{"rectime":"23H","data":22.98}],"incomedatas":[{"rectime":"00H","data":0.0},{"rectime":"01H","data":0.0},{"rectime":"02H","data":0.0},{"rectime":"03H","data":5.59},{"rectime":"04H","data":4.05},{"rectime":"05H","data":0.0},{"rectime":"06H","data":0.02},{"rectime":"07H","data":0.0},{"rectime":"08H","data":3.62},{"rectime":"09H","data":71.6},{"rectime":"10H","data":87.51},{"rectime":"11H","data":75.08},{"rectime":"12H","data":39.15},{"rectime":"13H","data":35.05},{"rectime":"14H","data":22.47},{"rectime":"15H","data":290.48},{"rectime":"16H","data":79.52},{"rectime":"17H","data":3.98},{"rectime":"18H","data":251.57},{"rectime":"19H","data":229.53},{"rectime":"20H","data":44.68},{"rectime":"21H","data":0.0},{"rectime":"22H","data":0.0},{"rectime":"23H","data":0.0}]}])
+
+弹出页 成本收益饼图：
+
+timeradio 时间类型
+date now 代表当天/当月/当年   2015-01-05 某天/某月/某年
+type 0 耗能成本 1 供能收益
+http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=mons&date=2015-01-01
+
+null([{"o":"165186.83 元","y":165186.83,"name":"耗气成本"},{"o":"165288.7 元","y":165288.7,"name":"耗电成本"},{"o":"1153.93 元","y":1153.93,"name":"耗水成本"}])
+
+===============================================================================================================
+
+3D部分
+
+设备状态
+http://localhost:8080/reds/ds/equipState
+callback参数: equipState
+
+待定 尚未完成 
+
+监测框载入
+http://10.36.128.73:8080/reds/monitorscreen/labellist?projectid=3&pageid=8301
+
+callback参数：labellist
+
+
+
+监测数据载入
+http://10.36.128.73:8080/reds/monitorscreen/labeldataAll?projectid=3&pageid=8301
+
+callback参数：labeldataAll
+
+解析方式请参照 equMonitorShow.jsp 页面相关解析方法
+
+pageid projectid name
+5300	1	黄花机场系统工艺图
+5350	1	黄花机场三联供子系统
+5352	1	黄花机场冷却塔/冷温泵子系统
+5400	1	黄花机场直燃机/锅炉子系统
+5401	1	黄花机场离心机子系统
+7303	1	黄花机场T2航站楼综合工艺图(大)
+9400	1	黄花机场T2航站楼综合工艺图(小)
+8301	3	亭湖医院泛能站综合工艺图
+8350	3	一层末端监测
+8351	3	二层末端监测
+8352	3	三层末端监测
+8353	3	四层末端监测
+8354	3	五层/六层末端监测
+8355	3	七层/八层末端监测
+8356	3	九层/十层末端监测
+8357	3	十一层末端监测
+49	4	神农城冬季监测运行
+7351	4	株洲神农城综合工艺图
+9482	4	株洲神农城供暧季工艺图
+9441	6	肇庆新区2#能源站综合工艺图
+9461	24	生态城能源站工艺图
+你的8301 对应的项目id 必须是3
+
+新pageid 0424
+黄花 100
+亭湖 101
+神农城 102

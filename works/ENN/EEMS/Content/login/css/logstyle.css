@@ -1,0 +1,228 @@
+body {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+div {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+input {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+form {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+img {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+td {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+span {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+a {
+	margin: 0px; padding: 0px; border: 0px currentColor; border-image: none; color: rgb(59, 59, 59); font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei"; font-size: 12px;
+}
+input {
+	-webkit-border-radius: 1px; -moz-border-radius: 1px;
+}
+.container {
+	margin: 0px auto; width: 960px;
+}
+#banner {
+	width: 100%; height: 90px;
+}
+#logo {
+	margin-top: 25px; float: left;
+}
+#subject {
+	margin: 45px auto auto 10px; font-size: 14px; float: left;
+}
+#main {
+	background: url("../images/mainbg.png"); height: 320px;
+}
+#btnSubmit {
+	background: url("../images/loginbtnBg.png") 0px 0px; border: 0px solid rgb(13, 132, 64); border-image: none; width: 128px; height: 29px; color: white; margin-top: 4px;
+}
+#btnSubmit:hover {
+	background: url("../images/loginbtnBg.png") 0px -38px;
+}
+#btnSubmit:active {
+	background: url("../images/loginbtnBg.png") 0px -76px;
+}
+div.hint {
+	padding: 0px 0px 8px; width: 201px; height: 12px; color: rgb(238, 139, 122);
+}
+div.loginhint {
+	padding: 0px; width: 280px; height: 30px; color: rgb(238, 139, 122); line-height: 30px; font-size: 14px;
+}
+div.barBox {
+	padding: 0px 0px 0px 54px; width: 258px; float: left;
+}
+div.splitor {
+	background: url("../images/splitor.png") no-repeat; width: 12px; height: 50px; float: left;
+}
+div.barBoxHeader {
+	font-weight: bold; margin-bottom: 10px;
+}
+div.barBoxImg {
+	width: 42px; height: 42px; float: left; display: block;
+}
+div.barBoxText {
+	width: 180px; color: rgb(80, 80, 80); line-height: 19px; font-size: 14px; margin-top: 5px; margin-left: 15px; float: left; display: block;
+}
+#txtPassword {
+	margin-top: 3px;
+}
+#footer {
+	background: white; text-align: center; color: rgb(191, 191, 191);
+}
+#footer div {
+	color: rgb(191, 191, 191);
+}
+#footer span {
+	color: rgb(191, 191, 191);
+}
+#footer div span {
+	color: rgb(191, 191, 191);
+}
+#footer div a {
+	color: rgb(191, 191, 191);
+}
+#pwdmain {
+	height: 320px; padding-left: 10px;
+}
+div.title {
+	font-size: 20px;
+}
+div.title span {
+	font-size: 20px;
+}
+#btnNext {
+	background: url("../images/button-bg.png") repeat-x 0px -81px; border: 1px solid rgb(196, 196, 196); border-image: none; width: 76px; height: 29px; text-align: center; color: rgb(51, 51, 51); line-height: 29px; margin-top: 4px;
+}
+#btnNext:hover {
+	background: url("../images/button-bg.png") repeat-x 0px -108px;
+}
+#btnNext:active {
+	background: url("../images/button-bg.png") repeat-x 0px -135px;
+}
+:disabled#btnNext {
+	background: rgb(238, 238, 238); color: rgb(155, 155, 155);
+}
+span.hightlight {
+	color: rgb(0, 157, 70);
+}
+div#PwdBox {
+	margin-top: 30px;
+}
+span.lhit {
+	margin-left: 5px;
+}
+.hidden {
+	display: none;
+}
+#login-banner {
+	background: white; height: 70px; border-bottom-color: rgb(17, 145, 70); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#login-logo {
+	line-height: 70px;
+}
+#login-logo div {
+	float: left; display: block;
+}
+#login-logo > div > img {
+	vertical-align: -16px;
+}
+#demo-login {
+	height: 70px; margin-left: 712px;
+}
+#demoLoginBtn {
+	background: url("../images/demoLoginBtn-bg.png") no-repeat 72px 30px rgb(233, 233, 233); padding: 29px 37px 27px 20px; border: 0px currentColor; border-image: none; text-align: left; color: rgb(0, 157, 66); font-size: 12px; cursor: pointer;
+}
+#demoLoginBtn:hover {
+	background-color: rgb(222, 222, 222);
+}
+#login-feature {
+	background: rgb(246, 246, 246); border-bottom-color: rgb(212, 215, 224); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#login-img-container {
+	margin: 0px auto; width: 960px; height: 450px; position: relative;
+}
+.slides-num {
+	margin: 423px 460px; width: 36px; height: 12px; position: absolute;
+}
+.slides-num div {
+	background: url("./../images/p.png") no-repeat center; width: 12px; height: 12px; margin-left: 15px;
+}
+:first-child.slides-num {
+	margin-left: 0px;
+}
+.slides-num div:hover {
+	background-image: url("./../images/pon.png");
+}
+.slides-num div.av:hover {
+	background-image: url("./../images/pon.png");
+}
+.slides-num div.hv {
+	background-image: url("./../images/pon.png");
+}
+.slides-num div.av {
+	background-image: url("./../images/psel.png");
+}
+.slides-num div.dn {
+	background-image: url("./../images/pon.png");
+}
+#loginBox {
+	background: rgb(246, 246, 246); padding: 100px 0px 0px 10px; left: 670px; top: 0px; width: 290px; height: 350px; text-align: left; position: absolute; z-index: 99;
+}
+#loginHeader {
+	color: rgb(163, 183, 171); letter-spacing: 3px; font-size: 18px; font-weight: bold;
+}
+#loginHeader2 {
+	color: rgb(110, 110, 110); letter-spacing: 2px; font-size: 28px; font-weight: bold;
+}
+#abovebar {
+	margin: 0px auto; top: 70px; width: 100%; height: 16px; position: absolute; z-index: 100;
+}
+input.text {
+	margin: 2px auto; border: 1px solid rgb(221, 221, 221); border-image: none; width: 197px; height: 27px; line-height: 27px; padding-left: 2px;
+}
+input.logintext {
+	border: 1px solid rgb(221, 221, 221); border-image: none; width: 268px; height: 36px; line-height: 36px; padding-left: 5px; font-size: 14px;
+}
+.demoTitle {
+	color: rgb(77, 77, 77); font-size: 30px; margin-top: 20px;
+}
+ul.bjqs {
+	list-style: none; margin: 0px; padding: 0px; overflow: hidden; display: none; position: relative;
+}
+li.bjqs-slide {
+	display: none; position: absolute;
+}
+ul.bjqs-controls {
+	list-style: none; margin: 0px; padding: 0px; z-index: 9999;
+}
+ul.v-centered.bjqs-controls li a {
+	position: absolute;
+}
+ul.v-centered.bjqs-controls li.bjqs-next a {
+	right: 0px;
+}
+ul.v-centered.bjqs-controls li.bjqs-prev a {
+	left: 0px;
+}
+ol.bjqs-markers {
+	list-style: none; margin: 0px; padding: 0px; width: 100%;
+}
+ol.h-centered.bjqs-markers {
+	text-align: center;
+}
+ol.bjqs-markers li {
+	display: inline;
+}
+ol.bjqs-markers li a {
+	display: inline-block;
+}
+p.bjqs-caption {
+	margin: 0px; padding: 2%; width: 96%; bottom: 0px; display: block; position: absolute;
+}

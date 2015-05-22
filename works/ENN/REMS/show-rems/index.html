@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/rems_logo.ico" sizes="16x16 24x24 32x32 48x48"/>
+    <title>大屏展示——远程系统</title>
+    <link rel="stylesheet" href="../../../../global/css/global.css" media="all">
+    <link rel="stylesheet" href="lib/jquery-ui-1.11.3/jquery-ui.css" media="all">
+    <link rel="stylesheet" href="lib/font-awesome-4.3.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="css/animations.css" media="all">
+    <link rel="stylesheet" href="css/main.css" media="all">
+
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+    <div class="layout layout1">
+        <div id="mapBox" class="map-box"></div>
+        <div id="mapLeft" class="map-sider map-left" >
+            <div class="map-left-inner">
+                <div class="rems-logo-box"><img src="img/rems_logo.ico" alt="新奥泛能能效平台"></div>
+                <h1 id="remsTitle" class="rems-title"></h1>
+                <h2 id="remsSubtitle" class="rems-subtitle"></h2>
+                <h3 id="remsSubtitleTranslate" class="rems-subtitle-translate"></h3>
+                <div class="rems-description"></div>
+            </div>
+        </div>
+        <div id="mapRight" class="map-sider map-right">
+            <div class="map-right-inner">
+                <div id="mapRightScroll" class="map-right-scroll">
+                    <div class="project-box clearfix">
+                        <div class="project-box-left left">
+                            <img src="img/defaultProjectListImg.jpg" alt="新奥">
+                        </div>
+                        <div class="project-detail-box clearfix">
+                            <div class="project-detail-col">
+                                <p>本月二氧化碳排放总量</p>
+                                <p>62,614.2kgCO₂</p>
+                            </div>
+                            <div class="project-detail-col">
+                                <p>本月成本总量</p>
+                                <p>55,721.73RMB</p>
+                            </div>
+                            <div class="project-detail-col">
+                                <p>本月用电总量</p>
+                                <p>74,229.7KWH</p>
+                            </div>
+                        </div>
+                        <div class="project-box-right left">
+                            <p class="project-name"></p>
+                            <p>项目类型：<span class="projectType"></span>所属行业：<span class="projectIndustry"></span></p>
+                            <p>功能建设：<span class="projectEnergy"></span></p>
+                            <p>项目地址：<span class="projectAddr"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout layout2">
+        <div class="cont-wrap">
+            <div id="contTopBox" class="cont-top-box">
+                <span id="gotoIndex" class="return-button">return</span>
+                <span class="project-name">name</span>
+            </div>
+            <div class="cont-bottom-box clearfix">
+                <div class="cont-bottom-left left c-f">
+                    <div class="cont-meter-box">
+                        <div id="circle-2" class="cont-meter-chart">
+                          <p class="cont-meter-title">节能率</p>
+                          <h2 class="circle-percentage"></h2>
+                          <svg class="chart-circle chart-circle-energy" id="chart-4" width="50%" viewBox="0 0 100 100">
+                            <path class="underlay" d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"/>
+                          </svg>
+                        </div>
+                        <p class="cont-meter-detail bg-g">节能量<span class="cont-meter-detail-num">20500.0</span>kWh</p>
+                        <div class="cont-meter-history clearfix ">
+                            <div class="cont-meter-history-left left bg-g">常规能耗123456吨标煤</div>
+                            <div class="cont-meter-history-right left bg-g">当前能耗25406吨标煤</div>
+                        </div>
+                    </div>
+                    <div class="cont-meter-box">
+                        <div id="circle-3" class="cont-meter-chart">
+                          <p class="cont-meter-title">节能率</p>
+                          <h2 class="circle-percentage"></h2>
+                          <svg class="chart-circle chart-circle-energy" id="chart-5" width="50%" viewBox="0 0 100 100">
+                            <path class="underlay" d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"/>
+                          </svg>
+                        </div>
+                        <p class="cont-meter-detail bg-g">节能量<span class="cont-meter-detail-num">20500.0</span>kWh</p>
+                        <div class="cont-meter-history clearfix ">
+                            <div class="cont-meter-history-left left bg-g">常规能耗123456吨标煤</div>
+                            <div class="cont-meter-history-right left bg-g">当前能耗25406吨标煤</div>
+                        </div>
+                    </div>
+                    <div class="cont-meter-box">
+                        <div id="circle-4" class="cont-meter-chart">
+                          <p class="cont-meter-title">节能率</p>
+                          <h2 class="circle-percentage"></h2>
+                          <svg class="chart-circle chart-circle-energy" id="chart-6" width="50%" viewBox="0 0 100 100">
+                            <path class="underlay" d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"/>
+                          </svg>
+                        </div>
+                        <p class="cont-meter-detail bg-g">节能量<span class="cont-meter-detail-num">20500.0</span>kWh</p>
+                        <div class="cont-meter-history clearfix ">
+                            <div class="cont-meter-history-left left bg-g">常规能耗123456吨标煤</div>
+                            <div class="cont-meter-history-right left bg-g">当前能耗25406吨标煤</div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="cont-bottom-center left">
+                    <span id="3dBtn" data-type="3" class="threed-btn cont-btn btn-active">3D图</span>
+                    <span id="processChartBtn" data-type="2" class="process-btn cont-btn">工艺图</span>
+                    <div id="cont3DBox" class="cont-3d-box contBox">
+                       <canvas id="canvas3D" width="600px" height="400px"></canvas>
+                    </div>
+                    <div id="processBox" class="cont-construct-box contBox hide">
+                        <div class="cont-construct-box-inner">
+                            <span id="labelValue"></span>    
+                            <span id="labelList"></span>    
+                            <img id="graphList" src="" />    
+                        </div>
+                    </div>
+                    <i data-dir="left" class="cont-projects-arrow arrow-left"></i>
+                    <div id="contProWrap" class="cont-projects-wrap active">
+                    <div class="cont-projects-wrap-inner">
+                        <i class="cont-projects-arrow arrow-bottom arrShow"></i>
+                        <div class="cont-projects-box clearfix">
+                            <ul id="projectsList" class="projects-list">
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海1</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海2</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海3</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海4</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海5</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海6</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海7</p>
+                                </li>
+                                <li class="cont-project ">
+                                    <p class="cont-project-name">ENN上海8</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <i data-dir="right" class="cont-projects-arrow arrow-right"></i>
+                </div>
+                <div class="cont-bottom-right left">
+                <div id="hcContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loading" class="loadingBox hide">Loading...</div>
+
+<div class="test hide">
+    <div class="">
+        <i class="fa fa-camera-retro"></i> fa-camera-retroL<br>
+        <i class="fa fa-map-marker"></i> fa-camera-retroL<br>
+        <input type="text" name="date" id="date">
+        <br>
+        <div id="btn1" />Volume</div>
+    <div id="btn2" />Volume</div>
+    <div id="btn3" />Volume</div>
+    <div id="btn4" />Fighter</div>
+    </div>
+<div id="chart" class="testChart"></div>
+</div>
+
+<!--ibs map-->
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=6e3a0f19a1e718c8e43263005c1b2f73"></script>
+<script src="js/d3.min.js"></script>
+<!--jquery-->
+<script src="../../../../global/js/jquery-1.11.0.min.js"></script>
+<script src="lib/jquery-ui-1.11.3/jquery-ui.min.js"></script>
+
+<!--
+<script src="js/three.min.js"></script>
+-->
+<script src="js/three.js"></script>
+<script src="js/OBJLoader.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<script src="js/highcharts-custom.js"></script>
+<script src='js/snap.svg-min.js'></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
