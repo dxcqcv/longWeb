@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Water pipeline</title>
+    <style>
+        .tank {
+  border: #ddd solid 1px;
+  width: 100%;
+  height: 250px;
+  position : relative;
+}
+
+.bg {
+  background: url(pipes.png) left top no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index : 100;
+}
+
+.tube {
+  background-color: red;
+  position: absolute;
+}
+  .tube.x {
+    height: 15px;
+  }
+  .tube.y {
+    width: 15px;
+  }
+
+.water {
+/*
+  background-color: #ef4988;
+  */
+  background-color: #ef4988;
+  position : absolute;
+} 
+  .water.left {
+    left: 0;
+  }
+  .water.right {
+    right: 0;
+  }
+  .water.top {
+    top: 0;
+  }
+  .water.bottom {
+    bottom: 0;
+  }
+  .x .water {
+    height: 100%;
+  }
+  .y .water {
+    width: 100%;
+  }
+    </style>
+</head>
+<body>
+     <p><a href="#" class="start">Start the water!</a><a href="#" class="reset">Reset</a></p>
+	<div class="tank">
+		<div class="tube x" style="width: 200px; top: 20px; left: 120px; z-index: 6;"><div class="water left"></div></div>
+		<div class="tube y" style="height: 100px; top: 20px; left: 220px; z-index: 5;"><div class="water top"></div></div>
+    <div class="tube x" style="width: 100px; top: 110px; left: 135px; z-index: 4;"><div class="water right"></div></div>
+    <div class="tube y" style="height: 50px; top: 75px; left: 135px; z-index: 3;"><div class="water bottom"></div></div>
+    <div class="tube x" style="width: 50px; top: 75px; left: 100px; z-index: 2;"><div class="water right"></div></div>
+    <div class="tube y" style="height: 150px; top: 75px; left: 100px; z-index: 1;"><div class="water top"></div></div>
+    <div class="bg">
+	</div> 
+    <script src="../../global/js/jquery-1.11.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+  $('.reset').hide();
+  var water = $('.tube .water');
+  $('.start').click(function(){
+  console.log(water);
+    $('.start').hide();
+
+    $(water[0]).animate({
+    width: "100%"
+    }, 420, 'linear', function(){
+      $(water[1]).animate({
+        height: "100%"
+      }, 190, 'linear', function(){
+        $(water[2]).animate({
+          width: "100%"
+        }, 190, 'linear', function(){
+          $(water[3]).animate({
+            height: "100%"
+          }, 80, 'linear', function(){
+            $(water[4]).animate({
+              width: "100%"
+            }, 80, 'linear', function(){
+              $(water[5]).animate({
+                height: "100%"
+              }, 370, 'linear', function(){
+                $('.reset').show();
+              });
+            });
+          });
+        });
+      });
+    });
+  }); 
+  $('.reset').click(function(){
+    $(this).hide();
+    $('.tube.x .water').css('width', '0%');
+    $('.tube.y .water').css('height', '0%');
+    $('.start').show();
+  });
+});
+    </script>
+</body>
+</html>
