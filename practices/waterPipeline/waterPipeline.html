@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Water pipeline</title>
     <style>
+    div#block1,
+    div#block2 {
+background:#aaa;
+width:18px;
+height:18px;
+position:absolute;
+top:800px;
+}
+div#block2 { background: #39c; top: 900px;}
         .tank {
   border: #ddd solid 1px;
   width: 100%;
@@ -57,6 +66,8 @@
     </style>
 </head>
 <body>
+<div id="block1"></div>
+<div id="block2"></div>
 	<div class="tank">
 		<div class="tube x" style="width: 200px; top: 20px; left: 20px; z-index: 6;"><div class="water left"></div></div>
 		<div class="tube y" style="height: 100px; top: 20px; left: 220px; z-index: 5;"><div class="water top"></div></div>
@@ -67,6 +78,7 @@
         <div class="bg"></div> 
     </div>
      <p><a href="#" class="start">Start the water!</a><a href="#" class="reset">Reset</a></p>
+     <div class="queue"></div>
     <script src="../../global/js/jquery-1.11.0.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -76,8 +88,41 @@
 
   $('.start').click(function(){
     waterStart();        
-    loopWaterId = setInterval(waterStart, 1900)
+    //loopWaterId = setInterval(waterStart, 1900)
   });
+
+/*
+var FUNC=[
+function() {$('#block1').animate({left:'+=100'},aniCB);},
+function() {$('#block2').animate({left:'+=100'},aniCB);},
+function() {$('#block1').animate({left:'+=100'},aniCB);},
+function() {$('#block2').animate({left:'+=100'},aniCB);},
+function() {$('#block1').animate({left:'+=100'},aniCB);},
+];
+var aniCB=function() {
+$(document).dequeue('myAnimation');
+}
+$(document).queue('myAnimation',FUNC);
+aniCB();
+*/
+var watero = [
+    function() { $(water[0]).animate({width: '100%'}, 420, 'linear', aniCB); },
+    function() { $(water[1]).animate({height: '100%'}, 210, 'linear', aniCB); },
+    function() { 
+        $('.tube.x .water').css('width', '0%');
+        $('.tube.y .water').css('height', '0%');
+    }
+];
+var aniCB=function() {
+$(document).dequeue('myAnimation');
+}
+$(document).queue('myAnimation',watero);
+aniCB();
+    loopWaterId = setInterval(function(){
+        $(document).queue('myAnimation',watero);
+        aniCB();
+    }, 1900)
+
 
   function waterStart(){
     $('.start').hide();
@@ -101,8 +146,6 @@
                 height: "100%"
               }, 315,'linear', function(){
                 $('.reset').show();
-                $('.tube.x .water').animate({'width': '0%'},'linear');
-                $('.tube.y .water').animate({'height': '0%'},'linear');
               });
             });
           });
