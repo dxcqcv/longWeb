@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>practices echart</title>
+    <style>
+        * {margin:0; padding: 0;}
+        #main {width: 600px; height:600px; background: #39c;}
+    </style>
+</head>
+<body>
+    
+    <div id="main"></div>
+    <button id="change">change</button>
+
+    <script src="echarts-all.js"></script>
+    <script src="../../global/js/jquery-1.11.0.min.js"></script>
+    <script>
+        ;(function(){
+            var myChart = echarts.init(document.getElementById('main'), 'macarons');
+
+var labelTop = {
+    normal : {
+        label : {
+            show : true,
+            position : 'center',
+            formatter : '{b}',
+            textStyle: {
+                baseline : 'bottom'
+            }
+        },
+        labelLine : {
+            show : false
+        }
+    }
+};
+var labelFromatter = {
+    normal : {
+        label : {
+            formatter : function (params){
+                return 100 - params.value + '%'
+            },
+            textStyle: {
+                baseline : 'top'
+            }
+        }
+    },
+}
+var labelFromatter2 = {
+    normal : {
+        label : {
+            formatter : function (params){
+            if(params > 100) return 100 
+            },
+            textStyle: {
+                baseline : 'top'
+            }
+        }
+    },
+}
+var labelBottom = {
+    normal : {
+        color: '#ccc',
+        label : {
+            show : true,
+            position : 'center'
+        },
+        labelLine : {
+            show : false
+        }
+    },
+    emphasis: {
+        color: 'rgba(0,0,0,0)'
+    }
+};
+var radius = [40, 55];
+option = {
+    legend: {
+        x : 'center',
+        y : 'center',
+        data:[
+            'GoogleMaps','Facebook','Youtube','Google+','Weixin',
+            'Twitter', 'Skype', 'Messenger', 'Whatsapp', 'Instagram'
+        ]
+    },
+    title : {
+        text: 'The App World',
+        subtext: 'from global web index',
+        x: 'center'
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        width: '20%',
+                        height: '30%',
+                        itemStyle : {
+                            normal : {
+                                label : {
+                                    formatter : function (params){
+                                        return 'other\n' + params.value + '%\n'
+                                    },
+                                    textStyle: {
+                                        baseline : 'middle'
+                                    }
+                                }
+                            },
+                        } 
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            type : 'pie',
+            center : ['90%', '70%'],
+            radius : radius,
+            y: '55%',   // for funnel
+            x:'80%', // for funnel
+            itemStyle : labelFromatter,
+            itemStyle2 : labelFromatter2,
+            data : [
+                {name:'other', value:189, itemStyle2 : labelBottom},
+                {name:'Instagram', value:111,itemStyle : labelTop}
+            ]
+        }
+    ]
+};
+
+var _percent = 189;
+var chartOPT = option;
+chartOPT.color = ['#39c'];
+chartOPT.series[0].data[0].value = (function(){
+    return (100 - _percent);
+})();
+chartOPT.series[0].data[1].value = (function(){
+    return  _percent;
+})();
+
+            myChart.setOption(chartOPT);
+        }());
+    </script>
+</body>
+</html>
