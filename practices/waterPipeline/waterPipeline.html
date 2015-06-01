@@ -41,6 +41,12 @@ div#block2 { background: #39c; top: 900px;}
     width: 15px;
   }
 
+div.tubeColor {
+  background-color: #efefef;
+}
+div.waterColor {
+  background-color: #ef4988;
+}
 .water {
   background-color: #ef4988;
   position : absolute;
@@ -91,35 +97,30 @@ div#block2 { background: #39c; top: 900px;}
     //loopWaterId = setInterval(waterStart, 1900)
   });
 
-/*
-var FUNC=[
-function() {$('#block1').animate({left:'+=100'},aniCB);},
-function() {$('#block2').animate({left:'+=100'},aniCB);},
-function() {$('#block1').animate({left:'+=100'},aniCB);},
-function() {$('#block2').animate({left:'+=100'},aniCB);},
-function() {$('#block1').animate({left:'+=100'},aniCB);},
-];
-var aniCB=function() {
-$(document).dequeue('myAnimation');
-}
-$(document).queue('myAnimation',FUNC);
-aniCB();
-*/
 var watero = [
-    function() { $(water[0]).animate({width: '100%'}, 420, 'linear', aniCB); },
-    function() { $(water[1]).animate({height: '100%'}, 210, 'linear', aniCB); },
-    function() { 
-        $('.tube.x .water').css('width', '0%');
-        $('.tube.y .water').css('height', '0%');
-    }
+    function() { $(water[0]).removeClass('right').addClass('left').animate({'width': '100%'}, 420, 'linear', aniCB); },
+    function() { $(water[1]).removeClass('bottom').addClass('top').animate({'height': '100%'}, 210, 'linear', aniCB); },
+    function() { $(water[0]).removeClass('left').addClass('right').animate({'width': '0%'}, 420, 'linear', aniCB); },
+    function() { $(water[1]).removeClass('top').addClass('bottom').animate({'height': '0%'}, 210, 'linear'); },
 ];
+
+var waterf = [
+    function(){waterFn(water[0],'right', 'left', {'width': '100%'}, 420, 'linear', aniCB);},
+function(){    waterFn(water[1],'bottom', 'top', {'height': '100%'}, 210, 'linear', aniCB);},
+function(){    waterFn(water[0],'left', 'right', {'width': '0%'}, 420, 'linear', aniCB);},
+function(){    waterFn(water[1],'top', 'bottom',{'height': '0%'}, 210, 'linear');}
+];
+
+function waterFn(ele,rc,ac,styles, duration, easing, callback) {
+    $(ele).removeClass(rc).addClass(ac).animate(styles, duration, easing, callback);
+}
 var aniCB=function() {
 $(document).dequeue('myAnimation');
 }
-$(document).queue('myAnimation',watero);
+$(document).queue('myAnimation',waterf);
 aniCB();
     loopWaterId = setInterval(function(){
-        $(document).queue('myAnimation',watero);
+        $(document).queue('myAnimation',waterf);
         aniCB();
     }, 1900)
 
