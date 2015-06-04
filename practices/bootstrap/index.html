@@ -4,12 +4,33 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.css" media="all">
+	<link href="../../../xinaoweb.github.io/js/lib/datepicker/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css">
     <style>
         .red {background: red;}
         .geen {background: green;}
     </style>
 </head>
 <body>
+    <input id="one" type="">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input id="two" type="">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input id="three" type="">
+    <br>
+    
     <div class="container">
         <div class="rows red">111
         </div>
@@ -18,5 +39,41 @@
 
     <script src="js/jquery.js"></script>
     <script src="bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+    <script src="../../../xinaoweb.github.io/js/lib/datepicker/bootstrap-datepicker.min.js"></script>
+    <script>
+        (function(){
+			$('#one').datepicker({
+				autoclose:true,
+				startView:2,
+				minViewMode:2,
+				format:'yyyy',
+                endDate: '+0y',
+				language:"zh-CN"
+			}).on('changeDate',function(ev) {
+                console.log(ev.date.getFullYear())
+var y = ev.date.getFullYear();
+                //$('#two').datepicker('setDate', new Date(y,2,5))
+                $('#two').datepicker('setDate', ev.date)
+            });
+			$('#two').datepicker({
+				autoclose:true,
+				startView:1,
+				minViewMode:1,
+				format:'mm',
+                endDate: '+0m',
+				language:"zh-CN"
+			}).on('changeDate',function(ev) {
+            });
+			$('#three').datepicker({
+				autoclose:true,
+				startView:0,
+				minViewMode:0,
+				format:'dd',
+                endDate: '+0d',
+				language:"zh-CN"
+			}).on('changeDate',function(ev) {
+            });
+        }()) 
+    </script>
 </body>
 </html>
