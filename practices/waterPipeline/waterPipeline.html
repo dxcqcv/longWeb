@@ -105,15 +105,24 @@ var watero = [
 ];
 
 var waterf = [
-    function(){waterFn(water[0],'right', 'left', {'width': '100%'}, 420, 'linear', aniCB);},
+    function(){waterFn(water[0],'right', 'left', {'width': '100%'}, 420, 'linear', aniCB);}, // 从左到右
 function(){    waterFn(water[1],'bottom', 'top', {'height': '100%'}, 210, 'linear', aniCB);},
+function(){    waterFn(water[2],'left', 'right', {'width': '100%'}, 210, 'linear', aniCB);},
+function(){    waterFn(water[3],'top', 'bottom', {'height': '100%'}, 105, 'linear', aniCB);},
+function(){    waterFn(water[4],'left', 'right', {'width': '100%'}, 105, 'linear', aniCB);},
+function(){    waterFn(water[5],'bottom', 'top', {'height': '100%'}, 315, 'linear', aniCB);},
 function(){    waterFn(water[0],'left', 'right', {'width': '0%'}, 420, 'linear', aniCB);},
-function(){    waterFn(water[1],'top', 'bottom',{'height': '0%'}, 210, 'linear');}
+function(){    waterFn(water[1],'top', 'bottom',{'height': '0%'}, 210, 'linear', aniCB);},
+function(){    waterFn(water[2],'right', 'left', {'width': '0%'}, 210, 'linear', aniCB);},
+function(){    waterFn(water[3],'bottom', 'top', {'height': '0%'}, 105, 'linear', aniCB);},
+function(){    waterFn(water[4],'right', 'left', {'width': '0%'}, 105, 'linear', aniCB);},
+function(){    waterFn(water[5],'top', 'bottom', {'height': '0%'}, 315, 'linear');}
 ];
 
 function waterFn(ele,rc,ac,styles, duration, easing, callback) {
     $(ele).removeClass(rc).addClass(ac).animate(styles, duration, easing, callback);
 }
+
 var aniCB=function() {
 $(document).dequeue('myAnimation');
 }
@@ -122,11 +131,11 @@ aniCB();
     loopWaterId = setInterval(function(){
         $(document).queue('myAnimation',waterf);
         aniCB();
-    }, 1900)
+    }, 2900)
 
 
-  function waterStart(){
     $('.start').hide();
+  function waterStart(){
 
     $(water[0]).animate({
     width: "100%"
