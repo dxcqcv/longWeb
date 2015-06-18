@@ -419,13 +419,6 @@ var cur = (index == _pid) ? 'class="selector cur swiper-slide"' : 'class="select
 		$(".xa-bottom-layout").toggleClass("show")
 	});
 
-	/*require([
-		"css!../lib/datepicker/bootstrap-datepicker.standalone.min",
-		"css!../lib/datepicker/bootstrap-datepicker3.standalone.min",
-		"../lib/datepicker/bootstrap-datepicker.min"
-	],function() {
-		require([
-		"../lib/datepicker/bootstrap-datepicker.zh-CN.min"],function(e) {*/
     var globalYears, globalMons, globalDays 
 
     var dateYear = $('.dateinput-year')
@@ -767,21 +760,21 @@ dateAllShow(); // show all datepicker
 		}
 		showModal('ten',show_10_callback);
 	}).on('click', '#pie1',function(){ //节能率弹出层
-    function pie11(){}
-		showModal('eleven',pie11);
+    function pie1(){}
+		showModal('eleven',pie1);
 
     }).on('click', '#pie2',function(){ //co2减排率弹出层
 
-    function pie11(){}
-		showModal('twelve',pie11);
+    function pie2(){}
+		showModal('twelve',pie2);
     }).on('click', '#pie3',function(){ //系统能效弹出层
 
-    function pie11(){}
-		showModal('thirteen',pie11);
+    function pie3(){}
+		showModal('thirteen',pie3);
     }).on('click', '#pie4',function(){ // 可再生能源利用率弹出层
 
-    function pie11(){}
-		showModal('fourteen',pie11);
+    function pie4(){}
+		showModal('fourteen',pie4);
     });
     
 	
@@ -2815,6 +2808,47 @@ function filterUnit(dig) {// 过滤万分位
         return dig;
     }
 
+}
+demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+
+var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
+  , huanghuaDianlengji18 = $('#huanghuaDianlengji18') //2#离心电冷机
+function huanghuaEquipStatFn(data) {
+   $.each(data, function(index, value){
+        if(value.classinstanceid === 17 && value.datavalue1 === '0') {
+            huanghuaDianlengji17.addClass('gray-filter');
+        } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
+            huanghuaDianlengji17.removeClass('gray-filter');
+            setTimeout(function(){releaseAnimate('lixindianlengjiIn')},1000);
+        } else if(value.classinstanceid === 18 && value.datavalue1 === '0') {
+            huanghuaDianlengji18.addClass('gray-filter');
+            console.log(9999999)
+        } else if(value.classinstanceid === 18 && value.datavalue1 === '1') {
+            huanghuaDianlengji18.removeClass('gray-filter');
+            console.log(1121212)
+        }
+   });
+}
+var lixindianlengjiIn01 = [
+    function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
+    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}
+];
+$doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
+/*释放队列下一个*/
+function releaseAnimate(name) {
+    $doc.dequeue(name);
+}
+/* 动画公用函数
+ele对象 obj
+rc removeClass string
+ac addClass string
+styles 属性 obj
+duration 持续时间 number
+easing 方式 string
+callback 回调 function
+*/
+function animateFn(ele,styles,duration,easing,callback) {
+    $(ele).animate(styles,duration,easing, callback);
 }
 /**************end*************/
 };
