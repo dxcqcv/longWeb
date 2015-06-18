@@ -1,0 +1,778 @@
+@charset "utf-8";
+/* CSS 格式书写开发人员约束规范 ****************************************************************** 
+
+1.所有CSS属性，除了空属性可以单行之外，即使只有一个属性，也必须换行,但是后期发布版本压缩什么的请随意压缩。
+
+
+2.所有缩进都用 TAB， 而不是空格。
+
+
+3.绑定到HTML元素的CSS属性，除非经过深思熟虑，排除后期污染到其它HTML标签属性，不然一律通过CLASS或者ID来写CSS 
+	例如：  
+		a {xxxx},  
+		div{xxxx}, 
+		li {xxxx}, 
+		span {xxxx} 这种全局通用HTML标签样式是禁止书写。
+
+
+4.禁止样式过多嵌套，尽量不要超过3层
+	例如：
+		.a {xxx}
+		.a .b {xxx}
+		.a .b .c {xxxx}
+
+
+5.不要滥用缩写去耍帅or偷懒,省了几个字节会造成后面维护人员很大麻烦
+	例如:font:12px/20px "simsun"
+
+
+********************************************************************************************  */
+.index-container
+{
+	position: relative;
+	height: 100%;
+}
+.map-content
+{
+	margin: 0px;
+	height: 100%;
+}
+.index-top
+{	
+	background: center top no-repeat;
+	font-size: 84px;
+	line-height: 250px;
+	font-weight: bold;
+	color: #328dde;
+	text-indent: 380px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 10;
+	margin: auto;
+	width: 1630px;
+	height: 288px;
+	background-image: url(../images/index-top-bg.png);
+}
+.xa-logo-rightop
+{
+	z-index: 1;
+	position: absolute;
+	left: 208px;
+	top: 50px;
+}
+.index-slider
+{
+	position: absolute;
+	left: 208px;
+	top: 286px;
+	width: 1078px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 60px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 20px;
+	box-shadow: 0 16px 64px 0 rgba(0, 0, 0, 0.33);
+}
+.index-slider .swiper-slide:nth-child(3n-1)
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border:4px #dddddd;
+	/*border-style: dashed none;*/
+}
+.index-slider .swiper-slide .sw-tcion
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 160px;
+}
+.index-slider .swiper-slide
+{
+/*
+	height: 33.33%;
+	padding: 0 120px;
+    */
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 20px;
+}
+.index-slider .swiper-wrapper
+{
+	height: 100%;
+}
+.index-slider .swiper-container
+{
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-bottom: 176px;
+}
+.index-slider .ils-pages .swiper-pagination-bullet
+{
+	background-color: #484848;
+	opacity: 1;
+	width: 40px;
+	height: 40px;
+	margin: 0 10px;
+}
+.index-slider .ils-pages .swiper-pagination-bullet-active:before
+{
+	display: block;
+	width: 50%;
+	height: 50%;
+	background-color: #fff;
+	content: '';
+	border-radius: 50px;
+	left: 50%;
+	top: 50%;
+	margin: -10px 0 0 -10px;
+	position: absolute;
+}
+.index-slider .ils-pages .swiper-pagination-bullet-active
+{
+	position: relative;
+	background-color: #484848;
+}
+.index-slider .ils-pages
+{
+	position: absolute;
+	left: 0;
+	height: 40px;
+	bottom: 120px;
+	width: 100%;
+}
+.index-slider .swiper-slide p.txa-c
+{
+	font-size: 50px;
+	line-height: 76px;
+	color: #484848;
+    text-align: left;
+    text-indent: 2em;
+}
+.dashed_line{ border-bottom:1px dashed #b3bbc2; padding-bottom:20px; margin-bottom:40px;}
+.index-slider .sw-title.has-img-icon
+{
+	position: relative;
+	padding-left: 230px;
+}
+.index-slider .sw-title
+{
+	display: inline-block;
+	height: 164px;
+	line-height: 164px;
+    /*
+	font-size: 74px;
+*/
+	font-size: 68px;
+	color: #328dde;
+	
+}
+.index-slider-right
+{
+	position: absolute;
+	right: 185px;
+	top: 286px;
+	width: 1670px;
+}
+.index-slider-right .swiper-container
+{
+	height: 100%;
+}
+.index-slider-right .swiper-slide
+{
+	position: relative;
+	color: #328dde;
+	display: block;
+}
+.index-slider-right .swiper-slide.mapview-active
+{
+	color: #22b473;
+}
+.index-slider-right .mapview-cycle
+{
+	border-radius: 500px;
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #fff;
+	border: solid 14px currentColor;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.mapview-active .mapview-cycle
+{
+	border-color: #fff;
+	box-shadow: 3px 3px 32px 0 rgba(0, 0, 0, 0.5);
+}
+.index-slider-right .mapview-cycle img
+{
+/*	display: none;*/
+	vertical-align: top;
+	width: 100%;
+	height: 100%;
+}
+.mapview-active .mapview-cycle > img {display: none;}
+.mpv-cycle-detail 
+{
+	display: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding: 94px 84px;
+	overflow: auto;
+	background-color: currentColor;
+}
+.mpv-cycle-detail > * 
+{
+	color: #fff;
+}
+.mpv-cycle-detail p
+{
+	font-size: 34px;
+	line-height: 55px;
+	border-radius: 8px;
+	background-color: #fff;
+	color: #22b473;
+	padding: 0 10px;
+	margin-bottom: 10px;
+}
+.mpv-cycle-detail h3
+{
+	font-size: 36px;
+	line-height: 60px;
+}
+
+.mapview-active .mpv-cycle-detail  
+{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.index-slider-right .mapview-cycle-tips .icon-si
+{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+.index-slider-right .mapview-cycle-tips .text-date 
+{
+	background-color: #fff;
+	width: 100%;
+	height: 100%;
+	border-radius: 80px;
+	display: none;
+	color: currentColor;
+}
+.mapview-active .mapview-cycle-tips .icon-si {display: none;}
+.mapview-active .mapview-cycle-tips .text-date {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.mapview-active .mapview-cycle-tips .text-date p 
+{
+	font-size: 21px;
+	line-height: 18px;
+}
+.mapview-active .mapview-cycle-tips .text-date h2
+{
+	font-size: 34px;
+	line-height: 36px;
+}
+.index-slider-right .mapview-cycle-tips
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: -55px;
+	margin: auto;
+	width: 110px;
+	height: 110px;
+	border-radius: 60px;
+	background-color: currentColor;
+}
+.index-slider-right .mapview-cycle-wrap
+{
+	position: absolute;
+	width: 500px;
+	height: 500px;
+	top: 0;
+	left: auto;
+	right: 390px;
+	bottom: 0;
+	margin: auto;
+}
+.mapview-active .mapview-cycle-wrap
+{
+	width: 610px;
+	height: 610px;
+}
+.index-slider-right .mapview-line-hov .mv-local
+{
+	position: absolute;
+	left: 86px;
+	height: 94px;
+	line-height: 94px;
+	top: -94px;
+	font-size: 42px;
+	color: currentColor;
+	width: 625px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: keep-all;
+	
+}
+.index-slider-right .mapview-line-hov .mv-localname
+{
+	position: absolute;
+	left: -32px;
+	height: 160px;
+	line-height: 160px;
+	bottom: -160px;
+	font-size: 82px;
+	font-weight: bold;
+	color: currentColor;
+	width: 720px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: keep-all;
+}
+.index-slider-right .mapview-line-hov
+{
+	position: absolute;
+	height: 4px;
+	width: 60%;
+	background-color: currentColor;
+	top: 0;
+	left: 80px;
+	right: auto;
+	bottom: 0;
+	margin: auto;
+}
+.index-slider-right .mapview-line-cycle .icon-loaction
+{
+	height: 193px;
+	width: 130px;
+	position: absolute;
+	left: 50%;
+	margin-left: -65px;
+	bottom: 20px;
+	background: center bottom no-repeat;
+}
+
+.index-slider-right .mapview-line-cycle .icon-loaction
+{
+	background-image: url(../images/icon-location-1.png);
+}
+.mapview-active .mapview-line-cycle .icon-loaction
+{
+	background-image: url(../images/icon-location-2.png);
+}
+
+.index-slider-right .mapview-line-cycle
+{
+	width: 18px;
+	height: 18px;
+	background-color: currentColor;
+	border-radius: 10px;
+	position: absolute;
+	left: -9px;
+	top: -7px;
+}
+.index-slider-right .mapview-right-text-wrap
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 10px;
+	left: auto;
+	margin: auto;
+	width: 330px;
+	height: 90px;
+	overflow: visible;
+	text-align: center;
+}
+.index-slider-right .inner-text em {
+	color: #fff;
+	text-shadow: 6px 6px 32px rgba(0, 0, 0, 0.5);
+}
+.index-slider-right .inner-text
+{
+	display: inline-block;
+	position: relative;
+	line-height: 90px;
+	font-size: 48px;
+	font-weight: bold;
+}
+.index-slider-right .inner-text .it-line-hov:before
+{
+	display: block;
+	content: '';
+	width: 18px;
+	height: 18px;
+	background-color: currentColor;
+	border-radius: 10px;
+	position: absolute;
+	right: -9px;
+	top: -7px;
+}
+.index-slider-right .inner-text .it-line-hov
+{
+	position: absolute;
+	height: 4px;
+	background-color: currentColor;
+	width: 200px;
+	top: 0;
+	left: -220px;
+	right: auto;
+	bottom: 0;
+	margin: auto;
+}
+
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot:after, 
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top:after
+{
+	display: block;
+	content: '';
+	width: 18px;
+	height: 18px;
+	background-color: currentColor;
+	border-radius: 10px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot:after
+{
+	top: -45px;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top:after
+{
+	top: auto;
+	bottom: -45px;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot:before, 
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top:before
+{
+	position: absolute;
+	content: '';
+	display: block;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 4px;
+	height: 36px;
+	background-color:currentColor;
+}
+
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot:before
+{
+	top: -36px;
+	bottom: auto;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top:before
+{
+	bottom: -36px;
+	top: auto;
+}
+
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot, 
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top
+{
+	position: absolute;
+	width: 208px;
+	height: 208px;
+	background-color: #fff;
+	border-radius: 110px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	color:currentColor;
+	margin: auto;
+	box-shadow: 3px 3px 32px 0 rgba(0, 0, 0, 0.14);
+}
+
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot p, 
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top p
+{
+	float: 48px;
+	font-size: 32px;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot h2, 
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top h2
+{
+/*
+	line-height: 58px;
+    */
+	line-height: 70px;
+	font-size: 40px;
+}
+
+#slider_prew,
+#slider_next
+{
+	width: 79px;
+	height: 46px;
+	cursor: pointer;
+	left: 0;
+	right: 0;
+	margin: auto;
+	position: absolute;
+}
+#slider_prew {background-image: url(../images/arrow-up.png); top: -56px;}
+#slider_next {background-image: url(../images/arrow-down.png);bottom: -56px;}
+
+.index-slider-right .mapview-right-text-wrap .inner-cycle-top 
+{
+	top: -250px;
+	left: 0;
+	right: 0;
+	bottom: auto;
+}
+.index-slider-right .mapview-right-text-wrap .inner-cycle-bot 
+{
+	top: auto;
+	left: 0;
+	right: 0;
+	bottom: -250px;
+}
+
+
+.left-cover-layout
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 1600px;
+	background-image : -webkit-linear-gradient(left, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -moz-linear-gradient(left, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -o-linear-gradient(left, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -ms-linear-gradient(left, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%); 
+	background-image : -linear-gradient(left, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+}
+.right-cover-layout
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 1600px;
+	background-image : -webkit-linear-gradient(right, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -moz-linear-gradient(right, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -o-linear-gradient(right, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);
+	background-image : -ms-linear-gradient(right, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%); 
+	background-image : -linear-gradient(right, rgb(156, 194, 255) 00%, rgba(156, 194, 255, 0) 100%);	
+}
+/* by Roy */
+.wrapper, .layout,
+.map-box { width:100%; height: 100%;}
+.wrapper {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.layout {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.pt-page-current,
+.no-js .pt-page {
+	visibility: visible;
+	z-index: 1;
+    height:100%;
+}
+
+/* 工艺图样式 */
+.hide { display: none; }
+.xa-con-cent-main {
+    position: relative;
+    width: 100%;
+}
+.huanghua-artwork {
+    width: 2881px; height: 1343px;
+}
+.huanghua-a { width: 3028px; height: 1434px;}
+.huanghua-bc { width: 2839px; height: 1288px;}
+.huanghua-d { width: 3132px; height: 1194px; }
+.position-selected-area{
+    position: absolute;
+    cursor: pointer;
+}
+.huanghua-pA {
+    top: 508px; left: 640px;
+    width: 1100px; height: 400px;
+    -webkit-transform: rotate(-18deg);
+    -moz-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+}
+.huanghua-pB {
+    top: 308px; left: 1770px;
+    width: 150px; height: 300px;
+    -webkit-transform: rotate(-49deg);
+    -moz-transform: rotate(-49deg);
+    transform: rotate(-49deg);
+}
+.huanghua-pC {
+    top: 238px; left: 1940px;
+    width: 150px; height: 300px;
+    -webkit-transform: rotate(-49deg);
+    -moz-transform: rotate(-49deg);
+    transform: rotate(-49deg);
+}
+.huanghua-pD {
+    top: 188px; left: 2150px;
+    width: 270px; height: 270px;
+    -webkit-transform: rotate(-40deg);
+    -moz-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+}
+.artwork-overview {width: 100%; height: 100%; position: relative;}
+.artwork-lines { position: absolute; }
+.huanghua-overview {
+    background: url('../images/huanghua-gyt01.png') no-repeat;
+}
+.huanghua-sanliangong {
+    background: url('../images/huanghua-sanliangong.png') no-repeat;
+}
+.huanghua-reshuiguolu { background: url('../images/huanghua-reshuiguolu.png') no-repeat; }
+.huanghua-zhilengji { background: url('../images/huanghua-zhilengji.png') no-repeat; }
+.artwork-title {
+   font-size: 100px;
+   text-align: center;
+   padding-bottom: 80px;
+}
+.xa-con-cent-bottom {
+    height: 348px; width: 100%;
+}
+.huanghua-thumbnail {
+    background: url('../images/huanghua-gyt01.png') no-repeat;
+    height: 348px; width: 728px;
+    background-size: 728px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.tails-box { display: inline-block;}
+.tail-icon {
+    display: inline-block; width: 110px; height: 110px;
+    border-radius: 60px;
+    background: #ccc; color: #fff;
+    text-align: center; font-size: 70px; line-height: 110px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.tails-box .active {
+    background: #3188d5;
+    vertical-align: bottom;
+}
+.legend-box { 
+    display: inline-block;
+    width: 1636px; height: 100px;
+    text-align: right;
+    vertical-align: bottom;
+}
+.legend-block { 
+    float: left; 
+    width: 400px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+.legend-icon {
+    height: 18px; width: 126px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.legend-des { 
+    font-size: 40px;
+}
+.kongtiaogongshui-icon {
+    background: url('../images/legend-icon-kongtiaogongshui.png') repeat-x;
+}
+.leng-1-in01 {
+    top: -67px; left: 2050px;
+    width: 20px; height: 735px;
+    transform: rotate(113deg);
+}
+.leng-1-in02 {
+    top: 73px; left: 1590px;
+    width: 20px; height: 270px;
+    -webkit-transform: rotate(70deg);
+    -moz-transform: rotate(70deg);
+    transform: rotate(70deg);
+}
+
+.lengshui-gif {
+    background: url('../images/lines/leng-lines-v.gif') repeat center/35px 40px;
+}
+.changshui-gif {
+    background: url('../images/lines/chang-lines-v.gif') repeat center/35px 40px;
+}
+.huanghua-d .inner { position: absolute; width:100%;}
+.huanghua-dianlengji01 {
+    background: url('../images/equips/huanghua-dianlengji.png') no-repeat;
+    width:640px; height: 482px;
+    position: absolute; left: 879px; top: 131px;
+}
+.huanghua-dianlengji02 {
+    background: url('../images/equips/huanghua-dianlengji.png') no-repeat;
+    width:640px; height: 482px;
+    position: absolute; left: 1579px; top: 411px;
+}
+.gray-filter { -webkit-filter: grayscale(1); }
+.huanghua-leng-line-up {
+    background: url('../images/lines/leng-1-default-line-up.png') no-repeat;
+    position: absolute; top: 452px; left: 820px;
+    width: 201px; height: 105px;
+}
+.huanghua-leng-line-down {
+    background: url('../images/lines/leng-1-default-line-down.png') no-repeat;
+    position: absolute; top: 508px; left: 839px;
+    width: 173px; height: 77px;
+}
+div.huanghua-leng-line02-up {
+    top:740px; left: 1510px;
+}
+div.huanghua-leng-line02-down {
+    top:791px; left: 1550px;
+}
