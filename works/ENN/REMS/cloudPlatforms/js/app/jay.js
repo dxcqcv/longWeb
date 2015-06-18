@@ -367,7 +367,6 @@ sumProjectid = _pid; // 为了3d属性
                     switchPage(function(){// 切换后回调
                         demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
 
-                    //change3d(_pid); // 调用3d
 loadLeftRight(_pid); //加载左右
 intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
 
@@ -1763,7 +1762,6 @@ dateAllShow(); // show all datepicker
 		$(this).addClass("cur").siblings().removeClass("cur");
 		
 		 projectid = $(this).attr("index");
-         //change3d(projectid); // 调用3d
 		
 		//alert("bbb"+a);
 		
@@ -2625,46 +2623,6 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 				$modalinnerChartWrap.data("echart", modalchartobj);
 			})
     }	
-    // 切换3d模型 
-
-         function change3d(id) {
-         
-            switch(id) {
-                case '1':
-                    builtUnity3d("obj/AirPort20150515.unity3d");
-                    interId = setInterval(function(){
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll', done:sent3dData});
-                    },6000);
-                    break;
-                case '3':
-                    builtUnity3d("obj/Hostpial20150515.unity3d");
-                    interId = setInterval(function(){
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=101', jsonp: 'labeldataAll', done:sent3dData});
-                    },6000);
-                    break;
-                case '4':
-                    builtUnity3d("obj/Other20150515.unity3d");
-                    interId = setInterval(function(){
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=102', jsonp: 'labeldataAll', done:sent3dData});
-                    },6000);
-                    break;
-            }
-         }
-         // 3d per
-         function property3d(id) {
-         
-            switch(id) {
-                case '1':
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist', done:sent3dProperty});
-                    break;
-                case '3':
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist', done:sent3dProperty});
-                    break;
-                case '4':
-                        demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist', done:sent3dProperty});
-                    break;
-            }
-         }
 
 // 单曲线回调函数
 		function singleEnergy_callback(url, callback, unitname) {
@@ -2822,10 +2780,8 @@ function huanghuaEquipStatFn(data) {
             setTimeout(function(){releaseAnimate('lixindianlengjiIn')},1000);
         } else if(value.classinstanceid === 18 && value.datavalue1 === '0') {
             huanghuaDianlengji18.addClass('gray-filter');
-            console.log(9999999)
         } else if(value.classinstanceid === 18 && value.datavalue1 === '1') {
             huanghuaDianlengji18.removeClass('gray-filter');
-            console.log(1121212)
         }
    });
 }
