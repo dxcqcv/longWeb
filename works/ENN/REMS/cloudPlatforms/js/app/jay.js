@@ -7,8 +7,7 @@ var jayfunction = function() {
 var demand
   , projectBoxIndex = 0 // 项目索引 
   , contTitle = $('#contSubTitle') 
-  , interId // 清重复
-  , sumProjectid = 0
+  , interId // 清重复,原清3d
   , sumProjectData =  {}
   , intervalWeather //小时刷新天气
   , intervalInnerRight //小时刷新内页供能耗能
@@ -316,21 +315,28 @@ var re = new RegExp(reg);
                     window.pageName = "index";
 
                     if(window.pageName == "index") {
-                        clearInterval(interId); // 清3d
                         clearInterval(intervalWeather); // 清气象更新
                         clearInterval(intervalInnerRight); // 清内页右侧更新
+                        //gytSelectFn('#huanghuaOverview~div','#huanghuaOverview', '工艺设计图'); //工艺图复位
 
                     }
                     switchPage(function(){
                         $(".mapview-active").removeClass("mapview-active");
                         bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
+                    }); //切换页面         
+                    switch(projectBoxIndex ) { //复位为overview
+                        case '1': gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); break;
+                        case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2'); break;
+                        case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3'); break;
+                    }
 					if(icon_arr && icon_arr.length>=1){
 						for(var i=0; i<icon_arr.length; i++){	
+                            if(typeof icon_arr[2*i] == 'undefined') continue; 
 							icon_arr[2*i].show();   
 							icon_arr[2*i+1].hide();
 						}
 					}
-                    }); //切换页面         
+
             });	
             var detail_data_index = 0; //内页图表数据索引 pinmingle add
 			$("#index_right_swiper").on("click", ".swiper-slide", function(e) {
@@ -340,7 +346,6 @@ var re = new RegExp(reg);
                 var _pid = $this.attr('data-pid')
 				var point = new BMap.Point( Number(_relh),Number(_relv) );
                 var name = $this.find('.mv-localname').text();
-sumProjectid = _pid; // 为了3d属性
 //				console.log(point)
 				bdmap.centerAndZoom(point,12); //地图的缩放比
 				var _actclass = "mapview-active"
@@ -359,13 +364,16 @@ sumProjectid = _pid; // 为了3d属性
 					e.preventDefault();
 				} else {
                     window.pageName = "page01";
-                    if(window.pageName == "page01")
-                        clearInterval(interId);
-
-
 
                     switchPage(function(){// 切换后回调
                         demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
+//console.log(typeof _pid)
+switch(_pid) {
+
+    case '1': gytSelectFn(false,'#huanghuaArtwork', '工艺设计图'); break;
+    case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2'); break;
+    case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3'); break;
+}
 
 loadLeftRight(_pid); //加载左右
 intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
@@ -377,7 +385,7 @@ intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
 
 projectBoxIndex = _pid; //为了内页切换重载成本收益
 
-	$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能, JSON语法错误
+	$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
     intervalInnerRight = setInterval(innerRight(_pid), 3600000); //小时更新供能耗能 
     getWeather(); 
     intervalWeather = setInterval(getWeather,3600000);// 加载气象信息
@@ -387,6 +395,7 @@ projectBoxIndex = _pid; //为了内页切换重载成本收益
 //console.log(sumProjectData)
 var innerWrap = $('#xinaoProjects')
 innerWrap.empty();
+/*
 $.each(sumProjectData, function(index, data){
 var cur = (index == _pid) ? 'class="selector cur swiper-slide"' : 'class="selector swiper-slide"'
   , img = 0
@@ -403,7 +412,7 @@ var cur = (index == _pid) ? 'class="selector cur swiper-slide"' : 'class="select
                          innerWrap.append(innerProjects);
 
 });
-
+*/
 }); //切换页面   
 
 
@@ -1684,10 +1693,6 @@ dateAllShow(); // show all datepicker
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#ec1e79'];
 					chartOPT.series[0].data[0].value = (function(){
-                    /*
-                        if(sumProjectid == 1){  return (100 - (_percent * 100)); } // 黄花机场系统能耗乘100  
-                        else return (100 - _percent);
-                        */
                         return (100 - _percent);
                         //return (100 - 87.9);
                     })();
@@ -1696,14 +1701,6 @@ dateAllShow(); // show all datepicker
 							return 100;
 							//return 87.9;
 						} else {
-                        /*
-                            if(sumProjectid == 1){ 
-                                var huanghuaP = _percent * 100;
-                                if( huanghuaP > 100 ) return 100;
-                                else return _percent *= 100
-                            }// 黄花机场系统能耗乘100  
-                            else return _percent;
-                            */
                         return _percent;
                         //return 87.9;
 						}
@@ -2767,7 +2764,39 @@ function filterUnit(dig) {// 过滤万分位
     }
 
 }
-demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+
+/* 工艺图 */
+$doc.on('click', '.huanghuaPA', huanghuaPAFn)
+    .on('click', '.huanghuaPB', huanghuaPBFn)
+    .on('click', '.huanghuaPC', huanghuaPCFn)
+    .on('click', '.huanghuaPD', huanghuaPDFn)
+    .on('click', '#artworkThumbnail', function(){ gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); }); //-1为空
+
+function huanghuaPAFn(){
+    gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
+}
+function huanghuaPBFn(){
+    gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
+}
+function huanghuaPCFn(){
+    gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
+}
+function huanghuaPDFn(){
+    gytSelectFn(true,'#huanghuaD','电制冷系统',[3]); 
+    demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+}
+
+function gytSelectFn(showBottom,showName,title,num) {
+    $(showName).removeClass('hide').siblings('div').addClass('hide');
+
+    if( showBottom )
+        $('#artworkBottom').removeClass('hide')
+    else
+        $('#artworkBottom').addClass('hide')
+    $('#artworkTitle').text(title)
+    $('#artworkTailsBox').children('.tail-icon').removeClass('active')
+    .filter(function(i){ return $.inArray(i,num) > -1; }).addClass('active')
+}
 
 var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
   , huanghuaDianlengji18 = $('#huanghuaDianlengji18') //2#离心电冷机
@@ -2785,9 +2814,10 @@ function huanghuaEquipStatFn(data) {
         }
    });
 }
+
 var lixindianlengjiIn01 = [
     function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
-    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}
+    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear');}
 ];
 $doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
 /*释放队列下一个*/
@@ -2796,8 +2826,6 @@ function releaseAnimate(name) {
 }
 /* 动画公用函数
 ele对象 obj
-rc removeClass string
-ac addClass string
 styles 属性 obj
 duration 持续时间 number
 easing 方式 string
@@ -2806,6 +2834,7 @@ callback 回调 function
 function animateFn(ele,styles,duration,easing,callback) {
     $(ele).animate(styles,duration,easing, callback);
 }
+/* 工艺图end */
 /**************end*************/
 };
        
