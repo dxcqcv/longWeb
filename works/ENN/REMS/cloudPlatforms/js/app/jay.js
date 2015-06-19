@@ -2817,7 +2817,7 @@ function huanghuaEquipStatFn(data) {
 
 var lixindianlengjiIn01 = [
     function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
-    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}
+    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear');}
 ];
 $doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
 /*释放队列下一个*/
