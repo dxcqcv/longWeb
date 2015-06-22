@@ -632,18 +632,46 @@
 }
 .artwork-popup { 
     position: absolute;  
-    border: 1px solid #333;
+    border: 1px solid #999;
     border-radius: 25px;
     color: #333;
-    font-size: 45px;
+    font-size: 35px;
     text-align: center;
-    top:0; left: 0;
-    padding: 15px;
+    padding: 5px;
     min-width: 238px;
     min-height: 162px;
-    background: linear-gradient(180deg, #c1c1c1, #fff);
-    opacity: .8;
+    background: linear-gradient(0deg, #fff, rgba(193,193,193,0.5));
     line-height: 1.5;
+}
+.huanghua-huanreqi01 {
+    top:770px; left: 1770px;
+}
+.huanghua-huanreqi02 {
+    top:670px; left: 1370px;
+}
+.huanghua-huanreqi03 {
+    top:830px; left: 870px;
+}
+.huanghua-huanreqi04 {
+    top:470px; left: 965px;
+}
+.huanghua-huanreqi05 {
+    top:640px; left: 460px;
+}
+.huanghua-huanreqi06 {
+    top:400px; left: 1890px;
+}
+.huanghua-huanreqi07 {
+    top:350px; left: 2740px;
+}
+.huanghua-huanreqi08 {
+    top:220px; left: 1440px;
+}
+.huanghua-huanreqi09 {
+    top:10px; left: 1890px;
+}
+.huanghua-huanreqi10 {
+    top:140px; left: 2400px;
 }
 .shenlongcheng-artwork { width: 2881px; height: 1343px; }
 .shenlongcheng-overview {
@@ -693,6 +721,7 @@
 }
 .artwork-overview {width: 100%; height: 100%; position: relative;}
 .artwork-lines { position: absolute; }
+.artwork-lines .inner { height: 100%; } /*temp*/
 .huanghua-overview {
     background: url('../images/huanghua-gyt01.png') no-repeat;
 }
@@ -754,6 +783,178 @@
 .kongtiaogongshui-icon {
     background: url('../images/legend-icon-kongtiaogongshui.png') repeat-x;
 }
+/*A区进线*/
+.yurezhiranji-1-in01 {
+    top: 950px; left: 1940px;
+    width: 20px; height: 200px;
+    transform: rotate(109deg);
+}
+.yurezhiranji-1-in02 {
+    top: 871px; left: 1607px;
+    width: 20px; height: 530px;
+    transform: rotate(64deg);
+}
+.yurezhiranji-1-in03 {
+    top: 927px; left: 1161px;
+    width: 20px; height: 470px;
+    transform: rotate(112deg);
+}
+.yurezhiranji-1-in04 {
+    top: 636px; left: 421px;
+    width: 20px; height: 410px;
+    transform: rotate(112deg);
+}
+.yurezhiranji-1-in05 {
+    top: 210px; left: 604px;
+    width: 20px; height: 800px;
+    transform: rotate(247deg);
+}
+.yurezhiranji-1-in06 {
+    top: 350px; left: 899px;
+    width: 20px; height: 150px;
+    transform: rotate(114deg);
+}
+.yurezhiranji-1-out01 {
+    top: 1003px; left: 1940px;
+    width: 20px; height: 200px;
+    transform: rotate(109deg);
+}
+.yurezhiranji-1-out02 {
+    top: 911px; left: 1603px;
+    width: 20px; height: 545px;
+    transform: rotate(64deg);
+}
+.yurezhiranji-1-out03 {
+    top: 940px; left: 1119px;
+    width: 20px; height: 520px;
+    transform: rotate(112deg);
+}
+.yurezhiranji-1-out04 {
+    top: 680px; left: 421px;
+    width: 20px; height: 410px;
+    transform: rotate(112deg);
+}
+.yurezhiranji-1-out05 {
+    top: 270px; left: 599px;
+    width: 20px; height: 780px;
+    transform: rotate(247deg);
+}
+.yurezhiranji-1-out06 {
+    top: 378px; left: 873px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.sanreqi-1-in01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.sanreqi-1-in02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.sanreqi-1-out01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.sanreqi-1-out02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-in01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-in02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-in03 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-in04 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-in05 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-out01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-out02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-out03 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-out04 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.fadianji-1-out05 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-in01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-in02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-in03 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-in04 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-out01 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-out02 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-out03 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+.lengqueta-1-out04 {
+    top:0px; left: 0px;
+    width: 20px; height: 180px;
+    transform: rotate(114deg);
+}
+/*A区进线end*/
 .leng-1-in01 {
     top: -67px; left: 2050px;
     width: 20px; height: 735px;
@@ -768,21 +969,75 @@
 }
 
 .lengshui-gif {
+    background: url('../images/lines/leng-lines.gif') repeat center/35px 40px;
+}
+.lengshui-gif-v {
     background: url('../images/lines/leng-lines-v.gif') repeat center/35px 40px;
 }
 .changshui-gif {
     background: url('../images/lines/chang-lines-v.gif') repeat center/35px 40px;
 }
 .huanghua-d .inner { position: absolute; width:100%;}
-.huanghua-dianlengji01 {
+.huanghua-sanreqi {
+    background: url('../images/equips/huanghua-sanreqi.png') no-repeat;
+    width:126px; height: 153px;
+    position: absolute;
+}
+.huanghua-sanreqi01 {
+    top: 790px; left: 1610px;
+}
+.huanghua-sanreqi02 {
+    top: 390px; left: 2510px;
+}
+.huanghua-fadianji {
+    background: url('../images/equips/huanghua-fadianji.png') no-repeat;
+    width:427px; height: 328px;
+    position: absolute;
+}
+.huanghua-fadianji01 {
+    top:560px; left:1140px;
+}
+.huanghua-fadianji02 {
+    top:160px; left:2060px;
+}
+.huanghua-yurezhiranji {
+    background: url('../images/equips/huanghua-yurezhiranji.png') no-repeat;
+    width:410px; height: 275px;
+    position: absolute;
+}
+.huanghua-yurezhiranji01 {
+    top:854px; left:610px;
+}
+.huanghua-yurezhiranji02 {
+    top:440px; left:1580px;
+}
+.huanghua-lengqueta {
+    background: url('../images/equips/huanghua-gaowenlengqueta.png') no-repeat;
+    width:206px; height: 205px;
+    position: absolute;
+}
+.huanghua-diwenlengqueta01 {
+    top:590px; left:830px;
+}
+.huanghua-diwenlengqueta02 {
+    top:200px; left:1790px;
+}
+.huanghua-gaowenlengqueta01 {
+    top:635px; left:710px;
+}
+.huanghua-gaowenlengqueta02 {
+    top:235px; left:1670px;
+}
+.huanghua-dianlengji {
     background: url('../images/equips/huanghua-dianlengji.png') no-repeat;
     width:640px; height: 482px;
-    position: absolute; left: 879px; top: 131px;
+    position: absolute;
+}
+.huanghua-dianlengji01 {
+     left: 879px; top: 131px;
 }
 .huanghua-dianlengji02 {
-    background: url('../images/equips/huanghua-dianlengji.png') no-repeat;
-    width:640px; height: 482px;
-    position: absolute; left: 1579px; top: 411px;
+     left: 1579px; top: 411px;
 }
 .gray-filter { -webkit-filter: grayscale(1); }
 .huanghua-leng-line-up {

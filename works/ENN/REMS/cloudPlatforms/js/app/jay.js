@@ -378,11 +378,6 @@ switch(_pid) {
 loadLeftRight(_pid); //加载左右
 intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
 
-//和下方联动函数，现注释
-                    //detail_data_index = $this.index(); // 获取图表数据索引 pinmingle add 
-                    //$(".inner-selector-i .selector").eq(detail_data_index).trigger("click"); //pinmingle add
-                    //$(".inner-selector-i .selector").eq(_pid).trigger("click"); //pinmingle add
-
 projectBoxIndex = _pid; //为了内页切换重载成本收益
 
 	$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
@@ -392,27 +387,6 @@ projectBoxIndex = _pid; //为了内页切换重载成本收益
 
      contTitle.text(name);
 
-//console.log(sumProjectData)
-var innerWrap = $('#xinaoProjects')
-innerWrap.empty();
-/*
-$.each(sumProjectData, function(index, data){
-var cur = (index == _pid) ? 'class="selector cur swiper-slide"' : 'class="selector swiper-slide"'
-  , img = 0
-  switch(index) {
-    case '1': img = 1; break; 
-    case '3': img = 2; break;
-    case '4': img = 3; break;
-    default: img = 4; break;
-  }
-    var innerProjects = '<div index="'+index+'" '+cur+'>'+
-                            '<img src="images/sampleimg-'+img+'.jpg" alt="">'+
-                            '<p>'+data+'</p>'+
-                         '</div>';
-                         innerWrap.append(innerProjects);
-
-});
-*/
 }); //切换页面   
 
 
@@ -2771,9 +2745,34 @@ $doc.on('click', '.huanghuaPA', huanghuaPAFn)
     .on('click', '.huanghuaPC', huanghuaPCFn)
     .on('click', '.huanghuaPD', huanghuaPDFn)
     .on('click', '#artworkThumbnail', function(){ gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); }); //-1为空
+    var popup18 = {} 
+      , w992 = $('#widgetid992')  
+      , w993 = $('#widgetid993')  
+function huanghAlabellistFn(data) {
+    $.each(data,function(index, value){
+        if(value.widgetid === 992) {
+            w992.attr('title',value.title).children('span.units').text(value.units)
+        } else if(value.widgetid === 993) {
+            w993.attr('title',value.title).children('span.units').text(value.units)
+        }
+    });
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
+}
+
+function huanghuaAlabeldataAllFn(data) {
+    $.each(data, function(index, value) {
+        if(value.widgetid === 992) {
+            w992.children('span.value').text(value.datavalue)
+        } else if(value.widgetid === 993) {
+            w993.children('span.value').text(value.datavalue)
+        }
+    });
+}
 
 function huanghuaPAFn(){
     gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
+    demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
+
 }
 function huanghuaPBFn(){
     gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
@@ -2800,17 +2799,63 @@ function gytSelectFn(showBottom,showName,title,num) {
 
 var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
   , huanghuaDianlengji18 = $('#huanghuaDianlengji18') //2#离心电冷机
+  , huanghuaSanreqi42 = $('#huanghuaSanreqi42')
+  , huanghuaSanreqi43 = $('#huanghuaSanreqi43')
+  , huanghuaFadianji11 = $('#huanghuaFadianji11')
+  , huanghuaFadianji12 = $('#huanghuaFadianji12')
+  , huanghuaYurezhiranji13 = $('#huanghuaYurezhiranji13')
+  , huanghuaYurezhiranji14 = $('#huanghuaYurezhiranji14')
+
 function huanghuaEquipStatFn(data) {
    $.each(data, function(index, value){
+        //D区电冷机17,18
         if(value.classinstanceid === 17 && value.datavalue1 === '0') {
             huanghuaDianlengji17.addClass('gray-filter');
         } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
             huanghuaDianlengji17.removeClass('gray-filter');
-            setTimeout(function(){releaseAnimate('lixindianlengjiIn')},1000);
+            releaseAnimate('lixindianlengjiIn');
         } else if(value.classinstanceid === 18 && value.datavalue1 === '0') {
             huanghuaDianlengji18.addClass('gray-filter');
         } else if(value.classinstanceid === 18 && value.datavalue1 === '1') {
             huanghuaDianlengji18.removeClass('gray-filter');
+        }
+        //A区散热器42，43
+        else if(value.classinstanceid  === 42 && value.datavalue1 === '0')
+        {
+            huanghuaSanreqi42.addClass('gray-filter')       
+        } else if(value.classinstanceid  === 42 && value.datavalue1 === '1')       {
+            huanghuaSanreqi42.removeClass('gray-filter')       
+        }
+        else if(value.classinstanceid  === 43 && value.datavalue1 === '0')
+        {
+            huanghuaSanreqi43.addClass('gray-filter')       
+        } else if(value.classinstanceid  === 43 && value.datavalue1 === '1')       {
+            huanghuaSanreqi43.removeClass('gray-filter')       
+        }
+        //A区发电机
+        else if(value.classinstanceid  === 11 && value.datavalue1 === '0')         {
+           huanghuaFadianji11.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 11 && value.datavalue1 === '1')         {
+           huanghuaFadianji11.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 12 && value.datavalue1 === '0')         {
+           huanghuaFadianji12.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 12 && value.datavalue1 === '1')         {
+           huanghuaFadianji12.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 13 && value.datavalue1 === '0')         {
+           huanghuaYurezhiranji13.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 13 && value.datavalue1 === '1')         {
+           huanghuaYurezhiranji13.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 14 && value.datavalue1 === '0')         {
+           huanghuaYurezhiranji14.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 14 && value.datavalue1 === '1')         {
+           huanghuaYurezhiranji14.removeClass('gray-filter')
         }
    });
 }
