@@ -370,9 +370,9 @@ var re = new RegExp(reg);
 //console.log(typeof _pid)
 switch(_pid) {
 
-    case '1': gytSelectFn(false,'#huanghuaArtwork', '工艺设计图'); break;
-    case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2'); break;
-    case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3'); break;
+    case '1': gytSelectFn(false,'#huanghuaArtwork', '工艺设计图',[],'huanghua-thumbnail'); break;
+    case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2',[],'tinghu-thumbnail'); break;
+    case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3',[],'shenlongcheng-thumbnail'); break;
 }
 
 loadLeftRight(_pid); //加载左右
@@ -2744,9 +2744,16 @@ $doc.on('click', '.huanghuaPA', huanghuaPAFn)
     .on('click', '.huanghuaPB', huanghuaPBFn)
     .on('click', '.huanghuaPC', huanghuaPCFn)
     .on('click', '.huanghuaPD', huanghuaPDFn)
+    .on('click', '.tinghuPA', tinghuPAFn)
+    .on('click', '.tinghuPB', tinghuPBFn)
+    .on('click', '.tinghuPC', tinghuPCFn)
+    .on('click', '.tinghuPD', tinghuPDFn)
+    .on('click', '.shenlongchengPA', shenlongchengPAFn)
+    .on('click', '.shenlongchengPB', shenlongchengPBFn)
+    .on('click', '.shenlongchengPC', shenlongchengPCFn)
     .on('click', '#artworkThumbnail', function(){ gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); }); //-1为空
-    var popup18 = {} 
-      , w992 = $('#widgetid992')  
+    //浮动框
+    var w992 = $('#widgetid992')  
       , w993 = $('#widgetid993')  
 function huanghAlabellistFn(data) {
     $.each(data,function(index, value){
@@ -2772,7 +2779,6 @@ function huanghuaAlabeldataAllFn(data) {
 function huanghuaPAFn(){
     gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
     demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
-
 }
 function huanghuaPBFn(){
     gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
@@ -2785,16 +2791,50 @@ function huanghuaPDFn(){
     demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
 }
 
-function gytSelectFn(showBottom,showName,title,num) {
+//亭湖选择
+function tinghuPAFn() {
+    gytSelectFn(true,'#tinghuA','1',[0]);
+}
+function tinghuPBFn() {
+    gytSelectFn(true,'#tinghuB','2',[1]);
+}
+function tinghuPCFn() {
+    gytSelectFn(true,'#tinghuC','3',[2]);
+}
+function tinghuPDFn() {
+    gytSelectFn(true,'#tinghuD','4',[3]);
+}
+
+//神农城
+function shenlongchengPAFn() {
+    gytSelectFn(true,'#shenlongchengA','1',[0]);
+}
+function shenlongchengPBFn() {
+    gytSelectFn(true,'#shenlongchengB','2',[1]);
+}
+function shenlongchengPCFn() {
+    gytSelectFn(true,'#shenlongchengC','3',[2]);
+}
+
+function gytSelectFn(showBottom,showName,title,num, bottomClass) {
+console.log(11111,bottomClass)
     $(showName).removeClass('hide').siblings('div').addClass('hide');
 
-    if( showBottom )
+    if( showBottom ) {
         $('#artworkBottom').removeClass('hide')
-    else
+    }
+    else {
         $('#artworkBottom').addClass('hide')
+    }
     $('#artworkTitle').text(title)
     $('#artworkTailsBox').children('.tail-icon').removeClass('active')
     .filter(function(i){ return $.inArray(i,num) > -1; }).addClass('active')
+        showBottomArea(bottomClass);
+}
+function showBottomArea(showName,tailNum) {
+console.log(22222,showName)
+    var adClass= 'bottom-thumbnail ' +showName; 
+    $('#artworkThumbnail').removeClass().addClass(adClass);        
 }
 
 var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
@@ -2864,6 +2904,10 @@ var lixindianlengjiIn01 = [
     function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
     function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear');}
 ];
+/*
+动画名
+队列名
+*/
 $doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
 /*释放队列下一个*/
 function releaseAnimate(name) {

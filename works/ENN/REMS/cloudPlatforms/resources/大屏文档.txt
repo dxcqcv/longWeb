@@ -1,0 +1,182 @@
+大屏工艺图文档
+
+1.大屏管道
+a,html结构 
+<div id="" class="yurezhiranji-1-out01 artwork-lines "><div class="inner lengshui-gif"></div></div>
+无需ID,class必须有artwork-lines,内部div必须有，其中class名inner必须有，lengshui-gif可变，为不同的管道颜色
+
+b,css文件为css/style1.css
+这2个总类，不要动
+.artwork-lines { position: absolute; } 
+.artwork-lines .inner { height: 100%; } /*temp*/
+这是例子，只需改变top,left,height,rotate,来调整管道方向和大小
+.yurezhiranji-1-out01 {
+    top: 1003px; left: 1940px;
+    width: 20px; height: 200px;
+    transform: rotate(109deg);
+}
+c,管道示例图在resources里
+
+d,管道流动，可暂时不添加，先添加CSS管道
+文件在js/app/jay.js
+例如：
+var lixindianlengjiIn01 = [
+    function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
+    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear');}
+];
+/*
+动画名
+队列名
+*/
+$doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
+/*释放队列下一个*/
+function releaseAnimate(name) {
+    $doc.dequeue(name);
+}
+/* 动画公用函数
+ele对象 obj
+styles 属性 obj
+duration 持续时间 number
+easing 方式 string
+callback 回调 function
+*/
+function animateFn(ele,styles,duration,easing,callback) {
+    $(ele).animate(styles,duration,easing, callback);
+}
+其中lixindianlengjiIn01为具体实例，每一条管道都在其中，一个数组为一条路径，queue动画名和队列名都可自定义 
+e,管道已用名比较多，可在index.html里搜索<!--管道--><!--管道end-->其中都是
+
+2.大屏浮动框
+a,html结构
+<div id="huanreqi01" class="artwork-popup huanghua-huanreqi01" >
+    <h1>1#换热器</h1>
+    <p id="widgetid992" title="你好"><span class="value"></span><span class="units"></span></p>
+    <p id="widgetid993" title="你好"><span class="value"></span><span class="units"></span></p>
+</div>
+id唯一，以拼音结构加数字编号，class中artwork-popup不动，后面class为多态变化，内部p的ID多态，H1的多态，其他不变
+b,css结构
+.huanghua-huanreqi01 {
+    top:770px; left: 1770px;
+}
+只需改变top和left即可定位
+c,ps设计图
+看PS中浮动框大概位置后，定位浮动框
+d,js结构
+    //浮动框
+    var w992 = $('#widgetid992')  
+      , w993 = $('#widgetid993')  
+function huanghAlabellistFn(data) {
+    $.each(data,function(index, value){
+        if(value.widgetid === 992) {
+            w992.attr('title',value.title).children('span.units').text(value.units)
+        } else if(value.widgetid === 993) {
+            w993.attr('title',value.title).children('span.units').text(value.units)
+        }
+    });
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
+}
+
+function huanghuaAlabeldataAllFn(data) {
+    $.each(data, function(index, value) {
+        if(value.widgetid === 992) {
+            w992.children('span.value').text(value.datavalue)
+        } else if(value.widgetid === 993) {
+            w993.children('span.value').text(value.datavalue)
+        }
+    });
+}
+
+function huanghuaPAFn(){
+    gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
+    demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
+
+}
+步骤，在huanghuaPAFn()取浮动框属性，对比widgetid后赋值即可，定id前可先查看labellist中的widgetid
+
+3.大屏设备启停
+a,html结构
+<div id="huanghuaSanreqi42" class="huanghua-sanreqi huanghua-sanreqi01 gray-filter"></div>
+id名为具体设备名，class名中第一个为该类设备的总体类，约定大小等，第二个为多态定位，第三个为置灰无需动
+b,css结构
+.huanghua-sanreqi {
+    background: url('../images/equips/huanghua-sanreqi.png') no-repeat;
+    width:126px; height: 153px;
+    position: absolute;
+}
+.huanghua-sanreqi01 {
+    top: 790px; left: 1610px;
+}
+.huanghua-sanreqi02 {
+    top: 390px; left: 2510px;
+}
+总类约定高宽，带数字的定位置
+c,js结构
+function huanghuaPDFn(){
+    gytSelectFn(true,'#huanghuaD','电制冷系统',[3]); 
+    demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+}
+var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
+  , huanghuaDianlengji18 = $('#huanghuaDianlengji18') //2#离心电冷机
+  , huanghuaSanreqi42 = $('#huanghuaSanreqi42')
+  , huanghuaSanreqi43 = $('#huanghuaSanreqi43')
+  , huanghuaFadianji11 = $('#huanghuaFadianji11')
+  , huanghuaFadianji12 = $('#huanghuaFadianji12')
+  , huanghuaYurezhiranji13 = $('#huanghuaYurezhiranji13')
+  , huanghuaYurezhiranji14 = $('#huanghuaYurezhiranji14')
+
+function huanghuaEquipStatFn(data) {
+   $.each(data, function(index, value){
+        //D区电冷机17,18
+        if(value.classinstanceid === 17 && value.datavalue1 === '0') {
+            huanghuaDianlengji17.addClass('gray-filter');
+        } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
+            huanghuaDianlengji17.removeClass('gray-filter');
+            releaseAnimate('lixindianlengjiIn');
+        } else if(value.classinstanceid === 18 && value.datavalue1 === '0') {
+            huanghuaDianlengji18.addClass('gray-filter');
+        } else if(value.classinstanceid === 18 && value.datavalue1 === '1') {
+            huanghuaDianlengji18.removeClass('gray-filter');
+        }
+        //A区散热器42，43
+        else if(value.classinstanceid  === 42 && value.datavalue1 === '0')
+        {
+            huanghuaSanreqi42.addClass('gray-filter')       
+        } else if(value.classinstanceid  === 42 && value.datavalue1 === '1')       {
+            huanghuaSanreqi42.removeClass('gray-filter')       
+        }
+        else if(value.classinstanceid  === 43 && value.datavalue1 === '0')
+        {
+            huanghuaSanreqi43.addClass('gray-filter')       
+        } else if(value.classinstanceid  === 43 && value.datavalue1 === '1')       {
+            huanghuaSanreqi43.removeClass('gray-filter')       
+        }
+        //A区发电机
+        else if(value.classinstanceid  === 11 && value.datavalue1 === '0')         {
+           huanghuaFadianji11.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 11 && value.datavalue1 === '1')         {
+           huanghuaFadianji11.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 12 && value.datavalue1 === '0')         {
+           huanghuaFadianji12.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 12 && value.datavalue1 === '1')         {
+           huanghuaFadianji12.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 13 && value.datavalue1 === '0')         {
+           huanghuaYurezhiranji13.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 13 && value.datavalue1 === '1')         {
+           huanghuaYurezhiranji13.removeClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 14 && value.datavalue1 === '0')         {
+           huanghuaYurezhiranji14.addClass('gray-filter')
+        }
+        else if(value.classinstanceid  === 14 && value.datavalue1 === '1')         {
+           huanghuaYurezhiranji14.removeClass('gray-filter')
+        }
+   });
+}
+在相应的区域调用设备启停ajax后，调用函数中判断是否开启，开removeClass,反之则关
+d,PS设备
+截取PS中设备图片，同样的只需取一次

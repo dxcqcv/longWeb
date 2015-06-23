@@ -121,7 +121,7 @@ classinstanceid为3D图中模型对应硬编码，根据datavalue1是0或者1判断取不同的模型,pr
 
 该方法需要分钟级循环调用。
 
-http://localhost:8080/reds/ds/equipState
+http://10.36.128.73:8080/reds/ds/equipState
 
 callback参数：equipState
 
