@@ -7,7 +7,7 @@ var jayfunction = function() {
 var demand
   , projectBoxIndex = 0 // 项目索引 
   , contTitle = $('#contSubTitle') 
-  , interId // 清重复,原清3d
+  , intervalGYTData // 工艺图分钟更新
   , sumProjectData =  {}
   , intervalWeather //小时刷新天气
   , intervalInnerRight //小时刷新内页供能耗能
@@ -318,6 +318,7 @@ var re = new RegExp(reg);
                         clearInterval(intervalWeather); // 清气象更新
                         clearInterval(intervalInnerRight); // 清内页右侧更新
                         //gytSelectFn('#huanghuaOverview~div','#huanghuaOverview', '工艺设计图'); //工艺图复位
+                        clearInterval(intervalGYTData); // 清工艺图更新
 
                     }
                     switchPage(function(){
@@ -326,8 +327,14 @@ var re = new RegExp(reg);
                     }); //切换页面         
                     switch(projectBoxIndex ) { //复位为overview
                         case '1': gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); break;
-                        case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2'); break;
-                        case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3'); break;
+                        case '3': 
+                            gytSelectFn(false,'#tinghuOverview', '工艺设计图',[-1]); 
+                            tinghuArtwork.height(2027);
+                            break;
+                        case '4': 
+                            gytSelectFn(false,'#shenlongchengOverview', '工艺设计图',[-1]); 
+                            shenlongchengArtwork.height(1718);
+                            break;
                     }
 					if(icon_arr && icon_arr.length>=1){
 						for(var i=0; i<icon_arr.length; i++){	
@@ -368,13 +375,37 @@ var re = new RegExp(reg);
                     switchPage(function(){// 切换后回调
                         demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
 //console.log(typeof _pid)
-switch(_pid) {
-
-    case '1': gytSelectFn(false,'#huanghuaArtwork', '工艺设计图',[],'huanghua-thumbnail'); break;
-    case '3': gytSelectFn(false,'#tinghuArtwork', '工艺设计图2',[],'tinghu-thumbnail'); break;
-    case '4': gytSelectFn(false,'#shenlongchengArtwork', '工艺设计图3',[],'shenlongcheng-thumbnail'); break;
+// 工艺图切换
+function equipsPopup(pid){
+    switch(pid) {
+        case 1:
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+            break;
+    }
 }
-
+switch(_pid) {
+    case '1': 
+        gytSelectFn(false,'#huanghuaArtwork', '黄花工艺设计图'); 
+        showBottomArea('huanghua-thumbnail');
+        artworkBottomHeight(348);//底部高度
+        builtTailIcon(1,4);
+        equipsPopup(1);
+        intervalGYTData = setInterval(equipsPopup, 60000); 
+        break;
+    case '3': 
+        gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
+        showBottomArea('tinghu-thumbnail');
+        artworkBottomHeight(648);//底部高度
+        builtTailIcon(3,4); //构建下标
+        break;
+    case '4': 
+        gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
+        showBottomArea('shenlongcheng-thumbnail');
+        artworkBottomHeight(458);
+        builtTailIcon(4,3);
+        break;
+}
 loadLeftRight(_pid); //加载左右
 intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
 
@@ -2740,6 +2771,8 @@ function filterUnit(dig) {// 过滤万分位
 }
 
 /* 工艺图 */
+var tinghuArtwork = $('#tinghuArtwork')
+  , shenlongchengArtwork = $('#shenlongchengArtwork')
 $doc.on('click', '.huanghuaPA', huanghuaPAFn)
     .on('click', '.huanghuaPB', huanghuaPBFn)
     .on('click', '.huanghuaPC', huanghuaPCFn)
@@ -2751,16 +2784,146 @@ $doc.on('click', '.huanghuaPA', huanghuaPAFn)
     .on('click', '.shenlongchengPA', shenlongchengPAFn)
     .on('click', '.shenlongchengPB', shenlongchengPBFn)
     .on('click', '.shenlongchengPC', shenlongchengPCFn)
-    .on('click', '#artworkThumbnail', function(){ gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); }); //-1为空
+    .on('click', '.huanghua-thumbnail', huanghuaFirst) 
+    .on('click', '.tinghu-thumbnail', tinghuFirst) 
+    .on('click', '.shenlongcheng-thumbnail', shenlongchengFirst); 
     //浮动框
     var w992 = $('#widgetid992')  
       , w993 = $('#widgetid993')  
+      , w999 = $('#widgetid999')  
+      , w1000 = $('#widgetid1000')  
+      , w994 = $('#widgetid994')  
+      , w995 = $('#widgetid995')  
+      , w975 = $('#widgetid975')  
+      , w976 = $('#widgetid976')  
+      , w977 = $('#widgetid977')  
+      , w978 = $('#widgetid978')  
+      , w974 = $('#widgetid974')  
+      , w1001 = $('#widgetid1001')  
+      , w973= $('#widgetid973') // 黄花A区  
+      , w996= $('#widgetid996')   
+      , w997= $('#widgetid997')   
+      , w968= $('#widgetid968')   
+      , w969= $('#widgetid969')   
+      , w983= $('#widgetid983')   
+      , w984= $('#widgetid984')   
+      , w985= $('#widgetid985')   
+      , w986= $('#widgetid986')   
+      , w987= $('#widgetid987')   
+      , w966= $('#widgetid966')   
+      , w967= $('#widgetid967')   
+      , w979= $('#widgetid979')   
+      , w980= $('#widgetid980')   
+      , w981= $('#widgetid981')   
+      , w982= $('#widgetid982')   
+      , w988= $('#widgetid988')   
+      , w990= $('#widgetid990')   
+      , w991= $('#widgetid991')   
+
+function huanghuaFirst() {
+    gytSelectFn(false,'#huanghuaOverview', '黄花工艺设计图',[-1]);//-1为空
+}
+function tinghuFirst() {
+    gytSelectFn(false,'#tinghuOverview', '亭湖工艺设计图',[-1]);//-1为空
+    tinghuArtwork.height(2027);
+}
+function shenlongchengFirst() {
+    gytSelectFn(false,'#shenlongchengOverview', '神农城工艺设计图',[-1]);//-1为空
+    shenlongchengArtwork.height(1718);
+}
 function huanghAlabellistFn(data) {
     $.each(data,function(index, value){
         if(value.widgetid === 992) {
             w992.attr('title',value.title).children('span.units').text(value.units)
         } else if(value.widgetid === 993) {
             w993.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 999) {
+            w999.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 1000) {
+            w1000.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 994) {
+            w994.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 995) {
+            w995.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 975) {
+            w975.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 976) {
+            w976.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 977) {
+            w977.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 978) {
+            w978.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 974) {
+            w974.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 1001) {
+            w1001.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 973) {
+            w973.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 996) {
+            w996.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 997) {
+            w997.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 968) {
+            w968.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 969) {
+            w969.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 983) {
+            w983.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 984) {
+            w984.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 985) {
+            w985.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 986) {
+            w986.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 987) {
+            w987.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 966) {
+            w966.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 967) {
+            w967.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 979) {
+            w979.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 980) {
+            w980.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 981) {
+            w981.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 982) {
+            w982.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 988) {
+            w988.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 990) {
+            w990.attr('title',value.title).children('span.units').text(value.units)
+        }
+        else if(value.widgetid === 991) {
+            w991.attr('title',value.title).children('span.units').text(value.units)
         }
     });
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
@@ -2773,12 +2936,101 @@ function huanghuaAlabeldataAllFn(data) {
         } else if(value.widgetid === 993) {
             w993.children('span.value').text(value.datavalue)
         }
+        else if(value.widgetid === 973) {
+            w973.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 999) {
+            w999.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 1000) {
+            w1000.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 994) {
+            w994.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 995) {
+            w995.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 975) {
+            w975.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 976) {
+            w976.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 977) {
+            w977.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 978) {
+            w978.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 974) {
+            w974.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 1001) {
+            w1001.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 973) {
+            w973.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 996) {
+            w996.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 997) {
+            w997.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 968) {
+            w968.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 969) {
+            w969.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 983) {
+            w983.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 984) {
+            w984.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 985) {
+            w985.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 986) {
+            w986.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 987) {
+            w987.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 966) {
+            w966.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 967) {
+            w967.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 979) {
+            w979.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 980) {
+            w980.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 981) {
+            w981.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 982) {
+            w982.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 988) {
+            w988.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 990) {
+            w990.children('span.value').text(value.datavalue)
+        }
+        else if(value.widgetid === 991) {
+            w991.children('span.value').text(value.datavalue)
+        }
     });
 }
 
 function huanghuaPAFn(){
     gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
-    demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
 }
 function huanghuaPBFn(){
     gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
@@ -2788,36 +3040,41 @@ function huanghuaPCFn(){
 }
 function huanghuaPDFn(){
     gytSelectFn(true,'#huanghuaD','电制冷系统',[3]); 
-    demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
 }
 
 //亭湖选择
 function tinghuPAFn() {
-    gytSelectFn(true,'#tinghuA','1',[0]);
+    gytSelectFn(true,'#tinghuA','燃气三联供设备',[0]);
+    tinghuArtwork.height(1341);
 }
 function tinghuPBFn() {
-    gytSelectFn(true,'#tinghuB','2',[1]);
+    gytSelectFn(true,'#tinghuBC','直燃机地源热泵',[1,2]);
+    tinghuArtwork.height(1200);
 }
 function tinghuPCFn() {
-    gytSelectFn(true,'#tinghuC','3',[2]);
+    gytSelectFn(true,'#tinghuBC','直燃机地源热泵',[1,2]);
+    tinghuArtwork.height(1200); //不同图片的高度
 }
 function tinghuPDFn() {
-    gytSelectFn(true,'#tinghuD','4',[3]);
+    gytSelectFn(true,'#tinghuD','燃气锅炉',[3]);
+    tinghuArtwork.height(1349);
 }
 
 //神农城
 function shenlongchengPAFn() {
-    gytSelectFn(true,'#shenlongchengA','1',[0]);
+    gytSelectFn(true,'#shenlongchengA','三联供系统',[0]);
+    shenlongchengArtwork.height(1180);
 }
 function shenlongchengPBFn() {
-    gytSelectFn(true,'#shenlongchengB','2',[1]);
+    gytSelectFn(true,'#shenlongchengB','电制冷系统',[1]);
+    shenlongchengArtwork.height(1212);
 }
 function shenlongchengPCFn() {
-    gytSelectFn(true,'#shenlongchengC','3',[2]);
+    gytSelectFn(true,'#shenlongchengC','燃气锅炉',[2]);
+    shenlongchengArtwork.height(1158);
 }
 
-function gytSelectFn(showBottom,showName,title,num, bottomClass) {
-console.log(11111,bottomClass)
+function gytSelectFn(showBottom,showName,title,num) {
     $(showName).removeClass('hide').siblings('div').addClass('hide');
 
     if( showBottom ) {
@@ -2829,14 +3086,35 @@ console.log(11111,bottomClass)
     $('#artworkTitle').text(title)
     $('#artworkTailsBox').children('.tail-icon').removeClass('active')
     .filter(function(i){ return $.inArray(i,num) > -1; }).addClass('active')
-        showBottomArea(bottomClass);
 }
 function showBottomArea(showName,tailNum) {
-console.log(22222,showName)
     var adClass= 'bottom-thumbnail ' +showName; 
     $('#artworkThumbnail').removeClass().addClass(adClass);        
 }
 
+//改变缩略图高度
+function artworkBottomHeight(h) {
+    $('#artworkThumbnail').height(h);
+}
+//多态小下标
+function builtTailIcon(name,num){
+    var str = '', className 
+      switch(name) {
+        case 1:
+            className = ['huanghuaPA','huanghuaPB','huanghuaPC','huanghuaPD'];
+            break;
+        case 3:
+            className = ['tinghuPA','tinghuPB','tinghuPC','tinghuPD'];
+            break;
+        case 4:
+            className = ['shenlongchengPA','shenlongchengPB','shenlongchengPC']
+            break;
+      }
+      for(var i = 0, l = num; i < l; i++) {
+         str += '<span class="tail-icon active '+className[i]+'" >'+className[i].substr(className[i].length - 1)+'</span>'; //取最后一个字符
+      }
+     $('#artworkTailsBox').empty().append(str)
+}
 var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
   , huanghuaDianlengji18 = $('#huanghuaDianlengji18') //2#离心电冷机
   , huanghuaSanreqi42 = $('#huanghuaSanreqi42')
@@ -2845,21 +3123,39 @@ var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
   , huanghuaFadianji12 = $('#huanghuaFadianji12')
   , huanghuaYurezhiranji13 = $('#huanghuaYurezhiranji13')
   , huanghuaYurezhiranji14 = $('#huanghuaYurezhiranji14')
+  , huanghuaSanreqi44 = $('#huanghuaSanreqi44') //黄花BC区换热器
+  , huanghuaRanqireshuiguolu16 = $('#huanghuaRanqireshuiguolu16')
+  , huanghuaRanqizhiranji15 = $('#huanghuaRanqizhiranji15')
 
+
+   var flag17 = 0
+     , flag18 = 0
 function huanghuaEquipStatFn(data) {
    $.each(data, function(index, value){
-        //D区电冷机17,18
+        //黄花D区电冷机17,18
         if(value.classinstanceid === 17 && value.datavalue1 === '0') {
             huanghuaDianlengji17.addClass('gray-filter');
+            $('.huanghua-d-lixindianlengji01').children('.inner').height(0); // 清流动
+            flag17 = 0
         } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
             huanghuaDianlengji17.removeClass('gray-filter');
-            releaseAnimate('lixindianlengjiIn');
+            //releaseAnimate('huanghua-d-lixindianlengjiIn');
+            $('.huanghua-leng-0-in01').children('.inner').height('100%');  
+            $('.huanghua-leng-0-out01').children('.inner').height('100%');  
+            $('.huanghua-d-lixindianlengji01').children('.inner').height('100%'); // 无动画流动 
+            flag17 = 1
         } else if(value.classinstanceid === 18 && value.datavalue1 === '0') {
             huanghuaDianlengji18.addClass('gray-filter');
+            $('.huanghua-d-lixindianlengji02').children('.inner').height(0); // 清流动
+            flag18 = 0
         } else if(value.classinstanceid === 18 && value.datavalue1 === '1') {
             huanghuaDianlengji18.removeClass('gray-filter');
+            $('.huanghua-leng-0-in02').children('.inner').height('100%');  
+            $('.huanghua-leng-0-out02').children('.inner').height('100%');  
+            $('.huanghua-d-lixindianlengji02').children('.inner').height('100%'); // 无动画流动 
+            flag18 = 1
         }
-        //A区散热器42，43
+        //黄花A区散热器42，43
         else if(value.classinstanceid  === 42 && value.datavalue1 === '0')
         {
             huanghuaSanreqi42.addClass('gray-filter')       
@@ -2872,7 +3168,7 @@ function huanghuaEquipStatFn(data) {
         } else if(value.classinstanceid  === 43 && value.datavalue1 === '1')       {
             huanghuaSanreqi43.removeClass('gray-filter')       
         }
-        //A区发电机
+        //黄花A区发电机
         else if(value.classinstanceid  === 11 && value.datavalue1 === '0')         {
            huanghuaFadianji11.addClass('gray-filter')
         }
@@ -2897,18 +3193,50 @@ function huanghuaEquipStatFn(data) {
         else if(value.classinstanceid  === 14 && value.datavalue1 === '1')         {
            huanghuaYurezhiranji14.removeClass('gray-filter')
         }
+        //黄花BC区
+        else if(value.classinstanceid  === 44 && value.datavalue1 === '0') {
+            huanghuaSanreqi44.addClass('gray-filter') 
+        }
+        else if(value.classinstanceid  === 44 && value.datavalue1 === '1') {
+            huanghuaSanreqi44.removeClass('gray-filter') 
+        }
+        else if(value.classinstanceid  === 16 && value.datavalue1 === '0') {
+            huanghuaRanqireshuiguolu16.addClass('gray-filter') 
+            $('.huanghua-bc-reshuiguolu').children('.inner').height('100%'); // 无动画流动 
+        }
+        else if(value.classinstanceid  === 16 && value.datavalue1 === '1') {
+            huanghuaRanqireshuiguolu16.removeClass('gray-filter') 
+            //$('.huanghua-bc-reshuiguolu').children('.inner').height('100%'); // 无动画流动 
+        }
+        else if(value.classinstanceid  === 15 && value.datavalue1 === '0') {
+            huanghuaRanqizhiranji15.addClass('gray-filter') 
+            $('.huanghua-bc-ranqizhiranji').children('.inner').height(0); // 无动画流动 
+        }
+        else if(value.classinstanceid  === 15 && value.datavalue1 === '1') {
+            huanghuaRanqizhiranji15.removeClass('gray-filter') 
+            $('.huanghua-bc-ranqizhiranji').children('.inner').height('100%'); // 无动画流动 
+        }
    });
+        if( flag17 === 0 && flag18 ===0) { //黄花D区
+            $('.huanghua-leng-0-in01').children('.inner').height(0);  
+            $('.huanghua-leng-0-out01').children('.inner').height(0);  
+            $('.huanghua-leng-0-in02').children('.inner').height(0);  
+            $('.huanghua-leng-0-out02').children('.inner').height(0);  
+        }
 }
 
 var lixindianlengjiIn01 = [
-    function() { animateFn('.leng-1-in01 .inner', {'height':'100%'}, 1543, 'linear',function(){releaseAnimate('lixindianlengjiIn')});}, // duration = height * spd 2.1
-    function() { animateFn('.leng-1-in02 .inner', {'height':'100%'}, 567, 'linear');}
+    function() { animateFn('.huanghua-leng-0-in02 .inner', {'height':'100%'}, 1428, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});}, // duration = height * spd 4.2
+    function() { animateFn('.huanghua-leng-1-in01 .inner', {'height':'100%'}, 3087, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-1-in02 .inner', {'height':'100%'}, 1134, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-1-out01 .inner', {'height':'100%'}, 1281, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-0-out01 .inner', {'height':'100%'}, 1071, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});}
 ];
 /*
 动画名
 队列名
 */
-$doc.queue('lixindianlengjiIn',lixindianlengjiIn01 );
+$doc.queue('huanghua-d-lixindianlengjiIn',lixindianlengjiIn01 );
 /*释放队列下一个*/
 function releaseAnimate(name) {
     $doc.dequeue(name);
