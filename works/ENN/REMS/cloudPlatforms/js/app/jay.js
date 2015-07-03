@@ -14,6 +14,15 @@ var demand
   , intervalLeftRight // 小时刷新节能率等和成本收益
   , intervalIndex //小时刷新首页项目
   , isWan = null // 检查是不是超过万
+  , globalMode = 1 // 默认供冷模式
+  , modeDate = new Date()
+  , modeMons = modeDate.getMonth()+1 
+  //判断供冷供热季，1为供冷，0为供热
+  if(modeMons >= 5 && modeMons <= 9) {
+     globalMode = 1;
+  } else if(modeMons >= 11 || modeMons <= 3) {
+     globalMode = 0;
+  }
 
 var legendName0 = '当'
   , legendName1 = '年'
@@ -2875,63 +2884,65 @@ function shenlongchengFirst() {
 function tinghuLabellistFn(data) {
     $.each(data,function(index, value){
         if(value.widgetid === 1025) {
-            w1025.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1025,[value.title,value.units])
         } else if(value.widgetid === 1040) {
-            w1040.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1040,[value.title,value.units])
         }
         else if(value.widgetid === 1016) {
-            w1016.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1016,[value.title,value.units])
         }
         else if(value.widgetid === 1029) {
-            w1029.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1029,[value.title,value.units])
         }
         else if(value.widgetid === 1041) {
-            w1041.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1041,[value.title,value.units])
         }
         else if(value.widgetid === 1022) {
-            w1022.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1022,[value.title,value.units])
         }
         else if(value.widgetid === 1023) {
-            w1023.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1023,[value.title,value.units])
         }
         else if(value.widgetid === 1030) {
-            w1030.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1030,[value.title,value.units])
         }
         else if(value.widgetid === 1037) {
-            w1037.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1037,[value.title,value.units])
         }
         else if(value.widgetid === 1046) {
-            w1046.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1046,[value.title,value.units])
         }
+        /*
         else if(value.widgetid === 1027) { //153
-            w1027.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1027,[value.title,value.units])
         }
         else if(value.widgetid === 1028) {
-            w1028.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1028,[value.title,value.units])
         }
+        */
         else if(value.widgetid === 1042) {
-            w1042.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1042,[value.title,value.units])
         }
         else if(value.widgetid === 1043) {
-            w1043.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1043,[value.title,value.units])
         }
         else if(value.widgetid === 1031) {
-            w1031.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1031,[value.title,value.units])
         }
         else if(value.widgetid === 1032) {
-            w1032.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1032,[value.title,value.units])
         }
         else if(value.widgetid === 1047) {
-            w1047.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1047,[value.title,value.units])
         }
         else if(value.widgetid === 1048) {
-            w1048.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1048,[value.title,value.units])
         }
         else if(value.widgetid === 1026) { //155
-            w1026.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1026,[value.title,value.units])
         }
         else if(value.widgetid === 1049) { //155
-            w1049.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1049,[value.title,value.units])
         }
     });
     demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=101', jsonp: 'labeldataAll',done:tinghuLabeldataAllFn});
@@ -2939,62 +2950,69 @@ function tinghuLabellistFn(data) {
 function tinghuLabeldataAllFn(data) {
     $.each(data, function(index, value) {
         if(value.widgetid === 1025 ) {
-            w1025.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1025 ,[value.datavalue])
         } else if(value.widgetid === 1040 ) {
-            w1040.children('span.value').text(value.datavalue)
-        } else if(value.widgetid === 1016 ) {
-            w1016.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1040 ,[value.datavalue])
         }
+            /*
+        else if(value.widgetid === 1016 ) {
+            widgetidFn(0,w1016 ,[value.datavalue])
+        }
+        */
         else if(value.widgetid === 1029 ) {
-            w1029.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1029 ,[value.datavalue])
         }
         else if(value.widgetid === 1041 ) {
-            w1041.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1041 ,[value.datavalue])
         }
+        /*
         else if(value.widgetid === 1022) {
-            w1022.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1022,[value.datavalue])
         }
         else if(value.widgetid === 1023) {
-            w1023.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1023,[value.datavalue])
         }
+        */
         else if(value.widgetid === 1030) {
-            w1030.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1030,[value.datavalue])
         }
         else if(value.widgetid === 1037) {
-            w1037.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1037,[value.datavalue])
         }
         else if(value.widgetid === 1046) {
-            w1046.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1046,[value.datavalue])
         }
         else if(value.widgetid === 1027) {
-            w1027.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1027,[value.datavalue])
         }
         else if(value.widgetid === 1028) {
-            w1028.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1028,[value.datavalue])
         }
         else if(value.widgetid === 1042) {
-            w1042.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1042,[value.datavalue])
         }
         else if(value.widgetid === 1043) {
-            w1043.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1043,[value.datavalue])
         }
+        /*
         else if(value.widgetid === 1031) {
-            w1031.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1031,[value.datavalue])
         }
         else if(value.widgetid === 1032) {
-            w1032.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1032,[value.datavalue])
         }
+        */
         else if(value.widgetid === 1047) {
-            w1047.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1047,[value.datavalue])
         }
         else if(value.widgetid === 1048) {
-            w1048.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1048,[value.datavalue])
         }
         else if(value.widgetid === 1026) {
-            w1026.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1026,[value.datavalue])
         }
         else if(value.widgetid === 1049) {
-            w1049.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1094,[value.datavalue])
         }
     });
 }
@@ -3003,7 +3021,7 @@ function shenlongchengLabellistFn(data) {
         if(value.widgetid === 1090) {
             w1090.attr('title',value.title).children('span.units').text(value.units)
         } else if(value.widgetid === 1092) {
-            w1092.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1092,[value.title,value.units])
         }
     });
     demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=102', jsonp: 'labeldataAll',done:shenlongchengLabeldataAllFn});
@@ -3017,153 +3035,165 @@ function shenlongchengLabeldataAllFn(data) {
         }
     });
 }
+function widgetidFn(type,name,value) {
+    var t = type
+    if(t === 1) { // 1为属性名和单位
+        name.children('span.name').text(value[0]+'：').end().children('span.units').text(value[1])
+    } else if( t === 0) { // 0为值
+        name.children('span.value').text(value[0])
+    }
+}
 function huanghAlabellistFn(data) {
     $.each(data,function(index, value){
         if(value.widgetid === 992) {
-            w992.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w992,[value.title,value.units])
         } else if(value.widgetid === 993) {
-            w993.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w993,[value.title,value.units])
         }
         else if(value.widgetid === 999) {
-            w999.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w999,[value.title,value.units])
         }
         else if(value.widgetid === 1000) {
-            w1000.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1000,[value.title,value.units])
         }
         else if(value.widgetid === 994) {
-            w994.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w994,[value.title,value.units])
         }
+        /*
         else if(value.widgetid === 995) {
-            w995.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w995,[value.title,value.units])
         }
         else if(value.widgetid === 975) {
-            w975.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w975,[value.title,value.units])
         }
         else if(value.widgetid === 976) {
-            w976.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w976,[value.title,value.units])
         }
+        */
         else if(value.widgetid === 977) {
-            w977.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w977,[value.title,value.units])
         }
         else if(value.widgetid === 978) {
-            w978.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w978,[value.title,value.units])
         }
         else if(value.widgetid === 974) {
-            w974.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w974,[value.title,value.units])
         }
         else if(value.widgetid === 1001) {
-            w1001.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w1001,[value.title,value.units])
         }
         else if(value.widgetid === 973) {
-            w973.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w973,[value.title,value.units])
         }
         else if(value.widgetid === 996) {
-            w996.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w996,[value.title,value.units])
         }
         else if(value.widgetid === 997) {
-            w997.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w997,[value.title,value.units])
         }
         else if(value.widgetid === 968) {
-            w968.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w968,[value.title,value.units])
         }
         else if(value.widgetid === 969) {
-            w969.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w969,[value.title,value.units])
         }
         else if(value.widgetid === 983) {
-            w983.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w983,[value.title,value.units])
         }
         else if(value.widgetid === 984) {
-            w984.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w984,[value.title,value.units])
         }
         else if(value.widgetid === 985) {
-            w985.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w985,[value.title,value.units])
         }
         else if(value.widgetid === 986) {
-            w986.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w986,[value.title,value.units])
         }
         else if(value.widgetid === 987) {
-            w987.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w987,[value.title,value.units])
         }
+        /*
         else if(value.widgetid === 966) {
-            w966.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w966,value.title,value.units)
         }
         else if(value.widgetid === 967) {
-            w967.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w967,value.title,value.units)
         }
         else if(value.widgetid === 979) {
-            w979.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w979,value.title,value.units)
         }
         else if(value.widgetid === 980) {
-            w980.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w980,value.title,value.units)
         }
+        */
         else if(value.widgetid === 981) {
-            w981.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w981,[value.title,value.units])
         }
         else if(value.widgetid === 982) {
-            w982.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w982,[value.title,value.units])
         }
         else if(value.widgetid === 988) {
-            w988.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w988,[value.title,value.units])
         }
         else if(value.widgetid === 990) {
-            w990.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w990,[value.title,value.units])
         }
         else if(value.widgetid === 991) {
-            w991.attr('title',value.title).children('span.units').text(value.units)
+            widgetidFn(1,w991,[value.title,value.units])
         }
     });
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
 }
-
 function huanghuaAlabeldataAllFn(data) {
     $.each(data, function(index, value) {
         if(value.widgetid === 992) {
-            w992.children('span.value').text(value.datavalue)
+            widgetidFn(0,w992,[value.datavalue])
         } else if(value.widgetid === 993) {
-            w993.children('span.value').text(value.datavalue)
+            widgetidFn(0,w993,[value.datavalue])
         }
         else if(value.widgetid === 973) {
-            w973.children('span.value').text(value.datavalue)
+            widgetidFn(0,w973,[value.datavalue])
         }
         else if(value.widgetid === 999) {
-            w999.children('span.value').text(value.datavalue)
+            widgetidFn(0,w999,[value.datavalue])
         }
         else if(value.widgetid === 1000) {
-            w1000.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1000,[value.datavalue])
         }
         else if(value.widgetid === 994) {
-            w994.children('span.value').text(value.datavalue)
+            widgetidFn(0,w994,[value.datavalue])
         }
         else if(value.widgetid === 995) {
-            w995.children('span.value').text(value.datavalue)
+            widgetidFn(0,w995,[value.datavalue])
         }
         else if(value.widgetid === 975) {
-            w975.children('span.value').text(value.datavalue)
+            widgetidFn(0,w975,[value.datavalue])
         }
         else if(value.widgetid === 976) {
-            w976.children('span.value').text(value.datavalue)
+            widgetidFn(0,w976,[value.datavalue])
         }
         else if(value.widgetid === 977) {
-            w977.children('span.value').text(value.datavalue)
+            widgetidFn(0,w977,[value.datavalue])
         }
         else if(value.widgetid === 978) {
-            w978.children('span.value').text(value.datavalue)
+            widgetidFn(0,w978,[value.datavalue])
         }
         else if(value.widgetid === 974) {
-            w974.children('span.value').text(value.datavalue)
+            widgetidFn(0,w974,[value.datavalue])
         }
         else if(value.widgetid === 1001) {
-            w1001.children('span.value').text(value.datavalue)
+            widgetidFn(0,w1001,[value.datavalue])
         }
         else if(value.widgetid === 973) {
-            w973.children('span.value').text(value.datavalue)
+            widgetidFn(0,w973,[value.datavalue])
         }
         else if(value.widgetid === 996) {
-            w996.children('span.value').text(value.datavalue)
+            widgetidFn(0,w996,[value.datavalue])
         }
         else if(value.widgetid === 997) {
-            w997.children('span.value').text(value.datavalue)
+            widgetidFn(0,w997,[value.datavalue])
         }
+        /*
         else if(value.widgetid === 968) {
             w968.children('span.value').text(value.datavalue)
         }
@@ -3176,41 +3206,42 @@ function huanghuaAlabeldataAllFn(data) {
         else if(value.widgetid === 984) {
             w984.children('span.value').text(value.datavalue)
         }
+        */
         else if(value.widgetid === 985) {
-            w985.children('span.value').text(value.datavalue)
+            widgetidFn(0,w985,[value.datavalue])
         }
         else if(value.widgetid === 986) {
-            w986.children('span.value').text(value.datavalue)
+            widgetidFn(0,w986,[value.datavalue])
         }
         else if(value.widgetid === 987) {
-            w987.children('span.value').text(value.datavalue)
+            widgetidFn(0,w987,[value.datavalue])
         }
         else if(value.widgetid === 966) {
-            w966.children('span.value').text(value.datavalue)
+            widgetidFn(0,w966,[value.datavalue])
         }
         else if(value.widgetid === 967) {
-            w967.children('span.value').text(value.datavalue)
+            widgetidFn(0,w967,[value.datavalue])
         }
         else if(value.widgetid === 979) {
-            w979.children('span.value').text(value.datavalue)
+            widgetidFn(0,w979,[value.datavalue])
         }
         else if(value.widgetid === 980) {
-            w980.children('span.value').text(value.datavalue)
+            widgetidFn(0,w980,[value.datavalue])
         }
         else if(value.widgetid === 981) {
-            w981.children('span.value').text(value.datavalue)
+            widgetidFn(0,w981,[value.datavalue])
         }
         else if(value.widgetid === 982) {
-            w982.children('span.value').text(value.datavalue)
+            widgetidFn(0,w982,[value.datavalue])
         }
         else if(value.widgetid === 988) {
-            w988.children('span.value').text(value.datavalue)
+            widgetidFn(0,w988,[value.datavalue])
         }
         else if(value.widgetid === 990) {
-            w990.children('span.value').text(value.datavalue)
+            widgetidFn(0,w990,[value.datavalue])
         }
         else if(value.widgetid === 991) {
-            w991.children('span.value').text(value.datavalue)
+            widgetidFn(0,w991,[value.datavalue])
         }
     });
 }
@@ -3269,7 +3300,7 @@ function gytSelectFn(showBottom,showName,title,num) {
     else {
         $('#artworkBottom').addClass('hide')
     }
-    $('#artworkTitle').text(title)
+    $('#artworkTitle').children('div').text(title)
     $('#artworkTailsBox').children('.tail-icon').removeClass('active')
     .filter(function(i){ return $.inArray(i,num) > -1; }).addClass('active')
 }
@@ -3280,7 +3311,7 @@ function showBottomArea(showName,tailNum) {
 
 //改变缩略图高度
 function artworkBottomHeight(h) {
-    $('#artworkThumbnail').height(h);
+    $('#artworkThumbnail').height(h).parent('#artworkBottom').height(h);
 }
 //多态小下标
 function builtTailIcon(name,num){
@@ -3314,226 +3345,425 @@ var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
   , huanghuaRanqizhiranji15 = $('#huanghuaRanqizhiranji15')
 
 
+//黄花设备
+//a
    var classinstanceid17Flag = 0
      , classinstanceid18Flag = 0
+     , classinstanceid11Flag = 0
+     , classinstanceid12Flag = 0
      // 42,43换热器1和2，13,14烟气余热直燃机1和2，11,12燃气内燃发电机组
      , classinstanceid13Flag = 0 
      , classinstanceid14Flag = 0
      , classinstanceid42Flag = 0
      , classinstanceid43Flag = 0
      // 亭湖 
+     , classinstanceid153Flag = 0
+     , classinstanceid154Flag = 0
+     , classinstanceid151Flag = 0
+     //a
+     , classinstanceid180Flag = 0
+     , classinstanceid181Flag = 0
      // 神农城
+     //a
+     //9051, 9053, 102,9054
+     , classinstanceid9051Flag = 0
+     , classinstanceid9053Flag = 0
+     , classinstanceid102Flag = 0
+     , classinstanceid9054Flag = 0
+     //b
+     , classinstanceid97Flag = 0
+     , classinstanceid98Flag = 0
+     , classinstanceid99Flag = 0
+     , classinstanceid100Flag = 0
+     , classinstanceid101Flag = 0
+     //c
+     , classinstanceid103Flag = 0
+     , classinstanceid104Flag = 0
+     , classinstanceid105Flag = 0
+     , classinstanceid106Flag = 0
+
+
 function tinghuEquipStatFn(data) {
     $.each(data, function(index, value) {
         if(value.classinstanceid === 180 && value.datavalue1 === '0') { //亭湖A蒸汽型溴化锂机组1
             $('#tinghuAEZhengqixiulengji01').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-a-l-xiulengji');
+            classinstanceid180Flag = 0
         }
         else if(value.classinstanceid  === 180 && value.datavalue1 === '1')
         {
             $('#tinghuAEZhengqixiulengji01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-xiulengji-out02','.tinghu-xiulengji-in05','.tinghu-a-l-xiulengji','.tinghu-xiulengji-out02','.tinghu-xiulengji-in05');
+            classinstanceid180Flag = 1
         }
         else if(value.classinstanceid === 157 && value.datavalue1 === '0') { //亭湖A烟气余热型蒸汽锅炉1
             $('#tinghuAEYureguolu01').addClass('gray-filter');
+            $('.tinghu-a-l-yureguolu').children('.inner').height(0); // 无动画流动 
+            pipelineStatus(0,'.tinghu-a-l-yureguolu');
         }
         else if(value.classinstanceid  === 157 && value.datavalue1 === '1')
         {
             $('#tinghuAEYureguolu01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-ranqiguolu-0-out01','.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-1-in01','.tinghu-a-l-yureguolu');
         }
         else if(value.classinstanceid === 152 && value.datavalue1 === '0') { //亭湖A发电机
             $('#tinghuAEFdianji01').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-a-l-fadianji');
         }
         else if(value.classinstanceid  === 152 && value.datavalue1 === '1')
         {
             $('#tinghuAEFdianji01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-fadianji-out01','.tinghu-a-l-fadianji');
         }
         else if(value.classinstanceid === 181 && value.datavalue1 === '0') { //亭湖A换热器01
             $('#tinghuAEHuanreqi01').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-a-l-huanreqi01');
         }
         else if(value.classinstanceid  === 181 && value.datavalue1 === '1')
         {
             $('#tinghuAEHuanreqi01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-huanreqi-0-in01','.tinghu-huanreqi-0-in02','.tinghu-a-l-huanreqi01');
         }
         else if(value.classinstanceid === 182 && value.datavalue1 === '0') { //亭湖A换热器02
             $('#tinghuAEHuanreqi02').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-a-l-huanreqi02');
         }
         else if(value.classinstanceid  === 182 && value.datavalue1 === '1')
         {
             $('#tinghuAEHuanreqi02').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-huanreqi-0-in01','.tinghu-huanreqi-0-in02','.tinghu-a-l-huanreqi02');
         }
         else if(value.classinstanceid === 161 && value.datavalue1 === '0') { //亭湖A低温冷却塔
             $('#tinghuAELengqueta02').addClass('gray-filter');
+            //pipelineStatus(1,'','');
         }
         else if(value.classinstanceid  === 161 && value.datavalue1 === '1')
         {
             $('#tinghuAELengqueta02').removeClass('gray-filter');
+            //pipelineStatus(1,'','');
         }
         else if(value.classinstanceid === 162 && value.datavalue1 === '0') { //亭湖A高温冷却塔
             $('#tinghuAELengqueta01').addClass('gray-filter');
+            //pipelineStatus(1,'','');
         }
         else if(value.classinstanceid  === 162 && value.datavalue1 === '1')
         {
             $('#tinghuAELengqueta01').removeClass('gray-filter');
+            //pipelineStatus(1,'','');
         }
-        else if(value.classinstanceid === 153 && value.datavalue1 === '0') { //亭湖A直燃机01
+        else if(value.classinstanceid === 153 && value.datavalue1 === '0') { //亭湖bc直燃机01
            $('#tinghuBCEZhiranji01').addClass('gray-filter');
+            classinstanceid153Flag = 0
+            pipelineStatus(0,'.tinghu-bc-l-zhiranji01');
         }
         else if(value.classinstanceid  === 153 && value.datavalue1 === '1')
         {
             $('#tinghuBCEZhiranji01').removeClass('gray-filter');
+            classinstanceid153Flag = 1
+            pipelineStatus(1,'.tinghu-bc-l-zhiranji01');
         }
-        else if(value.classinstanceid === 154 && value.datavalue1 === '0') { //亭湖A直燃机02
+        else if(value.classinstanceid === 154 && value.datavalue1 === '0') { //亭湖bc直燃机02
             $('#tinghuBCEZhiranji02').addClass('gray-filter');
+            classinstanceid154Flag = 0
+            pipelineStatus(0,'.tinghu-bc-l-zhiranji02');
         }
         else if(value.classinstanceid  === 154 && value.datavalue1 === '1')
         {
             $('#tinghuBCEZhiranji02').removeClass('gray-filter');
+            classinstanceid154Flag = 1
+            pipelineStatus(1,'.tinghu-zhiranji-0-in01','.tinghu-zhiranji-0-out01','.tinghu-zhiranji-2-out03','.tinghu-zhiranji-2-in03','.tinghu-zhiranji-0-out02','.tinghu-zhiranji-0-in02','.tinghu-bc-l-zhiranji02');
         }
-        else if(value.classinstanceid === 151 && value.datavalue1 === '0') { //亭湖A地源热泵
+        else if(value.classinstanceid === 151 && value.datavalue1 === '0') { //亭湖bc地源热泵
             $('#tinghuBCEDiyuanrebeng01').addClass('gray-filter');
+            classinstanceid151Flag = 0
+            pipelineStatus(0,'.tinghu-bc-l-diyuanrebeng');
         }
         else if(value.classinstanceid  === 151 && value.datavalue1 === '1')
         {
             $('#tinghuBCEDiyuanrebeng01').removeClass('gray-filter');
+            classinstanceid151Flag = 1
+            pipelineStatus(1,'.tinghu-zhiranji-2-out03','.tinghu-zhiranji-2-in03','.tinghu-zhiranji-0-out02','.tinghu-zhiranji-0-in02','.tinghu-bc-l-diyuanrebeng');
         }
         else if(value.classinstanceid === 155 && value.datavalue1 === '0') { //亭湖D燃气锅炉01
             $('#tinghuDERanqiguolu01').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-d-l-ranqiguolu01');
         }
         else if(value.classinstanceid  === 155 && value.datavalue1 === '1')
         {
             $('#tinghuDERanqiguolu01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-1-in01','.tinghu-ranqiguolu-0-out01','.tinghu-ranqiguolu2-0-in01','.tinghu-d-l-ranqiguolu01');
         }
-        else if(value.classinstanceid === 156 && value.datavalue1 === '0') { //亭湖D燃气锅炉01
+        else if(value.classinstanceid === 156 && value.datavalue1 === '0') { //亭湖D燃气锅炉02
             $('#tinghuDERanqiguolu02').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-d-l-ranqiguolu02');
         }
         else if(value.classinstanceid  === 156 && value.datavalue1 === '1')
         {
             $('#tinghuDERanqiguolu02').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-ranqiguolu2-0-in01','.tinghu-ranqiguolu2-1-out06','.tinghu-ranqiguolu-0-out01','.tinghu-d-l-ranqiguolu02');
         }
         else if(value.classinstanceid === 183 && value.datavalue1 === '0') { //亭湖D换热器03
             $('#tinghuDEHuanreqi01').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-d-l-huangreqi03');
         }
         else if(value.classinstanceid  === 183 && value.datavalue1 === '1')
         {
             $('#tinghuDEHuanreqi01').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-fenqigang-0-out01','.tinghu-ranqiguolu-0-out02','.tinghu-d-l-huangreqi03');
         }
         else if(value.classinstanceid === 184 && value.datavalue1 === '0') { //亭湖D换热器04
             $('#tinghuDEHuanreqi02').addClass('gray-filter');
+            pipelineStatus(0,'.tinghu-d-l-huangreqi04');
         }
         else if(value.classinstanceid  === 184 && value.datavalue1 === '1')
         {
             $('#tinghuDEHuanreqi02').removeClass('gray-filter');
+            pipelineStatus(1,'.tinghu-fenqigang-0-out01','.tinghu-ranqiguolu-0-out02','.tinghu-d-l-huangreqi04');
         }
     });
+
+        if( classinstanceid153Flag === 0 && classinstanceid154Flag ===0 &&classinstanceid151Flag ===0) { //亭湖bc区
+            pipelineStatus(0,'.tinghu-zhiranji-0-out02','.tinghu-zhiranji-0-in02');
+        } else if(classinstanceid153Flag === 0 && classinstanceid154Flag ===0 ){
+            pipelineStatus(0,'.tinghu-zhiranji-0-in01','.tinghu-zhiranji-0-out01');
+        }
+        if(classinstanceid154Flag === 0 && classinstanceid151Flag ===0 ){
+            pipelineStatus(0,'.tinghu-zhiranji-2-out03','.tinghu-zhiranji-2-in03');
+        }
+        if(classinstanceid180Flag === 0 && classinstanceid181Flag ===0 ){ //亭湖a区,溴冷机和1号换热器
+            pipelineStatus(0,'.tinghu-xiulengji-out02','.tinghu-xiulengji-in05');
+        }
+        if(classinstanceid181Flag === 0 && classinstanceid182Flag ===0 ){// 亭湖a区，1号换热器和2号换热器
+            pipelineStatus(0,'.tinghu-huanreqi-0-in01','.tinghu-huanreqi-0-in02');
+        }
+        if(classinstanceid183Flag === 0 && classinstanceid184Flag ===0 ){// 亭湖a区，1号换热器和2号换热器
+            pipelineStatus(0,'.tinghu-fenqigang-0-out01','.tinghu-ranqiguolu-0-out02');
+        }
+        if(classinstanceid155Flag === 0 && classinstanceid157Flag ===0) {
+            pipelineStatus(0,'.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-1-in01');
+        }
+        if(classinstanceid155Flag === 0 && classinstanceid157Flag ===0 && classinstanceid156Flag ===0) {
+            pipelineStatus(0,'.tinghu-ranqiguolu-0-out01');
+        }
+        if(classinstanceid155Flag === 0 && classinstanceid156Flag ===0) {
+            pipelineStatus(0,'.tinghu-ranqiguolu2-1-out06');
+        }
+}
+//判断设备状态, 状态码0为关闭，1为启动
+function equipStatus() {
+    var statusCode = Array.prototype.shift.call(arguments) 
+      , length = arguments.length
+      , i = 0
+    if(statusCode === 0) {
+        for(i;i<length;i++) {
+            $(arguments[i]).addClass('gray-filter');
+        }
+    } else if(statusCode === 1) {
+        for(i;i<length;i++) {
+            $(arguments[i]).removeClass('gray-filter');
+        }
+    }
+}
+//判断管道流动, 状态码0为关闭，1为启动
+function pipelineStatus() {
+    var statusCode = Array.prototype.shift.call(arguments) 
+      , length = arguments.length
+      , i = 0
+    if(statusCode === 0) {
+        for(i;i<length;i++) {
+            $(arguments[i]).children('.inner').height(0); // 无动画流动 
+        }
+    } else if(statusCode === 1) {
+        for(i;i<length;i++) {
+            $(arguments[i]).children('.inner').height('100%'); // 无动画流动 
+        }
+    }
+
 }
 function shenlongchengEquipStatFn(data) {
+
     $.each(data, function(index, value) {
         if(value.classinstanceid === 9051  && value.datavalue1 === '0') { //神农城A余热直燃机
+            equipStatus(0,'#shenlongchengAEYurezhiranji01');  
+            pipelineStatus(1,'.shenlongcheng-a-l-yurezhiranji');
+            classinstanceid9051Flag = 0
         }
         else if(value.classinstanceid  === 9051 && value.datavalue1 === '1')
         {
+            equipStatus(1,'#shenlongchengAEYurezhiranji01');  
+            pipelineStatus(1,'.shenlongcheng-a-l-yurezhiranji','.shenlongcheng-a-g-yureburanzhiranji-out07','.shenlongcheng-a-g-general-in01','.shenlongcheng-a-g-yureburanzhiranji-out05','.shenlongcheng-a-g-zhiranji-in01');
+            classinstanceid9051Flag = 1
         }
         else if(value.classinstanceid === 9053  && value.datavalue1 === '0') { //神农城A发电机1
+            equipStatus(0,'#shenlongchengAEFadianji01');  
+            pipelineStatus(0,'.shenlongcheng-a-l-fadianji01');
+            classinstanceid9053Flag = 0
         }
         else if(value.classinstanceid  === 9053 && value.datavalue1 === '1')
         {
+            equipStatus(1,'#shenlongchengAEFadianji01');  
+            pipelineStatus(1,'.shenlongcheng-a-l-fadianji01');
+            classinstanceid9053Flag = 1
         }
         else if(value.classinstanceid  === 102 && value.datavalue1 === '0') //神农城A燃气直燃机1
         {
-            $('#shenlongchengAEranqizhiranji01').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengAEranqizhiranji01');  
+            pipelineStatus(0,'.shenlongcheng-a-l-ranqizhiranji');
+            classinstanceid102Flag = 0
         }
         else if(value.classinstanceid  === 102 && value.datavalue1 === '1')
         {
-            $('#shenlongchengAEranqizhiranji01').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengAEranqizhiranji01');  
+            pipelineStatus(1,'.shenlongcheng-a-l-ranqizhiranji','.shenlongcheng-a-y-yureburanzhiranji-out10','.shenlongcheng-a-y-huanreqi2-out03','.shenlongcheng-a-huanreqi-in06','.shenlongcheng-a-y-yureburanzhiranji-out09','.shenlongcheng-a-y-yureburanzhiranji-out08','.shenlongcheng-a-g-yureburanzhiranji-out07','.shenlongcheng-a-g-general-in01','.shenlongcheng-a-g-yureburanzhiranji-out05','.shenlongcheng-a-g-zhiranji-in01');
+            classinstanceid102Flag = 1
         }
         else if(value.classinstanceid  === 9054 && value.datavalue1 === '0') //神农城A发电机2
         {
+            equipStatus(0,'#shenlongchengAEYurezhiranji02');  
+            pipelineStatus(0,'.shenlongcheng-a-l-fadianji02');
+            classinstanceid9054Flag = 0
         }
         else if(value.classinstanceid  === 9054 && value.datavalue1 === '1')
         {
+            equipStatus(1,'#shenlongchengAEYurezhiranji02');  
+            pipelineStatus(1,'.shenlongcheng-a-l-fadianji02');
+            classinstanceid9054Flag = 1
         }
         else if(value.classinstanceid  === 97 && value.datavalue1 === '0') //神农城B离心电制冷机01
         {
-            $('#shenlongchengBELixindianlengji01').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengBELixindianlengji01');  
+            pipelineStatus(0,'.shenlongcheng-b-l-lixindianzhilengA1');
+            classinstanceid97Flag = 0
         }
         else if(value.classinstanceid  === 97 && value.datavalue1 === '1')
         {
-            $('#shenlongchengBELixindianlengji01').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengBELixindianlengji01');  
+            pipelineStatus(1,'.shenlongcheng-b-l-lixindianzhilengA1','.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiA2-02','.dianzhilengji-b-g-qufenshuiqi-06','.dianzhilengji-jielengquelie-g-lixindianzhilengjiA3-02','.dianzhilengji-b-g-qufenshuiqi-04','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-02','.dianzhilengji-b-g-qufenshuiqi-02','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+            classinstanceid97Flag = 1
         }
         else if(value.classinstanceid  === 98 && value.datavalue1 === '0') //神农城B离心电制冷机02
         {
-            $('#shenlongchengBELixindianlengji02').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengBELixindianlengji02');  
+            pipelineStatus(0,'.shenlongcheng-b-l-lixindianzhilengA2');
+            classinstanceid98Flag = 1
         }
         else if(value.classinstanceid  === 98 && value.datavalue1 === '1')
         {
-            $('#shenlongchengBELixindianlengji02').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengBELixindianlengji02');  
+            pipelineStatus(1,'.shenlongcheng-b-l-lixindianzhilengA2','.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01',/*第一第二*/'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02','.dianzhilengji-b-lixindianzhilengjiA1-01'/*2和3蓝色*/,'.dianzhilengji-jielengquelie-g-lixindianzhilengjiA2-02','.dianzhilengji-b-g-qufenshuiqi-06','.dianzhilengji-jielengquelie-g-lixindianzhilengjiA3-02','.dianzhilengji-b-g-qufenshuiqi-04','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-02','.dianzhilengji-b-g-qufenshuiqi-02','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+            classinstanceid98Flag = 1
         }
         else if(value.classinstanceid  === 99 && value.datavalue1 === '0') //神农城B离心电制冷机03
         {
-            $('#shenlongchengBELixindianlengji03').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengBELixindianlengji03');  
+            pipelineStatus(0,'.shenlongcheng-b-l-lixindianzhilengA3');
+            classinstanceid99Flag = 1
         }
         else if(value.classinstanceid  === 99 && value.datavalue1 === '1')
         {
-            $('#shenlongchengBELixindianlengji03').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengBELixindianlengji03');  
+            pipelineStatus(1,'.shenlongcheng-b-l-lixindianzhilengA3','.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01'/*第一第二*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02','.dianzhilengji-b-lixindianzhilengjiA1-01'/*3和4蓝色*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-02','.dianzhilengji-b-lixindianzhilengjiA3-02'/*5和6*/,'.dianzhilengji-jielengquelie-g-lixindianzhilengjiA3-02','.dianzhilengji-b-g-qufenshuiqi-04','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-02','.dianzhilengji-b-g-qufenshuiqi-02','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+            classinstanceid99Flag = 1
         }
         else if(value.classinstanceid  === 100 && value.datavalue1 === '0') //神农城B离心电制冷机04
         {
-            $('#shenlongchengBELixindianlengji04').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengBELixindianlengji04');  
+            //pipelineStatus(0,'.shenlongcheng-b-l-lixindianzhilengB1');
+            classinstanceid100Flag = 1
         }
         else if(value.classinstanceid  === 100 && value.datavalue1 === '1')
         {
-            $('#shenlongchengBELixindianlengji04').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengBELixindianlengji04');  
+            pipelineStatus(1,'.shenlongcheng-b-l-lixindianzhilengB1','.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01'/*第一第二*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02','.dianzhilengji-b-lixindianzhilengjiA1-01'/*3和4蓝色*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-02','.dianzhilengji-b-lixindianzhilengjiA3-02'/*5和6*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA3-02','.dianzhilengji-b-lixindianzhilengjiB1-02','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-02','.dianzhilengji-b-g-qufenshuiqi-02','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+            classinstanceid100Flag = 1
         }
         else if(value.classinstanceid  === 101 && value.datavalue1 === '0') //神农城B离心电制冷机05
         {
-            $('#shenlongchengBELixindianlengji05').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengBELixindianlengji05');  
+            pipelineStatus(0,'.shenlongcheng-b-l-lixindianzhilengB2');
+            classinstanceid101Flag = 1
         }
         else if(value.classinstanceid  === 101 && value.datavalue1 === '1')
         {
-            $('#shenlongchengBELixindianlengji05').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengBELixindianlengji05');  
+            pipelineStatus(1,'.shenlongcheng-b-l-lixindianzhilengB2','.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01'/*第一第二*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02','.dianzhilengji-b-lixindianzhilengjiA1-01'/*3和4蓝色*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-02','.dianzhilengji-b-lixindianzhilengjiA3-02'/*5和6*/,'.dianzhilengji-jielengquelie-b-lixindianzhilengjiA3-02','.dianzhilengji-b-lixindianzhilengjiB1-02'/*7和8*/,'.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+            classinstanceid101Flag = 1
         }
         else if(value.classinstanceid  === 103 && value.datavalue1 === '0') //神农城C燃气热水锅炉01
         {
-            $('#shenlongchengCERanqireshuiguolu01').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengCERanqireshuiguolu01');  
+            pipelineStatus(0,'.shenlongcheng-c-l-ranqiguoluA1');
+            classinstanceid103Flag = 0
         }
         else if(value.classinstanceid  === 103 && value.datavalue1 === '1')
         {
-            $('#shenlongchengCERanqireshuiguolu01').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengCERanqireshuiguolu01');  
+            pipelineStatus(1,'.shenlongcheng-c-l-ranqiguoluA1','.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01'/*1和2*/,'.dianzhilengji-c-reshuiguolu-y-A2-01','.dianzhilengji-c-reshuiguolu-y-B1-03','.dianzhilengji-c-reshuiguolu-y-B1-02');
+            classinstanceid103Flag = 1
         }
         else if(value.classinstanceid  === 104 && value.datavalue1 === '0') //神农城C燃气热水锅炉02
         {
-            $('#shenlongchengCERanqireshuiguolu02').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengCERanqireshuiguolu02');  
+            pipelineStatus(0,'.shenlongcheng-c-l-ranqiguoluA2');
+            classinstanceid104Flag = 0
         }
         else if(value.classinstanceid  === 104 && value.datavalue1 === '1')
         {
-            $('#shenlongchengCERanqireshuiguolu02').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengCERanqireshuiguolu02');  
+            pipelineStatus(1,'.shenlongcheng-c-l-ranqiguoluA2','.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01'/*1和2*/,'.dianzhilengji-c-reshuiguolu-A1-01','.dianzhilengji-c-reshuiguolu-o-A2-02'/*3和4*/,'.dianzhilengji-c-reshuiguolu-y-A2-01','.dianzhilengji-c-reshuiguolu-y-B1-03','.dianzhilengji-c-reshuiguolu-y-B1-02');
+            classinstanceid104Flag = 1
         }
         else if(value.classinstanceid  === 105 && value.datavalue1 === '0') //神农城C燃气热水锅炉03
         {
-            $('#shenlongchengCERanqireshuiguolu03').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengCERanqireshuiguolu03');  
+            pipelineStatus(0,'.shenlongcheng-c-l-ranqiguoluA3');
+            classinstanceid105Flag = 0
         }
         else if(value.classinstanceid  === 105 && value.datavalue1 === '1')
         {
-            $('#shenlongchengCERanqireshuiguolu03').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengCERanqireshuiguolu03');  
+            pipelineStatus(1,'.shenlongcheng-c-l-ranqiguoluA3','.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01'/*1和2*/,'.dianzhilengji-c-reshuiguolu-A1-01','.dianzhilengji-c-reshuiguolu-o-A2-02'/*3和4*/,'.dianzhilengji-c-reshuiguolu-A2-02','.dianzhilengji-c-reshuiguolu-o-A3-02','.dianzhilengji-c-reshuiguolu-y-B1-03','.dianzhilengji-c-reshuiguolu-y-B1-02');
+            classinstanceid105Flag = 1
         }
         else if(value.classinstanceid  === 106 && value.datavalue1 === '0') //神农城C燃气热水锅炉04
         {
-            $('#shenlongchengCERanqireshuiguolu04').addClass('gray-filter');
+            equipStatus(0,'#shenlongchengCERanqireshuiguolu04');  
+            pipelineStatus(0,'.shenlongcheng-c-l-ranqiguoluB1');
+            classinstanceid106Flag = 0
         }
         else if(value.classinstanceid  === 106 && value.datavalue1 === '1')
         {
-            $('#shenlongchengCERanqireshuiguolu04').removeClass('gray-filter');
+            equipStatus(1,'#shenlongchengCERanqireshuiguolu04');  
+            pipelineStatus(1,'.shenlongcheng-c-l-ranqiguoluB1','.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01'/*1和2*/,'.dianzhilengji-c-reshuiguolu-A1-01','.dianzhilengji-c-reshuiguolu-o-A2-02'/*3和4*/,'.dianzhilengji-c-reshuiguolu-A2-02','.dianzhilengji-c-reshuiguolu-A3-02','.dianzhilengji-c-reshuiguolu-o-B1-02','.dianzhilengji-c-reshuiguolu-o-A3-02','.dianzhilengji-c-reshuiguolu-y-B1-02');
+            classinstanceid106Flag = 1
         }
     });
+    if(classinstanceid102Flag ===1 && classinstanceid9053Flag ===1) {
+        pipelineStatus(1,'.shenlongcheng-a-fadianji2-out10','.shenlongcheng-a-fadianji2-out11','.shenlongcheng-a-y-yureburanzhiranji-out11','.shenlongcheng-a-y-yureburanzhiranji-in12','.shenlongcheng-a-fadianji1-in02','.shenlongcheng-a-gaowenlengquetai1-out02','.shenlongcheng-a-gaowenlengquetai1-in03','.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-fadianji1-out01','.shenlongcheng-a-fadianji1-out02','.shenlongcheng-a-y-ranqizhiranji-in01');
+    }
+    if(classinstanceid102Flag ===1 && classinstanceid9054Flag ===1) {
+        pipelineStatus(1,'.shenlongcheng-a-fadianji2-out12','.shenlongcheng-a-fadianji2-out13','.shenlongcheng-a-y-yureburanzhiranji-out11','.shenlongcheng-a-y-yureburanzhiranji-in12','.shenlongcheng-a-fadianji2-in02','.shenlongcheng-a-fadianji2-in01','.shenlongcheng-a-fadianji2-out02','.shenlongcheng-a-fadianji1-out03','.shenlongcheng-a-y-ranqizhiranji-in01','.shenlongcheng-a-y-yureburanzhiranji-in11'); 
+    }
+    if(classinstanceid102Flag ===0 && classinstanceid9051Flag ===0) {
+        pipelineStatus(0,'.shenlongcheng-a-g-yureburanzhiranji-out05','.shenlongcheng-a-g-zhiranji-in01'); //去冷却塔
+        pipelineStatus(0,'.shenlongcheng-a-g-general-in01','.shenlongcheng-a-g-yureburanzhiranji-out07'); //去分水器
+    }
+    if(classinstanceid97Flag ===0 && classinstanceid98Flag ===0&& classinstanceid99Flag ===0&& classinstanceid100Flag ===0&& classinstanceid101Flag ===0) {
+        pipelineStatus(0,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-jielengquelie-in01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01'); 
+    }
+    if(classinstanceid103Flag ===0 && classinstanceid104Flag ===0&& classinstanceid105Flag ===0&& classinstanceid106Flag ===0) {
+        pipelineStatus(0,'.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01','.dianzhilengji-c-reshuiguolu-y-B1-02'); 
+    }
 }
 function huanghuaEquipStatFn(data) {
    $.each(data, function(index, value){
         //黄花D区电冷机17,18
         if(value.classinstanceid === 17 && value.datavalue1 === '0') {
-            huanghuaDianlengji17.addClass('gray-filter');
+            equipStatus(0,huanghuaDianlengji17);  
             $('.huanghua-d-lixindianlengji01').children('.inner').height(0); // 清流动
             classinstanceid17Flag = 0
         } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
-            huanghuaDianlengji17.removeClass('gray-filter');
+            equipStatus(1,huanghuaDianlengji17);  
             //releaseAnimate('huanghua-d-lixindianlengjiIn');
             $('.huanghua-leng-0-in01').children('.inner').height('100%');  
             $('.huanghua-leng-0-out01').children('.inner').height('100%');  
@@ -3554,61 +3784,61 @@ function huanghuaEquipStatFn(data) {
         else if(value.classinstanceid  === 42 && value.datavalue1 === '0')
         {
             huanghuaSanreqi42.addClass('gray-filter')       
+           pipelineStatus(0,'.huanghua-a-sanreqi01');
            classinstanceid42Flag = 0; 
         } else if(value.classinstanceid  === 42 && value.datavalue1 === '1')       {
             huanghuaSanreqi42.removeClass('gray-filter')       
+           pipelineStatus(1,'.huanghua-a-sanreqi01');
            classinstanceid42Flag = 1; 
         }
         else if(value.classinstanceid  === 43 && value.datavalue1 === '0')
         {
             huanghuaSanreqi43.addClass('gray-filter')       
+           pipelineStatus(0,'.huanghua-a-sanreqi02');
            classinstanceid43Flag = 0; 
         } else if(value.classinstanceid  === 43 && value.datavalue1 === '1')       {
             huanghuaSanreqi43.removeClass('gray-filter')       
+           pipelineStatus(1,'.huanghua-a-sanreqi02');
            classinstanceid43Flag = 1; 
         }
         //黄花A区发电机
         else if(value.classinstanceid  === 11 && value.datavalue1 === '0')         {
            huanghuaFadianji11.addClass('gray-filter')
+           //pipelineStatus(0,'.huanghua-a-lengqueta01','.huanghua-a-fadianji01');
+           pipelineStatus(0,'.huanghua-a-fadianji01');
+           classinstanceid11Flag = 0; 
         }
         else if(value.classinstanceid  === 11 && value.datavalue1 === '1')         {
            huanghuaFadianji11.removeClass('gray-filter')
-           $('.huanghua-a-fadianji01').children('.inner').height('100%'); // 无动画流动 
-           $('.huanghua-a-lengqueta01').children('.inner').height('100%'); //黄花A区1#冷却塔 
-           $('.huanghua-a-sanreqi01').children('.inner').height('100%'); //黄花A区1#换热器
+           classinstanceid11Flag = 1; 
         }
         else if(value.classinstanceid  === 12 && value.datavalue1 === '0')         {
            huanghuaFadianji12.addClass('gray-filter')
+           pipelineStatus(0,'.huanghua-a-l-yurezhiranji02');
+           classinstanceid12Flag = 0; 
         }
         else if(value.classinstanceid  === 12 && value.datavalue1 === '1')         {
            huanghuaFadianji12.removeClass('gray-filter')
-           $('.test02').children('.inner').height('100%'); //黄花A区2#发电机
+           classinstanceid12Flag = 1; 
         }
         else if(value.classinstanceid  === 13 && value.datavalue1 === '0')         {
            huanghuaYurezhiranji13.addClass('gray-filter')
-           $('.huanghua-a-yurezhiranji01').children('.inner').height(0); // 无动画流动 
+           pipelineStatus(0,'.huanghua-a-yurezhiranji01');
            classinstanceid13Flag = 0; 
         }
         else if(value.classinstanceid  === 13 && value.datavalue1 === '1')         {
            huanghuaYurezhiranji13.removeClass('gray-filter')
-            $('.huanghua-yurezhiranji-1-in06').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-in01').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-out01').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-out06').children('.inner').height('100%'); // 无动画流动 
-            //1号换热器和余热直燃机公用部分
-            $('.huanghua-yurezhiranji-1-in03-up').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-in03-down').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-out03-up').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-yurezhiranji-1-out03-down').children('.inner').height('100%'); // 无动画流动 
-            $('.huanghua-a-yurezhiranji01').children('.inner').height('100%'); // 无动画流动 
+           pipelineStatus(1,'.huanghua-a-yurezhiranji01','.huanghua-yurezhiranji-1-in03-up','.huanghua-yurezhiranji-1-in03-down','.huanghua-yurezhiranji-1-out03-up','.huanghua-yurezhiranji-1-out03-down','.huanghua-yurezhiranji-1-in06','.huanghua-yurezhiranji-1-in01','.huanghua-yurezhiranji-1-out01','.huanghua-yurezhiranji-1-out06');
            classinstanceid13Flag = 1; 
         }
         else if(value.classinstanceid  === 14 && value.datavalue1 === '0')         {
            huanghuaYurezhiranji14.addClass('gray-filter')
+           pipelineStatus(0,'.huanghua-a-l-yurezhiranji02');
            classinstanceid14Flag = 0; 
         }
         else if(value.classinstanceid  === 14 && value.datavalue1 === '1')         {
            huanghuaYurezhiranji14.removeClass('gray-filter')
+           pipelineStatus(1,'.huanghua-a-l-yurezhiranji02','.huanghua-yurezhiranji-2-in04-up','.huanghua-yurezhiranji-2-out03-up','.huanghua-yurezhiranji-2-in03','.huanghua-yurezhiranji-2-out04','.huanghua-yurezhiranji-1-in01','.huanghua-yurezhiranji-1-out01','.huanghua-yurezhiranji-1-in06','.huanghua-yurezhiranji-1-in01','.huanghua-yurezhiranji-1-out01','.huanghua-yurezhiranji-1-out06');
            classinstanceid14Flag = 1; 
         }
         //黄花BC区
@@ -3640,12 +3870,22 @@ function huanghuaEquipStatFn(data) {
             $('.huanghua-leng-0-out01').children('.inner').height(0);  
             $('.huanghua-leng-0-in02').children('.inner').height(0);  
             $('.huanghua-leng-0-out02').children('.inner').height(0);  
-        } else if(classinstanceid13Flag === 0 && classinstanceid14Flag ===0 && classinstanceid42Flag === 0 && classinstanceid43Flag ===0){
+        } 
+        if(classinstanceid13Flag === 0 && classinstanceid14Flag ===0 && classinstanceid42Flag === 0 && classinstanceid43Flag ===0){
             $('.huanghua-yurezhiranji-1-in06').children('.inner').height(0); // 无动画流动 
             $('.huanghua-yurezhiranji-1-in01').children('.inner').height(0); // 无动画流动 
             $('.huanghua-yurezhiranji-1-out01').children('.inner').height(0); // 无动画流动 
             $('.huanghua-yurezhiranji-1-out06').children('.inner').height(0); // 无动画流动 
         }
+        if(classinstanceid12Flag === 1 && classinstanceid14Flag ===1 ){ //黄花2号发电机和2号余热直燃机
+           pipelineStatus(1,'.huanghua-fadianji-2-out03','.huanghua-fadianji-2-out04','.huanghua-yuretianxian-2-in01','.huanghua-yuretianxian-2-out02','.huanghua-fadianji-2-in02','.huanghua-fadianji-2-in01','.huanghua-yurezhiranji-2-out06','.huanghua-yurezhiranji-2-out05','.huanghua-fadianji-2-out01','.huanghua-fadianji-2-out02','.huanghua-yurezhiranji-2-in06','.huanghua-yurezhiranji-2-in05');
+        }
+        if(classinstanceid11Flag === 1 && classinstanceid13Flag ===1 ){ //黄花1号发电机和1号余热直燃机
+           pipelineStatus(1,'');
+           //pipelineStatus(1,'.huanghua-a-lengqueta01','.huanghua-a-fadianji01');
+           pipelineStatus(1,'.huanghua-a-fadianji01');
+        }
+
 }
 
 var lixindianlengjiIn01 = [

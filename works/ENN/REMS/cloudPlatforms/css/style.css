@@ -476,6 +476,7 @@ font-size:58px;
 {
 /*	background-color: #8bfffb;*/
 	margin: 0 1700px 0 1340px;
+    position: relative;
 }
 .xa-con-cent > #unityPlayer > embed 
 {
