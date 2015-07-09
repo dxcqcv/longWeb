@@ -1,1 +1,120 @@
-equipStatus([{"name":null,"classinstanceid":73,"classpropertyid":0,"rectime":null,"datavalue":1.0,"propertytypeid":null,"datavalue1":"1"},{"name":null,"classinstanceid":74,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":75,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":76,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":77,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":78,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":79,"classpropertyid":0,"rectime":null,"datavalue":1.0,"propertytypeid":null,"datavalue1":"1"},{"name":null,"classinstanceid":80,"classpropertyid":0,"rectime":null,"datavalue":1.0,"propertytypeid":null,"datavalue1":"1"},{"name":null,"classinstanceid":81,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":82,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":83,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":84,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":85,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":86,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":87,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":88,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":89,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":90,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":91,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":92,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":93,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":94,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":95,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":96,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":97,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":98,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":99,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":100,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":101,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":102,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":103,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":104,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":105,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":106,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":107,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":108,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":109,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":110,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":111,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":112,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":113,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":114,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":115,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":116,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":117,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":118,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"},{"name":null,"classinstanceid":119,"classpropertyid":0,"rectime":null,"datavalue":0.0,"propertytypeid":null,"datavalue1":"0"}])
+equipState([
+	{
+		"name": null,
+		"classinstanceid": 9051, //燃气直燃
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	}, 
+	{
+		"name": null,
+		"classinstanceid": 102, //余热直燃机
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 9053, //发电机1
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "1"
+	},
+	{
+		"name": null,
+		"classinstanceid": 9054, //发电机2
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 97, //电冷机A1
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 98, //电冷机A2
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 99, //电冷机A3
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 100, //电冷机B1
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 101, //电冷机B2
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	}
+	,
+	{
+		"name": null,
+		"classinstanceid": 103, //燃气锅炉A1
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 104, //燃气锅炉A2
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 105, //燃气锅炉A3
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	},
+	{
+		"name": null,
+		"classinstanceid": 106, //燃气锅炉B1
+		"classpropertyid": 0,
+		"rectime": null,
+		"datavalue": 1.0,
+		"propertytypeid": null,
+		"datavalue1": "0"
+	}
+])
