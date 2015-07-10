@@ -19,6 +19,8 @@ var demand
   , globalMode = 1 // 默认供冷模式
   , modeDate = new Date()
   , modeMons = modeDate.getMonth()+1 
+  , hoursUpdate = 3600000 
+  , minsUpdate = 60000 
   //判断供冷供热季，1为供冷，0为供热
   if(modeMons >= 5 && modeMons <= 9) {
      globalMode = 1;
@@ -26,15 +28,13 @@ var demand
      globalMode = 0;
   }
 
-function myTimeoutFn(fn, time) {
+function myTimeoutFn(fn, time,callback) {
     fn();
+    checkFunction(callback)
     var t = setTimeout(function(){myTimeoutFn(fn,time)}, time)
     return t;
 }
         //myTimeoutFn(test,60)
-function test(){
-console.log(23232)
-}
 var legendName0 = '当'
   , legendName1 = '年'
   , legendName2 = '月'
@@ -95,6 +95,7 @@ $.extend(LocalJsonp.prototype, {
             if(textStatus == 'timeout') {}
             fail(jqXHR, textStatus, errorThrown);
         });
+        //return currentRequest ;
     }
 });
 function Request() {
@@ -140,6 +141,7 @@ $.extend(Request.prototype, {
             }
             fail(jqXHR, textStatus,errorThrown);
         });
+        //return currentRequest ;
     }
 });
 function failFn(jqXHR, textStatus,errorThrown) { console.log('error is ' + jqXHR.statusText + ' textStatus is ' + textStatus + ' errorThrown is ' + errorThrown); }
@@ -148,7 +150,7 @@ demand = new Request(); // 统一调用ajax
 localJsonp = new LocalJsonp(); // 调用本地jsonp 
 
 //updateIndex();
-intervalIndex = myTimeoutFn(updateIndex,3600000);//更新首页右侧项目列表
+intervalIndex = myTimeoutFn(updateIndex,hoursUpdate);//更新首页右侧项目列表
 function updateIndex(){
     demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',jsonp: 'login' ,done:remsLogin}); // 请求登录
     function remsLogin(data) {
@@ -169,8 +171,8 @@ function indexInit(data){
 	var $main = $( '#wrapper' ),
 		$pages = $main.children( 'div.layout' ),
 		//$iterate = $( '.rems-logo-box' ),
-		animcursor = getRandomArbitrary(1,67), // random 67 num
-		//animcursor = globalRandomNum, // random 67 num
+		//animcursor = getRandomArbitrary(1,67), // random 67 num
+		animcursor = 37, // 37 newspaper 58 cube 
 		pagesCount = $pages.length,
 		current = 0,
 		isAnimating = false,
@@ -440,72 +442,22 @@ var re = new RegExp(reg);
 					e.preventDefault();
 				} else {
                     window.pageName = "page01";
-
                     switchPage(function(){// 切换后回调
+
+                        clearTimeout(intervalIndex);
                         demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
-//console.log(typeof _pid)
-// 工艺图切换
-function equipsPopup(pid){
-    switch(pid) {
-        case 1:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
-            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
-            localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
-            break;
-        case 3:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
-            //localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
-            break;
-        case 4:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist',done:shenlongchengLabellistFn});
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
-            //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
-            break;
-    }
-}
-switch(_pid) {
-    case '1': 
-        gytSelectFn(false,'#huanghuaArtwork', '黄花工艺设计图'); 
-        showBottomArea('huanghua-thumbnail');
-        //artworkBottomHeight(348);//底部高度
-        artworkBottomHeight(116);//底部高度
-        builtTailIcon(1,4);
-        //equipsPopup(1);
-        intervalGYTData1 = myTimeoutFn(function(){equipsPopup(1)}, 60000); 
-        break;
-    case '3': 
-        gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
-        showBottomArea('tinghu-thumbnail');
-        //artworkBottomHeight(648);//底部高度
-        artworkBottomHeight(256);//底部高度
-        builtTailIcon(3,4); //构建下标
-        //equipsPopup(3);
-        intervalGYTData2 = myTimeoutFn(function(){equipsPopup(3)}, 60000); 
-        break;
-    case '4': 
-        gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
-        showBottomArea('shenlongcheng-thumbnail');
-        //artworkBottomHeight(458);
-        artworkBottomHeight(156);
-        builtTailIcon(4,3);
-        //equipsPopup(4);
-        intervalGYTData3 = myTimeoutFn(function(){equipsPopup(4)}, 60000); 
-        break;
-}
-//loadLeftRight(_pid); //加载左右
-intervalLeftRight = myTimeoutFn(innerLeftRight(_pid),3600000);
+                        var afterSwitchPg = [
+                            function(){ selectGYT(_pid,function(){releaseFn('afterSwitchPg')})},
+                            function(){ intervalLeftRight = myTimeoutFn(function(){loadLeftRight(_pid)},hoursUpdate,function(){releaseFn('afterSwitchPg')});},
+                            function(){ intervalInnerRight = myTimeoutFn(function(){gnhnfn(_pid)}, hoursUpdate,function(){releaseFn('afterSwitchPg')});}, //小时更新供能耗能
+                            function(){ intervalWeather = myTimeoutFn(getWeather,hoursUpdate,function(){releaseFn('afterSwitchPg')});}// 加载气象信息
+                        ];
+                        $doc.queue('afterSwitchPg',afterSwitchPg );
+                        releaseFn('afterSwitchPg');
+                        projectBoxIndex = _pid; //为了内页切换重载成本收益
+                        contTitle.text(name);//更换标题
 
-projectBoxIndex = _pid; //为了内页切换重载成本收益
-
-	//$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
-    intervalInnerRight = myTimeoutFn(innerRight(_pid), 3600000); //小时更新供能耗能 
-    //getWeather(); 
-    intervalWeather = myTimeoutFn(getWeather,3600000);// 加载气象信息
-
-     contTitle.text(name);
-
-}); //切换页面   
+                    }); //切换页面   
 
 
                 }
@@ -744,7 +696,7 @@ dateAllShow(); // show all datepicker
 		showModal('three',show_3_callback,'','',classpropertyid,unitname);
 	})
     .on("click", "#showModal_4",function() {
-dateAllShow(); // show all datepicker
+        dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
         var $this = $(this)
@@ -860,6 +812,19 @@ dateAllShow(); // show all datepicker
 		}
 		showModal('ten',show_10_callback);
 	}).on('click', '#pie1',function(){ //节能率弹出层
+
+        dateAllShow(); // show all datepicker
+		modalchartobj = null;
+		$modalinnerChartWrap[0].innerHTML= "";
+        /*
+        var $this = $(this)
+          , classpropertyid = $this.attr('data-classpropertyid')
+          , unitname = $this.attr('data-unitname')
+          */
+
+		showModal('ten',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname);
+
+    //
     function pie1(){}
 		showModal('eleven',pie1);
 
@@ -962,6 +927,7 @@ dateAllShow(); // show all datepicker
 				]
 			}
 		]
+        ,animation: false
 	};
 	var optionsPie2 = {
 		animationDuration: animationDurationAll,
@@ -979,6 +945,7 @@ dateAllShow(); // show all datepicker
 				]
 			}
 		]
+        ,animation: false
 	};
 	
 	
@@ -1622,13 +1589,11 @@ dateAllShow(); // show all datepicker
 		
 		
 		
-	//$doc.on("leftjsonpdataReady", function(){
 	function leftjsonpdataReady(data){
 		//console.log(leftjsonpdata,"left Json Data load");
 		//var datalength = leftjsonpdata.length;
 		var datalength = data.length;
 //		console.log(datalength)
-		//$.each(leftjsonpdata, function(index, data) {
 		$.each(data, function(index, data) {
 			if ( index <= 1) { // 节能率和CO2排放
 				var _name,
@@ -1889,28 +1854,14 @@ dateAllShow(); // show all datepicker
 	var data_Jsonp = ["leftjsonp.js","leftjsonp_2.js","leftjsonp_3.js","leftjsonp_4.js"];
         var projectid
 
-	$doc.on("click", ".inner-selector-i .selector", function() {
-		detail_data_index = $(this).index(); //pinmingle add
-		$(this).addClass("cur").siblings().removeClass("cur");
 		
-		 projectid = $(this).attr("index");
 		
-		//alert("bbb"+a);
-		
-		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+projectid,jsonp: 'setProject' ,done:setCompelte});
-		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
-//loadLeftRight();
-		bindY_M_D_data(); //pinmingle add 右边年月日数据绑定
-	
-	});
+}		
 		
         function loadLeftRight(id) {
             demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
             bindY_M_D_data(); //pinmingle add 右边年月日数据绑定
         }
-		
-}		
-		
 		
 		
 		
@@ -2070,7 +2021,7 @@ function main_days_Compelte(data){
 }
 
 function mainLeft_Compelte(data){
-	leftjsonpdata = data;
+//	leftjsonpdata = data;
 	//$doc.trigger("leftjsonpdataReady") //左侧4个圆
 leftjsonpdataReady(data);
 }
@@ -2196,14 +2147,14 @@ var gnhnTemp = '<div class="eng-bp" id="showModal_'+indexNum+'" data-classproper
                 }
 }
 	
-	function gnhnfn(e,projectid) {
-			demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+projectid+'',jsonp: 'setProject' ,done:setCompelte});
+	function gnhnfn(projectid) {
+			//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+projectid+'',jsonp: 'setProject' ,done:setCompelte});
 			demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainRight?timeradio=days',jsonp: 'mainRight' ,done:function(data){
                 gnhnfn_Compelte(data, projectid);
             }
         });
 	}
-	$doc.on("loadRightTab2JSON", gnhnfn);
+	//$doc.on("loadRightTab2JSON", gnhnfn);
 	//$doc.trigger("loadRightTab2JSON",[1]);
 
 // 获取环境信息
@@ -2246,7 +2197,7 @@ function setWeather(data){
 				animcursor = 1;
 			}
 			nextPage( animcursor, callback );
-			++animcursor;
+			//++animcursor;
             //callback();
         }
 // random
@@ -2825,12 +2776,13 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
             $doc.trigger("loadRightTab2JSON",[id]); // 加载供能耗能
         } 
     }
+    /*
 function innerLeftRight(id) {
    return function(){
        loadLeftRight(id);
    } 
 } 
-
+*/
                 function selectDate(type, pid, joinDate, unitname) {
 
                     switch(type) {
@@ -4075,7 +4027,7 @@ function huanghuaEquipStatFn(data) {
             classinstanceid17Flag = 0
         } else if(value.classinstanceid === 17 && value.datavalue1 === '1') {
             equipStatus(1,huanghuaDianlengji17);  
-            //releaseAnimate('huanghua-d-lixindianlengjiIn');
+            //releaseFn('huanghua-d-lixindianlengjiIn');
 
             pipelineStatus(1,'.huanghua-leng-0-in01','.huanghua-leng-0-out01','.huanghua-d-lixindianlengji01','.huanghua-leng-0-in02','.huanghua-leng-0-out02')
             classinstanceid17Flag = 1
@@ -4227,11 +4179,11 @@ function huanghuaEquipStatFn(data) {
 }
 
 var lixindianlengjiIn01 = [
-    function() { animateFn('.huanghua-leng-0-in02 .inner', {'height':'100%'}, 1428, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});}, // duration = height * spd 4.2
-    function() { animateFn('.huanghua-leng-1-in01 .inner', {'height':'100%'}, 3087, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
-    function() { animateFn('.huanghua-leng-1-in02 .inner', {'height':'100%'}, 1134, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
-    function() { animateFn('.huanghua-leng-1-out01 .inner', {'height':'100%'}, 1281, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});},
-    function() { animateFn('.huanghua-leng-0-out01 .inner', {'height':'100%'}, 1071, 'linear',function(){releaseAnimate('huanghua-d-lixindianlengjiIn')});}
+    function() { animateFn('.huanghua-leng-0-in02 .inner', {'height':'100%'}, 1428, 'linear',function(){releaseFn('huanghua-d-lixindianlengjiIn')});}, // duration = height * spd 4.2
+    function() { animateFn('.huanghua-leng-1-in01 .inner', {'height':'100%'}, 3087, 'linear',function(){releaseFn('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-1-in02 .inner', {'height':'100%'}, 1134, 'linear',function(){releaseFn('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-1-out01 .inner', {'height':'100%'}, 1281, 'linear',function(){releaseFn('huanghua-d-lixindianlengjiIn')});},
+    function() { animateFn('.huanghua-leng-0-out01 .inner', {'height':'100%'}, 1071, 'linear',function(){releaseFn('huanghua-d-lixindianlengjiIn')});}
 ];
 /*
 动画名
@@ -4239,7 +4191,7 @@ var lixindianlengjiIn01 = [
 */
 $doc.queue('huanghua-d-lixindianlengjiIn',lixindianlengjiIn01 );
 /*释放队列下一个*/
-function releaseAnimate(name) {
+function releaseFn(name) {
     $doc.dequeue(name);
 }
 /* 动画公用函数
@@ -4253,6 +4205,63 @@ function animateFn(ele,styles,duration,easing,callback) {
     $(ele).animate(styles,duration,easing, callback);
 }
 /* 工艺图end */
+function equipsPopup(pid){
+    switch(pid) {
+        case 1:
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+            localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
+            break;
+        case 3:
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
+            //localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
+            break;
+        case 4:
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist',done:shenlongchengLabellistFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
+            //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
+            break;
+    }
+}
+function checkFunction(fn) {
+    if(typeof fn == 'function') fn();
+}
+// 工艺图切换
+function selectGYT(id,callback) {
+    switch(id) {
+        case '1': 
+            gytSelectFn(false,'#huanghuaArtwork', '黄花工艺设计图'); 
+            showBottomArea('huanghua-thumbnail');
+            //artworkBottomHeight(348);//底部高度
+            artworkBottomHeight(116);//底部高度
+            builtTailIcon(1,4);
+            //equipsPopup(1);
+            intervalGYTData1 = myTimeoutFn(function(){equipsPopup(1)}, minsUpdate); 
+            checkFunction(callback)
+            break;
+        case '3': 
+            gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
+            showBottomArea('tinghu-thumbnail');
+            //artworkBottomHeight(648);//底部高度
+            artworkBottomHeight(256);//底部高度
+            builtTailIcon(3,4); //构建下标
+            //equipsPopup(3);
+            intervalGYTData2 = myTimeoutFn(function(){equipsPopup(3)}, minsUpdate); 
+            checkFunction(callback)
+            break;
+        case '4': 
+            gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
+            showBottomArea('shenlongcheng-thumbnail');
+            //artworkBottomHeight(458);
+            artworkBottomHeight(156);
+            builtTailIcon(4,3);
+            //equipsPopup(4);
+            intervalGYTData3 = myTimeoutFn(function(){equipsPopup(4)}, minsUpdate); 
+            checkFunction(callback)
+            break;
+    }
+}
 /**************end*************/
 };
        
