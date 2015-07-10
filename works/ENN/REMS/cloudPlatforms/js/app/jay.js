@@ -7,25 +7,34 @@ var jayfunction = function() {
 var demand
   , projectBoxIndex = 0 // 项目索引 
   , contTitle = $('#contSubTitle') 
-  , intervalGYTData // 工艺图分钟更新
+  , intervalGYTData1 // 工艺图分钟更新
+  , intervalGYTData2 // 工艺图分钟更新
+  , intervalGYTData3 // 工艺图分钟更新
   , sumProjectData =  {}
   , intervalWeather //小时刷新天气
   , intervalInnerRight //小时刷新内页供能耗能
   , intervalLeftRight // 小时刷新节能率等和成本收益
   , intervalIndex //小时刷新首页项目
   , isWan = null // 检查是不是超过万
-  , globalMode = 0 // 默认供冷模式
+  , globalMode = 1 // 默认供冷模式
   , modeDate = new Date()
   , modeMons = modeDate.getMonth()+1 
   //判断供冷供热季，1为供冷，0为供热
-  /*
   if(modeMons >= 5 && modeMons <= 9) {
      globalMode = 1;
   } else if(modeMons >= 11 || modeMons <= 3) {
      globalMode = 0;
   }
-  */
 
+function myTimeoutFn(fn, time) {
+    fn();
+    var t = setTimeout(function(){myTimeoutFn(fn,time)}, time)
+    return t;
+}
+        //myTimeoutFn(test,60)
+function test(){
+console.log(23232)
+}
 var legendName0 = '当'
   , legendName1 = '年'
   , legendName2 = '月'
@@ -138,8 +147,8 @@ function doneFn() { console.log('done'); }
 demand = new Request(); // 统一调用ajax
 localJsonp = new LocalJsonp(); // 调用本地jsonp 
 
-updateIndex();
-intervalIndex = setInterval(updateIndex,3600000);//更新首页右侧项目列表
+//updateIndex();
+intervalIndex = myTimeoutFn(updateIndex,3600000);//更新首页右侧项目列表
 function updateIndex(){
     demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',jsonp: 'login' ,done:remsLogin}); // 请求登录
     function remsLogin(data) {
@@ -372,10 +381,13 @@ var re = new RegExp(reg);
                     window.pageName = "index";
 
                     if(window.pageName == "index") {
-                        clearInterval(intervalWeather); // 清气象更新
-                        clearInterval(intervalInnerRight); // 清内页右侧更新
+                        clearTimeout(intervalWeather); // 清气象更新
+                        clearTimeout(intervalInnerRight); // 清内页右侧更新
+                        clearTimeout(intervalLeftRight); // 清内页左右
                         //gytSelectFn('#huanghuaOverview~div','#huanghuaOverview', '工艺设计图'); //工艺图复位
-                        clearInterval(intervalGYTData); // 清工艺图更新
+                        clearTimeout(intervalGYTData1); // 清工艺图更新
+                        clearTimeout(intervalGYTData2); // 清工艺图更新
+                        clearTimeout(intervalGYTData3); // 清工艺图更新
 
                     }
                     switchPage(function(){
@@ -442,13 +454,13 @@ function equipsPopup(pid){
             break;
         case 3:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
-            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
-            localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
+            //localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
             break;
         case 4:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist',done:shenlongchengLabellistFn});
-            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
-            localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
+            //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
             break;
     }
 }
@@ -456,37 +468,40 @@ switch(_pid) {
     case '1': 
         gytSelectFn(false,'#huanghuaArtwork', '黄花工艺设计图'); 
         showBottomArea('huanghua-thumbnail');
-        artworkBottomHeight(348);//底部高度
+        //artworkBottomHeight(348);//底部高度
+        artworkBottomHeight(116);//底部高度
         builtTailIcon(1,4);
-        equipsPopup(1);
-        intervalGYTData = setInterval(function(){equipsPopup(1)}, 60000); 
+        //equipsPopup(1);
+        intervalGYTData1 = myTimeoutFn(function(){equipsPopup(1)}, 60000); 
         break;
     case '3': 
         gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
         showBottomArea('tinghu-thumbnail');
-        artworkBottomHeight(648);//底部高度
+        //artworkBottomHeight(648);//底部高度
+        artworkBottomHeight(256);//底部高度
         builtTailIcon(3,4); //构建下标
-        equipsPopup(3);
-        intervalGYTData = setInterval(function(){equipsPopup(3)}, 60000); 
+        //equipsPopup(3);
+        intervalGYTData2 = myTimeoutFn(function(){equipsPopup(3)}, 60000); 
         break;
     case '4': 
         gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
         showBottomArea('shenlongcheng-thumbnail');
-        artworkBottomHeight(458);
+        //artworkBottomHeight(458);
+        artworkBottomHeight(156);
         builtTailIcon(4,3);
-        equipsPopup(4);
-        intervalGYTData = setInterval(function(){equipsPopup(4)}, 60000); 
+        //equipsPopup(4);
+        intervalGYTData3 = myTimeoutFn(function(){equipsPopup(4)}, 60000); 
         break;
 }
-loadLeftRight(_pid); //加载左右
-intervalLeftRight = setInterval(innerLeftRight(_pid),3600000);
+//loadLeftRight(_pid); //加载左右
+intervalLeftRight = myTimeoutFn(innerLeftRight(_pid),3600000);
 
 projectBoxIndex = _pid; //为了内页切换重载成本收益
 
-	$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
-    intervalInnerRight = setInterval(innerRight(_pid), 3600000); //小时更新供能耗能 
-    getWeather(); 
-    intervalWeather = setInterval(getWeather,3600000);// 加载气象信息
+	//$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
+    intervalInnerRight = myTimeoutFn(innerRight(_pid), 3600000); //小时更新供能耗能 
+    //getWeather(); 
+    intervalWeather = myTimeoutFn(getWeather,3600000);// 加载气象信息
 
      contTitle.text(name);
 
@@ -869,10 +884,10 @@ dateAllShow(); // show all datepicker
 		return 
 	} else {
 	var defaultTheme = "macarons"; // 默认chart主题
-//	var myCharts = echarts.init(document.getElementById('pie1'), defaultTheme);
-//	var myCharts2 = echarts.init(document.getElementById('pie2'), defaultTheme);
-//	var myChartsPie3 = echarts.init(document.getElementById('pie3'), defaultTheme);
-//	var myChartsPie4 = echarts.init(document.getElementById('pie4'), defaultTheme);
+	var myChartsPie1 = echarts.init(document.getElementById('pie1'), defaultTheme);
+	var myChartsPie2 = echarts.init(document.getElementById('pie2'), defaultTheme);
+	var myChartsPie3 = echarts.init(document.getElementById('pie3'), defaultTheme);
+	var myChartsPie4 = echarts.init(document.getElementById('pie4'), defaultTheme);
 //	var myCharts3 = echarts.init(document.getElementById('barchart-1'), defaultTheme);
 //	var myCharts4 = echarts.init(document.getElementById('barchart-2'), defaultTheme);
 	var mycolumnChart3 = echarts.init(document.getElementById('columnChart3'), defaultTheme);
@@ -1607,11 +1622,14 @@ dateAllShow(); // show all datepicker
 		
 		
 		
-	$doc.on("leftjsonpdataReady", function(){
+	//$doc.on("leftjsonpdataReady", function(){
+	function leftjsonpdataReady(data){
 		//console.log(leftjsonpdata,"left Json Data load");
-		var datalength = leftjsonpdata.length;
+		//var datalength = leftjsonpdata.length;
+		var datalength = data.length;
 //		console.log(datalength)
-		$.each(leftjsonpdata, function(index, data) {
+		//$.each(leftjsonpdata, function(index, data) {
+		$.each(data, function(index, data) {
 			if ( index <= 1) { // 节能率和CO2排放
 				var _name,
 					_percent,
@@ -1655,33 +1673,47 @@ dateAllShow(); // show all datepicker
 				//$classGroup.find(".chart-text-block").find("p").eq(1).html(data_1_val+ " " +data_1_unit)
 				$classGroup.find(".chart-text-block").find("p").eq(1).html(dNum+ " " +data_1_unit)
 				
+                /*
 				var $chartel = $classGroup.filter(function() {
 					var $this = $(this);
 					if ($this.hasClass("dib") && $this.attr("id")) {
 						return $this;
 					}
 				})
-//				console.log($chartel)
-				var myCharts = echarts.init($chartel[0], defaultTheme);
+                */
+				//console.log($chartel)
+				//var myCharts = echarts.init($chartel[0], defaultTheme);
 				var chartOPT;
 				if (index == "0") {
+                    if(myChartsPie1 && myChartsPie1.dispose) {
+                        myChartsPie1.dispose() 
+                    }
+                    myChartsPie1 =  echarts.init(document.getElementById('pie1'), defaultTheme);
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#f8ae3b'];
+				chartOPT.series[0].data[0].value = 100 - _percent 
+				chartOPT.series[0].data[1].value = _percent
+				chartOPT.series[0].data[1].name = _name
+				myChartsPie1.setOption(chartOPT,true);
 				} else if (index == "1") {
+                    if(myChartsPie2 && myChartsPie2.dispose) {
+                        myChartsPie2.dispose() 
+                    }
+                    myChartsPie2 =  echarts.init(document.getElementById('pie2'), defaultTheme);
 					chartOPT = optionsPie2
 					chartOPT.color = ['#21b171'];
+				chartOPT.series[0].data[0].value = 100 - _percent 
+				chartOPT.series[0].data[1].value = _percent
+				chartOPT.series[0].data[1].name = _name
+				myChartsPie2.setOption(chartOPT,true);
 				}
 				
 				
 				//var secVal = 100 - _percent;
-				var secVal =  _percent;
                 //console.log(_percent)
                 //console.log(secVal)
 				//chartOPT.series[0].data[0].value = secVal
-				chartOPT.series[0].data[0].value = 100 - _percent 
-				chartOPT.series[0].data[1].value = _percent
-				chartOPT.series[0].data[1].name = _name
-				myCharts.setOption(chartOPT);
+				//myCharts.setOption(chartOPT,true);
 
 				
 				
@@ -1692,6 +1724,13 @@ dateAllShow(); // show all datepicker
 					}
 				})
 				
+				//console.log($chartel2)
+                /*
+                if(myChartsPie2 && myChartsPie2 .dispose) {
+                    myChartsPie2 .dispose() 
+                }
+                myChartsPie2 =  echarts.init(document.getElementById('pie2'), defaultTheme);
+                */
 				//console.log($chartel2)
 				var myCharts2x = echarts.init($chartel2[0], defaultTheme);
 				
@@ -1715,7 +1754,8 @@ dateAllShow(); // show all datepicker
 				} else if (index == "1") {
 					chartOPT2.series[0].itemStyle.normal.color = "#21b171";
 				}
-				myCharts2x.setOption(chartOPT2)
+				myCharts2x.setOption(chartOPT2,true)
+				//myChartsPie2 .setOption(chartOPT2,true)
 				
 				
 			} else {
@@ -1757,16 +1797,28 @@ dateAllShow(); // show all datepicker
 				var $classGroupBlock_p = $classGroupBlock.find("p");
 				
 				
+                /*
 				var $chartel = $classGroup.filter(function() {
 					var $this = $(this);
 					if ($this.hasClass("dib") && $this.attr("id")) {
 						return $this;
 					}
 				})
-				var myCharts = echarts.init($chartel[0], defaultTheme);
+                */
+
+                /*
+                if(myCharts && myCharts.dispose) {
+                    myCharts.dispose() 
+                }
+                */
+				//var myCharts = echarts.init($chartel[0], defaultTheme);
 				var chartOPT;
 
 				if (index == "2") { // 系统能效
+                    if(myChartsPie3 && myChartsPie3.dispose) {
+                        myChartsPie3.dispose() 
+                    }
+                    myChartsPie3 =  echarts.init(document.getElementById('pie3'), defaultTheme);
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#ec1e79'];
 					chartOPT.series[0].data[0].value = (function(){
@@ -1787,7 +1839,12 @@ dateAllShow(); // show all datepicker
                     $classGroupBlock_p.eq(3).find("font").html(data_2_val) //综合供能值
                     $classGroupBlock_p.eq(3).find("span").html(data_2_unit)
 					
+                    myChartsPie3.setOption(chartOPT,true); //圆环生成
 				} else if (index == "3") { //可再生能源利用率
+                    if(myChartsPie4 && myChartsPie4.dispose) {
+                        myChartsPie4.dispose() 
+                    }
+                    myChartsPie4 =  echarts.init(document.getElementById('pie4'), defaultTheme);
 					chartOPT = optionsPie1
 					chartOPT.color = ['#92278e'];
 
@@ -1803,9 +1860,10 @@ dateAllShow(); // show all datepicker
                     var renewNum = Number(data_1_val * _percent / 100).toFixed(1); //可再生能源计算公式 
                     $classGroupBlock_p.eq(3).find("font").html(renewNum) // 可再生能源值
                     $classGroupBlock_p.eq(3).find("span").html(data_2_unit)//可再生能源单位
+                    myChartsPie4.setOption(chartOPT,true); //圆环生成
 
 				}
-				myCharts.setOption(chartOPT); //圆环生成
+				//myCharts.setOption(chartOPT,true); //圆环生成
 				
                 //console.log(data_1_val)
 				$classGroupBlock_p.eq(0).html( data_1_name ) //名称第一行，如综合耗能
@@ -1819,7 +1877,7 @@ dateAllShow(); // show all datepicker
 			}
 			
 		});
-	});
+	}
 		
         // left jsonp ready end
 		
@@ -1840,7 +1898,8 @@ dateAllShow(); // show all datepicker
 		//alert("bbb"+a);
 		
 		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+projectid,jsonp: 'setProject' ,done:setCompelte});
-		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
+		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
+//loadLeftRight();
 		bindY_M_D_data(); //pinmingle add 右边年月日数据绑定
 	
 	});
@@ -2012,7 +2071,8 @@ function main_days_Compelte(data){
 
 function mainLeft_Compelte(data){
 	leftjsonpdata = data;
-	$doc.trigger("leftjsonpdataReady") //左侧4个圆
+	//$doc.trigger("leftjsonpdataReady") //左侧4个圆
+leftjsonpdataReady(data);
 }
 
 
@@ -3876,15 +3936,20 @@ function shenlongchengEquipStatFn(data) {
 	}else{//
 		pipelineStatus(0,'.shenlongcheng-a-y-yureburanzhiranji-out11');
 	}
-	//余热和发电机任意一个
-	if(classinstanceid9051Flag == 1 && (classinstanceid9053Flag == 1 || classinstanceid9054Flag == 1)){
-		pipelineStatus(1,'.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-y-ranqizhiranji-in01');
+    //补燃直燃机和发电机任意一个
+	if(classinstanceid102Flag == 1 && (classinstanceid9053Flag == 1 || classinstanceid9054Flag == 1)){
+		pipelineStatus(1,'.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-y-ranqizhiranji-in01','.shenlongcheng-a-y-yureburanzhiranji-in12');
 		if(classinstanceid9053Flag == 1){//如果是1号发电机，补线
-			pipelineStatus(1,'.shenlongcheng-a-gaowenlengquetai1-in03');
+			pipelineStatus(1,'.shenlongcheng-a-gaowenlengquetai1-in03','.shenlongcheng-a-fadianji1-out01','.shenlongcheng-a-fadianji1-out02');
+		}
+		if(classinstanceid9054Flag == 1){//2号发电机补线
+			pipelineStatus(1,'.shenlongcheng-a-fadianji1-out03','.shenlongcheng-a-fadianji2-out02');
 		}
 	}else{
-		pipelineStatus(0,'.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-y-ranqizhiranji-in01','.shenlongcheng-a-gaowenlengquetai1-in03');
+		pipelineStatus(0,'.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-y-ranqizhiranji-in01','.shenlongcheng-a-gaowenlengquetai1-in03'
+			,'.shenlongcheng-a-fadianji1-out01','.shenlongcheng-a-fadianji1-out02','.shenlongcheng-a-fadianji1-out03','.shenlongcheng-a-fadianji2-out02','.shenlongcheng-a-y-yureburanzhiranji-in12');
 	}
+
 	// 换热器，直燃，余然共享
 	if(classinstanceid9051Flag == 1 || classinstanceidHRQ01Flag == 1 || classinstanceidHRQ02Flag == 1 || classinstanceid102Flag == 1){
 		pipelineStatus(1,'.shenlongcheng-a-g-general-in01','.shenlongcheng-a-g-yureburanzhiranji-out07');
