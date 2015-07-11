@@ -829,16 +829,34 @@ dateAllShow(); // show all datepicker
 
     }).on('click', '#pie2',function(){ //co2减排率弹出层
 
-    function pie2(){}
-		showModal('twelve',pie2);
+        dateAllShow(); // show all datepicker
+		modalchartobj = null;
+		$modalinnerChartWrap[0].innerHTML= "";
+        var $this = $(this)
+          , classpropertyid = $this.attr('data-classpropertyid')
+          , unitname = $this.attr('data-unitname')
+
+		showModal('twelve',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
     }).on('click', '#pie3',function(){ //系统能效弹出层
+        dateAllShow(); // show all datepicker
+		modalchartobj = null;
+		$modalinnerChartWrap[0].innerHTML= "";
+        var $this = $(this)
+          , classpropertyid = $this.attr('data-classpropertyid')
+          , unitname = $this.attr('data-unitname')
 
-    function pie3(){}
-		showModal('thirteen',pie3);
+		showModal('thirteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+
     }).on('click', '#pie4',function(){ // 可再生能源利用率弹出层
+        dateAllShow(); // show all datepicker
+		modalchartobj = null;
+		$modalinnerChartWrap[0].innerHTML= "";
+        var $this = $(this)
+          , classpropertyid = $this.attr('data-classpropertyid')
+          , unitname = $this.attr('data-unitname')
 
-    function pie4(){}
-		showModal('fourteen',pie4);
+		showModal('fourteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+
     });
     
 	
@@ -1212,9 +1230,16 @@ dateAllShow(); // show all datepicker
 					var k = [half*1.5, "50%"]
 					return k
 				})(),
-				radius :[120, (function() {
-					return 995/2 - 180
+				radius :[0, (function() {
+					//return 995/2 - 180
+					return 995/2 - 300 //外半径
 				})()],
+                /*
+				radius :[120, (function() {
+					//return 995/2 - 180
+					return 995/2 - 330 //外半径
+				})()],
+                */
 				itemStyle :　{
 					normal : {
 						label:{
@@ -2729,7 +2754,7 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 				success : function(json){
 					//console.log(json);
 					var opt = optionModal2;
-                    opt.xAxis[0].axisLabel.formatter = '{value}'+'H'; // 增加X轴时间单位
+                    opt.xAxis[0].axisLabel.formatter = '{value}'; 
                     opt.yAxis[0].axisLabel.formatter = '{value}'+unitname; // unitname
 					opt.xAxis[0].data= (function() {
 						var  k = [];
@@ -2808,6 +2833,12 @@ function innerLeftRight(id) {
                             break;
                         case 'ten':
                             costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date="+joinDate+"","financePie"],2);
+                            break;
+                        case 'eleven':
+                        case 'twelve':
+                        case 'thirteen':
+                        case 'fourteen':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname);
                             break;
                     }
                 
@@ -3615,7 +3646,7 @@ function tinghuEquipStatFn(data) {
         else if(value.classinstanceid  === 155 && value.datavalue1 === '1')
         {
             $('#tinghuDERanqiguolu01').removeClass('gray-filter');
-            pipelineStatus(1,'.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-1-in01','.tinghu-ranqiguolu-0-out01','.tinghu-ranqiguolu2-0-in01','.tinghu-d-l-ranqiguolu01','.tinghu-ranqiguolu2-1-out06');
+            pipelineStatus(1,'.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-0-out01','.tinghu-ranqiguolu2-0-in01','.tinghu-d-l-ranqiguolu01','.tinghu-ranqiguolu2-1-out06');
             classinstanceid155Flag =1
         }
         else if(value.classinstanceid === 156 && value.datavalue1 === '0') { //亭湖D燃气锅炉02
@@ -3645,19 +3676,22 @@ function tinghuEquipStatFn(data) {
         if(classinstanceid155Flag === 0 && classinstanceid157Flag ===0) {
             pipelineStatus(0,'.tinghu-ranqiguolu-1-out02','.tinghu-ranqiguolu-1-in01');
         }
+        if(classinstanceid155Flag === 0 && classinstanceid156Flag ===0) {
+            pipelineStatus(0,'.tinghu-ranqiguolu2-0-in01');
+        }
         if(classinstanceid155Flag === 0 && classinstanceid157Flag ===0 && classinstanceid156Flag ===0) { //亭湖D余热锅炉，1号2号燃气锅炉
             pipelineStatus(0,'.tinghu-ranqiguolu-0-out01','.tinghu-ranqiguolu2-1-out06');
         }
         if(classinstanceid157Flag === 1 && classinstanceid152Flag ===1) {
             pipelineStatus(1,'.tinghu-yureguolu-in01','.tinghu-yureguolu-in02');
         }
-        if(classinstanceid157Flag === 0 && classinstanceid152Flag ===0) {
+        if(classinstanceid157Flag === 0 || classinstanceid152Flag ===0) {
             pipelineStatus(0,'.tinghu-yureguolu-in01','.tinghu-yureguolu-in02');
         }
-        if(classinstanceid157Flag === 0 || classinstanceid152Flag ===0) {
-            pipelineStatus(0,'.tinghu-a-l-yureguolu-fadianji');
-        }
 
+        if( classinstanceid153Flag === 0 && classinstanceid154Flag ===0 ) {
+            pipelineStatus(0,'.tinghu-zhiranji-0-in01','.tinghu-zhiranji-0-out01');
+        }
         if(globalMode === 0) { //供热
             equipStatus(1,'#tinghuDEHuanreqi01','#tinghuDEHuanreqi02');  
             pipelineStatus(1,'.tinghu-fenqigang-0-out01','.tinghu-ranqiguolu-0-out02','.tinghu-d-l-huangreqi03','.tinghu-d-l-huangreqi04');
