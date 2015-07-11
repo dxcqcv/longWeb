@@ -679,10 +679,10 @@
  top:850px; left: -50px;width:272px;
 }
 .shenlongcheng-b-p02-shuoming03{
- top:132px; left:2872px;width:243px;
+ top:201px; left:2779px;width:243px;
 }
 .shenlongcheng-b-p02-shuoming04{
- top:312px; left: 2877px;width:238px;
+ top:312px; left: 2789px;width:238px;
 }
 /*shenglongcheng-c*/
 .shenlongcheng-c-p01-shuoming01{
@@ -951,7 +951,7 @@ top:6px; left:1947px;width:162px;
 }
 
 .huanghua-arrow-bc-line043{
-	    top:-12px; left:1885px;
+	    top:-9px; left:1885px;
     transform: rotate(71deg);
     height:120px;
 }
@@ -1587,23 +1587,13 @@ top:6px; left:1947px;width:162px;
 }
 .shenlongcheng-arrow-b-line05{
 	  top:319px; left:2768px;
-    transform: rotate(68deg);
+    transform: rotate(58deg);
     height:120px;
 }
-.shenlongcheng-arrow-b-line06{
-	  top:336px; left:2842px;
-    transform: rotate(90deg);
-    height:40px;
-}
 .shenlongcheng-arrow-b-line07{
-	  top:166px; left:2710px;
-    transform: rotate(28deg);
-    height:220px;
-}
-.shenlongcheng-arrow-b-line08{
-	  top:130px; left:2810px;
-    transform: rotate(90deg);
-    height:100px;
+	  top:227px; left:2710px;
+    transform: rotate(58deg);
+    height:180px;
 }
 /*神农城C箭头*/
 .shenlongcheng-c-arrow01 {
@@ -1654,18 +1644,18 @@ top:6px; left:1947px;width:162px;
 }
 /*神农城浮动框*/
 /*a区*/
-.shenlongcheng-a-p-huanreqi01 {top: 250px; left: 550px;}
-.shenlongcheng-a-p-lengqueta01 {top: 150px; left: 850px;}
+.shenlongcheng-a-p-huanreqi01 {top: 250px; left: 500px;}
+.shenlongcheng-a-p-lengqueta01 {top: 150px; left: 810px;}
 .shenlongcheng-a-p-lengqueta02 {top: 60px; left: 1120px;}
-.shenlongcheng-a-p-huanreqi02 {top: 50px; left: 1400px;}
+.shenlongcheng-a-p-huanreqi02 {top: -6px; left: 1435px;}
 .shenlongcheng-a-p-yurezhiranji {top: 700px; left: 800px;}
 .shenlongcheng-a-p-fadianji01 {top: 550px; left: 1250px;}
 .shenlongcheng-a-p-ranqizhiranji {top: 350px; left: 1800px;}
 .shenlongcheng-a-p-fadianji02 {top: 200px; left: 2200px;}
 /*b区*/
-.shenlongcheng-b-p-lixindianlengji01 {top:620px; left:900px;}
-.shenlongcheng-b-p-lixindianlengji02 {top:500px; left:1200px;}
-.shenlongcheng-b-p-lixindianlengji03 {top:400px; left:1500px;}
+.shenlongcheng-b-p-lixindianlengji01 {top:620px; left:735px;}
+.shenlongcheng-b-p-lixindianlengji02 {top:500px; left:1099px;}
+.shenlongcheng-b-p-lixindianlengji03 {top:400px; left:1450px;}
 .shenlongcheng-b-p-lixindianlengji04 {top:280px; left:1800px;}
 .shenlongcheng-b-p-lixindianlengji05 {top:100px; left:2100px;}
 /*c区*/
@@ -1794,7 +1784,7 @@ top:6px; left:1947px;width:162px;
 }
 /* 亭湖浮动框 */
 /*a区*/
-.tinghu-a-p-zhengqixiulengji { top: 550px; left: 600px; }
+.tinghu-a-p-zhengqixiulengji { top: 588px; left: 587px; }
 .tinghu-a-p-fenqigang { top: 400px; left: 900px; }
 .tinghu-a-p-yureguolu { top: 300px; left: 1200px; }
 .tinghu-a-p-fadianji { top: 150px; left: 1650px; }
@@ -1973,7 +1963,7 @@ top:6px; left:1947px;width:162px;
     top:400px; left: 1890px;
 }
 .huanghua-huanreqi07 {
-    top:350px; left: 2740px;
+    top:350px; left: 2586px;
 }
 .huanghua-huanreqi08 {
     top:220px; left: 1440px;
@@ -1988,9 +1978,10 @@ top:6px; left:1947px;width:162px;
 .shenlongcheng-overview {
     background: url('../images/shenlongcheng-gyt.png') no-repeat;
 }
-.tinghu-artwork { width: 2283px; height: 2027px; }
+.tinghu-artwork { width: 1935px; height: 1718px; }
 .tinghu-overview {
     background: url('../images/tinghu-gyt.png') no-repeat;
+    margin-left: 20%;
 }
 .huanghua-artwork {
     width: 2881px; 
@@ -2025,16 +2016,16 @@ background: #c6c6c6;
     top: 653px; left: 2200px;
 }
 .tinghu-des-a {
-    top: 930px; left: 0px;
+    top: 795px; left: -67px;
 }
 .tinghu-des-b {
-    top: 770px; left: 1500px;
+    top: 629px; left: 1249px;
 }
 .tinghu-des-c {
-    top: 1640px; left: 1450px;
+    top: 1400px; left: 1220px;
 }
 .tinghu-des-d {
-    top: 480px; left: 1580px;
+    top: 374px; right: -78px;
 }
 .position-selected-area{
     position: absolute;
@@ -2056,36 +2047,36 @@ background: #c6c6c6;
     width: 1150px; height: 450px;
 }
 .tinghu-pA {
-    top: 570px; left: 475px;
+    top: 450px; left: 368px;
     width: 300px; height: 220px;
     -webkit-transform: rotate(140deg);
     -moz-transform: rotate(140deg);
     transform: rotate(140deg);
 }
 .tinghu-pA02 {
-    top: 910px; left: 1220px;
+    top: 756px; left: 1006px;
     width: 290px; height: 150px;
     -webkit-transform: rotate(130deg);
     -moz-transform: rotate(130deg);
     transform: rotate(130deg);
 }
 .tinghu-pB {
-    top: 1046px; left: 1439px;
+    top: 881px; left: 1206px;
     width: 200px; height: 150px;
     -webkit-transform: rotate(130deg);
     -moz-transform: rotate(130deg);
     transform: rotate(130deg);
 }
 .tinghu-pC {
-    top: 1310px; left: 780px;
-    width: 700px; height: 330px;
+    top: 1188px; left: 632px;
+    width: 660px; height: 230px;
     -webkit-transform: rotate(135deg);
     -moz-transform: rotate(135deg);
     transform: rotate(135deg);
 }
 .tinghu-pD {
-    top: 720px; left: 800px;
-    width: 300px; height: 260px;
+    top: 560px; left: 721px;
+    width: 200px; height: 260px;
     -webkit-transform: rotate(120deg);
     -moz-transform: rotate(120deg);
     transform: rotate(120deg);
@@ -2182,32 +2173,34 @@ background: #c6c6c6;
     position: absolute;
     bottom: 5%;
 }
-.huanghua-thumbnail {
-    background: url('../images/huanghua-gyt01.png') no-repeat;
-    width: 250px;
-    height: 116px;
-    background-size: 250px 116px;
-}
-.tinghu-thumbnail {
-    background: url('../images/tinghu-gyt.png') no-repeat;
-    width: 246px;
-    height: 256px;
-    background-size: 246px 256px;
-}
-.shenlongcheng-thumbnail {
-    background: url('../images/shenlongcheng-gyt.png') no-repeat;
-    width: 247px;
-    height: 156px;
-    background-size: 247px 156px;
-}
 .bottom-thumbnail {
 /*
     height: 348px; width: 728px;
     background-size: 728px;
     */
+    background-repeat: no-repeat;
     display: inline-block;
     vertical-align: bottom;
     cursor: pointer;
+    margin-right: 40px;
+}
+.huanghua-thumbnail {
+    background-image: url('../images/huanghua-gyt01.png');
+    width: 250px;
+    height: 116px;
+    background-size: 250px 116px;
+}
+.tinghu-thumbnail {
+    background-image: url('../images/tinghu-gyt.png');
+    width: 246px;
+    height: 256px;
+    background-size: 246px 256px;
+}
+.shenlongcheng-thumbnail {
+    background-image: url('../images/shenlongcheng-gyt.png');
+    width: 247px;
+    height: 156px;
+    background-size: 247px 156px;
 }
 .tails-box { display: inline-block;}
 .tail-icon {

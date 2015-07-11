@@ -397,10 +397,14 @@ var re = new RegExp(reg);
                         bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
                     }); //切换页面         
                     switch(projectBoxIndex ) { //复位为overview
-                        case '1': gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); break;
+                        case '1': 
+                            gytSelectFn(false,'#huanghuaOverview', '工艺设计图',[-1]); 
+                            huanghuaArtwork.height(1343);
+                            break;
                         case '3': 
                             gytSelectFn(false,'#tinghuOverview', '工艺设计图',[-1]); 
-                            tinghuArtwork.height(2027);
+                            //tinghuArtwork.height(2027);
+                            tinghuArtwork.height(1718);
                             break;
                         case '4': 
                             gytSelectFn(false,'#shenlongchengOverview', '工艺设计图',[-1]); 
@@ -2853,7 +2857,8 @@ function filterUnit(dig) {// 过滤万分位
 }
 
 /* 工艺图 */
-var tinghuArtwork = $('#tinghuArtwork')
+var huanghuaArtwork = $('#huanghuaArtwork')
+  , tinghuArtwork = $('#tinghuArtwork')
   , shenlongchengArtwork = $('#shenlongchengArtwork')
 $doc.on('click', '.huanghuaPA', huanghuaPAFn)
     .on('click', '.huanghuaPB', huanghuaPBFn)
@@ -2957,7 +2962,8 @@ function huanghuaFirst() {
 }
 function tinghuFirst() {
     gytSelectFn(false,'#tinghuOverview', '亭湖工艺设计图',[-1]);//-1为空
-    tinghuArtwork.height(2027);
+    //tinghuArtwork.height(2027);
+    tinghuArtwork.height(1718);
 }
 function shenlongchengFirst() {
     gytSelectFn(false,'#shenlongchengOverview', '神农城工艺设计图',[-1]);//-1为空
@@ -3372,15 +3378,19 @@ function huanghuaAlabeldataAllFn(data) {
 
 function huanghuaPAFn(){
     gytSelectFn(true,'#huanghuaA','三联供系统',[0]);
+    huanghuaArtwork.height(1434);
 }
 function huanghuaPBFn(){
     gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
+    huanghuaArtwork.height(1288);
 }
 function huanghuaPCFn(){
     gytSelectFn(true,'#huanghuaBC','燃气直燃机燃气热水锅炉系统',[1,2]);
+    huanghuaArtwork.height(1288);
 }
 function huanghuaPDFn(){
     gytSelectFn(true,'#huanghuaD','电制冷系统',[3]); 
+    huanghuaArtwork.height(1194);
 }
 
 //亭湖选择
@@ -4204,8 +4214,8 @@ function equipsPopup(pid){
     switch(pid) {
         case 1:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
-            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
-            localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+            //localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
             break;
         case 3:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
