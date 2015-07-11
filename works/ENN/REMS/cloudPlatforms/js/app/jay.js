@@ -816,17 +816,12 @@ dateAllShow(); // show all datepicker
         dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
-        /*
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-          */
 
-		showModal('ten',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname);
+		showModal('eleven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
 
-    //
-    function pie1(){}
-		showModal('eleven',pie1);
 
     }).on('click', '#pie2',function(){ //co2减排率弹出层
 
