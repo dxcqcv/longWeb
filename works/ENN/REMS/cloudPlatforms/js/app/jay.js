@@ -3736,6 +3736,7 @@ function pipelineStatus() {
 
 }
 function shenlongchengEquipStatFn(data) {
+  //, globalMode = 1 // 默认供冷模式
 	var classinstanceidHRQ01Flag = 0 , classinstanceidHRQ02Flag = 0;
     $.each(data, function(index, value) {
         if(value.classinstanceid === 9051  && value.datavalue1 === '0') { //神农城A余热直燃机
@@ -3787,7 +3788,7 @@ function shenlongchengEquipStatFn(data) {
         {
         	equipStatus(0,'#shenlongchengAEFadianji02'); 
             equipStatus(0,'#shenlongchengAElengqueta02');
-            pipelineStatus(0,'.shennongcheng-a-l-fadianji02'); 
+            pipelineStatus(0,'.shennongcheng-a-l-fadianji02','.shenlongcheng-a-fadianji2-out02','.shenlongcheng-a-fadianji1-out03'); 
             equipStatus(0,'#shenlongchengAEhuanreqi02'); 
             pipelineStatus(0,'.shenlongcheng-a-l-huanreqi02');
             classinstanceidHRQ02Flag = 0;
@@ -3959,6 +3960,12 @@ function shenlongchengEquipStatFn(data) {
 	}else{
 		pipelineStatus(0,'.shenlongcheng-a-y-huanreqi2-out03','.shenlongcheng-a-y-yureburanzhiranji-out09','.shenlongcheng-a-y-yureburanzhiranji-out08','.shenlongcheng-a-huanreqi-in06');
 	}
+
+	if(classinstanceidHRQ01Flag == 1 || classinstanceidHRQ02Flag == 1 || classinstanceid102Flag == 1){
+		pipelineStatus(1,'.shenlongcheng-a-y-yureburanzhiranji-out08','.shenlongcheng-a-huanreqi-in06');
+    } else {
+		pipelineStatus(0,'.shenlongcheng-a-y-yureburanzhiranji-out08','.shenlongcheng-a-huanreqi-in06');
+    }
 	// B区 电冷机组 共享管道显示逻辑
 
 	//交错放置并行冷却水的输入输出管道
@@ -3979,6 +3986,13 @@ function shenlongchengEquipStatFn(data) {
 									 '.dianzhilengji-jielengquelie-g-lixindianzhilengjiA2-02',
 									 '.dianzhilengji-b-g-qufenshuiqi-08',
 									 '.dianzhilengji-jielengquelie-g-lixindianzhilengjiA1-02'];
+
+		pipelineStatus(0,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
+		pipelineStatus(0,shenlongchengLengqueshuiLine[0],shenlongchengLengqueshuiLine[1],shenlongchengLengqueshuiLine[2],shenlongchengLengqueshuiLine[3],shenlongchengLengqueshuiLine[4],shenlongchengLengqueshuiLine[5],shenlongchengLengqueshuiLine[6],shenlongchengLengqueshuiLine[7]);
+		pipelineStatus(0,shenlongchengLengshuiLine[0],shenlongchengLengshuiLine[1],shenlongchengLengshuiLine[2],shenlongchengLengshuiLine[3],shenlongchengLengshuiLine[4],shenlongchengLengshuiLine[5],shenlongchengLengshuiLine[6],shenlongchengLengshuiLine[7]);
+                                     /*
+        */
+
 	if(classinstanceid97Flag == 1 || classinstanceid98Flag ==1 ||classinstanceid99Flag ==1 || classinstanceid100Flag ==1 || classinstanceid101Flag ==1){
 		pipelineStatus(1,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
 		if(classinstanceid97Flag == 1){//电冷机A1
@@ -4004,6 +4018,15 @@ function shenlongchengEquipStatFn(data) {
 		pipelineStatus(0,shenlongchengLengqueshuiLine[0],shenlongchengLengqueshuiLine[1],shenlongchengLengqueshuiLine[2],shenlongchengLengqueshuiLine[3],shenlongchengLengqueshuiLine[4],shenlongchengLengqueshuiLine[5],shenlongchengLengqueshuiLine[6],shenlongchengLengqueshuiLine[7]);
 		pipelineStatus(0,shenlongchengLengshuiLine[0],shenlongchengLengshuiLine[1],shenlongchengLengshuiLine[2],shenlongchengLengshuiLine[3],shenlongchengLengshuiLine[4],shenlongchengLengshuiLine[5],shenlongchengLengshuiLine[6],shenlongchengLengshuiLine[7]);
 	}
+
+    /*
+		if(classinstanceid101Flag == 0 && classinstanceid100Flag == 0 && classinstanceid99Flag == 0 && classinstanceid98Flag == 0) {
+           pipelineStatus(0, '.dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02','.dianzhilengji-b-lixindianzhilengjiA1-01')
+        }
+        if(classinstanceid101Flag == 0 && classinstanceid100Flag == 0 && classinstanceid99Flag == 0) {
+           pipelineStatus(0, '.dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-02','')
+        }
+        */
 	// C区 燃气锅炉组 共享管道显示逻辑
 
 	//交错放置并行热水的输入输出管道
@@ -4014,6 +4037,11 @@ function shenlongchengEquipStatFn(data) {
 	//燃气的输入输出管道				
 	var shenlongchengCRanqiLines = ['.dianzhilengji-c-reshuiguolu-y-B1-03',
 									'.dianzhilengji-c-reshuiguolu-y-A2-01'];
+
+		pipelineStatus(0,'.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01','.dianzhilengji-c-reshuiguolu-y-B1-02');
+		pipelineStatus(0,shenlongchengCReshuiLines[0],shenlongchengCReshuiLines[1],shenlongchengCReshuiLines[2],shenlongchengCReshuiLines[3]);
+		pipelineStatus(0,shenlongchengCRanqiLines[0],shenlongchengCRanqiLines[1]);
+
 	if(classinstanceid103Flag == 1 || classinstanceid104Flag ==1 ||classinstanceid105Flag ==1 || classinstanceid106Flag ==1){
 		pipelineStatus(1,'.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01','.dianzhilengji-c-reshuiguolu-y-B1-02');
 
@@ -4058,6 +4086,7 @@ function shenlongchengEquipStatFn(data) {
 }
 function huanghuaEquipStatFn(data) {
 
+  //, globalMode = 1 // 默认供冷模式
    $.each(data, function(index, value){
         //黄花D区电冷机17,18
         if(value.classinstanceid === 17 && value.datavalue1 === '0') {
@@ -4218,7 +4247,9 @@ function huanghuaEquipStatFn(data) {
         if(classinstanceid13Flag === 0 && classinstanceid42Flag ===0 ) { //1号余热直燃机和换热器
             pipelineStatus(0,'.huanghua-yurezhiranji-1-in03-up','.huanghua-yurezhiranji-1-out03-up','.huanghua-yurezhiranji-1-in02','.huanghua-yurezhiranji-1-out02')
         }
-
+        if(classinstanceid13Flag === 0 && classinstanceid14Flag ===0 ) {
+            pipelineStatus(0,'.huanghua-yurezhiranji-1-in06','.huanghua-yurezhiranji-1-out06')
+        }
 }
 
 var lixindianlengjiIn01 = [
@@ -4252,7 +4283,7 @@ function equipsPopup(pid){
     switch(pid) {
         case 1:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
-            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
             localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
             break;
         case 3:

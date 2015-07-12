@@ -632,7 +632,6 @@
     width: 100%;
 }
 .artwork-popup { 
-display: none;
     position: absolute;  
     border: 1px solid #999;
     border-radius: 25px;
@@ -3881,9 +3880,9 @@ top:376px; left:1293px;
   transform:rotate(-71deg);
 }
   .shenlongcheng-a-y-yureburanzhiranji-in12{
-  	top:318px; left:1796px;
+  	top:318px; left:1798px;
    height:130px;
-  transform:rotate(-179deg);
+  transform:rotate(0deg);
   }
   .shenlongcheng-a-y-yureburanzhiranji-out11{
   	top:2px; left:1798px;
@@ -3915,7 +3914,7 @@ top:376px; left:1293px;
   .shenlongcheng-a-fadianji2-out13{
   	top:-2px; left:2009px;
    height:451px;
-  transform:rotate(-472deg);
+  transform:rotate(68deg);
   }
  .dianzhilengji-b-g-qufenshuiqi-in01{
   	top:377px; left:2568px;
