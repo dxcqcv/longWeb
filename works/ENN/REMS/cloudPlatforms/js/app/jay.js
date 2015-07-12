@@ -30,7 +30,7 @@ var demand
 
 function myTimeoutFn(fn, time,callback) {
     fn();
-    checkFunction(callback)
+    checkCallbackFn(callback)
     var t = setTimeout(function(){myTimeoutFn(fn,time)}, time)
     return t;
 }
@@ -190,14 +190,21 @@ function indexInit(data){
 		support = Modernizr.cssanimations;
 
     /* 页面切换结束 */
-
-	(function tab() {
+function toggleShow() {
+    var i = 0
+      , l = arguments.length
+      , c = Array.prototype.shift.call(arguments)
+    for(i,l;i<l;i++){
+        $(arguments[i]).addClass(c).siblings().removeClass(c) 
+    }
+}
+	function tab(num,callback) {
 		var index = "";
 		var $this;
 		var $target = $(".toggle-tabs-001 > .tablayout");
 		return $doc.on("click", ".subhead-tab-warp > .tabs", function(e) {
 			$this = $(this);
-			index = $this.index();
+			index = num ? num : $this.index();
 			$this.addClass("cur").siblings().removeClass("cur");
 			$target.eq(index).addClass("cur").siblings().removeClass("cur");
             //alert(projectBoxIndex);
@@ -205,10 +212,10 @@ function indexInit(data){
             //$doc.trigger("loadRightTab2JSON",[_pid]); // 加载供能耗能
 
             if(index == 1) bindY_M_D_data(); //pinmingle add 右边年月日数据绑定
-
+            checkCallbackFn(callback);
 		});
-	})();
-	
+	}
+    tab(null);//供能耗能和成本收益切换	
 
 	window.pageName = "index";
 	
@@ -454,6 +461,7 @@ var re = new RegExp(reg);
                             function(){ selectGYT(_pid,function(){releaseFn('afterSwitchPg')})},
                             function(){ intervalLeftRight = myTimeoutFn(function(){loadLeftRight(_pid)},hoursUpdate,function(){releaseFn('afterSwitchPg')});},
                             function(){ intervalInnerRight = myTimeoutFn(function(){gnhnfn(_pid)}, hoursUpdate,function(){releaseFn('afterSwitchPg')});}, //小时更新供能耗能
+                            function(){ toggleShow('cur','#gongnenghaonengDefTab','#gongnenghaonengDefLayout');releaseFn('afterSwitchPg'); },
                             function(){ intervalWeather = myTimeoutFn(getWeather,hoursUpdate,function(){releaseFn('afterSwitchPg')});}// 加载气象信息
                         ];
                         $doc.queue('afterSwitchPg',afterSwitchPg );
@@ -1042,6 +1050,7 @@ dateAllShow(); // show all datepicker
 			
 		]
 
+        ,animation: false
 	};
 	
 
@@ -1138,6 +1147,7 @@ dateAllShow(); // show all datepicker
 				data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 			}
 		]
+        ,animation: false
 	};
 	
 	
@@ -1267,6 +1277,7 @@ dateAllShow(); // show all datepicker
 				]
 			}
 		]
+        ,animation: false
 	};
 
 	var optionModal2itemsty = {
@@ -1370,11 +1381,12 @@ dateAllShow(); // show all datepicker
 				data:[320, 332, 301, 334, 390, 330, 320]
 			}
 		]
+        ,animation: false
 	};	
 
 		
 	var optionModal3 = {
-		animationDuration: animationDurationAll,
+		//animationDuration: animationDurationAll,
 		color:["#55b6d8", "#2bbaba", "#1c7099", "#038cc4"],
 		title : {
 			show:false
@@ -1591,6 +1603,7 @@ dateAllShow(); // show all datepicker
 				]
 			}
 		]
+        ,animation: false
 	};	
 		
 		
@@ -2990,6 +3003,7 @@ if(globalMode === 0) { //供热
 } 
 function huanghuaFirst() {
     gytSelectFn(false,'#huanghuaOverview', '黄花工艺设计图',[-1]);//-1为空
+    huanghuaArtwork.height(1434);
 }
 function tinghuFirst() {
     gytSelectFn(false,'#tinghuOverview', '亭湖工艺设计图',[-1]);//-1为空
@@ -4298,7 +4312,7 @@ function equipsPopup(pid){
             break;
     }
 }
-function checkFunction(fn) {
+function checkCallbackFn(fn) {
     if(typeof fn == 'function') fn();
 }
 // 工艺图切换
@@ -4312,7 +4326,7 @@ function selectGYT(id,callback) {
             builtTailIcon(1,4);
             //equipsPopup(1);
             intervalGYTData1 = myTimeoutFn(function(){equipsPopup(1)}, minsUpdate); 
-            checkFunction(callback)
+            checkCallbackFn(callback)
             break;
         case '3': 
             gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
@@ -4322,7 +4336,7 @@ function selectGYT(id,callback) {
             builtTailIcon(3,4); //构建下标
             //equipsPopup(3);
             intervalGYTData2 = myTimeoutFn(function(){equipsPopup(3)}, minsUpdate); 
-            checkFunction(callback)
+            checkCallbackFn(callback)
             break;
         case '4': 
             gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
@@ -4332,7 +4346,7 @@ function selectGYT(id,callback) {
             builtTailIcon(4,3);
             //equipsPopup(4);
             intervalGYTData3 = myTimeoutFn(function(){equipsPopup(4)}, minsUpdate); 
-            checkFunction(callback)
+            checkCallbackFn(callback)
             break;
     }
 }
