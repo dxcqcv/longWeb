@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html class="xa-app defaultpage">
+<head>
+<!-- ------------------------------------------------------------------
+***********************************************************************
+开发人员书写规范:
+1.所有缩进都用 TAB， 而不是空格。
+2.非必要，禁止用行内样式例如 <div style="display:block"> 
+
+浏览器兼容：
+	IE8+
+	FireFox
+	Webkit内核浏览器:
+		Chrome,
+		Opear(WebKit版),
+		360浏览器(7.0+),
+		360急速浏览器,
+		搜狗浏览器,
+		115浏览器,
+		UC桌面浏览器,
+		枫树浏览器,
+		Safari 5.1+
+		Safari 7+ (Mac OS)
+注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
+***********************************************************************
+---------------------------------------------------------------------- -->
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>新奥泛能远程专家系统</title>
+	<meta name="description" content="">
+	<meta name="author" content="J.Chen&dx">
+	<!-- 让360双核浏览器用webkit内核渲染页面 !!! 注意，这行最好放在前面，防止浏览器开始解析的时候采用其它内置的渲染方案
+	================================================== -->
+	<meta name="renderer" content="webkit">
+	<!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+	================================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- IOS6全屏 Chrome高版本全屏
+	================================================== -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI，但是在iOS8.1突然被取消 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- 指定苹果设备添加到主屏的标题 -->
+	<meta name="apple-mobile-web-app-title" content="title2">
+	<!-- CSS
+	================================================== -->
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="js/lib/datepicker/bootstrap-datepicker.standalone.min.css" rel="stylesheet" type="text/css">
+	<link href="js/lib/datepicker/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css">
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.ico" >
+	<!-- Android 主屏图标
+	================================================== -->	
+    <!--
+	<link rel="icon" sizes="196x196" href="touch-icon.png">
+    -->
+	<!-- IOS 主屏图标
+	================================================== -->
+	<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+	
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<!-- win 8 磁贴图标 -->
+	<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+	<!-- win 8 磁贴颜色 -->
+	<meta name="msapplication-TileColor" content="#3372DF">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	
+	<script>
+		//window.pageName = "index";
+		/*检测是不是WebKit内核*/
+		var isWebkit = 'WebkitAppearance' in document.documentElement.style;
+		var isIE = document.all && document.addEventListener;
+		var isFF = !!window.sidebar;
+		if(isWebkit || isIE || isFF ){
+			/*进行匹配缩放*/
+			function webkitScalc() {
+				var defaultWidth = 6142;
+				var userWidth = window.innerWidth;
+				var userHeight = window.innerHeight;
+				var scalcNum = userWidth / defaultWidth;
+				
+				if ( scalcNum < 1 ) {
+					scalcNum = scalcNum*100;
+					var rootElement = document.documentElement;
+					var setHeight = userHeight/(scalcNum/100);
+					rootElement.style.zoom = scalcNum + "%";
+					rootElement.style.height = setHeight+"px";
+					//rootElement.style.MozTransform = 'scale('+0.2+')';
+					
+					
+					var index_right_height = setHeight - 286 - 320 + 250; // 首页右侧高度
+					if (!document.getElementById("customsty")) {
+						var head = document.head || document.getElementsByTagName('head')[0];
+						var newStyle = document.createElement("style");
+						newStyle.setAttribute("id", "customsty");
+						newStyle.type = 'text/css';
+						head.appendChild(newStyle);
+					}
+					document.getElementById("customsty").innerHTML = ".index_right_height {height: "+index_right_height + "px}"+".irhitemsheight {height:" + index_right_height/3 + "px}";
+					
+					if (typeof console != 'undefined' && !isIE) {
+						var printCSS = {};
+						printCSS.index_right_height = [index_right_height+"px"];
+						printCSS.irhitemsheight = [index_right_height/3+"px"];
+						console.table(printCSS);
+					}
+					
+				}
+			}webkitScalc();
+			/*绑定到缩放事件*/
+            
+			window.addEventListener("resize", webkitScalc);
+		}
+	</script>
+	
+	
+	<!--<script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=g4kCTYjARuvaDc1oNzkcfKz7&v=1.0"></script>-->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=g4kCTYjARuvaDc1oNzkcfKz7"></script>
+
+
+</head>
+
+<body>
+<div id="wrapper" class="wrapper">
+
+    <div class="index-container layout layout1 pt-page-current">
+        <div class="index-top">
+           &nbsp;&nbsp;&nbsp;&nbsp;新奥泛能远程专家系统 
+        </div>
+        <div class="xa-logo-rightop">
+            <img src="images/xa-logo2.png" width="580" height="208" alt="">
+        </div>
+        <div class="map-content" id="Amapcontent" style=" zoom:4">
+            
+        </div>
+        
+        <div class="left-cover-layout"></div>
+        <div class="right-cover-layout"></div>
+        
+        <div class="index-slider index_right_height">
+            <div class="swiper-container" id="index_left_swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide" style="text-align:center;">
+                        <h2 class="sw-title">
+                            新奥集团简介
+                        </h2>
+                        <p style="width:100%; margin-bottom:90px;"><img src="images/index_s_2.jpg" width="100%" style=" max-width:931px;"/></p>
+                        <p class="txa-c">
+                            新奥集团创建于1989年，始终践行“创新清洁能源 改善生存环境 提高生活品质”的企业使命，致力于创建美丽生态、创造美好生活。
+                        </p>
+                        <p class="txa-c" style=" margin-top:35px;">
+                            经过持续的战略升级与产业拓展，新奥集团初步构建了能源环保与文化健康旅游两大业务群。能源环保业务为人们提供清洁能源产品和服务，打造良好的生态环境；文化健康旅游业务则为提高人们生活品质贡献力量，为人们的心灵生活打造一片乐土。
+                        </p>
+                    </div>
+                    <div class="swiper-slide" style="text-align:center;">
+                        <h2 class="sw-title">
+                            泛能业务简介
+                        </h2>
+                        <p class="txa-c">
+                            新奥智能能源系统分析区域能源问题，洞悉多能协同、余缺互补、价格寻优、负荷匹配、高效用能价值空间，依托系统能效理论及泛能网技术，持续创新实践，形成“泛能规划牵引、泛能站支撑、泛能微网升级”的泛能发展模式
+                        </p>
+                        <p style="width:100%; margin-top:60px;"><img src="images/index_s_1.png" width="100%" style=" max-width:931px;"/></p>
+                    </div>
+                    <div class="swiper-slide" style="text-align:center;">
+                    	<h2 class="sw-title" style="width:100%;">
+                           系统功能简介
+                        </h2>
+                        <h2 class="sw-title has-img-icon">
+                            <img src="images/icon-blue-peo.png" class="sw-tcion" alt="">
+                            运营管理
+                        </h2>
+                        <p class="txa-c dashed_line">
+                            实时监测泛能站及泛能微网系统运行状态，动态计算分析能源消耗、能源供应、系统能效、设备能效等数据，通过横向与纵向对标提升运营管理水平。
+                        </p>
+                         <h2 class="sw-title has-img-icon">
+                            <img src="images/icon-blue-poc.png" class="sw-tcion" alt="">
+                            远程服务
+                        </h2>
+                        <p class="txa-c dashed_line">
+                            基于历史数据统计分析和能效标准的建立，为泛能站及泛能微网运营管理客户提供远程能效诊断与运营数据分析服务，提高系统运行效率，降低运营成本。
+                        </p>
+                        <h2 class="sw-title has-img-icon">
+                            <img src="images/icon-blue-peos.png" class="sw-tcion" alt="">
+                            数据挖掘
+                        </h2>
+                        <p class="txa-c">
+                            通过泛能站及泛能微网大数据应用，挖掘工艺设计、自控及运营管理各个环节的节能提效潜力，指导运营管理和工艺设计。
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="ils-pages swiper-pagination" id="ils_pages"></div>
+        </div>
+        
+        <div class="index-slider-right index_right_height">
+            <div id="slider_prew"></div>
+            <div id="slider_next"></div>
+            <div class="swiper-container" id="index_right_swiper">
+                <div class="swiper-wrapper">
+                    
+                   <!-- 
+                    <a class="swiper-slide irhitemsheight" href="page1.html">
+                    -->
+                        
+                        <div class="mapview-line-hov">
+                            <div class="mapview-line-cycle">
+                                <div class="icon-loaction"></div>
+                            </div>
+                            <div class="mv-local">湖南省 · 长沙市 · 长沙区</div>
+                            <div class="mv-localname">上海地图坐标</div>
+                        </div>
+                        
+                        <div class="mapview-right-text-wrap">
+                            <div class="inner-cycle-top flexmid">
+                                <p>60,758 ㎡</p>
+                                <h2>建筑</h2>
+                            </div>
+                            <div class="inner-cycle-bot flexmid">
+                                <h2>供能</h2>
+                                <p>101,758 ㎡</p>
+                            </div>
+                        
+                            <span class="inner-text">
+                                <i class="it-line-hov"></i>
+                                <em>公共建筑</em>
+                            </span>
+                        </div>
+                        
+                        <div class="mapview-cycle-wrap">
+                            <div class="mapview-cycle"><img src="images/sampleimg-6.jpg" alt="">
+                                <div class="mpv-cycle-detail flexmid">
+                                    <h3>二氧化碳排放总量 (kg)</h3>
+                                    <p>21321321132231</p>
+                                    <h3>成本总量 (rmb)</h3>
+                                    <p>21321321132231</p>
+                                    <h3>用电总量 (kwh)</h3>
+                                    <p>21321321132231</p>
+                                </div>
+                            </div>
+                            <div class="mapview-cycle-tips">
+                                <div class="icon-si flexmid">
+                                    <img src="images/icon-bulid-1.png" alt="">
+                                </div>
+                                <div class="text-date flexmid">
+                                    <h2>12</h2>
+                                    <p>2015</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+                    </a>
+                    -->
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container  layout layout2"><!-- Everything started here -->
+        <div class="header-all">
+            <div class="xa-header clearfix">
+                <a href="#" class="xa-logo-text">
+                    <img src="images/xa-logo.png" alt="">
+                    <span>新奥泛能远程专家系统</span>
+                </a>
+                <!--顶部滚动-->
+                <div id="header_slide">
+                	<div class="swiper-container" id="header_gonggao">
+                        <div class="swiper-wrapper">
+                        <!--
+                            <div class="swiper-slide">新奥载誉2014中国分布式能源国际论坛</div>
+                            <div class="swiper-slide">新奥集团与施耐德电气组建合资公司发力分布式能源市场</div>
+                            <div class="swiper-slide">新奥盐城亭湖新区医院泛能站项目天然气发电一次并网成功</div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+                <div class="xa-logo-right">
+                    <img class="xa-logo2" src="images/xa-logo2.png" alt="">
+                </div>
+            </div>
+            <div class="xa-sub-header clearfix">
+                <div id="goHome" class="icon-button">
+                    <span class="icon icon-home"></span>
+                </div>
+                <h2 class="subhead-title">
+                    <span id="contSubTitle">黄花机场泛能站</span>
+                </h2>
+                <div class="subhead-param">
+                    <div class="row">
+                        <div class="cell th">
+                            <span class="icon-button">
+                                <i class="icon icon-temp"></i>
+                            </span>
+                        </div>
+                        <div class="cell td" id="temperature">
+                            <span class="spspan">温度</span>
+                            <span class="spspan"><i class="highlight">13°C</i></span>
+                        </div>
+                        <div class="cell th">
+                            <span class="icon-button">
+                                <i class="icon icon-wth"></i>
+                            </span>
+                        </div>
+                        <div class="cell td" id="humidity">
+                            <span class="spspan">湿度</span>
+                            <span class="spspan"><i class="highlight">15%</i></span>
+                        </div>
+                        <div class="cell th" id="irradianceIcon">
+                            <span class="icon-button">
+                                <i class="icon icon-sun"></i>
+                            </span>
+                        </div>
+                        <div class="cell td" id="irradiance">
+                            <span class="spspan">辐照度</span>
+                            <span class="spspan"><i class="highlight">w/㎡</i></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subhead-tab-warp" for="toggle-tabs-001">
+                    <div class="tabs cur">耗能 / 供能</div>
+                    <div class="tabs ">收益 / 成本</div>
+                </div>
+            
+            </div>
+        </div>
+        <div class="xa-content clearfix">
+            <div class="xa-con-left flexmid" style="height:100%">
+            	
+            	<div class="boxin">
+					<div class="row rw986 ">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<div id="pie1" class="dib leftGruop_0" data-classpropertyid="479" data-unitname="%" style="width:360px; height:320px;"></div>
+							</div>
+							<div class="col-2 txa-c">
+								<div id="pie2" class="dib leftGruop_1" data-classpropertyid="480" data-unitname="%" style="width:360px; height:320px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986" style="margin-top:-3px;margin-bottom:-3px;">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<span class="line" style="color:#f8ae3b"></span>
+							</div>
+							<div class="col-2 txa-c">
+								<span class="line" style="color:#21b171"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986">
+						<div class="inner">
+							<div class="col-2 txa-c leftGruop_0">
+								<div class="chart-text-block bgc-org">
+									<p>&nbsp;</p>
+									<p>&nbsp;<!--0000 kWh--></p>
+								</div>
+							</div>
+							<div class="col-2 txa-c leftGruop_1">
+								<div class="chart-text-block bgc-gry">
+									<p>&nbsp;</p>
+									<p>&nbsp;<!--0000 kg--></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986" style="margin-top:-3px;margin-bottom:-3px;">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<span class="dline" style="color:#f8ae3b"></span>
+							</div>
+							<div class="col-2 txa-c">
+								<span class="dline" style="color:#21b171"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<div id="barchart-1" class="hov-line-chartblock leftGruop_0"></div>
+							</div>
+							<div class="col-2 txa-c">
+								<div id="barchart-2" class="hov-line-chartblock leftGruop_1"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="boxin boxinbottom">
+					<div class="row rw986 ">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<div id="pie3" class="dib leftGruop_2" data-classpropertyid="474" data-unitname="%" style="width:360px; height:320px;"></div>
+							</div>
+							<div class="col-2 txa-c">
+								<div id="pie4" class="dib leftGruop_3" data-classpropertyid="467" data-unitname="%" style="width:360px; height:320px;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986" style="margin-top:-3px;margin-bottom:-3px;">
+						<div class="inner">
+							<div class="col-2 txa-c">
+								<span class="line" style="color:#ec1e79"></span>
+							</div>
+							<div class="col-2 txa-c">
+								<span class="line" style="color:#92278e"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row rw986">
+						<div class="inner">
+							<div class="col-2 txa-c leftGruop_2" >
+								<div id="" class="hov-line-chartblock flexmid">
+									<p>&nbsp;</p>
+									<p><font color="#ec1e79">&nbsp;<!--25406--></font> <span>&nbsp;<!--kWh--></span></p>
+									<p>&nbsp;</p>
+									<p><font color="#ec1e79">&nbsp;<!--25406--></font> <span>&nbsp;<!--kWh--></span></p>
+								</div>
+							</div>
+							<div class="col-2 txa-c leftGruop_3">
+								<div id="" class="hov-line-chartblock flexmid">
+									<p>&nbsp;</p>
+									<p><font color="#92278e">&nbsp;<!--25406--></font> <span>&nbsp;<!--kWh--></span></p>
+									<p>&nbsp;</p>
+									<p><font color="#92278e">&nbsp;<!--25406--></font> <span>&nbsp;<!--kWh--></span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+                
+            </div>
+            <div class="xa-con-right toggle-tabs-001" style="height:100%">
+                <div class="tablayout cur flexmid" id="toggle-tabs-002"  style="height:100%">
+                   
+                   <div class="boxin">
+                    <div class="eng-title">
+                        <span class="eng-titlein">耗能</span>
+                    </div>
+                    <div class="eng-block-wrap">
+                        <div class="inner part-3" id="costEnergy">
+                            <div class="eng-bp" id="showModal_1">
+                                <div class="eng-block color-1">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-thunder.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-01-day-name">今日耗电</p>
+                                                <p class="ghn-01-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-01-month-name">当月耗电</p>
+                                            <p class="ghn-01-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-01-year-name">当年耗电</p>
+                                            <p class="ghn-01-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eng-bp" id="showModal_2">
+                                <div class="eng-block color-2">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-fire.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-02-day-name">今日耗电</p>
+                                                <p class="ghn-02-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-02-month-name">当月耗电</p>
+                                            <p class="ghn-02-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-02-year-name">当年耗电</p>
+                                            <p class="ghn-02-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eng-bp" id="showModal_3">
+                                <div class="eng-block color-3">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-wth2.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-03-day-name">今日耗电</p>
+                                                <p class="ghn-03-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-03-month-name">当月耗电</p>
+                                            <p class="ghn-03-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-03-year-name">当年耗电</p>
+                                            <p class="ghn-03-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                   <div class="boxin boxinbottom">
+                    <div class="eng-title">
+                        <span class="eng-titlein">供能</span>
+                    </div>
+                    <div class="eng-block-wrap" >
+                        <div class="inner part-2" id="supplyEnergy">
+                            <div class="eng-bp" id="showModal_4">
+                                <div class="eng-block color-71538a">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-spr.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-04-day-name">今日供电</p>
+                                                <p class="ghn-04-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-04-month-name">当月耗电</p>
+                                            <p class="ghn-04-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-04-year-name">当年耗电</p>
+                                            <p class="ghn-04-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eng-bp" id="showModal_5">
+                                <div class="eng-block color-ab5150">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-fire2.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-05-day-name">今日供热</p>
+                                                <p class="ghn-05-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-05-month-name">当月耗电</p>
+                                            <p class="ghn-05-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-05-year-name">当年耗电</p>
+                                            <p class="ghn-05-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eng-bp" id="showModal_6">
+                                <div class="eng-block color-838d58">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-cup.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-06-day-name">今日供热水</p>
+                                                <p class="ghn-06-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-06-month-name">当月耗电</p>
+                                            <p class="ghn-06-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-06-year-name">当年耗电</p>
+                                            <p class="ghn-06-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eng-bp" id="showModal_7">
+                                <div class="eng-block color-b59142">
+                                    <div class="eng-b-top clearfix">
+                                        <div class="eng-icon">
+                                            <img src="images/icon-9dots.png" alt="">
+                                        </div>
+                                        <div class="eng-text">
+                                            <div>
+                                                <p class="ghn-07-day-name">今日供蒸汽</p>
+                                                <p class="ghn-07-day-val">40 kWh</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eng-b-con">
+                                        <div class="eng-bcin">
+                                            <p class="ghn-07-month-name">当月耗电</p>
+                                            <p class="ghn-07-month-val">1200 kWh</p>
+                                        </div>
+                                        <div class="eng-bcin">
+                                            <p class="ghn-07-year-name">当年耗电</p>
+                                            <p class="ghn-07-year-val">24000 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					</div>
+                </div>
+                <div class="tablayout flexmid" id="toggle-tabs-001" style="height:100%">
+                    <div class="column-chart-block" id="showModal_8">
+                        <div class="ccb-left">
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid">
+                                    <p id="cou_01">￥</p>
+                                    <p>当年成本</p>
+                                </div>
+                            </div>
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid">
+                                    <p id="cou_02">￥</p>
+                                    <p>当年收益</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ccb-right">
+                            <div class="chart-inner-wrap" id="columnChart3">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-chart-block" id="showModal_9">
+                        <div class="ccb-left">
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid" >
+                                    <p id="cou_03">￥</p>
+                                    <p>当月成本</p>
+                                </div>
+                            </div>
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid" >
+                                    <p id="cou_04">￥</p>
+                                    <p>当月收益</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ccb-right">
+                            <div class="chart-inner-wrap" id="columnChart4">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-chart-block" id="showModal_10">
+                        <div class="ccb-left">
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid" >
+                                    <p id="cou_05">￥</p>
+                                    <p>当日成本</p>
+                                </div>
+                            </div>
+                            <div class="ccb-leftblocks">
+                                <div class="ccb-leftblocks-inner flexmid" >
+                                    <p id="cou_06">￥</p>
+                                    <p>当日收益</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ccb-right">
+                            <div class="chart-inner-wrap" id="columnChart5">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--内页工艺图-->
+            <div class="xa-con-cent flexmid" id="artwork" style="height:100%">
+                <div id="artworkTitle" class="artwork-title">
+                    <div class="atInner">工艺设计图</div>
+                </div>
+                <div id="artworkMain" class="xa-con-cent-main">
+                    <div id="shenlongchengArtwork" class="shenlongcheng-artwork">
+                            <!--选择点击区域-->
+                        <div id="shenlongchengOverview" class="shenlongcheng-overview artwork-overview ">
+                            <div  class="position-selected-area shenlongcheng-pA shenlongchengPA" ></div>
+                            <div  class="position-selected-area shenlongcheng-pB shenlongchengPB" ></div>
+                            <div  class="position-selected-area shenlongcheng-pC shenlongchengPC" ></div>
+                            <!--选择点击区域end-->
+                            <!--描述框-->
+                            <div class="overview-des-area shenlongcheng-des-a">
+                                <p>燃气三联供设备</p>
+                                <p>燃气三联供设备为系统</p>
+                                <p>冷热电联供主要设备</p>
+                            </div>
+                            <div class="overview-des-area shenlongcheng-des-b">
+                                <p>电制冷机组</p>
+                                <p>离心式电制冷机组、电</p>
+                                <p>制冷机组为调峰设备</p>
+                            </div>
+                            <div class="overview-des-area shenlongcheng-des-c">
+                                <p>燃气锅炉</p>
+                                <p>燃气锅炉为调峰设备</p>
+                            </div>
+                        </div>
+                        <div id="shenlongchengA" class="shenlongcheng-a hide ">
+                            <div class="artwork-overview shenlongcheng-sanliangong">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup shenlongcheng-a-p-huanreqi01" >
+                                    <h1>1#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-lengqueta01" >
+                                    <h1>1#高温冷却塔</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-lengqueta02" >
+                                    <h1>2#高温冷却塔</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-huanreqi02" >
+                                    <h1>2#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-yurezhiranji" >
+                                    <h1>燃气直燃机</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-fadianji01" >
+                                    <h1>1#发电机</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-ranqizhiranji" >
+                                    <h1>余热直燃机</h1>
+                                    <p id="widgetid1090" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-a-p-fadianji02" >
+                                    <h1>2#发电机</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div class="artwork-popup02 shenlongcheng-a-p02-shuoming01">去分水器</div>
+                                <div class="artwork-popup02 shenlongcheng-a-p02-shuoming02">接冷温泵</div>
+                                <div class="artwork-popup02 shenlongcheng-a-p02-shuoming03">去冷却塔</div>
+                                <div class="artwork-popup02 shenlongcheng-a-p02-shuoming04">接冷温泵</div>
+                                <!--浮动框end-->
+                                <!--设备-->
+                                <div id="shenlongchengAEhuanreqi01" class="shenlongcheng-a-e-huanreqi shenlongcheng-a-e-huanreqi01 gray-filter"></div>
+                                <div id="shenlongchengAElengqueta02" class="shenlongcheng-a-e-lengqueta shenlongcheng-a-e-lengqueta01  gray-filter"></div>
+                                <div id="shenlongchengAElengqueta01" class="shenlongcheng-a-e-lengqueta shenlongcheng-a-e-lengqueta02 gray-filter"></div>
+                                <div id="shenlongchengAEhuanreqi02" class="shenlongcheng-a-e-huanreqi shenlongcheng-a-e-huanreqi02 gray-filter"></div>
+                                <div id="shenlongchengAEYurezhiranji01" class="shenlongcheng-a-e-yurezhiranji shenlongcheng-a-e-yurezhiranji01 gray-filter"></div>
+                                <div id="shenlongchengAEFadianji01" class="shenlongcheng-a-e-fadianji shenlongcheng-a-e-fadianji01 gray-filter"></div>
+                                <div id="shenlongchengAEranqizhiranji01" class="shenlongcheng-a-e-ranqizhiranji shenlongcheng-a-e-ranqizhiranji01 gray-filter"></div>
+                                <div id="shenlongchengAEFadianji02" class="shenlongcheng-a-e-fadianji shenlongcheng-a-e-fadianji02 gray-filter"></div>
+                                <!--设备end-->
+                                  <!--箭头-->
+
+                            <div class="gyt-arrow-blue shenlongcheng-arrow-a-blue011"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line012"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line013"></div>
+
+                            <div class="gyt-arrow-blue shenlongcheng-arrow-a-blue021"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line022"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line023"></div>
+
+                            <div class="gyt-arrow-blue shenlongcheng-arrow-a-blue031"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line032"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line033"></div>
+
+                            <div class="gyt-arrow-blue shenlongcheng-arrow-a-blue041"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line042"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-a-line043"></div>
+                                  <!--箭头end-->
+
+                                <!--补线-->
+
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                                <div id="" class="shenlongcheng-a-g-general-in01 artwork-lines lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-g-yurezhiranji-in01 artwork-lines shenlongcheng-a-l-yurezhiranji lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="shenlongcheng-a-zhiranji-out01 artwork-lines shenlongcheng-a-l-yurezhiranji yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-zhiranji-out02 artwork-lines shenlongcheng-a-l-yurezhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-zhiranji-out03 artwork-lines shenlongcheng-a-l-yurezhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-g-zhiranji-in01 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out01 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out02 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out03 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out04 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-g-yureburanzhiranji-out05 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-z-yureburanzhiranji-in01 artwork-lines shenlongcheng-a-l-yurezhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-z-yureburanzhiranji-in02 artwork-lines shenlongcheng-a-l-yurezhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-z-yureburanzhiranji-out06 artwork-lines shenlongcheng-a-l-yurezhiranji lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-g-yureburanzhiranji-out07 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out08 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-huanreqi-out01 artwork-lines shenlongcheng-a-l-huanreqi01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out09 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-huanreqi2-in01 artwork-lines shenlongcheng-a-l-huanreqi02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-huanreqi2-in02 artwork-lines shenlongcheng-a-l-huanreqi02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-huanreqi2-out02 artwork-lines reshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-huanreqi2-ine03 artwork-lines shenlongcheng-a-l-huanreqi02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-huanreqi2-out03 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi-in03 artwork-lines shenlongcheng-a-l-huanreqi01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji1-out01 artwork-lines gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji1-out02 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji1-out03 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-y-ranqizhiranji-in01 artwork-lines gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-out02 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai1-out01 artwork-lines gangtaoshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai1-out02 artwork-lines shenlongcheng-a-l-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji1-in01 artwork-lines shenlongcheng-a-l-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi-out02 artwork-lines shenlongcheng-a-l-huanreqi01 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai1-in01 artwork-lines shenlongcheng-a-l-huanreqi01 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai1-in02 artwork-lines shenlongcheng-a-l-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai1-in03 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai2-in01 artwork-lines shennongcheng-a-l-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-gaowenlengquetai2-out01 artwork-lines shennongcheng-a-l-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-in01 artwork-lines shennongcheng-a-l-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-in02 artwork-lines shennongcheng-a-l-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi2-out01 artwork-lines shenlongcheng-a-l-huanreqi02 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi2-out02 artwork-lines shenlongcheng-a-l-huanreqi02 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi2-in04 artwork-lines shenlongcheng-a-l-huanreqi02 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi2-in05 artwork-lines shenlongcheng-a-l-huanreqi02 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji1-in02 artwork-lines shenlongcheng-a-l-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi-in04 artwork-lines shenlongcheng-a-l-huanreqi01 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi-in05 artwork-lines shenlongcheng-a-l-huanreqi01 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi-in06  artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-in10 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out10 artwork-lines shenlongcheng-a-l-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-in11 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-huanreqi2-out10 artwork-lines shenlongcheng-a-l-huanreqi02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-in12 shenlongcheng-a-l-buranzhiranji01 artwork-lines yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out11  artwork-lines  yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                <div id="" class="shenlongcheng-a-y-yureburanzhiranji-out12 artwork-lines shenlongcheng-a-l-buranzhiranji01 shenlongcheng-a-l-ranqizhiranji yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-out10 artwork-lines shenlongcheng-a-l-fadianji01 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-out11 artwork-lines shenlongcheng-a-l-fadianji01 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-out12 artwork-lines shennongcheng-a-l-fadianji02 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                 <div id="" class="shenlongcheng-a-fadianji2-out13 artwork-lines shennongcheng-a-l-fadianji02 yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                        <div id="shenlongchengB" class="shenlongcheng-b hide ">
+                            <div class="artwork-overview shenlongcheng-dianzhilengji">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup shenlongcheng-b-p-lixindianlengji01" >
+                                    <h1>离心电制冷机A1</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-b-p-lixindianlengji02" >
+                                    <h1>离心电制冷机A2</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-b-p-lixindianlengji03" >
+                                    <h1>离心电制冷机A3</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-b-p-lixindianlengji04" >
+                                    <h1>离心电制冷机B1</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-b-p-lixindianlengji05" >
+                                    <h1>离心电制冷机B2</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div class="artwork-popup02 shenlongcheng-b-p02-shuoming01">接冷温泵</div>
+                                <div class="artwork-popup02 shenlongcheng-b-p02-shuoming02">去7~9冷却塔</div>
+                                <div class="artwork-popup02 shenlongcheng-b-p02-shuoming03">接冷温泵</div>
+                                <div class="artwork-popup02 shenlongcheng-b-p02-shuoming04">去分水器</div>
+
+                                <!--浮动框end-->
+                                <!--设备-->
+                                <div id="shenlongchengBELixindianlengji01" class="shenlongcheng-b-e-lixindianlengji shenlongcheng-b-e-lixindianlengji01  gray-filter"></div>
+                                <div id="shenlongchengBELixindianlengji02" class="shenlongcheng-b-e-lixindianlengji shenlongcheng-b-e-lixindianlengji02  gray-filter"></div>
+                                <div id="shenlongchengBELixindianlengji03" class="shenlongcheng-b-e-lixindianlengji shenlongcheng-b-e-lixindianlengji03  gray-filter"></div>
+                                <div id="shenlongchengBELixindianlengji04" class="shenlongcheng-b-e-lixindianlengji shenlongcheng-b-e-lixindianlengji04  gray-filter"></div>
+                                <div id="shenlongchengBELixindianlengji05" class="shenlongcheng-b-e-lixindianlengji shenlongcheng-b-e-lixindianlengji05  gray-filter"></div>
+                                <!--设备end-->
+                                <!--箭头-->
+
+                            <div class="shenlongcheng-b-arrow01"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-b-line01"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-b-line02"></div>
+                            <div class="shenlongcheng-b-arrow02"></div>
+                            <div class="shenlongcheng-b-arrow03"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-b-line05"></div>
+                            <div class="shenlongcheng-b-arrow04"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-b-line07"></div>
+                                <!--箭头end-->
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-in01 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-02 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-03 artwork-lines  shenlongcheng-b-l-lixindianzhilengB1 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-04 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-05 artwork-lines  shenlongcheng-b-l-lixindianzhilengA3 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-06 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-07 artwork-lines  shenlongcheng-b-l-lixindianzhilengA2 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-08 artwork-lines  shenlongcheng-b-l-lixindianzhilengA1 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-g-qufenshuiqi-09 artwork-lines  shenlongcheng-b-l-lixindianzhilengA1 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiB2-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiB2-02 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiB1-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB1 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiB1-02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiA3-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA3 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiA3-02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiA3-03 artwork-lines  shenlongcheng-b-l-lixindianzhilengA2 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiA1-01 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-b-lixindianzhilengjiA1-02 artwork-lines shenlongcheng-b-l-dianlengji01 shenlongcheng-b-l-lixindianzhilengA1 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-blixindianzhilengjiA1-out01 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-in01 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-01 artwork-lines shenlongcheng-b-l-dianlengji01 shenlongcheng-b-l-lixindianzhilengA1 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA1-02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA2 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA2-02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA3-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA3 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiA3-02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiB1-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB1 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiB2-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-b-lixindianzhilengjiB2-02 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA1-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA1 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA1-02 artwork-lines  shenlongcheng-b-l-lixindianzhilengA1 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA2-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA2 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA2-02 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA3-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengA3 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiA3-02 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB1 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiB1-02 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-01 artwork-lines  shenlongcheng-b-l-lixindianzhilengB2 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01 artwork-lines   lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                        <div id="shenlongchengC" class="shenlongcheng-c hide ">
+                            <div class="artwork-overview shenlongcheng-ranqiguolu ">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup shenlongcheng-c-p-ranqireshuiguolu01" >
+                                    <h1>燃气热水锅炉A1</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-c-p-ranqireshuiguolu02" >
+                                    <h1>燃气热水锅炉A2</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-c-p-ranqireshuiguolu03" >
+                                    <h1>燃气热水锅炉A3</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup shenlongcheng-c-p-ranqireshuiguolu04" >
+                                    <h1>燃气热水锅炉B1</h1>
+                                    <p id="widgetid1092" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div class="artwork-popup02 shenlongcheng-c-p01-shuoming01">接热水循环泵</div>
+                                <div class="artwork-popup02 shenlongcheng-c-p01-shuoming02">去分水器</div>
+
+                                <!--浮动框end-->
+                                <!--设备-->
+                                <div id="shenlongchengCERanqireshuiguolu01" class="shenlongcheng-c-e-ranqireshuiguolu shenlongcheng-c-e-ranqireshuiguolu01  gray-filter"></div>
+                                <div id="shenlongchengCERanqireshuiguolu02" class="shenlongcheng-c-e-ranqireshuiguolu shenlongcheng-c-e-ranqireshuiguolu02  gray-filter"></div>
+                                <div id="shenlongchengCERanqireshuiguolu03" class="shenlongcheng-c-e-ranqireshuiguolu shenlongcheng-c-e-ranqireshuiguolu03  gray-filter"></div>
+                                <div id="shenlongchengCERanqireshuiguolu04" class="shenlongcheng-c-e-ranqireshuiguolu shenlongcheng-c-e-ranqireshuiguolu04  gray-filter"></div>
+                                <!--设备end-->
+                                <!--箭头-->
+                            <div class="shenlongcheng-c-arrow01"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-c-line01"></div>
+                            <div class="gyt-arrow-line shenlongcheng-arrow-c-line02"></div>
+                            <div class="shenlongcheng-c-arrow02"></div>
+                            <div class="shenlongcheng-c-arrow03"></div>
+                                <!--箭头end-->
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                             <div id="" class="dianzhilengji-c-jiereshuixunhuanlie-in01 artwork-lines   reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A1-01 artwork-lines   reshui-guandao"><div class="inner reshui-gif"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A1-02 artwork-lines  shenlongcheng-c-l-ranqiguoluA1 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A2-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA2 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A2-02 artwork-lines   reshui-guandao"><div class="inner reshui-gif"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A3-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA3 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-A3-02 artwork-lines  shenlongcheng-c-l-ranqiguoluB1  reshui-guandao"><div class="inner reshui-gif"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-B1-01 artwork-lines  shenlongcheng-c-l-ranqiguoluB1 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-y-B1-in01 artwork-lines  shenlongcheng-c-l-ranqiguoluB1 ranqi-guandao"><div class="inner ranqi-gif"></div></div>
+                             <div id="" class="dianzhilengji-c-reshuiguolu-y-B1-02 artwork-lines   ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-B1-03 artwork-lines   ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-A3-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA3 ranqi-guandao"><div class="inner ranqi-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-A2-01 artwork-lines   ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-A2-02 artwork-lines  shenlongcheng-c-l-ranqiguoluA2 ranqi-guandao"><div class="inner ranqi-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-A1-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA1 ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-y-A1-02 artwork-lines  shenlongcheng-c-l-ranqiguoluA1 ranqi-guandao"><div class="inner ranqi-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-B1-01 artwork-lines  shenlongcheng-c-l-ranqiguoluB1 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-B1-02 artwork-lines  shenlongcheng-c-l-ranqiguoluB1  reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A3-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA3 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A3-02 artwork-lines   reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A2-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA2 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A2-02 artwork-lines   reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A1-01 artwork-lines  shenlongcheng-c-l-ranqiguoluA1 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                            <div id="" class="dianzhilengji-c-reshuiguolu-o-A1-out01 artwork-lines   reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tinghuArtwork" class="tinghu-artwork">
+                            <!--选择点击区域-->
+                        <div id="tinghuOverview" class="tinghu-overview artwork-overview ">
+                            <div  class="position-selected-area tinghu-pA tinghuPA" ></div>
+                            <div  class="position-selected-area tinghu-pA02 tinghuPA" ></div>
+                            <div  class="position-selected-area tinghu-pB tinghuPB" ></div>
+                            <div  class="position-selected-area tinghu-pC tinghuPC" ></div>
+                            <div  class="position-selected-area tinghu-pD tinghuPD" ></div>
+                            <!--选择点击区域end-->
+                            <!--描述框-->
+                            <div class="overview-des-area tinghu-des-a">
+                                <p>燃气三联供设备</p>
+                                <p>以天然气冷热电三联供为核心</p>
+                            </div>
+                            <div class="overview-des-area tinghu-des-b">
+                                <p>地源热泵</p>
+                                <p>地源热泵充分利用可再生能源</p>
+                            </div>
+                            <div class="overview-des-area tinghu-des-c">
+                                <p>直燃型溴化锂机组</p>
+                                <p>直燃型溴化锂机组进行调峰</p>
+                            </div>
+                            <div class="overview-des-area tinghu-des-d">
+                                <p>燃气锅炉</p>
+                                <p>燃气锅炉提供备用和生活热水</p>
+                            </div>
+                        </div>
+                        <div id="tinghuA" class="tinghu-a hide">
+                            <div class="artwork-overview tinghu-ranqisanliangongshebei">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup tinghu-a-p-zhengqixiulengji" >
+                                    <h1>蒸汽溴冷机</h1>
+                                    <p id="widgetid1025" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1040" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-fenqigang" >
+                                    <h1>分汽缸</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-yureguolu" >
+                                    <h1>余热锅炉</h1>
+                                    <!--
+                                    <p id="widgetid1016" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    -->
+                                    <p id="widgetid1029" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1041" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-fadianji" >
+                                    <h1>发电机</h1>
+                                    <!--
+                                    <p id="widgetid1022" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1023" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    -->
+                                    <p id="widgetid1030" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1037" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1046" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-huanreqi01" >
+                                    <h1>1#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-huanreqi02" >
+                                    <h1>2#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-gaowenlengqueta" >
+                                    <h1>1#高温冷却塔</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-a-p-diwenlengqueta" >
+                                    <h1>低温冷却塔</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming01">供冷却水</div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming02">回冷却水</div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming03">供空调水</div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming04">回空调水</div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming05">供生活热水</div>
+                               <div class="artwork-popup02 tinghu-a-p01-shuoming06">常温水</div>
+
+                                <!--浮动框end-->
+                           <!--箭头-->
+
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue011"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line012"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line013"></div>
+                         
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue021"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line022"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line023"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue031"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line032"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line033"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue041"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line042"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line043"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue051"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line052"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line053"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-a-blue061"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line062"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-a-line063"></div>
+                         <!--箭头end-->
+
+                                <!--设备-->
+                                <div id="tinghuAEZhengqixiulengji01" class="tinghu-a-e-zhengqixiulengji tinghu-a-e-zhengqixiulengji01  gray-filter"></div>
+                                <div id="" class="tinghu-a-e-fenqigang tinghu-a-e-fenqigang01  gray-filter"></div>
+                                <div id="tinghuAEYureguolu01" class="tinghu-a-e-yureguolu tinghu-a-e-yureguolu01  gray-filter"></div>
+                                <div id="tinghuAEFdianji01" class="tinghu-a-e-fadianji tinghu-a-e-fadianji01  gray-filter"></div>
+                                <div id="tinghuAEHuanreqi01" class="tinghu-a-e-huanreqi tinghu-a-e-huanreqi01  gray-filter"></div>
+                                <div id="tinghuAEHuanreqi02" class="tinghu-a-e-huanreqi tinghu-a-e-huanreqi02  gray-filter"></div>
+                                <div id="tinghuAELengqueta01" class="tinghu-a-e-lengqueta tinghu-a-e-lengqueta01  gray-filter"></div>
+                                <div id="tinghuAELengqueta02" class="tinghu-a-e-lengqueta tinghu-a-e-lengqueta02  gray-filter"></div>
+                                <!--设备end-->
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                                <div id="" class="tinghu-fadianji-in01 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in02 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in03 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in04 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in05 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in06 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in07 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in08 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in09 artwork-lines tb02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in10 artwork-lines tb02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in11 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-in12 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-in13 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+
+                                <div id="" class="tinghu-fadianji-out01 artwork-lines tinghu-a-l-fadianji yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out02 artwork-lines tinghu-a-l-fadianji yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-out03 artwork-lines tinghu-a-l-fadianji yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out04 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out05 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out06 artwork-lines tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out07 artwork-lines  tinghu-a-l-fadianji gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-out08 artwork-lines tb02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out09 artwork-lines tb02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out10 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+                                <div id="" class="tinghu-fadianji-out11 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+                                <div id="" class="tinghu-fadianji-out12 artwork-lines tb gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+
+                                <div id="" class="tinghu-yureguolu-in01 artwork-lines yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+                                <div id="" class="tinghu-yureguolu-in02 artwork-lines  yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+                                <div id="" class="tinghu-yureguolu-out01 artwork-lines tinghu-a-l-yureguolu zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-yureguolu-out02 artwork-lines tinghu-a-l-yureguolu zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-yureguolu-out03 artwork-lines tinghu-a-l-yureguolu zhengqi-guandao"><div class="inner zhengqi-gif"></div></div>
+
+                                <div id="" class="tinghu-xiulengji-in01 artwork-lines tinghu-a-l-xiulengji zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-xiulengji-in02 artwork-lines tinghu-a-l-xiulengji zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-xiulengji-in03 artwork-lines tinghu-a-l-xiulengji zhengqi-guandao"><div class="inner zhengqi-gif"></div></div>
+                                <div id="" class="tinghu-xiulengji-in04 artwork-lines tinghu-a-l-xiulengji lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-xiulengji-in05 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-xiulengji-out01 artwork-lines tinghu-a-l-xiulengji lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="tinghu-xiulengji-out02 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="tinghu-xiulengji-in06 artwork-lines tinghu-a-l-xiulengji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-xiulengji-in07 artwork-lines tinghu-a-l-xiulengji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-xiulengji-out03 artwork-lines tinghu-a-l-xiulengji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-xiulengji-out04 artwork-lines tinghu-a-l-xiulengji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+
+                                <div id="" class="tinghu-huanreqi-0-in01 artwork-lines tinghu-a-l-huanreqi02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-huanreqi-0-in02 artwork-lines tinghu-a-l-huanreqi02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+                                <div id="" class="tinghu-huanreqi-1-in01 artwork-lines tinghu-a-l-huanreqi01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="tinghu-huanreqi-1-out01 artwork-lines tinghu-a-l-huanreqi01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <!--
+                                <div id="" class="tinghu-huanreqi-1-out02 artwork-lines tinghu-a-l-huanreqi01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+-->
+                                <div id="" class="tinghu-huanreqi-2-in01 artwork-lines tinghu-a-l-huanreqi02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-huanreqi-2-out01 artwork-lines tinghu-a-l-huanreqi02 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                                <div id="" class="tinghu-huanreqi-2-out02 artwork-lines tinghu-a-l-huanreqi02  reshui-guandao"><div class="inner reshui-gif"></div></div>
+
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                        <div id="tinghuBC" class="tinghu-bc hide">
+                            <div class="artwork-overview tinghu-diyuanrebeng">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup tinghu-bc-p-zhiranji01" >
+                                    <h1>1#直燃机</h1>
+                                    <!-- 
+                                    <p id="widgetid1027" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1028" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    -->
+                                    <p id="widgetid1042" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1043" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-bc-p-zhiranji02" >
+                                    <h1>2#直燃机</h1>
+                                    <p id="widgetid1052" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1053" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1054" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1055" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-bc-p-diyuanrebeng" >
+                                    <h1>地源热泵</h1>
+                                    <!--
+                                    <p id="widgetid1031" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1032" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    -->
+                                    <p id="widgetid1047" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1048" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming01">去冷却塔</div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming02">接冷却泵</div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming03">接循环泵</div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming04">去地里</div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming05">接冷温泵</div>
+                               <div class="artwork-popup02 tinghu-bc-p01-shuoming06">去分水器</div>
+
+                                <!--浮动框end-->
+                                <!--设备-->
+                                <div id="tinghuBCEZhiranji01" class="tinghu-bc-e-zhiranji tinghu-bc-e-zhiranji01 gray-filter"></div>
+                                <div id="tinghuBCEZhiranji02" class="tinghu-bc-e-zhiranji tinghu-bc-e-zhiranji02 gray-filter"></div>
+                                <div id="tinghuBCEDiyuanrebeng01" class="tinghu-bc-e-diyuanrebeng tinghu-bc-e-diyuanrebeng01 gray-filter"></div>
+                                <!--设备end-->
+                             <!--箭头-->
+
+                            <div class="gyt-arrow-blue tinghu-arrow-bc-blue011"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line012"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line013"></div>
+
+
+                            <div class="gyt-arrow-blue tinghu-arrow-bc-blue021"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line022"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line023"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-bc-blue031"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line032"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line033"></div>
+
+
+                             <div class="gyt-arrow-blue tinghu-arrow-bc-blue041"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line042"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line043"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-bc-blue051"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line052"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line053"></div>
+
+                             <div class="gyt-arrow-blue tinghu-arrow-bc-blue061"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line062"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-bc-line063"></div>
+
+                              <!--箭头end-->
+
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                                <div id="" class="tinghu-diyuanrebeng-in01 artwork-lines tinghu-bc-l-diyuanrebeng  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-diyuanrebeng-in02 artwork-lines tinghu-bc-l-diyuanrebeng lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-diyuanrebeng-in03 artwork-lines tinghu-bc-l-diyuanrebeng lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="tinghu-diyuanrebeng-out01 artwork-lines tinghu-bc-l-diyuanrebeng lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-diyuanrebeng-out02 artwork-lines tinghu-bc-l-diyuanrebeng lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="tinghu-diyuanrebeng-out03 artwork-lines tinghu-bc-l-diyuanrebeng lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+
+                                <div id="" class="tinghu-zhiranji-0-in01 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-0-in02 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-0-out01 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-0-out02 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="tinghu-zhiranji-1-in01 artwork-lines tinghu-bc-l-zhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-in02 artwork-lines tinghu-bc-l-zhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-in03 artwork-lines tinghu-bc-l-zhiranji01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-in04 artwork-lines tinghu-bc-l-zhiranji01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+								
+								<div id="" class="tinghu-zhiranji-1-out01 artwork-lines tinghu-bc-l-zhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-out02 artwork-lines tinghu-bc-l-zhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-out03 artwork-lines tinghu-bc-l-zhiranji01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-1-out04 artwork-lines tinghu-bc-l-zhiranji01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="tinghu-zhiranji-2-in01 artwork-lines tinghu-bc-l-zhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-in02 artwork-lines tinghu-bc-l-zhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-in03 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-in04 artwork-lines tinghu-bc-l-zhiranji02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+								
+								<div id="" class="tinghu-zhiranji-2-out01 artwork-lines tinghu-bc-l-zhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-out02 artwork-lines tinghu-bc-l-zhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-out03 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="tinghu-zhiranji-2-out04 artwork-lines tinghu-bc-l-zhiranji02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                        <div id="tinghuD" class="tinghu-d hide">
+                            <div class="artwork-overview tinghu-ranqiguolu">
+                                <!--浮动框-->
+                                <div id="" class="artwork-popup tinghu-d-p-ranqiguolu01" >
+                                    <h1>1#燃气锅炉</h1>
+                                    <p id="widgetid1026" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1049" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-d-p-fenqigang" >
+                                    <h1>分汽缸</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-d-p-ranqiguolu" >
+                                    <h1>2#燃气锅炉</h1>
+                                    <p id="widgetid1056" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="widgetid1057" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-d-p-huanreqi01" >
+                                    <h1>3#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div id="" class="artwork-popup tinghu-d-p-huanreqi02" >
+                                    <h1>4#换热器</h1>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                    <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                </div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming01">供蒸汽</div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming02">接余热锅炉</div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming03">供生活热水</div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming04">去冷凝水</div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming05">供热</div>
+                                <div class="artwork-popup02 tinghu-d-p01-shuoming06">耗燃气</div>
+
+                                <!--浮动框end-->
+                                <!--设备-->
+                                <div id="tinghuDERanqiguolu01" class="tinghu-d-e-ranqiguolu tinghu-d-e-ranqiguolu01  gray-filter"></div>
+                                <div id="" class="tinghu-d-e-fenqigang tinghu-d-e-fenqigang01 gray-filter"></div>
+                                <div id="tinghuDERanqiguolu02" class="tinghu-d-e-ranqiguolu  tinghu-d-e-ranqiguolu02  gray-filter"></div>
+                                <div id="tinghuDEHuanreqi01" class="tinghu-d-e-huanreqi tinghu-d-e-huanreqi01  gray-filter"></div>
+                                <div id="tinghuDEHuanreqi02" class="tinghu-d-e-huanreqi  tinghu-d-e-huanreqi02  gray-filter"></div>
+
+                                <!--设备end-->
+                                 <!--箭头-->
+
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue011"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line012"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line013"></div>
+                            
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue021"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line022"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue031"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line032"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line033"></div>
+
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue041"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line042"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line043"></div>
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue051"></div>
+                            <div class="gyt-arrow-blue tinghu-arrow-d-blue052"></div>
+
+
+                            <div class="gyt-arrow-line tinghu-arrow-d-line062"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line063"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line064"></div>
+
+                            <div class="gyt-arrow-line tinghu-arrow-d-blue071"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line072"></div>
+                            <div class="gyt-arrow-line tinghu-arrow-d-line073"></div>
+                            <!--箭头end-->
+
+                                <!--补线-->
+                                <!--补线end-->
+                                <!--管道-->
+                                <div id="" class="tinghu-ranqiguolu-1-in01 artwork-lines  zhengqi-guandao"><div class="inner zhengqi-gif"></div></div>
+                                <div id="" class="tinghu-ranqiguolu-1-out01 artwork-lines tinghu-d-l-ranqiguolu01 zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-ranqiguolu-1-out02 artwork-lines  zhengqi-guandao"><div class="inner zhengqi-gif"></div></div>
+                                <div id="" class="tinghu-ranqiguolu-0-out01 artwork-lines  zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+                                <div id="" class="tinghu-ranqiguolu-0-out02 artwork-lines  lengningshui-guandao"><div class="inner lengningshui-gif"></div></div>
+								 
+							   <div id="" class="tinghu-ranqiguolu2-0-in01 artwork-lines ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+	                           <div id="" class="tinghu-ranqiguolu2-0-out01 artwork-lines tinghu-d-l-ranqiguolu02 ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+							   <div id="" class="tinghu-ranqiguolu2-0-out02 artwork-lines tinghu-d-l-ranqiguolu01 ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+						       <div id="" class="tinghu-ranqiguolu2-0-out03 artwork-lines tinghu-d-l-ranqiguolu01 ranqi-guandao"><div class="inner ranqi-gif-v"></div></div>
+							   <div id="" class="tinghu-ranqiguolu2-1-out04 artwork-lines tinghu-d-l-ranqiguolu02 zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+							   <div id="" class="tinghu-ranqiguolu2-1-out05 artwork-lines tinghu-d-l-ranqiguolu02 zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+							   <div id="" class="tinghu-ranqiguolu2-1-out06 artwork-lines  zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+							   
+							   <div id="" class="tinghu-fenqigang-0-out01 artwork-lines  zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+							   <div id="" class="tinghu-fenqigang-1-out02 artwork-lines tinghu-d-l-huangreqi04 zhengqi-guandao"><div class="inner zhengqi-gif"></div></div>
+							   <div id="" class="tinghu-huanreqi-4-out01 artwork-lines tinghu-d-l-huangreqi04 reshui-guandao"><div class="inner reshui-gif"></div></div>
+							   <div id="" class="tinghu-fenqigang-0-out03 artwork-lines tinghu-d-l-huangreqi03 zhengqi-guandao"><div class="inner zhengqi-gif-v"></div></div>
+							   <div id="" class="tinghu-huanreqi-3-out01 artwork-lines tinghu-d-l-huangreqi03 reshui-guandao"><div class="inner reshui-gif"></div></div>
+							   <div id="" class="tinghu-huanreqi-3-out03 artwork-lines tinghu-d-l-huangreqi03 lengningshui-guandao"><div class="inner lengningshui-gif"></div></div>
+							   <div id="" class="tinghu-huanreqi-3-out02 artwork-lines tinghu-d-l-huangreqi03 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+							   <div id="" class="tinghu-huanreqi-4-out04 artwork-lines tinghu-d-l-huangreqi04 lengningshui-guandao"><div class="inner lengningshui-gif-v"></div></div>
+							   <div id="" class="tinghu-huanreqi-4-out05 artwork-lines tinghu-d-l-huangreqi04 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+
+                                <!--管道end-->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="huanghuaArtwork" class="huanghua-artwork hide">
+                        <div id="huanghuaOverview" class="huanghua-overview artwork-overview ">
+                            <!--选择点击区域-->
+                            <div  class="position-selected-area huanghua-pA huanghuaPA" ></div>
+                            <div  class="position-selected-area huanghua-pB huanghuaPB" ></div>
+                            <div  class="position-selected-area huanghua-pC huanghuaPC" ></div>
+                            <div  class="position-selected-area huanghua-pD huanghuaPD" ></div>
+                        </div>
+                        <div id="huanghuaA" class="huanghua-a hide">
+                        <!--
+                            <div class="huanghua-a02"></div>
+                            -->
+                            <div class="artwork-overview huanghua-sanliangong"></div>
+                            <!--箭头-->
+
+                            <div class="gyt-arrow-blue huanghua-arrow-blue01"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line01"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line02"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-blue030"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line031"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line032"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-blue041"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line042"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line043"></div> 
+
+                            <div class="gyt-arrow-blue huanghua-arrow-blue051"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line052"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-line053"></div> 
+
+                            <!--箭头end-->
+                            <!--设备-->
+                            <div id="huanghuaSanreqi42" class="huanghua-sanreqi huanghua-sanreqi01 gray-filter"></div>
+                            <div id="huanghuaSanreqi43" class="huanghua-sanreqi huanghua-sanreqi02 gray-filter"></div>
+                            <div id="huanghuaFadianji11" class="huanghua-fadianji huanghua-fadianji01 gray-filter"></div>
+                            <div id="huanghuaFadianji12" class="huanghua-fadianji huanghua-fadianji02 gray-filter"></div>
+                            <div id="huanghuaYurezhiranji13" class="huanghua-yurezhiranji huanghua-yurezhiranji01-a gray-filter"></div>
+                            <div id="huanghuaYurezhiranji14" class="huanghua-yurezhiranji huanghua-yurezhiranji02-a gray-filter"></div>
+                            <div id="huanghuaDiwenlengqueta01" class="huanghua-lengqueta  huanghua-diwenlengqueta01  gray-filter"></div>
+                            <div id="huanghuaDiwenlengqueta02" class="huanghua-lengqueta  huanghua-diwenlengqueta02  gray-filter"></div>
+                            <div id="huanghuaGaowenlengqueta01" class="huanghua-lengqueta  huanghua-gaowenlengqueta01  gray-filter"></div>
+                            <div id="huanghuaGaowenlengqueta02" class="huanghua-lengqueta  huanghua-gaowenlengqueta02  gray-filter"></div>
+                            <!--设备end-->
+                            <!--管道-->
+                            <!--
+                            <div id="" class="test72 artwork-lines "><div class="inner lengqueshui-gif-v"></div></div>
+                            <div id="" class="test73 artwork-lines "><div class="inner lengqueshui-gif-v"></div></div>
+                            <div id="" class="test74 artwork-lines "><div class="inner lengqueshui-gif-v"></div></div>
+                            -->
+                            <div id="" class="huanghua-yurezhiranji-1-in01 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in02 artwork-lines lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in03-up artwork-lines   lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in03-down artwork-lines huanghua-a-yurezhiranji01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in04 artwork-lines  huanghua-a-yurezhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in05 artwork-lines  huanghua-a-yurezhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-in06 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out01 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out02 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out03-up artwork-lines   lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out03-down artwork-lines   huanghua-a-yurezhiranji01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out04 artwork-lines  huanghua-a-yurezhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out05 artwork-lines  huanghua-a-yurezhiranji01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                            <div id="" class="huanghua-yurezhiranji-1-out06 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                            <div id="" class="huanghua-sanreqi-1-in01 artwork-lines  huanghua-a-sanreqi01 reshui-guandao"><div class="inner reshui-gif"></div></div>
+                            <div id="" class="huanghua-sanreqi-1-in02 artwork-lines  huanghua-a-sanreqi01 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                            <div id="" class="huanghua-sanreqi-1-out01 artwork-lines  huanghua-a-sanreqi01 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+                            <div id="" class="huanghua-sanreqi-1-out02 artwork-lines huanghua-a-sanreqi01 reshui-guandao"><div class="inner reshui-gif"></div></div>
+
+							<div id="" class="huanghua-yurezhiranji-2-in01 artwork-lines huanghua-a-l-yurezhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-in02 artwork-lines huanghua-a-l-yurezhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-in03 artwork-lines test02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-in04-up artwork-lines test02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-in04-down artwork-lines huanghua-a-l-yurezhiranji02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out01 artwork-lines huanghua-a-l-yurezhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out02 artwork-lines huanghua-a-l-yurezhiranji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out03-up artwork-lines test02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out03-down artwork-lines huanghua-a-l-yurezhiranji02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out04 artwork-lines test02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+
+							<div id="" class="huanghua-yuretianxian-1-out01 artwork-lines  huanghua-a-yurezhiranji01 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							<div id="" class="huanghua-yuretianxian-1-out02 artwork-lines  huanghua-a-fadianji01 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							<div id="" class="huanghua-yuretianxian-2-out01 artwork-lines huanghua-a-l-yurezhiranji02 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							<div id="" class="huanghua-yuretianxian-2-out02 artwork-lines test02 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+
+							<div id="" class="huanghua-lengqueta-1-in01 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-lengqueta-1-in02 artwork-lines  huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-1-in03 artwork-lines  huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-1-out01 artwork-lines gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-1-out02 artwork-lines huanghua-a-fadianji01  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-lengqueta-1-out03 artwork-lines huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+
+							<div id="" class="huanghua-yurezhiranji-1-in07 artwork-lines   gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-1-in08 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-1-out07 artwork-lines  gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-1-out08 artwork-lines   gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+
+							<div id="" class="huanghua-fadianji-1-in01 artwork-lines  huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-fadianji-1-in02 artwork-lines  huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-fadianji-1-out01 artwork-lines huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-fadianji-1-out02 artwork-lines  huanghua-a-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+
+							<div id="" class="huanghua-sanreqi-1-in03 artwork-lines huanghua-a-sanreqi-fadianji01    gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-1-in04 artwork-lines huanghua-a-sanreqi-fadianji01   gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-1-in05 artwork-lines huanghua-a-sanreqi-fadianji01  gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-1-out03 artwork-lines huanghua-a-sanreqi-fadianji01  gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-1-out04 artwork-lines huanghua-a-sanreqi-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-1-out05 artwork-lines huanghua-a-sanreqi-fadianji01 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							
+							<div id="" class="huanghua-fadianji-1-out03 artwork-lines  huanghua-a-fadianji01 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							<div id="" class="huanghua-fadianji-1-out04 artwork-lines  huanghua-a-fadianji01 yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+
+							<div id="" class="huanghua-fadianji-2-in01 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-fadianji-2-in02 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-fadianji-2-out01 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-fadianji-2-out02 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+
+							<div id="" class="huanghua-fadianji-2-out03 artwork-lines test02 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							<div id="" class="huanghua-fadianji-2-out04 artwork-lines test02 yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+
+							<div id="" class="huanghua-yuretianxian-1-in01 artwork-lines yanqi-guandao"><div class="inner yanqi-gif-v"></div></div>
+							<div id="" class="huanghua-yuretianxian-2-in01 artwork-lines test02 yanqi-guandao"><div class="inner yanqi-gif"></div></div>
+							
+							<div id="" class="huanghua-lengqueta-2-in01 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-lengqueta-2-in02 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-2-in03 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-2-out01 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-lengqueta-2-out02 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-lengqueta-2-out03 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							
+							<div id="" class="huanghua-yurezhiranji-2-in05 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-in06 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out05 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-yurezhiranji-2-out06 artwork-lines test02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+
+							<div id="" class="huanghua-sanreqi-2-in01 artwork-lines huanghua-a-sanreqi02 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-2-in02 artwork-lines huanghua-a-sanreqi02 reshui-guandao"><div class="inner reshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-2-in03 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-2-in04 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-2-in05 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif-v"></div></div>
+							
+							<div id="" class="huanghua-sanreqi-2-out01 artwork-lines huanghua-a-sanreqi02 reshui-guandao"><div class="inner reshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-2-out02 artwork-lines huanghua-a-sanreqi02 reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+							<div id="" class="huanghua-sanreqi-2-out03 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-2-out04 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+							<div id="" class="huanghua-sanreqi-2-out05 artwork-lines huanghua-a-sanreqi-fadianji02 gangtaoshui-guandao"><div class="inner gangtaoshui-gif"></div></div>
+
+
+                            <!--管道end-->
+                            <!--浮动框-->
+                            <div id="huanreqi01" class="artwork-popup huanghua-huanreqi01" >
+                                <h1>1#换热器</h1>
+                                <p id="widgetid973" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi02" >
+                                <h1>1#发电机</h1>
+                                <p id="widgetid996" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid997" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi03" >
+                                <h1>1#余热直燃机</h1>
+                                <!--
+                                <p id="widgetid968" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid969" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid983" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid984" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                -->
+                                <p id="widgetid985" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid986" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid987" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi04" >
+                                <h1>1#低温冷却塔</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi05" >
+                                <h1>1#高温冷却塔</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi06" >
+                                <h1>2#余热直燃机</h1>
+                                <!--
+                                <p id="widgetid966" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid967" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid979" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid980" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                -->
+                                <p id="widgetid981" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid982" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid988" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi07" >
+                                <h1>2#换热器</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi08" >
+                                <h1>2#高温冷却塔</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi09" >
+                                <h1>2#低温冷却塔</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="" class="artwork-popup huanghua-huanreqi10" >
+                                <h1>2#发电机</h1>
+                                <p id="widgetid990" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid991" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                         <div class="artwork-popup02 huanghuajichuang-a-p01-shuoming01">去1~6#冷却塔</div>
+                         <div class="artwork-popup02 huanghuajichuang-a-p01-shuoming02">去冷却泵</div>
+                         <div class="artwork-popup02 huanghuajichuang-a-p01-shuoming03">接冷温泵</div>
+                         <div class="artwork-popup02 huanghuajichuang-a-p01-shuoming04">去分水器</div>
+                            
+                            <!--浮动框end-->
+                        </div>
+                        <div id="huanghuaBC" class="huanghua-bc hide">
+                            <div class="artwork-overview huanghua-reshuiguolu"></div>
+                            <div id="huanghuaSanreqi44" class="huanghua-sanreqi huanghua-sanreqi03 gray-filter"></div>
+                            <div id="huanghuaRanqireshuiguolu16" class="huanghua-ranqireshuiguolu huanghua-ranqireshuiguolu01 gray-filter"></div>
+                            <div id="huanghuaRanqizhiranji15" class="huanghua-bc-e-ranqizhiranji huanghua-bc-e-ranqizhiranji01 gray-filter"></div>
+                            <!--管道-->
+							<div id="" class="huanghua-huanreqi-in01 artwork-lines huanghua-bc-reshuiguolu lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+							<div id="" class="huanghua-huanreqi-out01 artwork-lines huanghua-bc-reshuiguolu lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+							<div id="" class="huanghua-reshuiguolu-in01 artwork-lines huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif"></div></div>
+							<div id="" class="huanghua-reshuiguolu-in02 artwork-lines  huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif"></div></div>
+							<div id="" class="huanghua-reshuiguolu-in03 artwork-lines  huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+							<div id="" class="huanghua-reshuiguolu-out01 artwork-lines  huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif"></div></div>
+							<div id="" class="huanghua-reshuiguolu-out02 artwork-lines  huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+							<div id="" class="huanghua-reshuiguolu-out03 artwork-lines  huanghua-bc-reshuiguolu reshui-guandao"><div class="inner reshui-gif-v"></div></div>
+
+							<div id="" class="huanghua-ranqizhiranji-in01 artwork-lines huanghua-bc-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-in02 artwork-lines huanghua-bc-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-in03 artwork-lines huanghua-bc-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-in04 artwork-lines huanghua-bc-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-out01 artwork-lines huanghua-bc-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-out02 artwork-lines huanghua-bc-ranqizhiranji lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+							<div id="" class="huanghua-ranqizhiranji-out03 artwork-lines huanghua-bc-ranqizhiranji lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+                            <!--管道end-->
+                              <!--lf start huanghuajichang-bc 7.3 箭头-->
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue011"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line012"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line013"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue021"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line022"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line023"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue031"></div>
+  
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue041"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line042"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line043"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue051"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line052"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line053"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-bc-blue061"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line062"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-bc-line063"></div> 
+                            <!--lf end huanghuajichang-bc 7.3 箭头--> 
+
+
+                             
+                            <!--浮动框-->
+                            <div id="huanghuaRanqireshuiguoluBC" class="artwork-popup huanghua-ranqireshuiguolu-bc" >
+                                <h1>燃气热水锅炉</h1>
+                                <p id="widgetid974" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid1001" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="huanghuaHuanreqiBC" class="artwork-popup huanghua-huanreqi-bc" >
+                                <h1>换热器</h1>
+                                <p id="" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="huanghuaRanqizhiranjiBC" class="artwork-popup huanghua-ranqizhiranji-bc" >
+                                <h1>燃气直燃机</h1>
+                                <p id="widgetid994" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <!--
+                                <p id="widgetid995" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid975" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid976" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                -->
+                                <p id="widgetid977" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid978" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming01">接冷温泵</div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming02">去分水器</div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming03">去分水器</div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming04">去1~6冷却塔</div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming05">接冷却泵</div>
+                         <div class="artwork-popup02 huanghuajichuang-bc-p01-shuoming06">接冷温泵</div>
+
+                            <!--浮动框end-->
+                        </div>
+                        <div id="huanghuaD" class="huanghua-d hide">
+                            <div class="artwork-overview huanghua-zhilengji">
+
+                            <!--浮动框-->
+                            <div id="huanghuaLixindianlengji01D" class="artwork-popup huanghua-lixindianlengji01" >
+                                <h1>1#离心电冷机</h1>
+                                <p id="widgetid999" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid1000" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                            <div id="huanghuaLixindianlengji02D" class="artwork-popup huanghua-lixindianlengji02" >
+                                <h1>2#离心电冷机</h1>
+                                <p id="widgetid992" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                                <p id="widgetid993" ><span class="name"></span><span class="value"></span><span class="units"></span></p>
+                            </div>
+                         <div class="artwork-popup02 huanghuajichuang-d-p01-shuoming01">接冷温泵</div>
+                         <div class="artwork-popup02 huanghuajichuang-d-p01-shuoming02">去分水器</div>
+                         <div class="artwork-popup02 huanghuajichuang-d-p01-shuoming03">去7~9冷却塔</div>
+                         <div class="artwork-popup02 huanghuajichuang-d-p01-shuoming04">接冷却泵</div>
+
+                            <!--浮动框end-->
+                            <!--设备-->
+                                <div id="huanghuaDianlengji17" class="huanghua-dianlengji huanghua-dianlengji01 gray-filter"></div>
+                                <div id="huanghuaDianlengji18" class="huanghua-dianlengji huanghua-dianlengji02 gray-filter"></div>
+                            <!--设备end-->
+                        
+                            <!--补线-->
+                            <!--
+                                <div class="huanghua-leng-line-up"></div>
+                                <div class="huanghua-leng-line-down"></div>
+                                <div class="huanghua-leng-line-up huanghua-leng-line02-up"></div>
+                                <div class="huanghua-leng-line-down huanghua-leng-line02-down"></div>
+                                -->
+                            <!--补线end-->
+                            <!--管道-->
+
+                                <div id="" class="huanghua-leng-0-in01 artwork-lines  lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="huanghua-leng-0-in02 artwork-lines  lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+
+                                <div id="" class="huanghua-leng-0-out01 artwork-lines  lengqueshui-guandao "><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-0-out02 artwork-lines   lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                
+                                <div id="leng1In" class="huanghua-leng-1-in01 artwork-lines  huanghua-d-lixindianlengji01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-1-in02 artwork-lines  huanghua-d-lixindianlengji01 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-1-in03 artwork-lines  huanghua-d-lixindianlengji01 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+
+                                <div id="" class="huanghua-leng-1-out01 artwork-lines  huanghua-d-lixindianlengji01 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-1-out02 artwork-lines  huanghua-d-lixindianlengji01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+                                <div id="" class="huanghua-leng-1-out03 artwork-lines  huanghua-d-lixindianlengji01 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                                <div id="" class="huanghua-leng-2-in01 artwork-lines huanghua-d-lixindianlengji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="huanghua-leng-2-in02 artwork-lines huanghua-d-lixindianlengji02 lengqueshui-guandao"><div class="inner lengqueshui-gif"></div></div>
+                                <div id="" class="huanghua-leng-2-in03 artwork-lines huanghua-d-lixindianlengji02 lengshui-guandao"><div class="inner lengshui-gif-v"></div></div>
+
+                                <div id="" class="huanghua-leng-2-out01 artwork-lines huanghua-d-lixindianlengji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-2-out02 artwork-lines huanghua-d-lixindianlengji02 lengqueshui-guandao"><div class="inner lengqueshui-gif-v"></div></div>
+                                <div id="" class="huanghua-leng-2-out03 artwork-lines huanghua-d-lixindianlengji02 lengshui-guandao"><div class="inner lengshui-gif"></div></div>
+
+                            <!--管道end-->
+                              <!--lf start huanghuajichang-d 7.3 箭头-->
+                            <div class="gyt-arrow-blue huanghua-arrow-d-blue011"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line012"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line013"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-d-blue021"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line022"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line023"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-d-blue031"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line032"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line033"></div>
+
+                            <div class="gyt-arrow-blue huanghua-arrow-d-blue041"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line042"></div>
+                            <div class="gyt-arrow-line huanghua-arrow-d-line043"></div>
+
+                               <!--lf end huanghuajichang-d 7.3 箭头-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="artworkBottom" class="xa-con-cent-bottom clearfix hide">
+                    <div id="artworkThumbnail" class="bottom-thumbnail huanghua-thumbnail"></div>
+                    <div id="artworkTailsBox" class="tails-box">
+                        <span class="tail-icon active huanghuaPA" >A</span>
+                        <span class="tail-icon huanghuaPB" >B</span>
+                        <span class="tail-icon huanghuaPC" >C</span>
+                        <span class="tail-icon huanghuaPD" >D</span>
+                    </div>
+                    <div class="legend-box">
+                        <div class="legend-block">
+                            <span class="legend-icon lengshui-icon"></span>
+                            <span class="legend-des">冷水</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon reshui-icon"></span>
+                            <span class="legend-des">热水</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon lengshui-icon"></span>
+                            <span class="legend-des">缸套水</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon yanqi-icon"></span>
+                            <span class="legend-des">烟气</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon lengqueshui-icon"></span>
+                            <span class="legend-des">冷却水</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon lengningshui-icon"></span>
+                            <span class="legend-des">冷凝水</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon ranqi-icon"></span>
+                            <span class="legend-des">燃气</span>
+                        </div>
+                        <div class="legend-block">
+                            <span class="legend-icon zhengqi-icon"></span>
+                            <span class="legend-des">蒸汽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹出层-->
+<div class="xa-modal-overlay modal-overlay-hide"></div>
+<div class="xa-modal-wrapper flexmid modal-hide">
+	<div class="modal-box">
+		<div class="title">
+			<div class="clsbtn"></div>
+			<div class="selector">
+				<div class="selector-inner">
+					<input type="text" class="dateinput dateinput-year" placeholder="年">
+				</div>
+			</div>
+			<div class="selector">
+				<div class="selector-inner">
+					<input type="text" class="dateinput dateinput-months" placeholder="月">
+				</div>
+			</div>
+			<div class="selector">
+				<div class="selector-inner">
+					<input type="text" class="dateinput dateinput-day" placeholder="日">
+				</div>
+			</div>
+			
+			<span id="popUpTitle" class="left">耗电</span>
+			
+		</div>
+		<div class="modal-content">
+			<div class="chartinner" id="chartinner">
+
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+
+	<script src="js/lib/echarts-all.js"></script>
+<!-- Javascript with AMD 
+	ADM开发DEMO 不采取AMD开发请自行去掉
+================================================== -->
+<script src="js/lib/require.js" data-main="js/app/main2" ></script>
+<script>
+	
+	/*if (typeof AMap !== 'undefined') {
+		function initialize(){
+			var position=new AMap.LngLat(116.397428,39.90923);
+			var mapObj=new AMap.Map("Amapcontent",{
+				view: new AMap.View2D({//创建地图二维视口
+				center:position,//创建中心点坐标
+				zoom:7, //设置地图缩放级别
+				rotation:0 //设置地图旋转角度
+			}),
+			lang:"zh_cn"//设置地图语言类型，默认：中文简体
+			});//创建地图实例
+		}
+		initialize()
+	}*/
+	
+	
+</script>
+
+<script type="text/javascript">
+var isWebkit = 'WebkitAppearance' in document.documentElement.style;
+	window.addEventListener("load", function() {
+		/*__________________ testing map size ____________________*/
+		if(isWebkit){
+		var maptarget = document.getElementById("Amapcontent");
+		var mapmaxwidth = 1536;
+		var mapmaxheight = "";
+		var userWidth = window.innerWidth;
+		var userHeight = window.innerHeight;
+		mapmaxheight = userHeight*(mapmaxwidth/userWidth);
+		if (userWidth >= mapmaxwidth) {
+			maptarget.style.width = mapmaxwidth+"px"
+			maptarget.style.height = mapmaxheight+"px"
+			var scalcNum = userWidth / mapmaxwidth;
+				scalcNum = scalcNum*100;
+			maptarget.style.zoom = "400%";
+		}
+		}
+		/*__________________ testing map size ____________________*/
+		
+		window.bdmap = new BMap.Map("Amapcontent");          // 创建地图实例  
+		bdmap.enableScrollWheelZoom()
+		bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
+//		bdmap.centerAndZoom(point, 19);		
+	} , false)
+
+	
+	
+</script>
+
+</html>
