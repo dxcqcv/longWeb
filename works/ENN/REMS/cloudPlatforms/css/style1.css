@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS 格式书写开发人员约束规范 ****************************************************************** 
 
 1.所有CSS属性，除了空属性可以单行之外，即使只有一个属性，也必须换行,但是后期发布版本压缩什么的请随意压缩。
@@ -1371,7 +1371,7 @@ top:6px; left:1947px;width:162px;
     top:73px;	
 }
 .tinghu-arrow-d-line032{
-	    top:-3px; left:1904px;
+	    top:-10px; left:1904px;
     transform: rotate(90deg);
     height: 80px;
 }
@@ -4262,3 +4262,9 @@ top:536px; left:682px;
   transform:rotate(68deg);
 }
 .dib { cursor: pointer!important;} /*左侧4个圆*/
+.fontStyle {
+    max-width: 300px;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}

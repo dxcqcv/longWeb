@@ -6,7 +6,7 @@ equipState([
         "rectime": null, 
         "datavalue": 1, 
         "propertytypeid": null, 
-        "datavalue1": "1"
+        "datavalue1": "0"
     }, 
     {
         "name": null, 
@@ -51,7 +51,7 @@ equipState([
         "rectime": null, 
         "datavalue": 0, 
         "propertytypeid": null, 
-        "datavalue1": "0"
+        "datavalue1": "1"
     }, 
     {
         "name": null, 
@@ -60,7 +60,7 @@ equipState([
         "rectime": null, 
         "datavalue": 0, 
         "propertytypeid": null, 
-        "datavalue1": "0"
+        "datavalue1": "1"
     }, 
     {
         "name": null, 

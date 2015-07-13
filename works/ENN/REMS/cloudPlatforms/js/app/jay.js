@@ -1671,9 +1671,9 @@ dateAllShow(); // show all datepicker
                 else if(index == 1)
                     $classGroup.find(".chart-text-block").find("p").eq(0).html('CO2减排量');
 
-                var dNum = Number(data_2_val - data_3_val).toFixed(1); //计算节能量和减排量
-				//$classGroup.find(".chart-text-block").find("p").eq(1).html(data_1_val+ " " +data_1_unit)
-				$classGroup.find(".chart-text-block").find("p").eq(1).html(dNum+ " " +data_1_unit)
+                //var dNum = Number(data_2_val - data_3_val).toFixed(1); //计算节能量和减排量
+				$classGroup.find(".chart-text-block").find("p").eq(1).html(data_1_val+ " " +data_1_unit)
+				//$classGroup.find(".chart-text-block").find("p").eq(1).html(dNum+ " " +data_1_unit)
 				
                 /*
 				var $chartel = $classGroup.filter(function() {
@@ -1821,12 +1821,15 @@ dateAllShow(); // show all datepicker
                         myChartsPie3.dispose() 
                     }
                     myChartsPie3 =  echarts.init(document.getElementById('pie3'), defaultTheme);
+                    var newPercent = (_percent > 100) ? 100 : _percent;
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#ec1e79'];
 					chartOPT.series[0].data[0].value = (function(){
-                        return (100 - _percent);
-                        //return (100 - 87.9);
+                        //return (100 - _percent);
+                        return (100 - newPercent );
                     })();
+					chartOPT.series[0].data[1].value = newPercent;
+                    /*
 					chartOPT.series[0].data[1].value = (function() {
 						if (_percent > 100) {
 							return 100;
@@ -1836,9 +1839,10 @@ dateAllShow(); // show all datepicker
                         //return 87.9;
 						}
 					})();
+                    */
 					chartOPT.series[0].data[1].name = _name;
 
-                    $classGroupBlock_p.eq(3).find("font").html(data_2_val) //综合供能值
+                    $classGroupBlock_p.eq(3).find("font").html(data_2_val).addClass('fontStyle') //综合供能值
                     $classGroupBlock_p.eq(3).find("span").html(data_2_unit)
 					
                     myChartsPie3.setOption(chartOPT,true); //圆环生成
@@ -1859,8 +1863,9 @@ dateAllShow(); // show all datepicker
 
 
                     /* 可再生能源 */
-                    var renewNum = Number(data_1_val * _percent / 100).toFixed(1); //可再生能源计算公式 
-                    $classGroupBlock_p.eq(3).find("font").html(renewNum) // 可再生能源值
+                    //var renewNum = Number(data_1_val * _percent / 100).toFixed(1); //可再生能源计算公式 
+                    //$classGroupBlock_p.eq(3).find("font").html(renewNum) // 可再生能源值
+                    $classGroupBlock_p.eq(3).find("font").html(data_2_val).addClass('fontStyle') // 可再生能源值
                     $classGroupBlock_p.eq(3).find("span").html(data_2_unit)//可再生能源单位
                     myChartsPie4.setOption(chartOPT,true); //圆环生成
 
@@ -1871,7 +1876,7 @@ dateAllShow(); // show all datepicker
 				$classGroupBlock_p.eq(0).html( data_1_name ) //名称第一行，如综合耗能
 				$classGroupBlock_p.eq(2).html( data_2_name ) //名称第三行，如综合供能，可再生能源
 				
-				$classGroupBlock_p.eq(1).find("font").html(data_1_val) //值第一行，无需公式计算 
+				$classGroupBlock_p.eq(1).find("font").html(data_1_val).addClass('fontStyle') //值第一行，无需公式计算 
 				$classGroupBlock_p.eq(1).find("span").html(data_1_unit) //单位第一行，如GJ
 				
 
@@ -2990,6 +2995,15 @@ if(globalMode === 0) { //供热
 //黄花B区
     w977.show()
     w978.hide()
+    //亭湖BC
+    w1043.hide()
+    w1042.show()
+
+    w1053.hide()
+    w1052.show()
+
+    w1047.show()
+    w1048.hide()
 
 } else if(globalMode === 1) { //供冷
 //黄花A区1or2号余热直燃机
@@ -3000,6 +3014,15 @@ if(globalMode === 0) { //供热
 //黄花B区
     w977.hide()
     w978.show()
+    //亭湖BC
+    w1043.show()
+    w1042.hide()
+
+    w1052.hide()
+    w1053.show()
+    
+    w1047.hide()
+    w1048.show()
 } 
 function huanghuaFirst() {
     gytSelectFn(false,'#huanghuaOverview', '黄花工艺设计图',[-1]);//-1为空
@@ -3257,9 +3280,11 @@ function huanghAlabellistFn(data) {
         else if(value.widgetid === 1001) {
             widgetidFn(1,w1001,[value.title,value.units])
         }
+        /*
         else if(value.widgetid === 973) {
             widgetidFn(1,w973,[value.title,value.units])
         }
+        */
         else if(value.widgetid === 996) {
             widgetidFn(1,w996,[value.title,value.units])
         }
@@ -3326,9 +3351,11 @@ function huanghuaAlabeldataAllFn(data) {
         } else if(value.widgetid === 993) {
             widgetidFn(0,w993,[value.datavalue])
         }
+        /*
         else if(value.widgetid === 973) {
             widgetidFn(0,w973,[value.datavalue])
         }
+        */
         else if(value.widgetid === 999) {
             widgetidFn(0,w999,[value.datavalue])
         }
@@ -3359,9 +3386,11 @@ function huanghuaAlabeldataAllFn(data) {
         else if(value.widgetid === 1001) {
             widgetidFn(0,w1001,[value.datavalue])
         }
+        /*
         else if(value.widgetid === 973) {
             widgetidFn(0,w973,[value.datavalue])
         }
+        */
         else if(value.widgetid === 996) {
             widgetidFn(0,w996,[value.datavalue])
         }
@@ -3570,6 +3599,8 @@ var huanghuaDianlengji17 = $('#huanghuaDianlengji17') //1#离心电冷机
 
 
 function tinghuEquipStatFn(data) {
+  //, globalMode = 1 // 默认供冷模式
+
     $.each(data, function(index, value) {
         if(value.classinstanceid === 180 && value.datavalue1 === '0') { //亭湖A蒸汽型溴化锂机组1
             $('#tinghuAEZhengqixiulengji01').addClass('gray-filter');
@@ -3699,6 +3730,9 @@ function tinghuEquipStatFn(data) {
         if(classinstanceid157Flag === 1 && classinstanceid152Flag ===1) {
             pipelineStatus(1,'.tinghu-yureguolu-in01','.tinghu-yureguolu-in02');
         }
+        if(classinstanceid180Flag === 0 && classinstanceid152Flag ===0) {
+            pipelineStatus(0,'.tinghu-xiulengji-out02','.tinghu-xiulengji-in05');
+        }
         if(classinstanceid157Flag === 0 || classinstanceid152Flag ===0) {
             pipelineStatus(0,'.tinghu-yureguolu-in01','.tinghu-yureguolu-in02');
         }
@@ -3767,7 +3801,7 @@ function shenlongchengEquipStatFn(data) {
         else if(value.classinstanceid === 9053  && value.datavalue1 === '0') { //神农城A发电机1
             equipStatus(0,'#shenlongchengAEFadianji01'); //发电机
             equipStatus(0,'#shenlongchengAElengqueta01'); //冷却塔
-            pipelineStatus(0,'.shenlongcheng-a-l-fadianji01'); 
+            pipelineStatus(0,'.shenlongcheng-a-l-fadianji01','.shenlongcheng-a-fadianji1-out02','.shenlongcheng-a-fadianji1-out01'); 
             equipStatus(0,'#shenlongchengAEhuanreqi01'); //换热器
             pipelineStatus(0,'.shenlongcheng-a-l-huanreqi01');
             classinstanceid9053Flag = 0;
@@ -3779,7 +3813,7 @@ function shenlongchengEquipStatFn(data) {
 
             equipStatus(1,'#shenlongchengAElengqueta01'); //冷却塔
             pipelineStatus(1,'.shenlongcheng-a-l-fadianji01'); 
-            if(globalMode === 1){//供冷季
+            if(globalMode === 0){//供热季
             	equipStatus(1,'#shenlongchengAEhuanreqi01'); //换热器
             	pipelineStatus(1,'.shenlongcheng-a-l-huanreqi01');
             	classinstanceidHRQ01Flag = 1;
@@ -3813,7 +3847,7 @@ function shenlongchengEquipStatFn(data) {
             equipStatus(1,'#shenlongchengAEFadianji02'); //发电机
             equipStatus(1,'#shenlongchengAElengqueta02'); //冷却塔
             pipelineStatus(1,'.shennongcheng-a-l-fadianji02'); 
-            if(globalMode === 1){//供冷季
+            if(globalMode === 0){//供热季
             	equipStatus(1,'#shenlongchengAEhuanreqi02'); //换热器
             	pipelineStatus(1,'.shenlongcheng-a-l-huanreqi02');
             	classinstanceidHRQ02Flag = 1;
@@ -4001,11 +4035,10 @@ function shenlongchengEquipStatFn(data) {
 									 '.dianzhilengji-b-g-qufenshuiqi-08',
 									 '.dianzhilengji-jielengquelie-g-lixindianzhilengjiA1-02'];
 
+//先全关闭
 		pipelineStatus(0,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
 		pipelineStatus(0,shenlongchengLengqueshuiLine[0],shenlongchengLengqueshuiLine[1],shenlongchengLengqueshuiLine[2],shenlongchengLengqueshuiLine[3],shenlongchengLengqueshuiLine[4],shenlongchengLengqueshuiLine[5],shenlongchengLengqueshuiLine[6],shenlongchengLengqueshuiLine[7]);
 		pipelineStatus(0,shenlongchengLengshuiLine[0],shenlongchengLengshuiLine[1],shenlongchengLengshuiLine[2],shenlongchengLengshuiLine[3],shenlongchengLengshuiLine[4],shenlongchengLengshuiLine[5],shenlongchengLengshuiLine[6],shenlongchengLengshuiLine[7]);
-                                     /*
-        */
 
 	if(classinstanceid97Flag == 1 || classinstanceid98Flag ==1 ||classinstanceid99Flag ==1 || classinstanceid100Flag ==1 || classinstanceid101Flag ==1){
 		pipelineStatus(1,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-blixindianzhilengjiA1-out01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01');
@@ -4052,6 +4085,7 @@ function shenlongchengEquipStatFn(data) {
 	var shenlongchengCRanqiLines = ['.dianzhilengji-c-reshuiguolu-y-B1-03',
 									'.dianzhilengji-c-reshuiguolu-y-A2-01'];
 
+//先全关闭
 		pipelineStatus(0,'.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01','.dianzhilengji-c-reshuiguolu-y-B1-02');
 		pipelineStatus(0,shenlongchengCReshuiLines[0],shenlongchengCReshuiLines[1],shenlongchengCReshuiLines[2],shenlongchengCReshuiLines[3]);
 		pipelineStatus(0,shenlongchengCRanqiLines[0],shenlongchengCRanqiLines[1]);
@@ -4079,23 +4113,6 @@ function shenlongchengEquipStatFn(data) {
 		pipelineStatus(0,shenlongchengCRanqiLines[0],shenlongchengCRanqiLines[1]);
 	}
 
-	/*
-    if(classinstanceid102Flag ===1 && classinstanceid9053Flag ===1) {
-        pipelineStatus(1,'.shenlongcheng-a-fadianji2-out10','.shenlongcheng-a-fadianji2-out11','.shenlongcheng-a-y-yureburanzhiranji-out11','.shenlongcheng-a-y-yureburanzhiranji-in12','.shenlongcheng-a-fadianji1-in02','.shenlongcheng-a-gaowenlengquetai1-out02','.shenlongcheng-a-gaowenlengquetai1-in03','.shenlongcheng-a-y-yureburanzhiranji-in11','.shenlongcheng-a-fadianji1-out01','.shenlongcheng-a-fadianji1-out02','.shenlongcheng-a-y-ranqizhiranji-in01');
-    }
-    if(classinstanceid102Flag ===1 && classinstanceid9054Flag ===1) {
-        pipelineStatus(1,'.shenlongcheng-a-fadianji2-out12','.shenlongcheng-a-fadianji2-out13','.shenlongcheng-a-y-yureburanzhiranji-out11','.shenlongcheng-a-y-yureburanzhiranji-in12','.shenlongcheng-a-fadianji2-in02','.shenlongcheng-a-fadianji2-in01','.shenlongcheng-a-fadianji2-out02','.shenlongcheng-a-fadianji1-out03','.shenlongcheng-a-y-ranqizhiranji-in01','.shenlongcheng-a-y-yureburanzhiranji-in11'); 
-    }
-    if(classinstanceid102Flag ===0 && classinstanceid9051Flag ===0) {
-        pipelineStatus(0,'.shenlongcheng-a-g-yureburanzhiranji-out05','.shenlongcheng-a-g-zhiranji-in01'); //去冷却塔
-        pipelineStatus(0,'.shenlongcheng-a-g-general-in01','.shenlongcheng-a-g-yureburanzhiranji-out07'); //去分水器
-    }
-    if(classinstanceid97Flag ===0 && classinstanceid98Flag ===0&& classinstanceid99Flag ===0&& classinstanceid100Flag ===0&& classinstanceid101Flag ===0) {
-        pipelineStatus(0,'.dianzhilengji-jielengquelie-in01','.dianzhilengji-jielengquelie-in01','.dianzhilengji-jielengquelie-g-lixindianzhilengjiB2-out01','.dianzhilengji-b-g-qufenshuiqi-in01'); 
-    }
-    if(classinstanceid103Flag ===0 && classinstanceid104Flag ===0&& classinstanceid105Flag ===0&& classinstanceid106Flag ===0) {
-        pipelineStatus(0,'.dianzhilengji-c-jiereshuixunhuanlie-in01','.dianzhilengji-c-reshuiguolu-o-A1-out01','.dianzhilengji-c-reshuiguolu-y-B1-02'); 
-    }*/
 
 }
 function huanghuaEquipStatFn(data) {
@@ -4264,6 +4281,9 @@ function huanghuaEquipStatFn(data) {
         if(classinstanceid13Flag === 0 && classinstanceid14Flag ===0 ) {
             pipelineStatus(0,'.huanghua-yurezhiranji-1-in06','.huanghua-yurezhiranji-1-out06')
         }
+        if(classinstanceid14Flag === 0 && classinstanceid43Flag ===0 ) { //2号余热直燃机和换热器
+            pipelineStatus(0,'.huanghua-yurezhiranji-2-in04-up','.huanghua-yurezhiranji-2-out03-up','.huanghua-yurezhiranji-2-in03','.huanghua-yurezhiranji-2-out04')
+        }
 }
 
 var lixindianlengjiIn01 = [
@@ -4298,7 +4318,7 @@ function equipsPopup(pid){
         case 1:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
             demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
-            localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
+            //localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
             break;
         case 3:
             demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});

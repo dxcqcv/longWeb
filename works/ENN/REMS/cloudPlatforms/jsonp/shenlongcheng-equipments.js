@@ -1,7 +1,7 @@
 equipState([
 	{
 		"name": null,
-		"classinstanceid": 9051, //燃气直燃
+		"classinstanceid": 9051, //余热直燃机
 		"classpropertyid": 0,
 		"rectime": null,
 		"datavalue": 1.0,
@@ -10,7 +10,7 @@ equipState([
 	}, 
 	{
 		"name": null,
-		"classinstanceid": 102, //余热直燃机
+		"classinstanceid": 102, //燃气直燃
 		"classpropertyid": 0,
 		"rectime": null,
 		"datavalue": 1.0,
@@ -69,7 +69,7 @@ equipState([
 		"rectime": null,
 		"datavalue": 1.0,
 		"propertytypeid": null,
-		"datavalue1": "1"
+		"datavalue1": "0"
 	},
 	{
 		"name": null,
@@ -97,7 +97,7 @@ equipState([
 		"rectime": null,
 		"datavalue": 1.0,
 		"propertytypeid": null,
-		"datavalue1": "1"
+		"datavalue1": "0"
 	},
 	{
 		"name": null,
