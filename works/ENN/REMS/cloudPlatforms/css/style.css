@@ -418,12 +418,18 @@ font-size:58px;
 {
 	height: 100%;
 	padding: 0 28px;
+    /*
 	background-color: #22aa6d;
+    */
+	background-color: #75c37c;
 	border-radius: 12px;
 }
 .column-chart-block .ccb-leftblocks:last-child .ccb-leftblocks-inner
 {
+/*
 	background-color: #00a89c;
+    */
+	background-color: #009aa8;
 }
 .column-chart-block .ccb-left .ccb-leftblocks-inner > p 
 {
@@ -631,6 +637,11 @@ font-size:58px;
 	overflow: hidden;
 	border-radius: 8px 8px 0 0;
 	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.eng-block:hover
+{
+	box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
+    border: 1px solid #fff;
 }
 .eng-block .eng-b-top
 {

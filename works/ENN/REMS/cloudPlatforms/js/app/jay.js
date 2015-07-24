@@ -591,26 +591,10 @@ var re = new RegExp(reg);
 		//console.log('pop-up');
         //alert($xa_modal_wrapper.find('#popUpTitle').text())
         var $title = $xa_modal_wrapper.find('#popUpTitle')
-        switch(type) {
-            case 'one': $title.text('耗气'); break;
-            case 'two': $title.text('耗水'); break;
-            case 'three': $title.text('耗电'); break;
-            case 'four': $title.text('供热'); break;
-            case 'five': $title.text('供冷'); break;
-            //case 'six': $title.text('多项供能对比'); break;
-            case 'six': $title.text('发电'); break;
 
-            case 'seven': $title.text('供蒸汽'); break;
-
-            case 'eight': $title.text('当年成本收益'); break;
-            case 'nine': $title.text('当月成本收益'); break;
-            case 'ten': $title.text('当日成本收益'); break;
-            case 'eleven': $title.text('节能率'); break;
-            case 'twelve': $title.text('CO2减排率'); break;
-            case 'thirteen': $title.text('系统能效'); break;
-            case 'fourteen': $title.text('可再生能源利用率'); break;
-        }
-
+            if(typeof type != 'undefined') {
+                $title.text(detectType(type))
+            }
 // 时间控件显示当前时间
 		$(".dateinput-day").val(nowDay).datepicker("update");
 		$(".dateinput-months").val(parseInt(nowMonth+1)).datepicker("update");
@@ -618,7 +602,7 @@ var re = new RegExp(reg);
 	});
 	
 	
-	function showModal(type,callback,url, jsonp, pid,unitname) {
+	function showModal(type,callback,url, jsonp, pid,unitname,isRate) {
         $xa_modal_wrapper.attr('data-type',type); // 增加弹出框标识
         $xa_modal_wrapper.attr('data-pid',pid); // 增加classpropertyid
         $xa_modal_wrapper.attr('data-unitname',unitname); // 增加unitname
@@ -627,7 +611,7 @@ var re = new RegExp(reg);
 			$xa_modal_wrapper.removeClass("modal-showing");
 			$doc.trigger("modalshow",[type]);
 			if (typeof callback == "function") {
-				callback(url, jsonp, unitname); // pass unitname
+				callback(url, jsonp, unitname,type,isRate); // pass unitname and type
 			}
 			$xa_modal_wrapper.off(".ane");
 		});
@@ -715,7 +699,7 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('four',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname);
+		showModal('four',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
 	})
     .on("click", "#showModal_5",function() {
 dateAllShow(); // show all datepicker
@@ -724,7 +708,7 @@ dateAllShow(); // show all datepicker
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('five',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname);
+		showModal('five',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
 	})
     .on("click", "#showModal_6",function() {
 dateAllShow(); // show all datepicker
@@ -733,7 +717,7 @@ dateAllShow(); // show all datepicker
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('six',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname );
+		showModal('six',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1 );
 	})
     .on("click", "#showModal_7",function() {
 dateAllShow(); // show all datepicker
@@ -742,7 +726,7 @@ dateAllShow(); // show all datepicker
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('seven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid, unitname);
+		showModal('seven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid, unitname,1);
 	})
     .on("click", "#showModal_8",function() {
 
@@ -832,7 +816,7 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('eleven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+		showModal('eleven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
 
 
     }).on('click', '#pie2',function(){ //co2减排率弹出层
@@ -844,7 +828,7 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('twelve',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+		showModal('twelve',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
     }).on('click', '#pie3',function(){ //系统能效弹出层
         dateAllShow(); // show all datepicker
 		modalchartobj = null;
@@ -853,7 +837,7 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('thirteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+		showModal('thirteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
 
     }).on('click', '#pie4',function(){ // 可再生能源利用率弹出层
         dateAllShow(); // show all datepicker
@@ -863,7 +847,7 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('fourteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname);
+		showModal('fourteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
 
     });
     
@@ -892,7 +876,7 @@ dateAllShow(); // show all datepicker
 				position : 'center',
 				formatter : '{b}',
 				textStyle: {
-					fontSize:48,
+					fontSize:40,
 					baseline : 'bottom'
 				}
 			},
@@ -1116,7 +1100,8 @@ dateAllShow(); // show all datepicker
 				itemStyle : 
 				{
 					normal: {
-						color: '#22b473',
+						//color: '#22b473',
+						color: '#75c37c',
 						borderRadius: 5,
 						label : {
 							show: false,
@@ -1135,7 +1120,8 @@ dateAllShow(); // show all datepicker
 				itemStyle : { 
 					normal: 
 					{
-						color: '#00a89c',
+						//color: '#00a89c',
+						color: '#009aa8',
 						borderRadius: 5,
 						label : {
 							show: false,
@@ -1292,7 +1278,7 @@ dateAllShow(); // show all datepicker
 		animationDuration: animationDurationAll,
 		color:["#f6921e","#f05a24", "#ec1c24", "#c0272d"],
 		tooltip : {
-			show:false,
+			show:true,
 			trigger: 'axis'
 		},
         /*
@@ -1327,18 +1313,23 @@ dateAllShow(); // show all datepicker
 		calculable : false,
 		xAxis : [
 			{
+                name: '小时',
+                nameTextStyle: {fontSize:40},
 				type : 'category',
-				boundaryGap : false,
+				//boundaryGap : false,
+				boundaryGap : true,
 				axisLabel:{
 					textStyle:{
 						fontSize:40
 					}	
 				},
+                boundaryGap: true,
 				data : ['周一','周二','周三','周四','周五','周六','周日']
 			}
 		],
 		yAxis : [
 			{
+                nameTextStyle: {fontSize:40},
 				axisLabel:{
 					textStyle:{
 						fontSize:40
@@ -1353,15 +1344,44 @@ dateAllShow(); // show all datepicker
 				type:'line',
 				symbolSize:10,
 				stack: '总量',
-				itemStyle:optionModal2itemsty,
+				//itemStyle:optionModal2itemsty,
+				itemStyle : 
+				{
+					normal: {
+						label : {
+							show: true,
+							position: 'top' // 数值位置
+						}
+					}
+				},
 				data:[120, 132, 101, 134, 90, 230, 210]
+
 			},
 			{
 				name:'供热',
 				type:'line',
 				symbolSize:10,
 				stack: '总量',
-				itemStyle:optionModal2itemsty,
+				//itemStyle:optionModal2itemsty,
+				itemStyle : 
+				{
+					normal: {
+						color: '#22b473',
+						borderRadius: 5,
+						label : {
+							//show: false,
+							show: true,
+							//position: 'left',
+							position: 'top' // 数值位置
+							//formatter: '{b}'
+						}
+                      , textStyle: {
+                            fontSize: '20',
+                            fontFamily: '微软雅黑',
+                            fontWeight: 'bold'
+                      }
+					}
+				},
 				data:[220, 182, 191, 234, 290, 330, 310]
 			},
 			{
@@ -1369,7 +1389,26 @@ dateAllShow(); // show all datepicker
 				type:'line',
 				symbolSize:10,
 				stack: '总量',
-				itemStyle:optionModal2itemsty,
+				//itemStyle:optionModal2itemsty,
+				itemStyle : 
+				{
+					normal: {
+						color: '#22b473',
+						borderRadius: 5,
+						label : {
+							//show: false,
+							show: true,
+							//position: 'left',
+							position: 'top' // 数值位置
+							//formatter: '{b}'
+						}
+                      , textStyle: {
+                            fontSize: '20',
+                            fontFamily: '微软雅黑',
+                            fontWeight: 'bold'
+                      }
+					}
+				},
 				data:[150, 232, 201, 154, 190, 330, 410]
 			},
 			{
@@ -1377,7 +1416,26 @@ dateAllShow(); // show all datepicker
 				type:'line',
 				symbolSize:10,
 				stack: '总量',
-				itemStyle:optionModal2itemsty,
+				//itemStyle:optionModal2itemsty,
+				itemStyle : 
+				{
+					normal: {
+						color: '#22b473',
+						borderRadius: 5,
+						label : {
+							//show: false,
+							show: true,
+							//position: 'left',
+							position: 'top' // 数值位置
+							//formatter: '{b}'
+						}
+                      , textStyle: {
+                            fontSize: '20',
+                            fontFamily: '微软雅黑',
+                            fontWeight: 'bold'
+                      }
+					}
+				},
 				data:[320, 332, 301, 334, 390, 330, 320]
 			}
 		]
@@ -1391,18 +1449,25 @@ dateAllShow(); // show all datepicker
 		title : {
 			show:false
 		},
-		tooltip : {
+		tooltip : { //hover框
+            trigger: 'axis',
+            /*
 			show:true,
+            z:999,
+            zlevel:999,
+            */
 			textStyle:{
 				fontSize:30
 			},
 			showDelay: 0,
 			hideDelay: 50,
 			transitionDuration:0,
+            /*
 			backgroundColor : 'rgba(255,0,255,0.7)',
 			borderColor : '#f50',
-			borderRadius : 8,
 			borderWidth: 2,
+			borderRadius : 8,
+            */
 			padding: 10,    // [5, 10, 15, 20]
 			position : function(p) {
 				// 位置回调
@@ -1419,6 +1484,7 @@ dateAllShow(); // show all datepicker
       		itemWidth :70,//图例的宽
        		itemHeight :40//图例的高
 		},
+        /*
 		toolbox: {
 			show : false,
 			feature : {
@@ -1429,6 +1495,7 @@ dateAllShow(); // show all datepicker
 				saveAsImage : {show: true}
 			}
 		},
+        */
 		grid:{
 			y:200,
 			y2:200,
@@ -1438,6 +1505,7 @@ dateAllShow(); // show all datepicker
 		calculable : false,
 		xAxis : [
 			{
+        /*
 				axisLine:{
 					lineStyle:{
 						color: '#989898'
@@ -1450,6 +1518,7 @@ dateAllShow(); // show all datepicker
 						fontSize: 34
 					}
 				},
+                */
 				type : 'category',
 				data : [2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015]
 			}
@@ -1484,10 +1553,17 @@ dateAllShow(); // show all datepicker
 						color: '#22b473',
 						borderRadius: 5,
 						label : {
-							show: false,
-							position: 'left',
-							formatter: '{b}'
+							//show: false,
+							show: true,
+							//position: 'left',
+							position: 'top' // 数值位置
+							//formatter: '{b}'
 						}
+                      , textStyle: {
+                            fontSize: '20',
+                            fontFamily: '微软雅黑',
+                            fontWeight: 'bold'
+                      }
 					}
 				},
 				data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
@@ -1505,16 +1581,30 @@ dateAllShow(); // show all datepicker
 						label : {
 							//show: false, //是否显示tips 
 							show: true, //是否显示tips 
-							position: 'left',
-							formatter: '{b}'
+							//position: 'left',
+							position: 'top' // 数值位置
+							//formatter: '{b}' // 显示X轴时间在柱子上
 						}
+                      , textStyle: {
+                            fontSize: '20',
+                            fontFamily: '微软雅黑',
+                            fontWeight: 'bold'
+                      }
 					}
 				},
 				data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                /*
+              , markPoint : { 
+                    data:[
+                        {type: 'max', name:'最大值'}
+                      , {type: 'min', name:'最小值'}
+                    ]
+              } 
+              */
 			},
 			{
 				calculable : false,
-				name:'意向',
+				//name:'意向',
 				type:'pie',
 				/*roseType : 'area',*/
 				center: (function() {
@@ -1559,7 +1649,7 @@ dateAllShow(); // show all datepicker
 			},
 			{
 				calculable : false,
-				name:'意向',
+				//name:'意向',
 				type:'pie',
 				/*roseType : 'area',*/
 				center: (function() {
@@ -1840,7 +1930,10 @@ dateAllShow(); // show all datepicker
 						}
 					})();
                     */
-					chartOPT.series[0].data[1].name = _name;
+					//chartOPT.series[0].data[1].name = _name;
+					chartOPT.series[0].data[1].name = (function(){
+                        if(_name == "综合能源利用率") return "综合能源\n利用率"
+                    })();
 
                     $classGroupBlock_p.eq(3).find("font").html(data_2_val).addClass('fontStyle') //综合供能值
                     $classGroupBlock_p.eq(3).find("span").html(data_2_unit)
@@ -2694,6 +2787,7 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 
 				$.each(json_a[0][0].costdatas, function(index,data) {
 					xAxisdata[index] = data.rectime;
+					//xAxisdata[index] = data.data;
 					colsdata01[index] = data.data; 
 				});
 
@@ -2753,12 +2847,43 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 				$modalinnerChartWrap.data("echart", modalchartobj);
 			})
     }	
+function detectType(type,isLiang) {
+        var typeName
+          , liang
+        if(typeof isLiang != 'undefined') liang = isLiang ;
+        else liang = 0;
+        switch(type) {
+            case 'one': typeName=(liang==0)?'耗气':'耗气量'; break;
+            case 'two': typeName=(liang==0)?'耗水':'耗水量'; break;
+            case 'three': typeName=(liang==0)?'耗电':'耗电量'; break;
+            case 'four': typeName=(liang==0)?'供热':'供热量'; break;
+            case 'five': typeName=(liang==0)?'供冷':'供冷量'; break;
+            case 'six': typeName=(liang==0)?'发电':'发电量'; break;
+            case 'seven': typeName=(liang==0)?'供蒸汽':'供蒸汽量'; break;
 
+            case 'eight': typeName='当年成本收益'; break;
+            case 'nine': typeName='当月成本收益'; break;
+            case 'ten': typeName='当日成本收益'; break;
+            case 'eleven': typeName='节能率'; break;
+            case 'twelve': typeName='CO2减排率'; break;
+            case 'thirteen': typeName='综合能源利用率'; break;
+            case 'fourteen': typeName='可再生能源利用率'; break;
+        }
+        return typeName 
+}
 // 单曲线回调函数
-		function singleEnergy_callback(url, callback, unitname) {
+		function singleEnergy_callback(url, callback, unitname,type,isRate) {
 			//console.log("show 4 call back");
 			//console.log(url);
 			//console.log(callback);
+            var singleTypeName
+              , detectRate
+            if(typeof isRate != 'undefined') {
+                detectRate = isRate //判断0为指标曲线，1为供能曲线
+            }
+            if(typeof type != 'undefined') {
+                 singleTypeName = detectType(type,1);       
+            }
 			$.ajax({
 				type : "get",
 				async:true,
@@ -2774,6 +2899,7 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 					var opt = optionModal2;
                     opt.xAxis[0].axisLabel.formatter = '{value}'; 
                     opt.yAxis[0].axisLabel.formatter = '{value}'+unitname; // unitname
+                    opt.yAxis[0].name = singleTypeName;
 					opt.xAxis[0].data= (function() {
 						var  k = [];
                         if(json[0].list == null)  json[0].list = [{'rectime':'0','data':'0'},{'rectime':'0','data':'0'}]; // 若数据无则默认输出 
@@ -2785,6 +2911,24 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 						});
 						return k
 					})();
+                    
+
+/*
+		normal : {
+			label : {
+				show : true,
+				position : 'center',
+				formatter : '{b}',
+				textStyle: {
+					fontSize:48,
+					baseline : 'bottom'
+				}
+			},
+			lineStyle:{
+				width:10
+			},
+            */
+
 					opt.series = [];
 					opt.series[0] = (function() {
 						var sd = {
@@ -2794,7 +2938,7 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 							type:'line',
 							symbolSize:10,
 							stack: '总量',
-							itemStyle:optionModal2itemsty,
+
 							data:(function() {
 								var k = [];
 								$.each(json[0].list, function(index, data) {
@@ -2803,6 +2947,38 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 								return k;
 							})()
 						}
+
+                            if(detectRate == 1) {
+                                sd.itemStyle = optionModal2itemsty;
+                                sd.markLine = {
+                                    data : [
+                                        // 纵轴，默认
+                                        {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                        {type : 'min', name: '最小值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                        {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                    ]
+                                };
+                            }
+                            else if(detectRate == 0) {
+                            
+                                sd.itemStyle = 
+                                {
+                                    normal: {
+                                        lineStyle:{
+                                            width:10
+                                        },
+                                        label : {
+                                            show: true,
+                                            position: 'top' // 数值位置
+                                          , textStyle: {
+                                                fontSize: '40',
+                                                color: '#ff6633',
+                                                fontFamily: '微软雅黑',
+                                          }
+                                        }
+                                    }
+                                };
+                            }
 						return sd;
 					})();
 					modalchartobj = echarts.init(document.getElementById('chartinner'), defaultTheme);
@@ -2838,10 +3014,16 @@ function innerLeftRight(id) {
                             energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
                             break;
                         case 'four':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'four',1);
+                            break;
                         case 'five':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'five',1);
+                            break;
                         case 'six':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'six',1);
+                            break;
                         case 'seven':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname);
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'seven',1);
                             break;
                         case 'eight':
                             costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=years&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=years&date="+joinDate+"","financePie"],0);
@@ -2853,10 +3035,16 @@ function innerLeftRight(id) {
                             costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date="+joinDate+"","financePie"],2);
                             break;
                         case 'eleven':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'eleven',0);
+                            break;
                         case 'twelve':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'twelve',0);
+                            break;
                         case 'thirteen':
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'thirteen',0);
+                            break;
                         case 'fourteen':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname);
+                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'fourteen',0);
                             break;
                     }
                 
@@ -4342,7 +4530,8 @@ function selectGYT(id,callback) {
             gytSelectFn(false,'#huanghuaArtwork', '黄花工艺设计图'); 
             showBottomArea('huanghua-thumbnail');
             //artworkBottomHeight(348);//底部高度
-            artworkBottomHeight(116);//底部高度
+            //artworkBottomHeight(116);//底部高度
+            artworkBottomHeight(335);//底部高度
             builtTailIcon(1,4);
             //equipsPopup(1);
             intervalGYTData1 = myTimeoutFn(function(){equipsPopup(1)}, minsUpdate); 
@@ -4352,7 +4541,8 @@ function selectGYT(id,callback) {
             gytSelectFn(false,'#tinghuArtwork', '亭湖工艺设计图'); 
             showBottomArea('tinghu-thumbnail');
             //artworkBottomHeight(648);//底部高度
-            artworkBottomHeight(256);//底部高度
+            //artworkBottomHeight(256);//底部高度
+            artworkBottomHeight(605);//底部高度
             builtTailIcon(3,4); //构建下标
             //equipsPopup(3);
             intervalGYTData2 = myTimeoutFn(function(){equipsPopup(3)}, minsUpdate); 
@@ -4362,7 +4552,8 @@ function selectGYT(id,callback) {
             gytSelectFn(false,'#shenlongchengArtwork', '神农城工艺设计图'); 
             showBottomArea('shenlongcheng-thumbnail');
             //artworkBottomHeight(458);
-            artworkBottomHeight(156);
+            //artworkBottomHeight(156);
+            artworkBottomHeight(415);
             builtTailIcon(4,3);
             //equipsPopup(4);
             intervalGYTData3 = myTimeoutFn(function(){equipsPopup(4)}, minsUpdate); 

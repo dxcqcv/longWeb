@@ -10,12 +10,12 @@ equipState([
     }, 
     {
         "name": null, 
-        "classinstanceid": 152, 
+        "classinstanceid": 152, //发电机 
         "classpropertyid": 0, 
         "rectime": null, 
         "datavalue": 0, 
         "propertytypeid": null, 
-        "datavalue1": "0"
+        "datavalue1": "1"
     }, 
     {
         "name": null, 
@@ -55,12 +55,12 @@ equipState([
     }, 
     {
         "name": null, 
-        "classinstanceid": 157, 
+        "classinstanceid": 157, //余热锅炉
         "classpropertyid": 0, 
         "rectime": null, 
         "datavalue": 0, 
         "propertytypeid": null, 
-        "datavalue1": "0"
+        "datavalue1": "1"
     }, 
     {
         "name": null, 
