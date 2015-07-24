@@ -2878,6 +2878,8 @@ function detectType(type,isLiang) {
 			//console.log(callback);
             var singleTypeName
               , detectRate
+              , isMin = 0
+              , isMarkLine = 0
             if(typeof isRate != 'undefined') {
                 detectRate = isRate //判断0为指标曲线，1为供能曲线
             }
@@ -2931,6 +2933,10 @@ function detectType(type,isLiang) {
 
 					opt.series = [];
 					opt.series[0] = (function() {
+            var maxList
+              , arrayList = [];
+            
+            
 						var sd = {
 							name: (function() {
 								return json[0].div.name;
@@ -2943,21 +2949,46 @@ function detectType(type,isLiang) {
 								var k = [];
 								$.each(json[0].list, function(index, data) {
 									k[index] = data.data;
+
+                  if(data.data == 0){
+                    isMin = 1;
+                  }
+                  arrayList.push(data.data)
 								});
 								return k;
 							})()
 						}
+            maxList = getMaxOfArray(arrayList);
+            if(maxList == 0) isMarkLine = 1;
+
 
                             if(detectRate == 1) {
-                                sd.itemStyle = optionModal2itemsty;
-                                sd.markLine = {
-                                    data : [
-                                        // 纵轴，默认
-                                        {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
-                                        {type : 'min', name: '最小值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
-                                        {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
-                                    ]
-                                };
+                                if(isMarkLine == 1){
+                                    sd.itemStyle = optionModal2itemsty;
+                                }
+                                  else if(isMin == 1) {
+
+                                      sd.itemStyle = optionModal2itemsty;
+                                      sd.markLine = {
+                                          data : [
+                                              // 纵轴，默认
+                                              {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                              
+                                              {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                          ]
+                                      };
+                                  } else if(isMin == 0) {
+                                    sd.itemStyle = optionModal2itemsty;
+                                      sd.markLine = {
+                                          data : [
+                                              // 纵轴，默认
+                                              {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                              {type : 'min', name: '最小值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                              {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                                          ]
+                                      };
+                                  }
+                               
                             }
                             else if(detectRate == 0) {
                             
