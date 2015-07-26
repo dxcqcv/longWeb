@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>2048</title>
+<style type="text/css" >
+td{
+	width:100px;
+	height:100px;
+	text-align:center;
+	font-size:20px;
+	line-height:100px;
+	vertical-align:middle;
+	font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+	<center>
+    <table width="400px" height="400px" border="1">
+  <tr>
+    <td id="b00"></td>
+    <td id="b01"></td>
+    <td id="b02"></td>
+    <td id="b03"></td>
+  </tr>
+  <tr>
+    <td id="b10"></td>
+    <td id="b11"></td>
+    <td id="b12"></td>
+    <td id="b13"></td>
+  </tr>
+  <tr>
+    <td id="b20"></td>
+    <td id="b21"></td>
+    <td id="b22"></td>
+    <td id="b23"></td>
+  </tr>
+  <tr>
+    <td id="b30"></td>
+    <td id="b31"></td>
+    <td id="b32"></td>
+    <td id="b33"></td>
+  </tr>
+</table>
+	<input type="button" value="new game" id="button" onclick="resetgame()"/>
+</center>
+<script type="text/javascript">
+//声明4*4二维数组对应每个单元格
+var arr=new Array();
+for(var i=0;i<4;i++){
+	arr[i]=new Array();
+	for(var j=0;j<4;j++){
+		arr[i][j]=$("b"+i+j);
+	}
+}
+
+var isplus=new Array();
+for(var i=0;i<4;i++){
+	isplus[i]=new Array();
+	for(var j=0;j<4;j++){
+		isplus[i][j]=false;
+	}
+}
+
+
+//键盘点击事件
+document.onkeyup = function (event) {
+    var e = event || window.event;       
+	switch(e.keyCode){
+		case 37:
+			leftmove();
+		break;
+		case 38:
+			upmove();
+		break;
+		case 39:
+			rightmove();
+		break;
+		case 40:
+			downmove();
+		break;	
+	}
+}
+
+function leftmove(){
+	var ismove=false;
+	for(var k=0;k<4;k++){
+			for(var i=0;i<4;i++){
+				for(var j=0;j<3;j++){
+					if(arr[i][j].innerHTML==""){
+						arr[i][j].innerHTML=arr[i][j+1].innerHTML;
+						arr[i][j+1].innerHTML="";
+						ismove=true;
+					}else if(arr[i][j].innerHTML==arr[i][j+1].innerHTML&&isplus[i][j]==false){
+						arr[i][j].innerHTML=parseInt(arr[i][j].innerHTML)+parseInt(arr[i][j+1].innerHTML);
+						arr[i][j+1].innerHTML="";
+						ismove=true;
+						for(var l=0;l<=j;l++){
+							isplus[i][l]=true;
+						}
+					}
+				}
+			}
+		}
+	gameover();	
+	resetbool();
+	if(ismove){
+		randomnumber();
+	}
+	color();	
+}
+
+function upmove(){
+	var ismove=false;
+	for(var k=0;k<4;k++){
+			for(var i=0;i<4;i++){
+				for(var j=0;j<3;j++){
+					if(arr[j][i].innerHTML==""){
+						arr[j][i].innerHTML=arr[j+1][i].innerHTML;
+						arr[j+1][i].innerHTML="";
+						ismove=true;
+					}else if(arr[j][i].innerHTML==arr[j+1][i].innerHTML&&isplus[j][i]==false){
+						arr[j][i].innerHTML=parseInt(arr[j][i].innerHTML)+parseInt(arr[j+1][i].innerHTML);
+						arr[j+1][i].innerHTML="";
+						ismove=true;
+						for(var l=0;l<=j;l++){	
+							isplus[l][i]=true;
+						}
+					}
+				}
+			}
+		}
+	gameover();	
+	resetbool();
+	if(ismove){
+		randomnumber();
+	}
+	color();	
+}
+
+function rightmove(){
+	var ismove=false;
+	for(var k=0;k<4;k++){
+		for(var i=0;i<4;i++){
+			for(var j=3;j>0;j--){
+				if(arr[i][j].innerHTML==""){
+					arr[i][j].innerHTML=arr[i][j-1].innerHTML;
+					arr[i][j-1].innerHTML="";
+					ismove=true;
+				}else if(arr[i][j].innerHTML==arr[i][j-1].innerHTML&&isplus[i][j]==false){
+					arr[i][j].innerHTML=parseInt(arr[i][j].innerHTML)+parseInt(arr[i][j-1].innerHTML);
+					arr[i][j-1].innerHTML="";
+					ismove=true;
+					for(var l=3;l>=j;l--){
+						isplus[i][l]=true;
+					}
+				}
+			}
+		}
+	}
+	gameover();	
+	resetbool();
+	if(ismove){
+		randomnumber();
+	}
+	color();
+}
+
+function downmove(){
+	var ismove=false;
+	for(var k=0;k<4;k++){
+			for(var i=0;i<4;i++){
+				for(var j=3;j>0;j--){
+					if(arr[j][i].innerHTML==""){
+						arr[j][i].innerHTML=arr[j-1][i].innerHTML;
+						arr[j-1][i].innerHTML="";
+						ismove=true;
+					}else if(arr[j][i].innerHTML==arr[j-1][i].innerHTML&&isplus[j][i]==false){
+						arr[j][i].innerHTML=parseInt(arr[j][i].innerHTML)+parseInt(arr[j-1][i].innerHTML);
+						arr[j-1][i].innerHTML="";
+						ismove=true;
+						for(var l=3;l>=j;l--){	
+							isplus[l][i]=true;
+						}
+					}
+				}
+			}
+		}
+	gameover();	
+	resetbool();
+	if(ismove){
+		randomnumber();
+	}
+	color();	
+}
+
+//重置布尔数组的函数
+function resetbool(){
+	for(var i=0;i<4;i++){
+		for(var j=0;j<4;j++){
+			isplus[i][j]=false;
+		}
+}
+}
+
+//随机位置生成新数字的函数
+
+function randomnumber(){
+	while(true){
+	var nospace=true;
+	//判断是否有空位
+	for(var i=0;i<4;i++){
+		for(var j=0;j<4;j++){
+			if(arr[i][j].innerHTML==""){
+				nospace=false;
+			}
+		}
+	}
+		if(nospace==true){
+		break;
+		}
+		
+		var x=Math.round(Math.random()*3);
+		var y=Math.round(Math.random()*3);
+		if(arr[x][y].innerHTML==""){
+			var num=Math.random();
+			if(num<=0.8){
+				arr[x][y].innerHTML="2";
+			}else{
+				arr[x][y].innerHTML="4";
+			}
+			break;
+		}else
+		continue;
+	}
+}
+//判断是否结束的函数
+function gameover(){
+	var islose=true;
+	for(var i=0;i<4;i++){
+		for(var j=0;j<4;j++){
+			if(arr[i][j].innerHTML==""){
+				islose=false;
+			}
+		}
+	}
+	for(var i=0;i<4;i++){
+		for(var j=0;j<3;j++){
+			if(arr[i][j].innerHTML==arr[i][j+1].innerHTML){
+				islose=false;
+			}
+		}
+	}
+	for(var i=0;i<4;i++){
+		for(var j=0;j<3;j++){
+			if(arr[j][i].innerHTML==arr[j+1][i].innerHTML){
+				islose=false;
+			}
+		}
+	}
+	if(islose==true){
+		alert("你输了！");
+		resetgame();		
+	}
+}
+
+//重置游戏的函数
+function resetgame(){
+	for(var i=0;i<4;i++){
+		for(var j=0;j<4;j++){
+			arr[i][j].innerHTML="";
+			isplus[i][j]=false;
+		}
+	}
+	var x=Math.round(Math.random()*3);
+	var y=Math.round(Math.random()*3);
+	arr[x][y].innerHTML="2";
+	color();
+}
+
+//设置单元格颜色的函数
+function color(){
+	for(var i=0;i<4;i++){
+		for(var j=0;j<4;j++){
+			switch(arr[i][j].innerHTML){
+				case "":
+				arr[i][j].style.backgroundColor="white";
+				break;
+				case "2":
+				arr[i][j].style.backgroundColor="green";
+				break;
+				case "4":
+				arr[i][j].style.backgroundColor="blue";
+				break;
+				case "8":
+				arr[i][j].style.backgroundColor="purple";
+				break;
+				case "16":
+				arr[i][j].style.backgroundColor="orange";
+				break;
+				case "32":
+				arr[i][j].style.backgroundColor="red";
+				break;
+				default:
+				arr[i][j].style.backgroundColor="yellow";
+				break;
+			}
+		}
+	}
+}
+
+function $(id){
+	return document.getElementById(id);
+}
+</script>
+</body>
+</html>
