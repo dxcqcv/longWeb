@@ -892,7 +892,8 @@ dateAllShow(); // show all datepicker
 					//保留小数点后面1位
                     //console.log('params ',params)
                     // 圆环参数公式
-					return  Math.floor((100 - params.value)*10)/10 + '%';
+					//return  Math.floor((100 - params.value)*10)/10 + '%';
+					return  Math.floor((1 - params.value)*10)/10 ;
 				},
 				textStyle: {
 					fontWeight:'bold',
@@ -1785,7 +1786,8 @@ dateAllShow(); // show all datepicker
                     myChartsPie1 =  echarts.init(document.getElementById('pie1'), defaultTheme);
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#f8ae3b'];
-				chartOPT.series[0].data[0].value = 100 - _percent 
+				//chartOPT.series[0].data[0].value = 100 - _percent 
+				chartOPT.series[0].data[0].value = 1 - _percent 
 				chartOPT.series[0].data[1].value = _percent
 				chartOPT.series[0].data[1].name = _name
 				myChartsPie1.setOption(chartOPT,true);
@@ -1796,7 +1798,8 @@ dateAllShow(); // show all datepicker
                     myChartsPie2 =  echarts.init(document.getElementById('pie2'), defaultTheme);
 					chartOPT = optionsPie2
 					chartOPT.color = ['#21b171'];
-				chartOPT.series[0].data[0].value = 100 - _percent 
+				//chartOPT.series[0].data[0].value = 100 - _percent 
+				chartOPT.series[0].data[0].value = 1 - _percent 
 				chartOPT.series[0].data[1].value = _percent
 				chartOPT.series[0].data[1].name = _name
 				myChartsPie2.setOption(chartOPT,true);
@@ -1913,12 +1916,14 @@ dateAllShow(); // show all datepicker
                         myChartsPie3.dispose() 
                     }
                     myChartsPie3 =  echarts.init(document.getElementById('pie3'), defaultTheme);
-                    var newPercent = (_percent > 100) ? 100 : _percent;
+                    //var newPercent = (_percent > 100) ? 100 : _percent;
+                    var newPercent = (_percent > 1) ? 1 : _percent;
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#ec1e79'];
 					chartOPT.series[0].data[0].value = (function(){
                         //return (100 - _percent);
-                        return (100 - newPercent );
+                        //return (100 - newPercent );
+                        return (1 - newPercent );
                     })();
 					chartOPT.series[0].data[1].value = newPercent;
                     /*
@@ -1949,7 +1954,8 @@ dateAllShow(); // show all datepicker
 					chartOPT = optionsPie1
 					chartOPT.color = ['#92278e'];
 
-					chartOPT.series[0].data[0].value = 100 - _percent;
+					//chartOPT.series[0].data[0].value = 100 - _percent;
+					chartOPT.series[0].data[0].value = 1 - _percent;
 					chartOPT.series[0].data[1].value = _percent;
 					chartOPT.series[0].data[1].name = (function() {
 						if (_name == "可再生能源利用率") return "可再生能源\n利用率"
