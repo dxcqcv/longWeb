@@ -32,7 +32,19 @@ a{text-decoration: none;}
 .txa-c {text-align: center;}
 .txa-l {text-align: left;}
 .txa-r {text-align: right;}
-.dib {display: inline-block;}
+.dib {
+    display: inline-block;
+    /*
+    width: 360px; height: 320px;
+    border: 1px solid #000;
+    */
+    width: 300px; height: 300px;
+    cursor: pointer!important;
+    border-radius: 50%;
+}/*左侧4个圆*/
+.dib:hover {
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+}
 .pdtsty1 {padding-top: 100px;}
 .xa-app
 {
