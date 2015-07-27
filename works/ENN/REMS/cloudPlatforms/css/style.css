@@ -38,12 +38,15 @@ a{text-decoration: none;}
     width: 360px; height: 320px;
     border: 1px solid #000;
     */
-    width: 303px; height: 303px;
+    width: 302px; height: 302px;
     cursor: pointer!important;
     border-radius: 50%;
 }/*左侧4个圆*/
 .dib:hover {
-    box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+    box-shadow: 6px 15px 10px 5px rgba(0,0,0,.3);
+}
+.hoverShadow {
+    box-shadow: 6px 15px 10px 5px rgba(0,0,0,.3);
 }
 .pdtsty1 {padding-top: 100px;}
 .xa-app
@@ -723,6 +726,10 @@ font-size:58px;
 	background-color: #039d91;
 	color: #fff;
 }
+.eng-block.color-1:hover .eng-b-top
+{
+	background-color: #20c0b4;
+}
 .eng-block.color-1 .eng-b-con .eng-bcin p:last-child
 {
 	color: #039d91;
@@ -732,6 +739,11 @@ font-size:58px;
 	background-color: #22a86c;
 	color: #fff;
 }
+.eng-block.color-2:hover .eng-b-top
+{
+	background-color: #30ca8a;
+}
+
 .eng-block.color-2 .eng-b-con .eng-bcin p:last-child
 {
 	color: #22a86c;
@@ -740,6 +752,11 @@ font-size:58px;
 {
 	background-color: #6ea652;
 	color: #fff;
+}
+
+.eng-block.color-3:hover .eng-b-top
+{
+	background-color: #8dc969;
 }
 .eng-block.color-3 .eng-b-con .eng-bcin p:last-child
 {
@@ -750,6 +767,10 @@ font-size:58px;
 	background-color: #71538a;
 	color: #fff;
 }
+.eng-block.color-71538a:hover .eng-b-top
+{
+	background-color: #a475c3;
+}
 .eng-block.color-71538a .eng-b-con .eng-bcin p:last-child
 {
 	color: #71538a;
@@ -758,6 +779,10 @@ font-size:58px;
 {
 	background-color: #ab5150;
 	color: #fff;
+}
+.eng-block.color-ab5150:hover  .eng-b-top
+{
+	background-color: #e46e6e;
 }
 .eng-block.color-ab5150 .eng-b-con .eng-bcin p:last-child
 {
@@ -768,6 +793,10 @@ font-size:58px;
 	background-color: #838d58;
 	color: #fff;
 }
+.eng-block.color-838d58:hover  .eng-b-top
+{
+	background-color: #a5ae6f;
+}
 .eng-block.color-838d58 .eng-b-con .eng-bcin p:last-child
 {
 	color: #838d58;
@@ -777,6 +806,10 @@ font-size:58px;
 {
 	background-color: #b59142;
 	color: #fff;
+}
+.eng-block.color-b59142:hover  .eng-b-top
+{
+	background-color: #d6b554;
 }
 .eng-block.color-b59142 .eng-b-con .eng-bcin p:last-child
 {

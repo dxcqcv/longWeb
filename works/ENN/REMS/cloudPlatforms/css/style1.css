@@ -2385,8 +2385,9 @@ background: #c6c6c6;
     margin-right: 40px;
 }
 .huanghua-thumbnail {
-    background-image: url('../images/huanghua-gyt01.png');
+    background-image: url('../images/huanghua-gyt01-s.png');
     /*
+    background-image: url('../images/huanghua-gyt01.png');
     width: 250px;
     height: 116px;
     background-size: 250px 116px;
@@ -2394,9 +2395,13 @@ background: #c6c6c6;
     width: 723px; height: 335px;
     background-size: 723px 335px;
 }
+.huanghua-thumbnail:hover {
+    background-image: url('../images/huanghua-gyt01-s2.png');
+}
 .tinghu-thumbnail {
-    background-image: url('../images/tinghu-gyt.png');
+    background-image: url('../images/tinghu-gyt-s.png');
     /*
+    background-image: url('../images/tinghu-gyt.png');
     width: 246px;
     height: 256px;
     background-size: 246px 256px;
@@ -2404,9 +2409,16 @@ background: #c6c6c6;
     width: 578px; height: 605px;
     background-size: 578px 605px;
 }
+.tinghu-thumbnail:hover {
+    background-image: url('../images/tinghu-gyt-s2.png');
+/*
+    box-shadow: 0 5px 5px 5px rgba(0,0,0,.5);
+    */
+}
 .shenlongcheng-thumbnail {
-    background-image: url('../images/shenlongcheng-gyt.png');
+    background-image: url('../images/shenlongcheng-gyt-s.png');
     /*
+    background-image: url('../images/shenlongcheng-gyt.png');
     width: 247px;
     height: 156px;
     background-size: 247px 156px;
@@ -2414,14 +2426,28 @@ background: #c6c6c6;
     width: 658px; height: 415px;
     background-size: 658px 415px;
 }
+.shenlongcheng-thumbnail:hover {
+    background-image: url('../images/shenlongcheng-gyt-s2.png');
+}
 .tails-box { display: inline-block;}
 .tail-icon {
     display: inline-block; width: 110px; height: 110px;
-    border-radius: 60px;
-    background: #ccc; color: #fff;
+    border-radius: 50%;
+    background: #b1b1b1; color: #fff;
     text-align: center; font-size: 70px; line-height: 110px;
     margin-right: 40px;
     cursor: pointer;
+    transition: .1s;
+}
+/*
+.tail-icon:hover {
+    box-shadow: 0 5px 5px 5px rgba(0,0,0,.5);
+    width: 120px; height: 120px; line-height: 120px;
+}
+*/
+.tailIconHover {
+    box-shadow: 0 5px 5px 5px rgba(0,0,0,.5);
+    width: 120px; height: 120px; line-height: 120px;
 }
 .tails-box .active {
     background: #3188d5;
@@ -2429,16 +2455,21 @@ background: #c6c6c6;
 }
 .legend-box { 
     display: inline-block;
-    /*width:1636px*/
-    width: 1436px; height: 100px;
+    /*width:1636px
+    width: 1436px;
+    */
+    width: 1160px;
+     height: 100px;
     text-align: right;
     vertical-align: bottom;
     position: absolute; right: 0;bottom:0;
 }
 .legend-block { 
     float: left; 
-    /*width:400px*/
+    /*width:400px
     width: 340px;
+    */
+    width: 290px;
     overflow: hidden;
     margin-bottom: 30px;
 }
