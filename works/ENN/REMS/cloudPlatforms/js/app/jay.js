@@ -79,6 +79,7 @@ $.extend(LocalJsonp.prototype, {
           , timeout: timeout
           , data: data
           , dataType: 'jsonp'
+          , cache: false
           , jsonp: jsonp
           , jsonpCallback: jsonpCallback
           , crossDomain: true
@@ -2108,9 +2109,6 @@ function bindY_M_D_data(){ //成本收益侧栏生成
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
-console.log(tab01chartjsonY )	
-console.log(tab01chartjsonM )	
-console.log(tab01chartjsonD )	
         //mycolumnChart4.clear();
 		mycolumnChart4.setOption(columnChartoptInit);
 
@@ -2140,9 +2138,6 @@ console.log(tab01chartjsonD )
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
-console.log(tab01chartjsonY )	
-console.log(tab01chartjsonM )	
-console.log(tab01chartjsonD )	
         //mycolumnChart5.clear();
 		mycolumnChart5.setOption(columnChartoptInit);
 	}).on("tab01chartjsonloadY", function(e) { // 收益成本年
@@ -2171,22 +2166,19 @@ console.log(tab01chartjsonD )
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
-console.log(tab01chartjsonY )	
-console.log(tab01chartjsonM )	
-console.log(tab01chartjsonD )	
         //mycolumnChart3.clear();
 		mycolumnChart3.setOption(columnChartoptInit);
 	});
 		
 		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date=now',jsonp: 'mainfinance' ,done:main_mons_Compelte});//月成本收益
-		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_mons_Compelte});//月成本收益
+		localJsonp.start({url:'jsonp/mainfinanceM.js',jsonpCallback:'mainfinanceM' ,done:main_mons_Compelte});//月成本收益
 		
 		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now',jsonp: 'mainfinance' ,done:main_days_Compelte});//日成本收益
-		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_days_Compelte});//日成本收益
+		localJsonp.start({url:'jsonp/mainfinanceD.js',jsonpCallback:'mainfinanceD' ,done:main_days_Compelte});//日成本收益
 		
 		
 		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now',jsonp: 'mainfinance' ,done:main_years_Compelte});//年成本收益
-		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_years_Compelte});//年成本收益
+		localJsonp.start({url:'jsonp/mainfinanceY.js',jsonpCallback:'mainfinanceY' ,done:main_years_Compelte});//年成本收益
 			
         //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
 		
@@ -2198,14 +2190,17 @@ function setCompelte(){ console.log(1111)}
 
 
 function main_years_Compelte(data){
+console.log(1,data)
 	tab01chartjsonY = data;
 	$doc.trigger("tab01chartjsonloadY")
 }
 function main_mons_Compelte(data){
+console.log(2,data)
 	tab01chartjsonM = data;
 	$doc.trigger("tab01chartjsonloadM")
 }
 function main_days_Compelte(data){
+console.log(3,data)
 	tab01chartjsonD = data;
 	$doc.trigger("tab01chartjsonloadD");
 }
