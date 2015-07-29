@@ -56,6 +56,7 @@ var nowMonth = nowdate.getMonth();
 var nowDay = nowdate.getDate();
 
 var jsonDataRight = {}; // 全局
+
 function LocalJsonp() {
     this.loading = $('#loading')
 }
@@ -112,7 +113,7 @@ $.extend(Request.prototype, {
           , done = opt.done ? opt.done : doneFn
           , fail = opt.fail ? opt.fail : failFn
           , jsonp = opt.jsonp ? opt.jsonp : 'callbackparam'
-          // jsonpCallback = opt.jsonpCallback ? opt.jsonpCallback : ''
+          //, jsonpCallback = opt.jsonpCallback ? opt.jsonpCallback : '' 
           , self = this;
 
         currentRequest = $.ajax({
@@ -123,7 +124,7 @@ $.extend(Request.prototype, {
           //, async : false
           , dataType: 'jsonp'
           , jsonp: jsonp //服务端用于接收callback调用的function名的参数  
-          // jsonpCallback: jsonpCallback//callback的function名称,服务端会把名称和data一起传递回来 
+          //, jsonpCallback: jsonpCallback//callback的function名称,服务端会把名称和data一起传递回来 
           , crossDomain: true
           , mimeType: 'application/json'
           , contentType: 'text/plain'
@@ -153,9 +154,12 @@ localJsonp = new LocalJsonp(); // 调用本地jsonp
 //updateIndex();
 intervalIndex = myTimeoutFn(updateIndex,hoursUpdate);//更新首页右侧项目列表
 function updateIndex(){
-    demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',jsonp: 'login' ,done:remsLogin}); // 请求登录
+    //demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/login?USERNAME=ennshow&PASSWORD=ennshow0311',jsonp: 'login' ,done:remsLogin}); // 请求登录
+    localJsonp.start({url:'jsonp/login.js',jsonpCallback: 'login' ,done:remsLogin}); // 请求登录
+
     function remsLogin(data) {
-        if(data[0].login === 'true') demand.start({url:'http://10.36.128.73:8080/reds/ds/gislist', jsonp: 'gislist',done:indexInit}); // 登录成功加载项目
+        //if(data[0].login === 'true') demand.start({url:'http://10.36.128.73:8080/reds/ds/gislist', jsonp: 'gislist',done:indexInit}); // 登录成功加载项目
+        if(data[0].login === 'true') localJsonp.start({url:'jsonp/gislist.js', jsonpCallback: 'gislist',done:indexInit}); // 登录成功加载项目
         //else alert('数据库出错')
     }
 }
@@ -459,7 +463,7 @@ var re = new RegExp(reg);
                     switchPage(function(){// 切换后回调
 
                         clearTimeout(intervalIndex);
-                        demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
+                        //demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+_pid,jsonp: 'setProject' ,done:setCompelte}); // 设置projectid
                         var afterSwitchPg = [
                             function(){ selectGYT(_pid,function(){releaseFn('afterSwitchPg')})},
                             function(){ intervalLeftRight = myTimeoutFn(function(){loadLeftRight(_pid)},hoursUpdate,function(){releaseFn('afterSwitchPg')});},
@@ -653,7 +657,7 @@ var re = new RegExp(reg);
 	
 	window.$modalinnerChartWrap = $("#chartinner");
 	var modalchartobj ;
-	$doc.on("click", "#showModal_1", function() {
+	$doc.on("click", "#showModal_1", function() { //耗气弹出框pid 551
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
@@ -666,10 +670,11 @@ dateAllShow(); // show all datepicker
 			modalchartobj = echarts.init(document.getElementById('chartinner'), defaultTheme);
 			modalchartobj.setOption(optionModal);
             */
-            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            energyFn(['jsonp/singleEnergy'+classpropertyid+'.js','singleEnergy'],['jsonp/energyPie'+classpropertyid+'.js','energyPie'],unitname);
 		}
 		showModal('one',show_1_callback,'','',classpropertyid,unitname); // 参数为type, callback, url, jsonp, pid, unitname
-	}).on("click", "#showModal_2",function() {
+	}).on("click", "#showModal_2",function() { //耗水弹出框pid 552
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
@@ -678,10 +683,11 @@ dateAllShow(); // show all datepicker
           , unitname = $this.attr('data-unitname')
 		function show_2_callback() {
 			//console.log("show 1 call back")
-            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            energyFn(['jsonp/singleEnergy'+classpropertyid+'.js','singleEnergy'],['jsonp/energyPie'+classpropertyid+'.js','energyPie'],unitname);
 		}
 		showModal('two',show_2_callback,'','',classpropertyid,unitname);
-	}).on("click", "#showModal_3",function() {
+	}).on("click", "#showModal_3",function() { //耗电弹出框pid 471 
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
@@ -690,11 +696,12 @@ dateAllShow(); // show all datepicker
           , unitname = $this.attr('data-unitname')
 		function show_3_callback() {
 			//console.log("show 1 call back")
-            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+classpropertyid+'&timeradio=days&date=now','energyPie'],unitname);
+            energyFn(['jsonp/singleEnergy'+classpropertyid+'.js','singleEnergy'],['jsonp/energyPie'+classpropertyid+'.js','energyPie'],unitname);
 		}
 		showModal('three',show_3_callback,'','',classpropertyid,unitname);
 	})
-    .on("click", "#showModal_4",function() {
+    .on("click", "#showModal_4",function() {//供热弹出框473
         dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
@@ -702,34 +709,38 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('four',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
+		//showModal('four',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
+		showModal('four',singleEnergy_callback, 'jsonp/singleEnergy'+classpropertyid+'.js', 'singleEnergy',classpropertyid,unitname,1);
 	})
-    .on("click", "#showModal_5",function() {
+    .on("click", "#showModal_5",function() {//供冷弹出框472
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('five',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
+		//showModal('five',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1);
+		showModal('five',singleEnergy_callback, 'jsonp/singleEnergy'+classpropertyid+'.js', 'singleEnergy',classpropertyid,unitname,1);
 	})
-    .on("click", "#showModal_6",function() {
+    .on("click", "#showModal_6",function() {//发电弹出框553
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('six',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1 );
+		//showModal('six',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid,unitname,1 );
+		showModal('six',singleEnergy_callback, 'jsonp/singleEnergy'+classpropertyid+'.js', 'singleEnergy',classpropertyid,unitname,1);
 	})
-    .on("click", "#showModal_7",function() {
+    .on("click", "#showModal_7",function() {//供蒸汽弹出框1222
 dateAllShow(); // show all datepicker
 		modalchartobj = null;
 		$modalinnerChartWrap[0].innerHTML= "";
         var $this = $(this)
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
-		showModal('seven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid, unitname,1);
+		//showModal('seven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+classpropertyid+'&timeradio=days&date=now', 'singleEnergy',classpropertyid, unitname,1);
+		showModal('seven',singleEnergy_callback, 'jsonp/singleEnergy'+classpropertyid+'.js', 'singleEnergy',classpropertyid, unitname,1);
 	})
     .on("click", "#showModal_8",function() {
 
@@ -753,7 +764,8 @@ dateAllShow(); // show all datepicker
 			"top":"90px"
 		});
 		function show_8_callback() {
-        costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=years&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=years&date=now","financePie"],0);
+        //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=years&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=years&date=now","financePie"],0);
+        costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],0);
 			//console.log("modal8 clicked")
             /*
 			var URLS = [["http://10.36.128.73:8080/reds/ds/","mainfinance"],["http://10.36.128.73:8080/reds/ds/","financePie"],["http://10.36.128.73:8080/reds/ds/","financePie"]];
@@ -788,7 +800,8 @@ dateAllShow(); // show all datepicker
 			"top":"90px"
 		});
 		function show_5_callback() {
-            costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=mons&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=mons&date=now","financePie"], 1);
+            //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=mons&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=mons&date=now","financePie"], 1);
+            costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],1);
 		}
 		showModal('nine',show_5_callback);
 	}).on("click", "#showModal_10",function() {
@@ -799,7 +812,8 @@ dateAllShow(); // show all datepicker
       dateMon.parents('.selector').hide();
       dateDay.parents('.selector').show();
 
-            costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date=now","financePie"],2);
+            //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date=now","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date=now","financePie"],2);
+            costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],2);
             /*
 			var URLS = [["http://10.36.128.73:8080/reds/ds/","mainfinance"],["http://10.36.128.73:8080/reds/ds/","financePie"],["http://10.36.128.73:8080/reds/ds/","financePie"]];
 			$modalinnerChartWrap.data({
@@ -819,7 +833,8 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('eleven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		//showModal('eleven',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		showModal('eleven',singleEnergy_callback, 'jsonp/singleQuota'+classpropertyid+'.js', 'singleQuota',classpropertyid,unitname,0);
 
 
     }).on('click', '#pie2',function(){ //co2减排率弹出层
@@ -831,7 +846,8 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('twelve',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		//showModal('twelve',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		showModal('twelve',singleEnergy_callback, 'jsonp/singleQuota'+classpropertyid+'.js', 'singleQuota',classpropertyid,unitname,0);
     }).on('click', '#pie3',function(){ //系统能效弹出层
         dateAllShow(); // show all datepicker
 		modalchartobj = null;
@@ -840,7 +856,8 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('thirteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		//showModal('thirteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		showModal('thirteen',singleEnergy_callback, 'jsonp/singleQuota'+classpropertyid+'.js', 'singleQuota',classpropertyid,unitname,0);
 
     }).on('click', '#pie4',function(){ // 可再生能源利用率弹出层
         dateAllShow(); // show all datepicker
@@ -850,7 +867,8 @@ dateAllShow(); // show all datepicker
           , classpropertyid = $this.attr('data-classpropertyid')
           , unitname = $this.attr('data-unitname')
 
-		showModal('fourteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		//showModal('fourteen',singleEnergy_callback, 'http://10.36.128.73:8080/reds/ds/singleQuota?pid='+classpropertyid+'&timeradio=days&date=now', 'singleQuota',classpropertyid,unitname,0);
+		showModal('thirteen',singleEnergy_callback, 'jsonp/singleQuota'+classpropertyid+'.js', 'singleQuota',classpropertyid,unitname,0);
 
     });
     
@@ -2035,7 +2053,8 @@ function addShadowToCircle(id,className) {
         });
 }
         function loadLeftRight(id) {
-            demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
+            //demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainLeft?timeradio=hours',jsonp: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
+            localJsonp.start({url:'jsonp/mainLeft.js',jsonpCallback: 'mainLeft' ,done:mainLeft_Compelte}); //pinmingle add 左侧数据绑定
             bindY_M_D_data(); //pinmingle add 右边年月日数据绑定
             addShadowToCircle('#pie1','.addShadow1')
             addShadowToCircle('#pie2','.addShadow2')
@@ -2062,7 +2081,6 @@ var rightY_M_D_data = [{"yData":"ajaxsample/costsumY.js","mData":"ajaxsample/cos
 var tab01chartjsonM = {};
 	var tab01chartjsonD = {};
 	var tab01chartjsonY = {};
-	
 function bindY_M_D_data(){ //成本收益侧栏生成
 
 	$doc.on("tab01chartjsonloadM", function(e) { // 收益成本月
@@ -2090,6 +2108,9 @@ function bindY_M_D_data(){ //成本收益侧栏生成
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
+console.log(tab01chartjsonY )	
+console.log(tab01chartjsonM )	
+console.log(tab01chartjsonD )	
         //mycolumnChart4.clear();
 		mycolumnChart4.setOption(columnChartoptInit);
 
@@ -2119,6 +2140,9 @@ function bindY_M_D_data(){ //成本收益侧栏生成
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
+console.log(tab01chartjsonY )	
+console.log(tab01chartjsonM )	
+console.log(tab01chartjsonD )	
         //mycolumnChart5.clear();
 		mycolumnChart5.setOption(columnChartoptInit);
 	}).on("tab01chartjsonloadY", function(e) { // 收益成本年
@@ -2147,47 +2171,24 @@ function bindY_M_D_data(){ //成本收益侧栏生成
 		columnChartoptInit.series[0].data = dates1;
 		columnChartoptInit.series[1].data = dates2;
 
+console.log(tab01chartjsonY )	
+console.log(tab01chartjsonM )	
+console.log(tab01chartjsonD )	
         //mycolumnChart3.clear();
 		mycolumnChart3.setOption(columnChartoptInit);
 	});
 		
-	/*$.ajax({
-			type : "get",
-			async:true,
-			url : rightY_M_D_data[i].mData,
-			dataType : "jsonp",
-			jsonp: "callback",
-			jsonpCallback:"costsumM",
-			success : function(json){
-				tab01chartjsonM = json;
-				$doc.trigger("tab01chartjsonloadM")
-			},
-				error:function(){
-				alert('加载图表01数据失败');
-			}
-		});*/
-		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date=now',jsonp: 'mainfinance' ,done:main_mons_Compelte});
+		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date=now',jsonp: 'mainfinance' ,done:main_mons_Compelte});//月成本收益
+		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_mons_Compelte});//月成本收益
 		
-		/*$.ajax({
-			type : "get",
-			async:true,
-			url : rightY_M_D_data[i].dData,
-			dataType : "jsonp",
-			jsonp: "callback",
-			jsonpCallback:"costsumD",
-			success : function(json){
-				tab01chartjsonD = json;
-				$doc.trigger("tab01chartjsonloadD")
-			},
-				error:function(){
-				alert('加载图表01数据失败');
-			}
-		});		*/
-		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now',jsonp: 'mainfinance' ,done:main_days_Compelte});
+		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date=now',jsonp: 'mainfinance' ,done:main_days_Compelte});//日成本收益
+		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_days_Compelte});//日成本收益
 		
 		
-		demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now',jsonp: 'mainfinance' ,done:main_years_Compelte});
+		//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now',jsonp: 'mainfinance' ,done:main_years_Compelte});//年成本收益
+		localJsonp.start({url:'jsonp/mainfinance.js',jsonpCallback:'mainfinance' ,done:main_years_Compelte});//年成本收益
 			
+        //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
 		
 		
 }
@@ -2338,7 +2339,8 @@ var gnhnTemp = '<div class="eng-bp" id="showModal_'+indexNum+'" data-classproper
 	
 	function gnhnfn(projectid) {
 			//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/setProject?projectid='+projectid+'',jsonp: 'setProject' ,done:setCompelte});
-			demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainRight?timeradio=days',jsonp: 'mainRight' ,done:function(data){
+			//demand.start({type:'GET',url:'http://10.36.128.73:8080/reds/ds/mainRight?timeradio=days',jsonp: 'mainRight' ,done:function(data){
+			localJsonp.start({type:'GET',url:'jsonp/mainRight.js',jsonpCallback: 'mainRight' ,done:function(data){
                 gnhnfn_Compelte(data, projectid);
             }
         });
@@ -2348,7 +2350,8 @@ var gnhnTemp = '<div class="eng-bp" id="showModal_'+indexNum+'" data-classproper
 
 // 获取环境信息
 function getWeather() {
-    demand.start({url:'http://10.36.128.73:8080/reds/ds/weather',jsonp: 'weather' ,done:setWeather});
+    //demand.start({url:'http://10.36.128.73:8080/reds/ds/weather',jsonp: 'weather' ,done:setWeather});
+    localJsonp.start({url:'jsonp/weather.js',jsonpCallback: 'weather' ,done:setWeather});
 }
 function setWeather(data){
    var d = data
@@ -2742,14 +2745,18 @@ function getRandomArbitrary(min, max) {
 
 
 // 获取ajax
-			function ajaxget(URL,JSONP,CALLBACK_NAME) {
+			//function ajaxget(URL,JSONP,CALLBACK_NAME) {
+			function ajaxget(URL,CALLBACK_NAME) {
 				var thisAjax = $.ajax({
 					type : "get",
 					async:true,
 					url : URL,
-					dataType : "jsonp",
-					jsonp: JSONP,
-					//jsonpCallback:CALLBACK_NAME
+					dataType : "jsonp"
+                  , crossDomain: true
+                  , mimeType: 'application/json'
+                  , contentType: 'text/plain',
+					//jsonp: JSONP,
+					jsonpCallback:CALLBACK_NAME
 				});
 				return thisAjax;
 			}
@@ -2761,8 +2768,12 @@ function energyFn() {
       , getEchart
       , unitname = (typeof arguments[2] == 'undefined') ? '' : arguments[2]
 
+/*
     ajaxLoad_1 = ajaxget(arguments[0][0],arguments[0][1], "popinc_col");
     ajaxLoad_2 = ajaxget(arguments[1][0],arguments[1][1], "popinc_pie");
+    */
+    ajaxLoad_1 = ajaxget(arguments[0][0],arguments[0][1]);
+    ajaxLoad_2 = ajaxget(arguments[1][0],arguments[1][1]);
 
 
 
@@ -2823,9 +2834,14 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 				getEchart;
             //             demand.start({url:"http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date=now",jsonp:'mainfinance',done:function(data){console.log('dddddd '+data);ajaxLoad_1 = data}});
             //console.log('dididid '+arguments)
+            /*
 			ajaxLoad_1 = ajaxget(arguments[0][0],arguments[0][1], "popinc_col");
 			ajaxLoad_2 = ajaxget(arguments[1][0],arguments[1][1], "popinc_pie");
 			ajaxLoad_3 = ajaxget(arguments[2][0],arguments[2][1], "popinc_pie2");
+            */
+			ajaxLoad_1 = ajaxget(arguments[0][0],arguments[0][1]);
+			ajaxLoad_2 = ajaxget(arguments[1][0],arguments[1][1]);
+			ajaxLoad_3 = ajaxget(arguments[2][0],arguments[2][1]);
 
 			$.when(ajaxLoad_1,ajaxLoad_2,ajaxLoad_3).done(function(json_a,json_b,json_c) {
 				//console.log( json_a,json_b,json_c,"拿到JSON数据")
@@ -2948,8 +2964,12 @@ function detectType(type,isLiang) {
 				url : url,
 				dataType : "jsonp",
 				//jsonp: "singleEnergy",
-				jsonp: callback,
-				jsonpCallback:"popinc_line_single",
+				//jsonp: callback,
+				//jsonpCallback:"popinc_line_single",
+                   crossDomain: true
+                  , mimeType: 'application/json'
+                  , contentType: 'text/plain',
+				jsonpCallback:callback,
 				success : function(json){
 					//console.log(json);
 					var opt = optionModal2;
@@ -3088,50 +3108,63 @@ function innerLeftRight(id) {
    } 
 } 
 */
-                function selectDate(type, pid, joinDate, unitname) {
-
+                function selectDate(type, pid, joinDate, unitname) {//弹出框多态
                     switch(type) {
                         case 'one': // 耗气 
-                            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            energyFn(['jsonp/singleEnergy'+pid+'.js','singleEnergy'],['jsonp/energyPie'+pid+'.js','energyPie'],unitname);
                             break;
                         case 'two': // 耗水
-                            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            energyFn(['jsonp/singleEnergy'+pid+'.js','singleEnergy'],['jsonp/energyPie'+pid+'.js','energyPie'],unitname);
                             break;
                         case 'three': // 耗电
-                            energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            //energyFn(['http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'','singleEnergy'],['http://10.36.128.73:8080/reds/ds/energyPie?pid='+pid+'&timeradio=days&date='+joinDate+'','energyPie'],unitname);
+                            energyFn(['jsonp/singleEnergy'+pid+'.js','singleEnergy'],['jsonp/energyPie'+pid+'.js','energyPie'],unitname);
                             break;
                         case 'four':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'four',1);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'four',1);
+                            singleEnergy_callback('jsonp/singleEnergy'+pid+'.js', 'singleEnergy',unitname,'four',1);
                             break;
                         case 'five':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'five',1);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'five',1);
+                            singleEnergy_callback('jsonp/singleEnergy'+pid+'.js', 'singleEnergy',unitname,'five',1);
                             break;
                         case 'six':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'six',1);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'six',1);
+                            singleEnergy_callback('jsonp/singleEnergy'+pid+'.js', 'singleEnergy',unitname,'six',1);
                             break;
                         case 'seven':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'seven',1);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleEnergy?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleEnergy',unitname,'seven',1);
+                            singleEnergy_callback('jsonp/singleEnergy'+pid+'.js', 'singleEnergy',unitname,'seven',1);
                             break;
                         case 'eight':
-                            costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=years&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=years&date="+joinDate+"","financePie"],0);
+                            //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=years&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=years&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=years&date="+joinDate+"","financePie"],0);
+                            costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],0);
                             break;
                         case 'nine':
-                            costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=mons&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=mons&date="+joinDate+"","financePie"],1);
+                            //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=mons&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=mons&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=mons&date="+joinDate+"","financePie"],1);
+                            costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],1);
                             break;
                         case 'ten':
-                            costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date="+joinDate+"","financePie"],2);
+                            //costFn(["http://10.36.128.73:8080/reds/ds/mainfinance?timeradio=days&date="+joinDate+"","mainfinance"],["http://10.36.128.73:8080/reds/ds/financePie?type=0&timeradio=days&date="+joinDate+"","financePie"],["http://10.36.128.73:8080/reds/ds/financePie?type=1&timeradio=days&date="+joinDate+"","financePie"],2);
+                            costFn(["jsonp/mainfinance.js","mainfinance"],["jsonp/financePie.js","financePie"],["jsonp/financePie.js","financePie"],2);
                             break;
                         case 'eleven':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'eleven',0);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'eleven',0);
+                            singleEnergy_callback('jsonp/singleQuota'+pid+'.js', 'singleQuota',unitname,'eleven',0);
                             break;
                         case 'twelve':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'twelve',0);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'twelve',0);
+                            singleEnergy_callback('jsonp/singleQuota'+pid+'.js', 'singleQuota',unitname,'twelve',0);
                             break;
                         case 'thirteen':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'thirteen',0);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'thirteen',0);
+                            singleEnergy_callback('jsonp/singleQuota'+pid+'.js', 'singleQuota',unitname,'thirteen',0);
                             break;
                         case 'fourteen':
-                            singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'fourteen',0);
+                            //singleEnergy_callback('http://10.36.128.73:8080/reds/ds/singleQuota?pid='+pid+'&timeradio=days&date='+joinDate+'', 'singleQuota',unitname,'fourteen',0);
+                            singleEnergy_callback('jsonp/singleQuota'+pid+'.js', 'singleQuota',unitname,'fourteen',0);
                             break;
                     }
                 
@@ -3398,7 +3431,8 @@ function tinghuLabellistFn(data) {
         }
         */
     });
-    demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=101', jsonp: 'labeldataAll',done:tinghuLabeldataAllFn});
+    //demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=101', jsonp: 'labeldataAll',done:tinghuLabeldataAllFn});
+    localJsonp.start({url:'jsonp/labeldataAll101.js', jsonpCallback: 'labeldataAll',done:tinghuLabeldataAllFn});
 }
 function tinghuLabeldataAllFn(data) {
     $.each(data, function(index, value) {
@@ -3497,7 +3531,8 @@ function shenlongchengLabellistFn(data) {
             widgetidFn(1,w1092,[value.title,value.units])
         }
     });
-    demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=102', jsonp: 'labeldataAll',done:shenlongchengLabeldataAllFn});
+    //demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=102', jsonp: 'labeldataAll',done:shenlongchengLabeldataAllFn});
+    localJsonp.start({url:'jsonp/labeldataAll102.js', jsonpCallback: 'labeldataAll',done:shenlongchengLabeldataAllFn});
 }
 function shenlongchengLabeldataAllFn(data) {
     $.each(data, function(index, value) {
@@ -3617,7 +3652,8 @@ function huanghAlabellistFn(data) {
             widgetidFn(1,w991,[value.title,value.units])
         }
     });
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/labeldataAll?pageid=100', jsonp: 'labeldataAll',done:huanghuaAlabeldataAllFn});
+    localJsonp.start({url:'jsonp/labeldataAll100.js', jsonpCallback: 'labeldataAll',done:huanghuaAlabeldataAllFn});
 }
 function huanghuaAlabeldataAllFn(data) {
     $.each(data, function(index, value) {
@@ -4592,19 +4628,22 @@ function animateFn(ele,styles,duration,easing,callback) {
 function equipsPopup(pid){
     switch(pid) {
         case 1:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
-            //localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=100', jsonp: 'labellist',done:huanghAlabellistFn});
+            localJsonp.start({url:'jsonp/labellist100.js',jsonpCallback:'labellist',done:huanghAlabellistFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:huanghuaEquipStatFn});
+            localJsonp.start({url:'jsonp/huanghua-equipments.js',jsonpCallback:'equipState',done:huanghuaEquipStatFn});
             break;
         case 3:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
-            //localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=101', jsonp: 'labellist',done:tinghuLabellistFn});
+            localJsonp.start({url:'jsonp/labellist101.js',jsonpCallback:'labellist',done:tinghuLabellistFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:tinghuEquipStatFn});
+            localJsonp.start({url:'jsonp/tinghu-equipments.js',jsonpCallback:'equipState',done:tinghuEquipStatFn});
             break;
         case 4:
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist',done:shenlongchengLabellistFn});
-            demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
-            //localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/labellist?pageid=102', jsonp: 'labellist',done:shenlongchengLabellistFn});
+            localJsonp.start({url:'jsonp/labellist102.js',jsonpCallback:'labellist',done:shenlongchengLabellistFn});
+            //demand.start({url:'http://10.36.128.73:8080/reds/ds/equipState', jsonp: 'equipState',done:shenlongchengEquipStatFn});
+            localJsonp.start({url:'jsonp/shenlongcheng-equipments.js',jsonpCallback:'equipState',done:shenlongchengEquipStatFn});
             break;
     }
 }
