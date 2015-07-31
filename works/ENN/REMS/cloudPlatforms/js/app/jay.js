@@ -915,7 +915,7 @@ dateAllShow(); // show all datepicker
                     //console.log('params ',params)
                     // 圆环参数公式
 					//return  Math.floor((100 - params.value)*10)/10 + '%';
-					return  Math.floor((1 - params.value)*10)/10 ;
+					return  Math.round((1 - params.value)*10)/10 ;
 				},
 				textStyle: {
 					fontWeight:'bold',
