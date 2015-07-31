@@ -944,7 +944,10 @@ font-size:58px;
 .modal-box
 {
 	overflow: hidden;
+    /*
 	width: 3128px;
+    */
+	width: 4128px;
 	height: 1356px;
 	background-color: #fff;
 	border-radius: 8px;

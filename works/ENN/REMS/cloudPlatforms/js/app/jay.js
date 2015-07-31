@@ -915,7 +915,9 @@ dateAllShow(); // show all datepicker
                     //console.log('params ',params)
                     // 圆环参数公式
 					//return  Math.floor((100 - params.value)*10)/10 + '%';
-					return  Math.round((1 - params.value)*10)/10 ;
+					//return  Math.floor((1 - params.value)*10)/10 ;
+                    console.log(parseFloat(1 - params.value).toFixed(3))
+					return   parseFloat(1 - params.value).toFixed(3);
 				},
 				textStyle: {
 					fontWeight:'bold',
@@ -1247,7 +1249,8 @@ dateAllShow(); // show all datepicker
 				type:'pie',
 				/*roseType : 'area',*/
 				center: (function() {
-					var half = 2908/2
+					//var half = 2908/2
+					var half = 3908/2 //耗能弹出框pie位置
 					var k = [half*1.5, "50%"]
 					return k
 				})(),
@@ -1633,7 +1636,8 @@ dateAllShow(); // show all datepicker
 				type:'pie',
 				/*roseType : 'area',*/
 				center: (function() {
-					var half = 2908/2
+					//var half = 2908/2 //成本收益pie位置
+					var half = 4008/2 //成本收益pie位置
 					var k = [half*1.25, "50%"]
 					return k
 				})(),
@@ -1678,7 +1682,9 @@ dateAllShow(); // show all datepicker
 				type:'pie',
 				/*roseType : 'area',*/
 				center: (function() {
-					var half = 2908/2
+					//var half = 2908/2//成本收益pie位置
+					var half = 3908/2//成本收益pie位置
+
 					var k = [half*1.75, "50%"]
 					return k
 				})(),
