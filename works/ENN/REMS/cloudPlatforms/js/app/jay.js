@@ -1836,7 +1836,11 @@ dateAllShow(); // show all datepicker
                     if(_percent > 1) {
                         newPercent =  1;
                         overflowNum = _percent.toString().split('.')[1]; 
-                    } else {
+                    } else if(_percent == 1) {
+                        newPercent =  1;
+                        overflowNum = '000'; 
+                    }
+                    else {
                         newPercent = _percent;
                     }
 					chartOPT = optionsPie1;
@@ -1861,7 +1865,11 @@ dateAllShow(); // show all datepicker
                     if(_percent > 1) {
                         newPercent =  1;
                         overflowNum = _percent.toString().split('.')[1]; 
-                    } else {
+                    } else if(_percent == 1) {
+                        newPercent =  1;
+                        overflowNum = '000'; 
+                    }
+                    else {
                         newPercent = _percent;
                     }
 					chartOPT = optionsPie2
@@ -1995,7 +2003,11 @@ dateAllShow(); // show all datepicker
                     if(_percent > 1) {
                         newPercent =  1;
                         overflowNum = _percent.toString().split('.')[1]; 
-                    } else {
+                    } else if(_percent == 1) {
+                        newPercent =  1;
+                        overflowNum = '000'; 
+                    }
+                    else {
                         newPercent = _percent;
                     }
 					chartOPT = optionsPie1;
@@ -2023,7 +2035,11 @@ dateAllShow(); // show all datepicker
                     if(_percent > 1) {
                         newPercent =  1;
                         overflowNum = _percent.toString().split('.')[1]; 
-                    } else {
+                    } else if(_percent == 1) {
+                        newPercent =  1;
+                        overflowNum = '000'; 
+                    }
+                    else {
                         newPercent = _percent;
                     }
                     //newPercent = (_percent > 1) ? 1 : _percent;
