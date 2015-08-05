@@ -54,6 +54,9 @@
 	width: 1630px;
 	height: 288px;
 	background-image: url(../images/index-top-bg.png);
+    cursor: pointer;
+}
+.index-top:hover {
 }
 .xa-logo-rightop
 {
@@ -61,6 +64,7 @@
 	position: absolute;
 	left: 208px;
 	top: 50px;
+    cursor: pointer;
 }
 .index-slider
 {
@@ -191,6 +195,7 @@
 	position: relative;
 	color: #328dde;
 	display: block;
+    cursor: pointer;
 }
 .index-slider-right .swiper-slide.mapview-active
 {

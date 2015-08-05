@@ -364,6 +364,7 @@ var re = new RegExp(reg);
 				
 				});
 
+/*
 			window.bottomSwiper = new Swiper('#bottomSWIPER', {
               // Optional parameters
               direction: 'horizontal',
@@ -372,6 +373,7 @@ var re = new RegExp(reg);
 	      	  prevButton:"#index_prev",
               loop: true
             }) 
+            */
 			
 			/*内页顶部滚动*/
 			var header_swiper = new Swiper('#header_gonggao', {
@@ -407,7 +409,6 @@ var re = new RegExp(reg);
                     }
                     switchPage(function(){
                         $(".mapview-active").removeClass("mapview-active");
-                        bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
                     }); //切换页面         
                     switch(projectBoxIndex ) { //复位为overview
                         case '1': 
@@ -424,15 +425,22 @@ var re = new RegExp(reg);
                             shenlongchengArtwork.height(1718);
                             break;
                     }
-					if(icon_arr && icon_arr.length>=1){
-						for(var i=0; i<icon_arr.length; i++){	
-                            if(typeof icon_arr[2*i] == 'undefined') continue; 
-							icon_arr[2*i].show();   
-							icon_arr[2*i+1].hide();
-						}
-					}
+                    restoreMap();
 
             });	
+            
+$doc.on('xinaoTitle',restoreMap);
+$doc.on('click','.index-top',function(){$doc.trigger('xinaoTitle');$('.mapview-active').removeClass('mapview-active')});//恢复地图
+function restoreMap() {
+    bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
+    if(icon_arr && icon_arr.length>=1){
+        for(var i=0; i<icon_arr.length; i++){	
+            if(typeof icon_arr[2*i] == 'undefined') continue; 
+            icon_arr[2*i].show();   
+            icon_arr[2*i+1].hide();
+        }
+    }
+}
             var detail_data_index = 0; //内页图表数据索引 pinmingle add
 			$("#index_right_swiper").on("click", ".swiper-slide", function(e) {
 				var $this = $(this);
@@ -445,10 +453,13 @@ var re = new RegExp(reg);
 				bdmap.centerAndZoom(point,12); //地图的缩放比
 				var _actclass = "mapview-active"
 				if ( !$this.hasClass(_actclass) ){
-                    if(_pid != '1' && _pid != '3' && _pid != '4') {
+                    if(_pid != '1' && _pid != '3' ) { 
                         $(".mapview-active").removeClass("mapview-active"); //取消高亮
-                        bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
-                        //alert(name +'还在建造中');
+                        //bdmap.centerAndZoom(new BMap.Point(103.404, 39.915),5); //修改地图的中心点
+                        restoreMap();
+                        //alert(name +'还在建造中，暂不开放，敬请谅解。');
+                        var indexPopupTitle = name +'项目正在改建中，暂不开放，敬请谅解。'; 
+                        showModal(indexPopupTitle);
                         return;
                     }
 					$this.addClass(_actclass).siblings().removeClass(_actclass);
@@ -469,7 +480,7 @@ var re = new RegExp(reg);
                             function(){ selectGYT(_pid,function(){releaseFn('afterSwitchPg')})},
                             function(){ intervalLeftRight = myTimeoutFn(function(){loadLeftRight(_pid)},hoursUpdate,function(){releaseFn('afterSwitchPg')});},
                             function(){ intervalInnerRight = myTimeoutFn(function(){gnhnfn(_pid)}, hoursUpdate,function(){releaseFn('afterSwitchPg')});}, //小时更新供能耗能
-                            function(){ toggleShow('cur','#gongnenghaonengDefTab','#gongnenghaonengDefLayout');releaseFn('afterSwitchPg'); },
+                            function(){ toggleShow('cur','#gongnenghaonengDefTab','#gongnenghaonengDefLayout');releaseFn('afterSwitchPg'); }, //成本收益tab
                             function(){ intervalWeather = myTimeoutFn(getWeather,hoursUpdate,function(){releaseFn('afterSwitchPg')});}// 加载气象信息
                         ];
                         $doc.queue('afterSwitchPg',afterSwitchPg );
@@ -907,6 +918,7 @@ dateAllShow(); // show all datepicker
 			}
 		}
 	};
+    var overflowNum //超过值的变量
 	var labelFromatter = {
 		normal : {
 			label : {
@@ -916,8 +928,9 @@ dateAllShow(); // show all datepicker
                     // 圆环参数公式
 					//return  Math.floor((100 - params.value)*10)/10 + '%';
 					//return  Math.floor((1 - params.value)*10)/10 ;
-                    console.log(parseFloat(1 - params.value).toFixed(3))
-					return   parseFloat(1 - params.value).toFixed(3);
+                    //console.log(parseFloat(1 - params.value).toFixed(3))
+                    if(params.value == 0) return parseFloat(1 - params.value).toFixed(0) + '.' +overflowNum;  //超过1则显示超出的值 
+                    else return   parseFloat(1 - params.value).toFixed(3);
 				},
 				textStyle: {
 					fontWeight:'bold',
@@ -943,8 +956,8 @@ dateAllShow(); // show all datepicker
 		}
 	};
 	
-	var animationDurationAll = 300;
-	
+	var animationDurationAll = 300
+
 	var optionsPie1 = {
 		animationDuration: animationDurationAll,
 		color : ['#faaf3b'],
@@ -1197,6 +1210,8 @@ dateAllShow(); // show all datepicker
 		calculable : false,
 		xAxis : [
 			{
+                name: '小时',
+                nameTextStyle: {fontSize:40},
 				type : 'category',
 				boundaryGap : false,
 				data : ['2009','2010','2011','2012','2013','2014','2015'],
@@ -1209,6 +1224,7 @@ dateAllShow(); // show all datepicker
 		],
 		yAxis : [
 			{
+                nameTextStyle: {fontSize:40},
 				type : 'value',
 				axisLabel:{
                     formatter: '￥{value}',
@@ -1364,6 +1380,9 @@ dateAllShow(); // show all datepicker
 					}	
 				},
 				type : 'value'
+              , scale: true //Y轴最大值控制
+              , power: 1
+              , precision: 1
 			}
 		],
 		series : [
@@ -1813,13 +1832,20 @@ dateAllShow(); // show all datepicker
                         myChartsPie1.dispose() 
                     }
                     myChartsPie1 =  echarts.init(document.getElementById('pie1'), defaultTheme);
-                    newPercent = (_percent > 1) ? 1 : _percent;
+                    //newPercent = (_percent > 1) ? 1 : _percent;
+                    if(_percent > 1) {
+                        newPercent =  1;
+                        overflowNum = _percent.toString().split('.')[1]; 
+                    } else {
+                        newPercent = _percent;
+                    }
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#f8ae3b'];
 				//chartOPT.series[0].data[0].value = 100 - _percent 
                 /*
 				chartOPT.series[0].data[0].value = 1 - _percent 
 				chartOPT.series[0].data[1].value = _percent
+
                 */
                 chartOPT.series[0].data[0].value = (1 - newPercent );
                 chartOPT.series[0].data[1].value = newPercent;
@@ -1831,7 +1857,13 @@ dateAllShow(); // show all datepicker
                         myChartsPie2.dispose() 
                     }
                     myChartsPie2 =  echarts.init(document.getElementById('pie2'), defaultTheme);
-                    newPercent = (_percent > 1) ? 1 : _percent;
+                    //newPercent = (_percent > 1) ? 1 : _percent;
+                    if(_percent > 1) {
+                        newPercent =  1;
+                        overflowNum = _percent.toString().split('.')[1]; 
+                    } else {
+                        newPercent = _percent;
+                    }
 					chartOPT = optionsPie2
 					chartOPT.color = ['#21b171'];
 				//chartOPT.series[0].data[0].value = 100 - _percent 
@@ -1878,6 +1910,7 @@ dateAllShow(); // show all datepicker
 					return params.value ; //节能量减排量去单位
 				};
 				chartOPT2.series[0].data = [data_2_val,data_3_val];
+
                 /*
                 var newData2Name = data_2_name.substring(0,2) + data_2_name.substring(5); // 去掉co2
                 var newData3Name = data_3_name.substring(0,2) + data_3_name.substring(5); // 去掉co2
@@ -1951,7 +1984,7 @@ dateAllShow(); // show all datepicker
                 }
                 */
 				//var myCharts = echarts.init($chartel[0], defaultTheme);
-				var chartOPT;
+				var chartOPT
 
 				if (index == "2") { // 系统能效
                     if(myChartsPie3 && myChartsPie3.dispose) {
@@ -1959,7 +1992,12 @@ dateAllShow(); // show all datepicker
                     }
                     myChartsPie3 =  echarts.init(document.getElementById('pie3'), defaultTheme);
                     //var newPercent = (_percent > 100) ? 100 : _percent;
-                    newPercent = (_percent > 1) ? 1 : _percent;
+                    if(_percent > 1) {
+                        newPercent =  1;
+                        overflowNum = _percent.toString().split('.')[1]; 
+                    } else {
+                        newPercent = _percent;
+                    }
 					chartOPT = optionsPie1;
 					chartOPT.color = ['#ec1e79'];
 					chartOPT.series[0].data[0].value = (function(){
@@ -1968,17 +2006,6 @@ dateAllShow(); // show all datepicker
                         return (1 - newPercent );
                     })();
 					chartOPT.series[0].data[1].value = newPercent;
-                    /*
-					chartOPT.series[0].data[1].value = (function() {
-						if (_percent > 100) {
-							return 100;
-							//return 87.9;
-						} else {
-                        return _percent;
-                        //return 87.9;
-						}
-					})();
-                    */
 					//chartOPT.series[0].data[1].name = _name;
 					chartOPT.series[0].data[1].name = (function(){
                         if(_name == "综合能源利用率") return "综合能源\n利用率"
@@ -1993,7 +2020,13 @@ dateAllShow(); // show all datepicker
                         myChartsPie4.dispose() 
                     }
                     myChartsPie4 =  echarts.init(document.getElementById('pie4'), defaultTheme);
-                    newPercent = (_percent > 1) ? 1 : _percent;
+                    if(_percent > 1) {
+                        newPercent =  1;
+                        overflowNum = _percent.toString().split('.')[1]; 
+                    } else {
+                        newPercent = _percent;
+                    }
+                    //newPercent = (_percent > 1) ? 1 : _percent;
 					chartOPT = optionsPie1
 					chartOPT.color = ['#92278e'];
 
@@ -2107,13 +2140,21 @@ function bindY_M_D_data(){ //成本收益侧栏生成
 		$.each(tab01chartjsonM[0].incomedatas, function(i, d) {
 			dates2[i] = d.data;
 		})
+        /*
+					colsdata01[i] = filterUnit(json_a[0][0].list[i].data); //过滤万分位
+                if(isWan == null) opt.yAxis[0].axisLabel.formatter = '{value}'+unitname; // unitname
+                else opt.yAxis[0].axisLabel.formatter = '{value}'+' 万'+unitname; // unitname
+                */
         // 图例
         columnChartoptInit.legend.data = [legendName7,legendName10]; 
         columnChartoptInit.series[0].name=legendName7; //图例item颜色需name对应
         columnChartoptInit.series[1].name=legendName10;
 		columnChartoptInit.xAxis[0].data = dateX;
-		columnChartoptInit.series[0].data = dates1;
-		columnChartoptInit.series[1].data = dates2;
+		columnChartoptInit.series[0].data = filterUnit(dates1);
+		columnChartoptInit.series[1].data = filterUnit(dates2);
+
+        if(isWan == null) columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'; // unitname
+        else columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'+' 万'; // unitname
 
         //mycolumnChart4.clear();
 		mycolumnChart4.setOption(columnChartoptInit);
@@ -2141,8 +2182,11 @@ function bindY_M_D_data(){ //成本收益侧栏生成
         columnChartoptInit.series[1].name=legendName11;
 
 		columnChartoptInit.xAxis[0].data = dateX;
-		columnChartoptInit.series[0].data = dates1;
-		columnChartoptInit.series[1].data = dates2;
+		columnChartoptInit.series[0].data = filterUnit(dates1);
+		columnChartoptInit.series[1].data = filterUnit(dates2);
+
+        if(isWan == null) columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'; // unitname
+        else columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'+' 万'; // unitname
 
         //mycolumnChart5.clear();
 		mycolumnChart5.setOption(columnChartoptInit);
@@ -2169,8 +2213,11 @@ function bindY_M_D_data(){ //成本收益侧栏生成
         columnChartoptInit.series[1].name=legendName9;
 
 		columnChartoptInit.xAxis[0].data = dateX;
-		columnChartoptInit.series[0].data = dates1;
-		columnChartoptInit.series[1].data = dates2;
+		columnChartoptInit.series[0].data = filterUnit(dates1);
+		columnChartoptInit.series[1].data = filterUnit(dates2);
+
+        if(isWan == null) columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'; // unitname
+        else columnChartoptInit.yAxis[0].axisLabel.formatter = '￥{value}'+' 万'; // unitname
 
         //mycolumnChart3.clear();
 		mycolumnChart3.setOption(columnChartoptInit);
@@ -2196,17 +2243,14 @@ function setCompelte(){ console.log(1111)}
 
 
 function main_years_Compelte(data){
-console.log(1,data)
 	tab01chartjsonY = data;
 	$doc.trigger("tab01chartjsonloadY")
 }
 function main_mons_Compelte(data){
-console.log(2,data)
 	tab01chartjsonM = data;
 	$doc.trigger("tab01chartjsonloadM")
 }
 function main_days_Compelte(data){
-console.log(3,data)
 	tab01chartjsonD = data;
 	$doc.trigger("tab01chartjsonloadD");
 }
@@ -2768,6 +2812,7 @@ function energyFn() {
       , ajaxLoad_2
       , getEchart
       , unitname = (typeof arguments[2] == 'undefined') ? '' : arguments[2]
+      , nameY = (typeof arguments[3] == 'undefined') ? '' : arguments[3]
 
 /*
     ajaxLoad_1 = ajaxget(arguments[0][0],arguments[0][1], "popinc_col");
@@ -2778,21 +2823,22 @@ function energyFn() {
 
 
 
-    $.when(ajaxLoad_1,ajaxLoad_2,unitname).done(function(json_a,json_b,unitname) { // add passing unit
+    $.when(ajaxLoad_1,ajaxLoad_2,unitname,nameY).done(function(json_a,json_b,unitname,nameY) { // add passing unit
 
-/*
-                console.log(json_b[0][0].y);
-                console.log(json_b);
-                */
 
     modalchartobj = echarts.init(document.getElementById('chartinner'), defaultTheme);
     			
 				//alert("ttt");
-				var opt = optionModal; // 模型
-				var xAxisdata = [];
-				var colsdata01 = [];
-				var piedata = [];
-				var piedata2 = [];
+				var opt = optionModal // 模型
+				, xAxisdata = []
+				, colsdata01 = []
+				, piedata = []
+				, piedata2 = []
+                , energyFnArraylist = [] //能源曲线数值
+                , energyIsMin = 0
+                , energyIsMax = 0
+                , energyArrayMax
+
 
 if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{'rectime':'0','data':'0'}]; // 若数据无则默认输出 
 //if(json_b[0] == null) json_b[0] = []; 
@@ -2800,12 +2846,16 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 //console.log(json_a[0][0].list.length)
                 for(var i = 0, l = json_a[0][0].list.length; i < l; i++) {
                 //console.log(json_a[0][0].list[i].rectime)
-					//xAxisdata[i] = json_a[0][0].list[i].rectime.substring(0,10);// 过滤小时
+				//xAxisdata[i] = json_a[0][0].list[i].rectime.substring(0,10);// 过滤小时
 					//xAxisdata[i] = json_a[0][0].list[i].rectime.split(' ')[1].split(':')[0]; // 过滤年月日，变为小时
 					xAxisdata[i] = json_a[0][0].list[i].rectime; // 过滤年月日，变为小时
 
 					colsdata01[i] = filterUnit(json_a[0][0].list[i].data); //过滤万分位
+                    energyFnArraylist.push(json_a[0][0].list[i].data);
+                    if(json_a[0][0].list[i].data == 0) energyIsMin = 1; 
                 }
+                energyArrayMax = getMaxOfArray(energyFnArraylist);
+                if(energyArrayMax == 0) energyIsMax = 1;
                 for(var j = 0, k = json_b[0].length; j < k; j++) {
 					piedata[j] = {
 						value : json_b[0][j].y, name:json_b[0][j].name
@@ -2814,10 +2864,37 @@ if(json_a[0][0].list == null)  json_a[0][0].list = [{'rectime':'0','data':'0'},{
 				opt.xAxis[0].data = xAxisdata;
 				//opt.xAxis[0].axisLabel.formatter = '{value}'+'H'; // 增加X轴时间单位
 				opt.xAxis[0].axisLabel.formatter = '{value}'; // 增加X轴时间单位
+                opt.yAxis[0].name = nameY;
                 if(isWan == null) opt.yAxis[0].axisLabel.formatter = '{value}'+unitname; // unitname
                 else opt.yAxis[0].axisLabel.formatter = '{value}'+' 万'+unitname; // unitname
 
 				opt.series[0].data = colsdata01;
+                if(energyIsMin == 1 && energyIsMax != 1 ) {
+                  opt.series[0].markLine = {
+                      data : [
+                          // 纵轴，默认
+                          {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                          {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                      ]
+                  };
+                
+                } else if(energyIsMax == 1) {
+                  opt.series[0].markLine = {
+                      data : [
+                          // 纵轴，默认
+                      ]
+                  };
+                
+                } else if(energyIsMax == 0 && energyIsMin == 0) {
+                  opt.series[0].markLine = {
+                      data : [
+                          // 纵轴，默认
+                          {type : 'max', name: '最大值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                          {type : 'min', name: '最小值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                          {type : 'average', name : '平均值', itemStyle:{normal:{color:'#dc143c',lineStyle:{width:5},label:{textStyle:{fontSize:30}}}}},
+                      ]
+                  };
+                }
 				//opt.series[0].barWidth = 15;
 				opt.series[1].data = piedata;
 			//	alert(opt.series[1].data.length);
@@ -2924,23 +3001,28 @@ function detectType(type,isLiang) {
         if(typeof isLiang != 'undefined') liang = isLiang ;
         else liang = 0;
         switch(type) {
-            case 'one': typeName=(liang==0)?'耗气':'耗气量'; break;
-            case 'two': typeName=(liang==0)?'耗水':'耗水量'; break;
-            case 'three': typeName=(liang==0)?'耗电':'耗电量'; break;
-            case 'four': typeName=(liang==0)?'供热':'供热量'; break;
-            case 'five': typeName=(liang==0)?'供冷':'供冷量'; break;
-            case 'six': typeName=(liang==0)?'发电':'发电量'; break;
-            case 'seven': typeName=(liang==0)?'供蒸汽':'供蒸汽量'; break;
+            case 'one': typeName=(liang==0)?'耗气':'耗气量'; removeAutoWH(); break;
+            case 'two': typeName=(liang==0)?'耗水':'耗水量';  removeAutoWH(); break;
+            case 'three': typeName=(liang==0)?'耗电':'耗电量';  removeAutoWH(); break;
+            case 'four': typeName=(liang==0)?'供热':'供热量';  removeAutoWH(); break;
+            case 'five': typeName=(liang==0)?'供冷':'供冷量';  removeAutoWH(); break;
+            case 'six': typeName=(liang==0)?'发电':'发电量';  removeAutoWH(); break;
+            case 'seven': typeName=(liang==0)?'供蒸汽':'供蒸汽量';  removeAutoWH(); break;
 
-            case 'eight': typeName='当年成本收益'; break;
-            case 'nine': typeName='当月成本收益'; break;
-            case 'ten': typeName='当日成本收益'; break;
-            case 'eleven': typeName='节能率'; break;
-            case 'twelve': typeName='CO2减排率'; break;
-            case 'thirteen': typeName='综合能源利用率'; break;
-            case 'fourteen': typeName='可再生能源利用率'; break;
+            case 'eight': typeName='当年成本收益';  removeAutoWH(); break;
+            case 'nine': typeName='当月成本收益';  removeAutoWH(); break;
+            case 'ten': typeName='当日成本收益';  removeAutoWH(); break;
+            case 'eleven': typeName='节能率';  removeAutoWH(); break;
+            case 'twelve': typeName='CO2减排率';  removeAutoWH(); break;
+            case 'thirteen': typeName='综合能源利用率';  removeAutoWH(); break;
+            case 'fourteen': typeName='可再生能源利用率';  removeAutoWH(); break;
+            //default: typeName = '提示'; $('.selector').hide();$('.modal-content').css('height','auto');$('.modal-box').css({'height':'auto','width':'auto'});$('#chartinner').text(type).css('fontSize','60px'); break;
+            default: typeName = '提示'; $('.selector').hide();$('.modal-content').addClass('w-h-auto');$('.modal-box').addClass('w-h-auto');$('#chartinner').text(type).css('fontSize','60px'); break;
         }
         return typeName 
+}
+function removeAutoWH(){
+    $('.modal-content').removeClass('w-h-auto');$('.modal-box').removeClass('w-h-auto');
 }
 // 单曲线回调函数
 		function singleEnergy_callback(url, callback, unitname,type,isRate) {
@@ -2951,11 +3033,19 @@ function detectType(type,isLiang) {
               , detectRate
               , isMin = 0
               , isMarkLine = 0
+              , detectUnitname
             if(typeof isRate != 'undefined') {
                 detectRate = isRate //判断0为指标曲线，1为供能曲线
             }
             if(typeof type != 'undefined') {
                  singleTypeName = detectType(type,1);       
+            }
+            if(typeof detectRate != 'undefined') { //判断是否需要Y轴单位
+                if(detectRate == 1) {
+                    detectUnitname = unitname;
+                } else if(detectRate == 0){
+                    detectUnitname = '';
+                }
             }
 			$.ajax({
 				type : "get",
@@ -2974,14 +3064,11 @@ function detectType(type,isLiang) {
 				success : function(json){
 					//console.log(json);
 					var opt = optionModal2;
-                    opt.xAxis[0].axisLabel.formatter = '{value}'; 
-                    if(detectRate == 1) {
-                        opt.yAxis[0].axisLabel.formatter = '{value}'+unitname; // unitname
-                    }
+                        opt.yAxis[0].axisLabel.formatter = '{value}'+detectUnitname ; // unitname
                     opt.yAxis[0].name = singleTypeName;
 					opt.xAxis[0].data= (function() {
 						var  k = [];
-                        if(json[0].list == null)  json[0].list = [{'rectime':'0','data':'0'},{'rectime':'0','data':'0'}]; // 若数据无则默认输出 
+                        if(json[0].list == null || json[0].list.length == 0)  json[0].list = [{'rectime':'0','data':'0'},{'rectime':'0','data':'0'}]; // 若数据无则默认输出 
 						$.each(json[0].list , function(index,data) {
 							//k[index] = data.rectime.split(" ")[0];
 							//k[index] = data.rectime.split(" ")[1].split(':')[0]; // 小时
