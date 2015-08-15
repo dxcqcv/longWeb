@@ -25,5 +25,15 @@
     });
     var headerNav = new Nav()
     headerNav.hover({ele:$('.qxj-header > ul > li > a')})
-
+    
+    function autoFit() {
+        var wrapper = $('#qxjYngnWrapper').width()
+          , title = $('#qxjYngnTitle').width()
+          , other = $('.qxjOther')
+        other.width(wrapper - title)
+    }
+    autoFit();
+    $(window).resize(function(){
+        autoFit();
+    });
 }());

@@ -60,15 +60,15 @@
         </div>
         <div class="qxj-content">
         <!--7修 用能-供能状态展示页面-->
-            <div class="qxj-yngn-wrapper">
+            <div id="qxjYngnWrapper" class="qxj-yngn-wrapper">
                 <!--block start-->
                 <div class="qxj-yngn-block clearfix">
-                   <div class="qxj-yngn-ync-left left bigTitle">
+                   <div id="qxjYngnTitle" class="qxj-yngn-ync-left left bigTitle">
                         <p>用</p>
                         <p>能</p>
                         <p>侧</p>
                    </div>
-                   <div class="qxj-yngn-ync-right left">
+                   <div class="qxj-yngn-ync-right left qxjOther">
                         <!--用能侧未来-->
                         <div class="qxj-yngn-ync-future clearfix">
                             <div class="qxj-yngn-ync-future-left left smallTitle">
@@ -77,7 +77,7 @@
                             </div>
                             <div class="qxj-yngn-ync-future-right left">
                                 <div class="qxj-yngn-ync-future-right-block01 left">
-                                    <p>下一时段：9：00-10：00</p>
+                                    <p class="tcenter">下一时段：9：00-10：00</p>
                                     <div class="qxj-yngn-ync-future-right-block01-bottom">
                                         <div class="qxj-yugn-ync-future-right-block01-bottom-left left">
                                             <p>室外温度</p>
@@ -86,9 +86,9 @@
                                         </div>
                                         <div class="qxj-yugn-ync-future-right-block01-bottom-right left">
                                             <p>用冷总负荷</p>
-                                            <p>预测值：1320 KW</p>
+                                            <p class="bb">预测值：1320 KW</p>
                                             <p>用热总负荷</p>
-                                            <p>预测值：755 KW</p>
+                                            <p class="bb">预测值：755 KW</p>
                                             <p>用电总负荷</p>
                                             <p>预测值：1685 KW</p>
                                         </div>
@@ -96,27 +96,27 @@
                                 </div>
                                 <div class="qxj-yngn-ync-future-right-block02 left">
                                     <div class="qxj-yngn-left-block">
-                                        <p>照明</p>
+                                        <h3>照明</h3>
                                         <p>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>动力</p>
+                                        <h3>动力</h3>
                                         <p>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>空调系统</p>
+                                        <h3>空调系统</h3>
                                         <p>p冷：530 KW</p>
                                         <p>p热：530 KW</p>
-                                        <p>（注：空调负荷预测来自宋志春提供数据）</p>
+                                        <p class="fxs">（注：空调负荷预测来自<br />宋志春提供数据）</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>游泳池</p>
+                                        <h3>游泳池</h3>
                                         <p>p热：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>生活热水</p>
+                                        <h3>生活热水</h3>
                                         <p>p热：530 KW</p>
-                                        <p>（注：照明用电、动力用电，游泳池热负荷、生活热水热负荷使用昨天同时段各表计数据）</p>
+                                        <p class="fxs">（注：照明用电、动力用电，游泳池<br/>热负荷、生活热水热负荷使用昨天同时段各表计数据）</p>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
 
                         <!--用能侧现在-->
                         <div class="qxj-yngn-ync-now clearfix">
-                            <div class="qxj-yngn-ync-now-left left">
+                            <div class="qxj-yngn-ync-now-left left smallTitle">
                                 <p>现</p>
                                 <p>在</p>
                             </div>
@@ -138,33 +138,33 @@
                                             <p>25C</p>
                                         </div>
                                         <div class="qxj-yugn-ync-now-right-block01-bottom-right">
-                                            <p>用冷总负荷：1320 KW</p>
-                                            <p>用热总负荷：755 KW</p>
+                                            <p class="bb">用冷总负荷：1320 KW</p>
+                                            <p class="bb">用热总负荷：755 KW</p>
                                             <p>用电总负荷：1685 KW</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="qxj-yngn-ync-now-right-block02 left">
                                     <div class="qxj-yngn-left-block">
-                                        <p>照明</p>
-                                        <p>p电：530 KW</p>
+                                        <h3>照明</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync qxj-gnyn-arrow-ync-dian"></span>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>动力</p>
-                                        <p>p电：530 KW</p>
+                                        <h3>动力</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync qxj-gnyn-arrow-ync-dian"></span>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>空调系统</p>
-                                        <p>p冷：530 KW</p>
-                                        <p>p热：530 KW</p>
+                                        <h3>空调系统</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync-qu qxj-gnyn-arrow-ync-qu-leng"></span>p冷：530 KW</p>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync-qu qxj-gnyn-arrow-ync-qu-re"></span>p热：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>游泳池</p>
-                                        <p>p热：530 KW</p>
+                                        <h3>游泳池</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync qxj-gnyn-arrow-ync-re"></span>p热：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>生活热水</p>
-                                        <p>p热：530 KW</p>
+                                        <h3>生活热水</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow-ync qxj-gnyn-arrow-ync-re"></span>p热：530 KW</p>
                                     </div>
                                 </div>
                             </div>
@@ -173,51 +173,61 @@
                    </div>
                 </div>
                 <!--block end-->
-                <div class="sep">sep</div>
+                <div class="qxj-yngn-sep">
+                    <span class="qxj-yngn-sep-logo"></span>
+                    <span class="qxj-yngn-sep-word">七修能源网络</span>
+                </div>
                 <!--block start-->
-                <div class="qxj-yngn-block">
-                   <div class="qxj-yngn-gnc-left fs30">供能侧</div>
-                   <div class="qxj-yngn-gnc-right">
+                <div class="qxj-yngn-block clearfix">
+                   <div class="qxj-yngn-gnc-left bigTitle left">
+                       <p>供</p>
+                       <p>能</p>
+                       <p>侧</p>
+                   </div>
+                   <div class="qxj-yngn-gnc-right left qxjOther">
 
                         <!--供能侧现在-->
-                        <div class="qxj-yngn-gnc-now">
-                            <div class="qxj-yngn-gnc-now-left">现在</div>
-                            <div class="qxj-yngn-gnc-now-right">
-                                <div class="qxj-yngn-gnc-now-right-block01">
+                        <div class="qxj-yngn-gnc-now clearfix">
+                            <div class="qxj-yngn-gnc-now-left left smallTitle">
+                                <p>现</p>
+                                <p>在</p>
+                            </div>
+                            <div class="qxj-yngn-gnc-now-right left">
+                                <div class="qxj-yngn-gnc-now-right-block01 left">
                                     <div class="qxj-yngn-gnc-now-right-block01-bottom">
-                                        <p>总供冷负荷：1320 KW</p>
-                                        <p>总供热负荷：755 KW</p>
+                                        <p class="bb">总供冷负荷：1320 KW</p>
+                                        <p class="bb">总供热负荷：755 KW</p>
                                         <p>总供电负荷：1685 KW</p>
                                     </div>
                                 </div>
-                                <div class="qxj-yngn-gnc-now-right-block02">
+                                <div class="qxj-yngn-gnc-now-right-block02 left">
                                     <div class="qxj-yngn-left-block">
-                                        <p>泛能机</p>
-                                        <p>p冷：530 KW</p>
-                                        <p>p热：530 KW</p>
-                                        <p>p电：530 KW</p>
+                                        <h3 class="qxj-gnyn-on">泛能机</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-leng"></span>p冷：530 KW</p>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-re"></span>p热：530 KW</p>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-dian"></span>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>光伏</p>
-                                        <p>p电：530 KW</p>
+                                        <h3 class="qxj-gnyn-on">光伏</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-dian-top"></span>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>市电</p>
-                                        <p>p电：530 KW</p>
+                                        <h3>市电</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-dian-top"></span>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>地源热泵</p>
-                                        <p>p冷：530 KW</p>
-                                        <p>p热：530 KW</p>
+                                        <h3 class="qxj-gnyn-on">地源热泵</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-leng"></span>p冷：530 KW</p>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-re"></span>p热：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>燃气锅炉</p>
-                                        <p>p热：530 KW</p>
+                                        <h3 class="qxj-gnyn-on">燃气锅炉</h3>
+                                        <p class="qxj-gnyn-arrow-box"><span class="qxj-gnyn-arrow qxj-gnyn-arrow-re-top"></span>p热：530 KW</p>
                                     </div>
-                                    <div class="qxj-yngn-left-block">
-                                        <p>冷水</p>
-                                        <p>热水</p>
-                                        <p>电（10KV）</p>
+                                    <div class="qxj-yngn-left-block-legend">
+                                        <p class="lengshui-legend logo-legend">冷水</p>
+                                        <p class="reshui-legend logo-legend">热水</p>
+                                        <p class="dian-legend logo-legend">电（10KV）</p>
                                     </div>
                                 </div>
                             </div>
@@ -225,39 +235,41 @@
                         <!--供能侧现在-->
 
                         <!--供能侧未来-->
-                        <div class="qxj-yngn-gnc-future">
-                            <div class="qxj-yngn-gnc-future-left">未来</div>
-                            <div class="qxj-yngn-gnc-future-right">
-                                <div class="qxj-yngn-gnc-future-right-block01">
-                                    <p>下一时段：9：00-10：00</p>
+                        <div class="qxj-yngn-gnc-future clearfix">
+                            <div class="qxj-yngn-gnc-future-left left smallTitle">
+                                <p>未</p>
+                                <p>来</p>
+                            </div>
+                            <div class="qxj-yngn-gnc-future-right left">
+                                <div class="qxj-yngn-gnc-future-right-block01 left">
                                     <div class="qxj-yngn-gnc-future-right-block01-bottom">
                                             <p>下一时段：9：00-10：00</p>
-                                            <p>优化模式：</p>
+                                            <p class="qxj-yngn-yhms">优化模式：</p>
                                             <div><select id="" name=""><option value="">经济性优化</option></select></div>
                                     </div>
                                 </div>
-                                <div class="qxj-yngn-gnc-future-right-block02">
+                                <div class="qxj-yngn-gnc-future-right-block02 left">
                                     <div class="qxj-yngn-left-block">
-                                        <p>泛能机</p>
+                                        <h3 class="qxj-gnyn-on">泛能机</h3>
                                         <p>p冷：530 KW</p>
                                         <p>p热：530 KW</p>
                                         <p>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>光伏</p>
+                                        <h3 class="qxj-gnyn-off">光伏</h3>
                                         <p>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>市电</p>
+                                        <h3>市电</h3>
                                         <p>p电：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>地源热泵</p>
+                                        <h3 class="qxj-gnyn-on">地源热泵</h3>
                                         <p>p冷：530 KW</p>
                                         <p>p热：530 KW</p>
                                     </div>
                                     <div class="qxj-yngn-left-block">
-                                        <p>燃气锅炉</p>
+                                        <h3 class="qxj-gnyn-on">燃气锅炉</h3>
                                         <p>p热：530 KW</p>
                                     </div>
                                 </div>
