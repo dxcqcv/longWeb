@@ -1,32 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- ------------------------------------------------------------------
-***********************************************************************
-开发人员书写规范:
-1.所有缩进都用 TAB， 而不是空格。
-2.非必要，禁止用行内样式例如 <div style="display:block"> 
-
-浏览器兼容：
-	IE8+
-	FireFox
-	Webkit内核浏览器:
-		Chrome,
-		Opear(WebKit版),
-		360浏览器(7.0+),
-		360急速浏览器,
-		搜狗浏览器,
-		115浏览器,
-		UC桌面浏览器,
-		枫树浏览器,
-		Safari 5.1+
-		Safari 7+ (Mac OS)
-注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
-***********************************************************************
----------------------------------------------------------------------- -->
 
     <meta charset="UTF-8">
-    <title>shanghaihuina</title>
+    <title>frame</title>
 	<!-- 让360双核浏览器用webkit内核渲染页面 !!! 注意，这行最好放在前面，防止浏览器开始解析的时候采用其它内置的渲染方案
 	================================================== -->
 	<meta name="renderer" content="webkit">
@@ -80,31 +57,52 @@
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="font-awesome/css/font-awesome.css" media="all">
-    <style>
-        p { 
-            padding: 50px;
-            font-size: 32px;
-            font-weight: bold;
-            text-align: center;
-            background: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
-<h1>Coming soon!!!</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <p>Box 1</p>
-                </div>
-            </div>
-        </div>
+<!-- wrapper -->
+<div class="my-wrapper">
+<!-- header -->
+<nav role="navigation" class="navbar navbar-default my-navbar">
+    <div class="container">
+       <div class="navbar-header">
+           <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">LOGO</a>
+       </div>
+       <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <li><a href="#">导航1</a></li>
+                <li><a href="#">导航2</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Login</a></li>
+            </ul>
+       </div>
+    </div>
+</nav>
+        
+<!-- content -->
+<div class="my-content">
+    <div class="content-inner">
+    
+    </div>
+</div>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+<!-- footer -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.js"></script>
+<!-- wrapper -->
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.js"></script>
 
 </body>
 </html>
