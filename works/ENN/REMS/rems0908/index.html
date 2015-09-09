@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>frame</title>
+    <title>frame-tabs</title>
 	<!-- 让360双核浏览器用webkit内核渲染页面 !!! 注意，这行最好放在前面，防止浏览器开始解析的时候采用其它内置的渲染方案
 	================================================== -->
 	<meta name="renderer" content="webkit">
@@ -63,7 +63,6 @@
 <div class="my-wrapper">
 <!-- header -->
 <nav role="navigation" class="navbar navbar-default my-navbar">
-    <div class="container">
        <div class="navbar-header">
            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -74,32 +73,46 @@
            <a class="navbar-brand" href="#">LOGO</a>
        </div>
        <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">导航1<b class="caret"></b></a>
-                <ul role="menu" class="dropdown-menu my-menu">
-                        <li><a href="#">september</a></li>
-                        <li><a href="#">september1</a></li>
-                        <li><a href="#">september2</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">september3</a></li>
-                </ul>
-                </li>
-                <li><a href="#">导航2</a></li>
-            </ul>
+           <ul class="nav nav-tabs navbar-nav">
+               <li class="active"><a data-toggle="tab" href="#sectionA">首页</a></li>
+               <li><a data-toggle="tab" href="#sectionB">第二</a></li>
+               <li><a data-toggle="tab" href="#sectionC">第三</a></li>
+           </ul>
+            <div class="tab-content my-tab-content">
+                <div id="sectionA" class="tab-pane fade in active hidden-lg">
+                </div>
+                <div id="sectionB" class="tab-pane fade">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">A</a></li>
+                        <li><a href="#">B</a></li>
+                        <li><a href="#">C</a></li>
+                    </ul>
+                </div>
+                <div id="sectionC" class="tab-pane fade">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">D</a></li>
+                        <li><a href="#">E</a></li>
+                        <li><a href="#">F</a></li>
+                    </ul>
+                </div>
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Login</a></li>
             </ul>
        </div>
-    </div>
 </nav>
         
 <!-- content -->
 <div class="my-content">
     <div class="content-inner">
-        <div class="left"></div>
-        <div class="right"></div>
+        <!--两栏-->
+        <!--<div class="my-left col-lg-2 col-md-2 col-sm-2"></div>-->
+        <!--<div class="my-right col-lg-10 col-md-10  col-sm-10"></div>-->
+        <!--4分格-->
+        <div class="my-box col-md-6 col-lg-6 col-xs-12"></div>
+        <div class="my-box col-md-6 col-lg-6 col-xs-12"></div>
+        <div class="my-box col-md-6 col-lg-6 col-xs-12"></div>
+        <div class="my-box col-md-6 col-lg-6 col-xs-12"></div>
     </div>
 </div>
 

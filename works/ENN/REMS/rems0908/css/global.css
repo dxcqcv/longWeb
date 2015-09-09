@@ -39,35 +39,21 @@ html, body { height: 100%; font-family: "Helvetica Neue",Helvetica, "微软雅�
     background: #39c;
     height: 100%;
 }
-.my-menu {
-    position: fixed;
-    top: 51px;
-    width: 100%;
+.my-right,
+.my-left {
+    height: 100%;
 }
-.my-menu > li {
-    display: inline-block;
+.my-right { background: pink;}
+.my-left { background: green;}
+.my-box { height: 50%; background: #ccc;border: 1px solid red; box-sizing: border-box; }
+/*修改bootstrap部分*/
+.my-tab-content {
+    position: absolute; top: 52px; left: 0;
+    width: 100%; background: #eee;
 }
-/*修改bootstrap部分
-.dropdown-menu {
-    margin-right: -1000px;
+@media (max-width: 768px){
+    .my-tab-content {
+        position: static; top: auto; left: auto;
+        background: #eee;
+    }
 }
-.dropdown-menu > li {
-    display: inline-block;
-}
-
-.my-navbar { position: relative!important; }
-.my-menu {
-width: 100%;
-position: absolute;
-top: 178px;
-left: 0;
-z-index: 1000;
-display: none;
-float: left;
-min-width: 160px;
-padding: 5px 0;
-margin: 0 auto;
-
-text-align:center;
-}
-*/
