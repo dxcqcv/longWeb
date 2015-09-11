@@ -84,7 +84,11 @@ html, body { height: 100%; font-family: "Helvetica Neue",Helvetica, "微软雅�
 /* 工艺图样式 */
 .h100 {height: 100%;}
 .hide { display: none; }
-.xa-con-cent { transform: scale(.4); }
+.gyt-wrapper { transform: scale(.4); transform-origin: 0 0; }
+.xa-con-cent { 
+     
+    height: 1634px; position: relative;
+}
 .xa-con-cent-main {
     position: relative;
     width: 100%;
