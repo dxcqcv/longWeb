@@ -4,6 +4,7 @@
 .qxj-header {
     margin-bottom: 20px;
 }
+.
 .qxj-header > ul {
     display: flex;
     justify-content: center;
@@ -335,7 +336,7 @@
     width: 6px; height: 55px;
     background: #0071bc;
     position: absolute;
-    top: 0px; left: -56px;
+    top: 0; left: -56px;
 }
 .qxj-gnyn-arrow-ync-qu-re {
     border-left: 16px solid #e36c0a;
@@ -351,7 +352,7 @@
     top: 0; left: -35px;
 }
 .qxj-yngn-gnc-future-right-block01 p.qxj-yngn-yhms {
-    font-style: bold;
+    font-weight: bold;
     font-size: 24px; 
 }
 

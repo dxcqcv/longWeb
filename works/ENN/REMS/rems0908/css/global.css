@@ -80,13 +80,18 @@ html, body { height: 100%; font-family: "Helvetica Neue",Helvetica, "微软雅�
 	content: "\e601";
 }
 
+/*highcharts*/
+.highcharts-box {
+    height: 100%;
+    background: #999;
+}
+
 /*工艺图*/
 /* 工艺图样式 */
 .h100 {height: 100%;}
 .hide { display: none; }
-.gyt-wrapper { transform: scale(.4); transform-origin: 0 0; }
+.gyt-wrapper { position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%) scale(.4); }
 .xa-con-cent { 
-     
     height: 1634px; position: relative;
 }
 .xa-con-cent-main {
