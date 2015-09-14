@@ -7,25 +7,32 @@ require.config({
     },
     paths: {
         jquery:'../lib/jquery',
-        dx:'dx'
+        roy:'roy'
     },
     shim: {
-       'dx':{deps:['jquery']} 
+       'roy':{deps:['jquery']} 
     }
 });
 
 require(
 	[
-		'jay'
+		'roy'
 	], 
-	function (jquery,modernizr,jay){
+	function (jquery,modernizr,roy){
 		$(function() {
-			jayfunction();
+			royfunction();
 		});
 	}
 );
 //加载对应css模块
 require([
-	"css!../../css/style1",
-	"css!../../css/animations"
+//Reset CSS
+    "css!../../css/reset",
+//Bootstrap Core CSS
+    "css!../../css/bootstrap",
+    "css!../../css/bootstrap-theme",
+//Custom Fonts 
+    "css!../../font-awesome/css/font-awesome",
+//Custom CSS
+    "css!../../css/global"
 ]);

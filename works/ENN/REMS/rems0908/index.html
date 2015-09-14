@@ -46,19 +46,6 @@
 	<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-    <!---->
-
-    <!-- Reset CSS -->
-    <link rel="stylesheet" href="css/reset.css" media="all">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css" media="all">
-    <link rel="stylesheet" href="css/bootstrap-theme.css" media="all">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/global.css" media="all">
-
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.css" media="all">
 </head>
 <body>
 <!-- wrapper -->
@@ -72,7 +59,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">LOGO</a>
+           <a class="navbar-brand" href="#index">LOGO</a>
        </div>
        <div id="navbarCollapse" class="collapse navbar-collapse">
            <ul class="nav nav-tabs navbar-nav">
@@ -99,7 +86,7 @@
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
+                <li><a href="#second">Login</a></li>
             </ul>
        </div>
 </nav>
@@ -108,8 +95,11 @@
 <div class="my-content">
     <div class="content-inner">
         <!--两栏-->
-        <!--<div class="my-left col-lg-2 col-md-2 col-sm-2"></div>-->
-        <!--<div class="my-right col-lg-10 col-md-10  col-sm-10"></div>-->
+        <div class="my-left col-lg-2 col-md-2 col-sm-2">
+            <div id="index">12121</div>
+            <div id="second">second</div>
+        </div>
+        <div class="my-right col-lg-10 col-md-10  col-sm-10"></div>
         <!--4分格-->
         <!--<div class="my-box col-md-6 col-lg-6 col-xs-12"></div>-->
         <!--<div class="my-box col-md-6 col-lg-6 col-xs-12"></div>-->
@@ -1377,17 +1367,22 @@
 <!-- wrapper -->
 </div>
 
+<!-- Javascript with AMD 
+	ADM开发DEMO 不采取AMD开发请自行去掉
+================================================== -->
+<script src="js/lib/require.js" data-main="js/app/main"></script>
+
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+<!--<script src="js/jquery.js"></script>-->
 
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.js"></script>
+<!--[> Bootstrap Core JavaScript <]-->
+<!--<script src="js/bootstrap.js"></script>-->
 
-<!--highcharts-->
-<!--<script src="js/highcharts-custom.js"></script>-->
+<!--[>highcharts<]-->
+<!--[><script src="js/highcharts-custom.js"></script><]-->
 
-<!-- 工艺图 -->
-<script src="js/main.js"></script>
+<!--[> 工艺图 <]-->
+<!--<script src="js/main.js"></script>-->
 
 
 </body>
