@@ -1,6 +1,6 @@
-(function(){
-    //$('.highcharts-box').highcharts({
-    var options = {
+var gytfunction = function() {
+    $('.highcharts-box').highcharts({
+    //var options = {
         title: {
             text: 'Monthly Average Temperature',
             x: -20 //center
@@ -45,7 +45,7 @@
             name: 'London',
             data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
         }]
-    };
+    });
 
 //工艺图
 	$doc = $(document);
@@ -1722,4 +1722,4 @@ function selectGYT(id,callback) {
 }
 /**************end*************/
 
-}());
+};

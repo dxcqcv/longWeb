@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* CSS 格式书写开发人员约束规范 ****************************************************************** 
+
+1.所有CSS属性，除了空属性可以单行之外，即使只有一个属性，也必须换行,但是后期发布版本压缩什么的请随意压缩。
+
+
+2.所有缩进都用 TAB， 而不是空格。
+
+
+3.绑定到HTML元素的CSS属性，除非经过深思熟虑，排除后期污染到其它HTML标签属性，不然一律通过CLASS或者ID来写CSS 
+	例如：  
+		a {xxxx},  
+		div{xxxx}, 
+		li {xxxx}, 
+		span {xxxx} 这种全局通用HTML标签样式是禁止书写。
+
+
+4.禁止样式过多嵌套，尽量不要超过3层
+	例如：
+		.a {xxx}
+		.a .b {xxx}
+		.a .b .c {xxxx}
+
+
+5.不要滥用缩写去耍帅or偷懒,省了几个字节会造成后面维护人员很大麻烦
+	例如:font:12px/20px "simsun"
+
+
+********************************************************************************************  */
+html, body { height: 100%; font-family: "Helvetica Neue",Helvetica, "微软雅黑",Arial,Verdana,sans-serif; }
+.my-wrapper { height: 100%; min-height: 100%; }
+.my-navbar { position: absolute; top: 0; left:0; width: 100%; z-index: 2;}
+.one-nav { padding: 52px 0 0; }
+.two-nav { padding: 92px 0 0; }
+.my-content {
+    height: 100%; box-sizing: border-box;
+}
+.content-inner {
+    position: relative;
+    background: #39c;
+    height: 100%;
+}
+.my-right,
+.my-left {
+    height: 100%;
+}
+.my-right { background: pink;}
+.my-left { background: green;}
+.my-box { height: 50%; background: #ccc;border: 1px solid red; box-sizing: border-box; }
+/*icon fonts*/
+.ttt { font-size: 16px; color: #39c;}
+@font-face {
+	font-family: 'icomoon';
+	src:url('../img/icons/fonts/icomoon.eot?lkd161');
+	src:url('../img/icons/fonts/icomoon.eot?#iefixlkd161') format('embedded-opentype'),
+		url('../img/icons/fonts/icomoon.ttf?lkd161') format('truetype'),
+		url('../img/icons/fonts/icomoon.woff?lkd161') format('woff'),
+		url('../img/icons/fonts/icomoon.svg?lkd161#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sun:before {
+	content: "\e600";
+}
+.icon-temp:before {
+	content: "\e601";
+}
+
+/*highcharts*/
+.highcharts-box {
+    height: 100%;
+    background: #999;
+}
+
+/*修改bootstrap部分*/
+.my-tab-content {
+    position: absolute; top: 52px; left: 0;
+    width: 100%; background: #eee;
+}
+@media (max-width: 768px){
+    .my-tab-content {
+        position: static; top: auto; left: auto;
+        background: #eee;
+    }
+}
+

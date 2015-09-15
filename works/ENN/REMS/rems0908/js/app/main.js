@@ -7,20 +7,27 @@ require.config({
     },
     paths: {
         jquery:'../lib/jquery',
+        bootstrap:'../lib/bootstrap.min',
+        highcharts:'../lib/highcharts/highcharts',
+        gyt:'gyt',
         roy:'roy'
     },
     shim: {
-       'roy':{deps:['jquery']} 
+       'bootstrap':{deps:['jquery']},
+       'highcharts':{deps:['jquery']},
+       'gyt':{deps:['jquery','highcharts']},
+       'roy':{deps:['jquery','bootstrap']} 
     }
 });
 
 require(
 	[
-		'roy'
+		'roy','gyt'
 	], 
 	function (jquery,modernizr,roy){
 		$(function() {
 			royfunction();
+			gytfunction();
 		});
 	}
 );
@@ -34,5 +41,9 @@ require([
 //Custom Fonts 
     "css!../../font-awesome/css/font-awesome",
 //Custom CSS
-    "css!../../css/global"
+    "css!../../css/global",
+    "css!../../css/login",
+    "css!../../css/index",
+    "css!../../css/gyt",
+    "css!../../css/others"
 ]);
