@@ -9,6 +9,8 @@ require.config({
         jquery:'../lib/jquery',
         bootstrap:'../lib/bootstrap.min',
         highcharts:'../lib/highcharts/highcharts',
+        index:'../lib/index',
+        login:'../lib/login',
         gyt:'gyt',
         roy:'roy'
     },
@@ -16,18 +18,22 @@ require.config({
        'bootstrap':{deps:['jquery']},
        'highcharts':{deps:['jquery']},
        'gyt':{deps:['jquery','highcharts']},
-       'roy':{deps:['jquery','bootstrap']} 
+       'roy':{deps:['jquery','bootstrap']}, 
+       'index':{deps:['jquery','bootstrap']}, 
+       'login':{deps:['jquery','bootstrap']} 
     }
 });
 
 require(
 	[
-		'roy','gyt'
+		'roy','gyt','index','login'
 	], 
 	function (jquery,modernizr,roy){
 		$(function() {
 			royfunction();
 			gytfunction();
+			indexfunction();
+			loginfunction();
 		});
 	}
 );
