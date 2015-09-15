@@ -9,8 +9,8 @@ require.config({
         jquery:'../lib/jquery',
         bootstrap:'../lib/bootstrap.min',
         highcharts:'../lib/highcharts/highcharts',
-        index:'../lib/index',
-        login:'../lib/login',
+        index:'index',
+        login:'login',
         gyt:'gyt',
         roy:'roy'
     },
