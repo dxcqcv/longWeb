@@ -40,7 +40,7 @@ require(
 //加载对应css模块
 require([
 //Reset CSS
-    "css!../../css/reset",
+    //"css!../../css/reset",
 //Bootstrap Core CSS
     "css!../../css/bootstrap",
     "css!../../css/bootstrap-theme",
