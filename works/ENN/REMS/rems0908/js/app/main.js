@@ -28,7 +28,7 @@ require(
 	[
 		'roy','gyt','index','login'
 	], 
-	function (jquery,modernizr,roy){
+	function (jquery,modernizr){
 		$(function() {
 			royfunction();
 			gytfunction();
