@@ -45,7 +45,6 @@
 	<meta name="msapplication-TileColor" content="#3372DF">
 	<meta http-equiv="Cache-Control" content="no-siteapp">
     <link media="all" rel="stylesheet" href="css/reset.css" type="text/css" />
-    <link media="all" rel="stylesheet" href="css/global.css" type="text/css" />
 
 </head>
 <body>
@@ -64,10 +63,10 @@
        </div>
        <div id="navbarCollapse" class="collapse navbar-collapse">
            <ul class="nav nav-tabs navbar-nav my-nav">
-               <li class="active"><a data-show="0" class="index-nav" data-toggle="tab" href="#sectionA"><span class="icon-temp ttt"></span>首页</a></li>
-               <li><a data-show="1" class="xmgl-nav" data-toggle="tab" href="#sectionB"><span class="icon-sun ttt"></span>项目概览</a></li>
-               <li><a data-show="1" class="ycjc-nav" data-toggle="tab" href="#sectionC">远程监测</a></li>
-               <li><a data-show="1" class="nygl-nav" data-toggle="tab" href="#sectionD">能源管理</a></li>
+               <li class="active"><a data-hight="0" class="index-nav my-show" data-show="index" data-toggle="tab" href="#sectionA"><span class="icon-temp ttt"></span>首页</a></li>
+               <li><a data-hight="1" class="xmgl-nav" data-toggle="tab" href="#sectionB"><span class="icon-sun ttt"></span>项目概览</a></li>
+               <li><a data-hight="1" class="ycjc-nav" data-toggle="tab" href="#sectionC">远程监测</a></li>
+               <li><a data-hight="1" class="nygl-nav" data-toggle="tab" href="#sectionD">能源管理</a></li>
            </ul>
             <div class="tab-content my-tab-content">
                 <div id="sectionA" class="tab-pane fade in active hidden-lg">
@@ -81,14 +80,14 @@
                 </div>
                 <div id="sectionC" class="tab-pane fade">
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#">D</a></li>
-                        <li><a href="#">E</a></li>
-                        <li><a href="#">F</a></li>
+                        <li class="active"><a href="#gyt" data-show="gyt" class="my-show">工艺监测</a></li>
+                        <li><a href="#">能效监测</a></li>
+                        <li><a href="#">数据监测</a></li>
                     </ul>
                 </div>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#second">Login</a></li>
+                <li><a href="#login">Login</a></li>
             </ul>
        </div>
 </nav>
@@ -108,15 +107,15 @@
         <!--<div class="my-box col-md-6 col-lg-6 col-xs-12"></div>-->
         <!--<div class="my-box col-md-6 col-lg-6 col-xs-12"></div>-->
         <!--登录页-->
-        <div id="login"></div>
+        <div id="login" class="hide my-section"></div>
         <!--首页-->
-        <div id="index"></div>
+        <div id="index" class="hide my-section"></div>
         <!--能效检测-->
-        <div id="nxjc"></div>
+        <div id="nxjc" class="hide my-section"></div>
 
-        <div class="highcharts-box hide"></div>
+        <div id="hightcharts" class="highcharts-box hide my-section"></div>
             <!--内页工艺图-->
-        <div class="gyt-wrapper hide">
+        <div id="gyt" class="gyt-wrapper my-section hide">
             <div class="xa-con-cent flexmid" id="artwork">
                 <div id="artworkTitle" class="artwork-title">
                     <div class="atInner">工艺设计图</div>
@@ -1368,6 +1367,7 @@
             </div>
             <!--artwork end-->        
         </div>
+
     </div>
 </div>
 
