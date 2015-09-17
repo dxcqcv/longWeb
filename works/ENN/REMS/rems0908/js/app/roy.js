@@ -18,13 +18,17 @@ var royfunction = function() {
     myShow.on('click', function(){
         var show = $(this).data('show');                
         $.each(mySection, function(i,k){
-            var $this = $(this);
-            if($this.attr('id') == show) {
+            var $this = $(this)
+                id = $this.attr('id') 
+            ;
+            if(id == 'index') {
+                window.location.href = 'index.html#index';
+            }
+            if(id == show) {
                 $this.siblings('div').addClass('hide').end().removeClass('hide');
             }
         });
     });
 
-    var d = window.location.search;
-    alert(d);
+
 };
