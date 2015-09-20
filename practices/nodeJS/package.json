@@ -1,0 +1,19 @@
+{
+  "name": "ollie-github-example",
+  "version": "1.0.0",
+  "description": "Get a list of github user repos",
+  "main": "github.js",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "github"
+  ],
+  "author": "Ollie Parsley",
+  "license": "ISC"
+}
