@@ -4,6 +4,7 @@ console.log('starting');
 var config = JSON.parse(fs.readFileSync('./files/config.json'));
 var host = config.host;
 var port = config.port;
+
 var server = http.createServer(function(request, response){
     console.log('Received request: ' + request.url);
     fs.readFile('./public' + request.url, function(error, data) {
