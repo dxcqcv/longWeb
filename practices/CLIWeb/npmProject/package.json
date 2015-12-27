@@ -1,0 +1,14 @@
+{
+  "name": "create-project",
+  "version": "1.0.0",
+  "description": "Setting Up a Project",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kezz Bracey",
+  "license": "MIT",
+  "devDependencies": {
+    "less": "^2.5.3"
+  }
+}

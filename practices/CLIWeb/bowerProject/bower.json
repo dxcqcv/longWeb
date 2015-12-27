@@ -1,0 +1,23 @@
+{
+  "name": "createProject",
+  "homepage": "https://github.com/dxcqcv/longWeb",
+  "authors": [
+    "dxcqcv <dxcqcv@gmail.com>"
+  ],
+  "description": "Setting Up a Project",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}

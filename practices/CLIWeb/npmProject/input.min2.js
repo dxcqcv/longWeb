@@ -1,0 +1,1 @@
+function test(){alert(12121)}var name=function(){var t=9;while(t){t--;console.log(t)}};var bt;bt=2;bt+=2;bt%=3;
