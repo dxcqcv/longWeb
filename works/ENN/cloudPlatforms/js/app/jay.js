@@ -167,6 +167,7 @@ function updateIndex(){
 
 
 function indexInit(data){
+    console.log(data);
     jsonDataRight = data;
     $doc.trigger("index_jsonload")
 }
@@ -274,11 +275,17 @@ function toggleShow() {
 					var _refh = data.longitude;
 					var _refv = data.latitude;
                     var _pid = data.projectid;
-					
-					
+				    
+                    //改变首页icon
+                    var iconS = "images/icon-map_1.png"
+					if(data.projectid == 1) { 
+                    
+                    iconS = "images/icon-map_2.png"
+                    }
 					//百度地图
 					var point = new BMap.Point(_refh,_refv);  // 创建点坐标  
-					var myIcon = new BMap.Icon("images/icon-map_1.png", new BMap.Size(18,27));
+					//var myIcon = new BMap.Icon("images/icon-map_1.png", new BMap.Size(18,27));
+                    var myIcon = new BMap.Icon(iconS, new BMap.Size(18,27));
 					var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
 					bdmap.addOverlay(marker2);     
 					
