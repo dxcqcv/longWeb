@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+   <script>
+   function Mammal(name) {
+        this.name = name;
+        this.offspring=[];
+   }
+   Mammal.prototype.haveABaby = function() {
+        var newBaby = new Mammal("Baby " + this.name);
+        this.offspring.push(newBaby);
+        return newBaby;
+   }
+   Mammal.prototype.toString = function() {
+        return '[Mammal "'+this.name+'"]';
+   }
+   Cat.prototype = new Mammal();
+   Cat.prototype.constructor = Cat;
+   function Cat(name) {
+        this.name = name;
+   }
+   Cat.prototype.toString = function() {
+        return '[Cat "'+this.name+'"]';
+   }
+
+   var someAnimal = new Mammal('Mr. Biggles');
+   var myPet = new Cat('Felix');
+   alert('someAnimal is '+someAnimal);
+   alert('myPet is '+myPet);
+   myPet.haveABaby();
+   alert(myPet.offspring.length);
+   alert(myPet.offspring[0]);
+   /*
+var people = function (){
+    this.name = 'r';
+}
+people.prototype.getName = function(){return this.name};
+var MAN = function(){
+    this.sex = 'm';
+    people.call(this);
+}
+// method1: wrong construct and prototype of people will effect prototype of man 
+MAN.prototype = people.prototype;
+// method2
+MAN.prototype = new people();
+MAN.prototype.constructor = MAN;
+MAN.prototype.toString = function(){
+    return '[MAN "' +this.name+'"]';
+}
+var man = new MAN(); man.getName();
+var p = new people();
+console.log(new man.constructor())
+console.log(new p.constructor())
+*/
+   </script>
+</body>
+</html>
