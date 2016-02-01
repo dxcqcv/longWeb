@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+  .valid { border: 2px solid green;}
+  </style>
+</head>
+<body>
+    <form id="ourForm" action="">
+        <label for="">FirstName</label>
+        <input type="">
+        <br>
+        <label for="">Last Name</label>
+        <input type="">
+        <br>
+        <label for="">Email</label>
+        <input type="">
+        <br>
+        <input type="submit" value="submit">
+    </form>
+<script>
+function addEvent(to, type, fn) {
+    if(document.addEventListener) {
+        to.addEventListener(type, fn, false);
+    } else if(document.attachEvent) {
+        to.attachEvent('on'+type, fn);
+    } else {
+        to['on'+type] = fn;
+    }
+}
+addEvent(window, 'load', function(){
+//all our code that runs after the page is ready goes here
+
+      var ourForm = document.getElementById('ourForm');
+    var submit_button = Form.getSubmit('ourForm');
+    submit_button.disabled = 'disabled';
+    function checkForm() {
+        var inputs = ourForm.getElementsByTagName('input');
+        if(Form.validateLength(inputs[0], Form.fname)) {
+            if(Form.validateLength(inputs[1], Form.lname)) {
+                if(Form.validateEmail(inputs[2])) {
+                    submit_button.disabled = false;
+                    return true;
+                }
+            }
+        }
+        submit_button.disabled = 'disabled';
+        return false;
+    }
+    checkForm();
+    addEvent(ourForm, 'keyup', checkForm);
+    addEvent(ourForm, 'submit', checkForm);
+
+  
+});
+
+var Form = {
+    validClass: 'valid',
+    fname: {
+        minLength: 1,
+        maxLength: 15,
+        fieldName: 'First Name'
+    },
+    lname: {
+        minLength: 1,
+        maxLength: 25,
+        fieldName: 'Last Name'
+    },
+    validateLength: function(formEl, type){
+        if(formEl.value.length > type.maxLength || formEl.value.length < type.minLength) {
+            formEl.className = formEl.className.replace(' '+ Form.validClass, '');
+            return false;
+        } else {
+            if(formEl.className.indexOf(' '+ Form.validClass) == -1) {
+                formEl.className += ' '+Form.validClass;
+            }
+            // fixed only checked the case of having valid class
+            return true;
+                
+        }
+    },
+    validateEmail: function(formEl) {
+        var regEx = /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
+        var emailTest = regEx.test(formEl.value);
+
+        if(emailTest) {
+            if(formEl.className.indexOf(' '+Form.validClass) == -1) {
+                formEl.className += ' '+Form.validClass;
+                return true;
+            }
+        } else {
+            formEl.className = formEl.className.replace(' '+Form.validClass, '');
+            return false;
+        }
+    },
+    getSubmit: function(formID) {
+        var inputs = document.getElementById(formID).getElementsByTagName('input');
+        for(var i = 0; i< inputs.length; i++) {
+            if(inputs[i].type == 'submit') {
+                return inputs[i];
+            }
+        }
+        return false;
+    }
+};
+</script>
+</body>
+</html>
