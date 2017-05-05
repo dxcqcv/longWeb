@@ -431,6 +431,8 @@ var re = new RegExp(reg);
                             gytSelectFn(false,'#shenlongchengOverview', '工艺设计图',[-1]); 
                             shenlongchengArtwork.height(1718);
                             break;
+                        default:
+                            
                     }
                     restoreMap();
 
